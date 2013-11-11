@@ -22,4 +22,7 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <organization>
+  	<name>NJU-HouseWang</name>
+  </organization>
 </project>
