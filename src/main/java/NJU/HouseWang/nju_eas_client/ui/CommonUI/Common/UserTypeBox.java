@@ -14,4 +14,5 @@ public class UserTypeBox extends JComboBox<UserType> {
 		setFont(new Font("微软雅黑", Font.BOLD, 15));
 		setForeground(Color.gray);
 	}
+	
 }

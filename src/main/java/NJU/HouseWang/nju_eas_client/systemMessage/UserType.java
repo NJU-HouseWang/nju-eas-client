@@ -1,10 +1,11 @@
 package NJU.HouseWang.nju_eas_client.systemMessage;
 
 public enum UserType {
-	Admin("管理员"), 
-	SchoolDean("学校教务老师"), 
-	DeptAD("院系教务老师"), 
-	Teacher("任课老师"), 
+	Null("请选择用户类型..."),
+	Admin("管理员"),
+	SchoolDean("学校教务老师"),
+	DeptAD("院系教务老师"),
+	Teacher("任课老师"),
 	Student("学生");
 
 	private String chName;
@@ -16,4 +17,6 @@ public enum UserType {
 	public String getChName() {
 		return chName;
 	}
+	
+	
 }

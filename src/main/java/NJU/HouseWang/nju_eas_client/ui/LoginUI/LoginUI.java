@@ -9,10 +9,10 @@ package NJU.HouseWang.nju_eas_client.ui.LoginUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
 import NJU.HouseWang.nju_eas_client.systemMessage.UserType;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.CommonFrame;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.PasswordField;
@@ -54,12 +54,13 @@ public class LoginUI implements UIService {
 		loginBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ea) {
 				if (utBox.getSelectedIndex() == 0) {
-					showFeedback(-1);
+					showFeedback(Feedback.USERTYPE_EMPTY);
 				} else if (unField.getText().equals("")
-						|| unField.getText().equals("请输入用户名...")
-						|| pwField.getPassword().length == 0
+						|| unField.getText().equals("请输入用户名...")) {
+					showFeedback(Feedback.USERNAME_EMPTY);
+				} else if (pwField.getPassword().length == 0
 						|| pwField.getPassword()[0] == '请') {
-					showFeedback(-2);
+					showFeedback(Feedback.PASSWORD_EMPTY);
 				} else {
 					uic.login((UserType) utBox.getSelectedItem(),
 							unField.getText(), pwField.getPassword());
@@ -74,36 +75,12 @@ public class LoginUI implements UIService {
 		uic = null;
 	}
 
-	public void showFeedback(int feedback) {
-		String message = null;
-		switch (feedback) {
-		case 0:
-			break;
-		case -1:
-			message = "请选择用户类型";
-			break;
-		case -2:
-			message = "用户名或密码不能为空";
-			break;
-		case -3:
-			message = "用户名或密码错误";
-			break;
-		case -4:
-			message = "您的账号已经在其他地点登陆";
-			break;
-		case -5:
-			message = "请检查您的网络连接";
-			break;
-		case -6:
-			message = "请不要在一台机器上登陆两个客户端";
-			break;
-		}
-		if (message != null) {
-			JOptionPane.showMessageDialog(frame, message);
-		}
+	public void showFeedback(Feedback feedback) {
+		JOptionPane.showMessageDialog(frame, feedback.getContent());
 	}
 
 	private void initUserTypeBox() {
+		utBox.addItem(UserType.Null);
 		utBox.addItem(UserType.Admin);
 	}
 }
