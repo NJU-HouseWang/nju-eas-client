@@ -44,7 +44,6 @@ public class LoginUI implements UIService {
 		unField = new UserNameField();
 		pwField = new PasswordField();
 		loginBtn = new LoginBtn();
-		initUserTypeBox();
 		frame.add(loginBtn);
 		frame.add(utBox);
 		frame.add(unField);
@@ -79,8 +78,4 @@ public class LoginUI implements UIService {
 		JOptionPane.showMessageDialog(frame, feedback.getContent());
 	}
 
-	private void initUserTypeBox() {
-		utBox.addItem(UserType.Null);
-		utBox.addItem(UserType.Admin);
-	}
 }

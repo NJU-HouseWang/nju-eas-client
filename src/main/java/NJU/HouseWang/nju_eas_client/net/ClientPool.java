@@ -5,7 +5,7 @@ import java.util.Stack;
 public class ClientPool {
 	private final int poolSize = 100;
 	private int linkNum = 0;
-	private String ip = "192.168.0.107";
+	private String ip = "localhost";
 	private int port = 9001;
 	private Stack<Client> clientStack = new Stack<Client>();
 

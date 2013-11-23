@@ -7,7 +7,7 @@ import NJU.HouseWang.nju_eas_client.systemMessage.UserType;
 import NJU.HouseWang.nju_eas_client.ui.LoginUI.LoginUI;
 
 public class LoginUIController {
-	private NetService client = new Client("192.168.0.107", 9001);
+	private NetService client = new Client("localhost", 9001);
 	private LoginUI ui = null;
 	private String command = null;
 	private Feedback feedback = null;
@@ -18,7 +18,7 @@ public class LoginUIController {
 	}
 
 	public void login(UserType userType, String userName, char[] password) {
-		command = "Login；" + userType.toString() + "；" + userName + "；"
+		command = "login；" + userType.toString() + "；" + userName + "；"
 				+ new String(password);
 		System.out.println(command);
 		try {

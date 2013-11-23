@@ -1,7 +1,6 @@
 package NJU.HouseWang.nju_eas_client.systemMessage;
 
 public enum UserType {
-	Null("请选择用户类型..."),
 	Admin("管理员"),
 	SchoolDean("学校教务老师"),
 	DeptAD("院系教务老师"),
