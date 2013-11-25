@@ -3,11 +3,13 @@ package NJU.HouseWang.nju_eas_client.net;
 import java.util.Stack;
 
 public class ClientPool {
+	private static ClientPool cPool = null;
 	private final int poolSize = 100;
 	private int linkNum = 0;
 	private String ip = "localhost";
 	private int port = 9001;
 	private Stack<Client> clientStack = new Stack<Client>();
+	private Thread checkLinkNum = null;
 
 	// 初始化连接数
 	private void initialize() throws Exception {
@@ -17,6 +19,13 @@ public class ClientPool {
 			clientStack.push(c);
 		}
 		linkNum += poolSize;
+	}
+
+	public void shutdown() {
+		checkLinkNum.interrupt();
+		for (int i = linkNum; i > 0; i--) {
+			clientStack.pop().shutDownConnection();
+		}
 	}
 
 	public void replenish() throws Exception {
@@ -31,7 +40,7 @@ public class ClientPool {
 
 	public void run() throws Exception {
 		initialize();
-		Thread cheakLinkNum = new Thread(new Runnable() {
+		checkLinkNum = new Thread(new Runnable() {
 			public void run() {
 				while (true) {
 					if (linkNum < 10) {
@@ -48,7 +57,7 @@ public class ClientPool {
 				}
 			}
 		});
-		cheakLinkNum.start();
+		checkLinkNum.start();
 	}
 
 	public Client getClient() {
@@ -56,12 +65,14 @@ public class ClientPool {
 		return clientStack.pop();
 	}
 
-	public static void main(String[] args) throws Exception {
-		ClientPool cp = new ClientPool();
-		cp.run();
-		for (int i = 0; i < 95; i++) {
-			cp.getClient();
-			System.out.println("弹出Client" + (i + 1));
+	private ClientPool() {
+	}
+
+	public static ClientPool getInstance() {
+		if (cPool != null) {
+			return cPool;
+		} else {
+			return new ClientPool();
 		}
 	}
 }

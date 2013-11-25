@@ -21,6 +21,8 @@ public class CommonFrame extends JFrame {
 	private int width = 860;
 	private int hight = 660;
 	private String frameName = null;
+	private MinBtn minBtn = null;
+	private ExitBtn exitBtn = null;
 
 	public CommonFrame(String frameName) {
 		this.frameName = frameName;
@@ -30,8 +32,20 @@ public class CommonFrame extends JFrame {
 
 		setBackgroung();
 		setMovable(this);
-		add(new MinBtn(this));
-		add(new ExitBtn());
+		minBtn = new MinBtn(this);
+		exitBtn = new ExitBtn();
+		minBtn.addMouseListener(new MouseAdapter() {
+			public void mouseReleased(MouseEvent e) {
+				setExtendedState(JFrame.ICONIFIED);
+			}
+		});
+		exitBtn.addMouseListener(new MouseAdapter() {
+			public void mouseReleased(MouseEvent e) {
+				System.exit(0);
+			}
+		});
+		add(minBtn);
+		add(exitBtn);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 

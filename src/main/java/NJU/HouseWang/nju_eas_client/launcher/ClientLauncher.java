@@ -7,6 +7,7 @@
  */
 package NJU.HouseWang.nju_eas_client.launcher;
 
+import NJU.HouseWang.nju_eas_client.uiController.AdminUIController;
 import NJU.HouseWang.nju_eas_client.uiController.LoginUIController;
 
 /*
@@ -24,9 +25,9 @@ public class ClientLauncher {
 		case "Login":
 			new LoginUIController();
 			break;
-//		case "Admin":
-//			new AdminUI().create();
-//			break;
+		case "Admin":
+			new AdminUIController(userName);
+			break;
 //		case "School":
 //			new SchoolDeanUI().create();
 //			break;

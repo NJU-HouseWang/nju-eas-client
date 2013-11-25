@@ -19,9 +19,12 @@ public class SmallCommonFrame extends JFrame {
 
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private static Point origin = new Point();
+
 	private int width = 760;
 	private int hight = 560;
 	private String frameName = null;
+	private MinBtn minBtn = null;
+	private ExitBtn exitBtn = null;
 
 	public SmallCommonFrame(String frameName) {
 		this.frameName = frameName;
@@ -34,9 +37,20 @@ public class SmallCommonFrame extends JFrame {
 		setBackgroung();
 
 		setMovable(this);
-
-		add(new MinBtn(this, 651, 30));
-		add(new ExitBtn(688, 30));
+		minBtn = new MinBtn(this, 651, 30);
+		exitBtn = new ExitBtn(688, 30);
+		minBtn.addMouseListener(new MouseAdapter() {
+			public void mouseReleased(MouseEvent e) {
+				setExtendedState(JFrame.ICONIFIED);
+			}
+		});
+		exitBtn.addMouseListener(new MouseAdapter() {
+			public void mouseReleased(MouseEvent e) {
+				setVisible(false);
+			}
+		});
+		add(minBtn);
+		add(exitBtn);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -46,7 +60,7 @@ public class SmallCommonFrame extends JFrame {
 		JPanel imagePanel = (JPanel) this.getContentPane();
 		imagePanel.setOpaque(false);
 		setUndecorated(true);
-		com.sun.awt.AWTUtilities.setWindowOpaque(this, false);
+		// com.sun.awt.AWTUtilities.setWindowOpaque(this, false);
 	}
 
 	private void setMovable(final JFrame frame) {

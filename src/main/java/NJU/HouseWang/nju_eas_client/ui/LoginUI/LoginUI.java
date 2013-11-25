@@ -20,6 +20,7 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.UserNameField;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.UserTypeBox;
 import NJU.HouseWang.nju_eas_client.uiController.LoginUIController;
 import NJU.HouseWang.nju_eas_client.uiService.UIService;
+import NJU.HouseWang.nju_eas_client.vo.UserTypeVO;
 
 /*
  * 类：LoginUI
@@ -61,8 +62,9 @@ public class LoginUI implements UIService {
 						|| pwField.getPassword()[0] == '请') {
 					showFeedback(Feedback.PASSWORD_EMPTY);
 				} else {
-					uic.login((UserType) utBox.getSelectedItem(),
-							unField.getText(), pwField.getPassword());
+					uic.login(UserType.valueOf(((UserTypeVO) utBox
+							.getSelectedItem()).name_en), unField.getText(),
+							pwField.getPassword());
 				}
 			}
 		});
