@@ -97,7 +97,7 @@ public class EditItemFrame extends JFrame {
 			ClientPool cPool = ClientPool.getInstance();
 			NetService net = cPool.getClient();
 			net.sendCommand(command);
-			showFeedBack(net.receiveCommand());
+			showFeedBack(net.receiveFeedback());
 		} catch (Exception e) {
 			showFeedBack(Feedback.INTERNET_ERROR);
 			e.printStackTrace();

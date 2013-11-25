@@ -62,8 +62,7 @@ public class LoginFrame extends CommonFrame implements UIService {
 						|| pwField.getPassword()[0] == '请') {
 					showFeedback(Feedback.PASSWORD_EMPTY);
 				} else {
-					sendLoginCommand(
-							((UserTypeVO) utBox.getSelectedItem()).name_en,
+					login(((UserTypeVO) utBox.getSelectedItem()).name_en,
 							unField.getText(), pwField.getPassword());
 				}
 			}
@@ -74,25 +73,23 @@ public class LoginFrame extends CommonFrame implements UIService {
 		JOptionPane.showMessageDialog(this, feedback.getContent());
 	}
 
-	public void sendLoginCommand(String userType, String userName,
-			char[] password) {
+	public void login(String userType, String userName, char[] password) {
 		String command = "login；" + userType + "；" + userName + "；"
 				+ new String(password);
 		Feedback feedback = null;
 		try {
 			ClientPool cPool = ClientPool.getInstance();
+			cPool.run();
 			NetService ns = cPool.getClient();
-			ns.createConnection();
 			ns.sendCommand(command);
-			feedback = Feedback.valueOf(ns.receiveCommand());
-			showFeedback(feedback);
+			feedback = Feedback.valueOf(ns.receiveFeedback());
 		} catch (Exception e) {
 			showFeedback(Feedback.INTERNET_ERROR);
 			e.printStackTrace();
 		}
 		if (feedback == Feedback.OPERATION_SUCCEED) {
-			ClientLauncher.createUI(userType.toString(), userName);
 			dispose();
+			ClientLauncher.createUI(userType, userName);
 		} else {
 			showFeedback(feedback);
 		}

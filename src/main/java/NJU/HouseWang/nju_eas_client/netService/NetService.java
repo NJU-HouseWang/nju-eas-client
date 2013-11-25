@@ -23,18 +23,19 @@ public interface NetService {
 	public void sendFile(File file) throws Exception;
 
 	// 接收命令
-	public String receiveCommand() throws IOException;
+	public String receiveFeedback() throws IOException;
 
 	// 接收文件
 	public void receiveFile() throws Exception;
 
 	// 发送列表
-	public void sendList(ArrayList list) throws Exception;
+	public void sendList(ArrayList<String> list) throws IOException;;
 
 	// 接收列表
 	public ArrayList<String> receiveList() throws Exception;
 
 	public void createConnection() throws Exception;
 
-	public void shutDownConnection() throws Exception;;
+	public void shutDownConnection() throws Exception;
+
 }

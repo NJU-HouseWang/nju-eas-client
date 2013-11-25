@@ -69,7 +69,7 @@ public class AdminFrame extends CommonFrame implements UIService {
 		searchtf = new JTextField();
 		searchBtn = new JButton();
 		listChooser.setBounds(166, 167, 134, 22);
-		listChooser.addItem("user_list");
+		listChooser.addItem("login_list");
 		listChooser.addItem("log_list");
 		listChooser.addItem("states_list");
 
@@ -103,10 +103,9 @@ public class AdminFrame extends CommonFrame implements UIService {
 			cPool = ClientPool.getInstance();
 		} catch (Exception e) {
 			e.printStackTrace();
-			showFeedback(Feedback.INTERNET_ERROR);
-		} finally {
 			dispose();
 			ClientLauncher.createUI("Login", null);
+			JOptionPane.showMessageDialog(null, "由于网络问题，请重新登陆");
 		}
 	}
 
@@ -151,20 +150,23 @@ public class AdminFrame extends CommonFrame implements UIService {
 	}
 
 	public void showList(String listName, String conditions) {
-		ArrayList<String> l1 = null;
+		String l1 = null;
 		String command1 = "show；" + listName + "_head";
 		try {
 			NetService ns1 = cPool.getClient();
 			ns1.sendCommand(command1);
-			l1 = ns1.receiveList();
-			head = (String[]) l1.toArray();
+			l1 = ns1.receiveFeedback();
+			head = l1.split("；");
 		} catch (Exception e) {
 			e.printStackTrace();
 			showFeedback(Feedback.INTERNET_ERROR);
 		}
 
 		ArrayList<String> l2 = null;
-		String command2 = "show；" + listName;
+		if (conditions.equals("")) {
+			conditions = "*";
+		}
+		String command2 = "show；" + listName + "；" + conditions;
 		try {
 			NetService ns2 = cPool.getClient();
 			ns2.sendCommand(command2);
@@ -184,7 +186,7 @@ public class AdminFrame extends CommonFrame implements UIService {
 		try {
 			NetService ns = cPool.getClient();
 			ns.sendCommand(command);
-			showFeedback(ns.receiveCommand());
+			showFeedback(ns.receiveFeedback());
 			ns.shutDownConnection();
 		} catch (Exception e) {
 			e.printStackTrace();

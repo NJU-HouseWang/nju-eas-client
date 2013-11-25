@@ -30,11 +30,10 @@ public class Client implements NetService {
 
 	private Socket socket = null;
 
-	private DataOutputStream out = null;
-
 	private DataInputStream in = null;
-
+	private DataOutputStream out = null;
 	private DataInputStream fis = null;
+	private DataOutputStream fos = null;
 
 	public Client(String ip, int port) {
 		this.ip = ip;
@@ -44,6 +43,7 @@ public class Client implements NetService {
 	public void createConnection() throws Exception {
 		try {
 			socket = new Socket(ip, port);
+			System.out.println("Create Connection to ip" + ip + ":" + port);
 		} catch (Exception e) {
 			e.printStackTrace();
 			if (socket != null) {
@@ -53,10 +53,28 @@ public class Client implements NetService {
 		}
 	}
 
-	public void sendCommand(String message) throws Exception {
+	public void shutDownConnection() {
+		System.out.println("Shutdown Connection");
+		try {
+			if (out != null)
+				out.close();
+			if (in != null)
+				in.close();
+			if (fis != null)
+				fis.close();
+			if (out != null)
+				out.close();
+			if (socket != null)
+				socket.close();
+		} catch (Exception e) {
+		}
+	}
+
+	public void sendCommand(String command) throws Exception {
+		System.out.println("Send Command:" + command);
 		try {
 			out = new DataOutputStream(socket.getOutputStream());
-			out.writeUTF(message);
+			out.writeUTF(command);
 			out.flush();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -65,6 +83,49 @@ public class Client implements NetService {
 			}
 			throw e;
 		}
+	}
+
+	public String receiveFeedback() throws IOException {
+		in = new DataInputStream(new BufferedInputStream(
+				socket.getInputStream()));
+		String feedback = new String();
+		feedback = in.readUTF();
+		System.out.println("Receive Feedback:" + feedback);
+		return feedback;
+	}
+
+	public void sendList(ArrayList<String> list) throws IOException {
+		try {
+			out = new DataOutputStream(socket.getOutputStream());
+			out.writeUTF("listStart");
+			for (String str : list) {
+				out.writeUTF(str);
+				System.out.println("Send List Item :" + str);
+			}
+			out.writeUTF("listEnd");
+			out.flush();
+		} catch (Exception e) {
+			e.printStackTrace();
+			if (out != null) {
+				out.close();
+			}
+			throw e;
+		}
+	}
+
+	public ArrayList<String> receiveList() throws IOException {
+		in = new DataInputStream(new BufferedInputStream(
+				socket.getInputStream()));
+		ArrayList<String> list = new ArrayList<String>();
+		String line;
+		while (!in.readUTF().equals("listStart")) {
+			System.out.println("Waiting for Server......");
+		}
+		while (!(line = in.readUTF()).trim().equals("listEnd")) {
+			System.out.println("Receive List Item :" + line);
+			list.add(line);
+		}
+		return list;
 	}
 
 	public void sendFile(File file) throws Exception {
@@ -102,15 +163,6 @@ public class Client implements NetService {
 		}
 	}
 
-	public String receiveCommand() throws IOException {
-		in = new DataInputStream(new BufferedInputStream(
-				socket.getInputStream()));
-		String message = new String();
-		message = in.readUTF();
-		System.out.println(message);
-		return message;
-	}
-
 	public void receiveFile() throws Exception {
 		try {
 			in = new DataInputStream(new BufferedInputStream(
@@ -123,9 +175,8 @@ public class Client implements NetService {
 			long len = 0;
 
 			savePath += in.readUTF();
-			DataOutputStream fileOut = new DataOutputStream(
-					new BufferedOutputStream(new BufferedOutputStream(
-							new FileOutputStream(savePath))));
+			fos = new DataOutputStream(new BufferedOutputStream(
+					new BufferedOutputStream(new FileOutputStream(savePath))));
 			len = in.readLong();
 
 			System.out.println("文件的长度为:" + len + "\n");
@@ -142,38 +193,14 @@ public class Client implements NetService {
 				}
 				// 下面进度条本为图形界面的prograssBar做的，这里如果是打文件，可能会重复打印出一些相同的百分比
 				System.out.println("文件接收了" + (passedlen * 100 / len) + "%\n");
-				fileOut.write(buf, 0, read);
+				fos.write(buf, 0, read);
 			}
 			System.out.println("接收完成，文件存为" + savePath + "\n");
 
-			fileOut.close();
+			fos.close();
 		} catch (Exception e) {
 			System.out.println("接收消息错误" + "\n");
 			throw new Exception();
 		}
-	}
-
-	public void shutDownConnection() {
-		try {
-			if (out != null)
-				out.close();
-			if (in != null)
-				in.close();
-			if (fis != null)
-				fis.close();
-			if (out != null)
-				out.close();
-			if (socket != null)
-				socket.close();
-		} catch (Exception e) {
-		}
-	}
-
-	public void sendList(ArrayList list) throws Exception {
-
-	}
-
-	public ArrayList<String> receiveList() throws Exception {
-		return null;
 	}
 }

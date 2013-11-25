@@ -4,7 +4,7 @@ import java.util.Stack;
 
 public class ClientPool {
 	private static ClientPool cPool = null;
-	private final int poolSize = 100;
+	private final int poolSize = 20;
 	private int linkNum = 0;
 	private String ip = "localhost";
 	private int port = 9001;
@@ -32,7 +32,6 @@ public class ClientPool {
 		for (int i = 0; i < poolSize / 2; i++) {
 			Client c = new Client(ip, port);
 			c.createConnection();
-			c.sendCommand("...");
 			clientStack.push(c);
 		}
 		linkNum += poolSize / 2;
@@ -43,16 +42,12 @@ public class ClientPool {
 		checkLinkNum = new Thread(new Runnable() {
 			public void run() {
 				while (true) {
-					if (linkNum < 10) {
+					if (linkNum < 5) {
 						try {
 							replenish();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
-					}
-					try {
-						Thread.sleep(5000);
-					} catch (InterruptedException e) {
 					}
 				}
 			}
@@ -72,8 +67,7 @@ public class ClientPool {
 		if (cPool != null) {
 			return cPool;
 		} else {
-			ClientPool cPool = new ClientPool();
-			cPool.run();
+			cPool = new ClientPool();
 			return cPool;
 		}
 	}
