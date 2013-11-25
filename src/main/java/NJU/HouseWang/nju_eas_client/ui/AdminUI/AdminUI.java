@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.AddItemFrame;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.CommonFrame;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.FunctionBar;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.TitleBar;
@@ -55,10 +56,14 @@ public class AdminUI implements UIService {
 			}
 		});
 		fBtn[0].addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				uic.showAddItemFrame((String)listChooser.getSelectedItem());
+			}
+		});
+		fBtn[1].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
 			}
 		});
 	}

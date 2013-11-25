@@ -109,5 +109,9 @@ public class AdminUIController implements AdminUICService {
 	public void showIOMgr() {
 
 	}
+	
+	public void showAddItemFrame(String listName) {
+		
+	}
 
 }

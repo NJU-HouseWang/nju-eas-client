@@ -45,6 +45,7 @@ public class FormPanel extends JPanel {
 		this.content = content;
 		dtm.setDataVector(content, head);
 	}
+	
 
 	public String[] getHead() {
 		return head;

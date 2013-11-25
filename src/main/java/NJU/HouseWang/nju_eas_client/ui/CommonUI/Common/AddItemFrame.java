@@ -16,6 +16,7 @@ public class AddItemFrame extends JFrame {
 	private JButton cancelBtn = null;
 
 	public AddItemFrame(String[] item) {
+		setTitle("新增项目");
 		panel = new JPanel();
 		iteml = new JLabel[item.length];
 		itemtf = new JTextField[item.length];
@@ -41,5 +42,9 @@ public class AddItemFrame extends JFrame {
 	
 	public String[] getItemStr() {
 		return null;
+	}
+	
+	public static void main(String[] args) {
+		new AddItemFrame(new String[]{"1","2","3","4"});
 	}
 }
