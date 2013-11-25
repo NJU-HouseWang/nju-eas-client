@@ -68,11 +68,13 @@ public class ClientPool {
 	private ClientPool() {
 	}
 
-	public static ClientPool getInstance() {
+	public static ClientPool getInstance() throws Exception {
 		if (cPool != null) {
 			return cPool;
 		} else {
-			return new ClientPool();
+			ClientPool cPool = new ClientPool();
+			cPool.run();
+			return cPool;
 		}
 	}
 }

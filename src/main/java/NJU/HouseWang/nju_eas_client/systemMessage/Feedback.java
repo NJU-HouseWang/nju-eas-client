@@ -13,7 +13,8 @@ public enum Feedback {
 	USERTYPE_EMPTY("请选择用户类型"),
 	USERNAME_EMPTY("请输入用户名"),
 	PASSWORD_EMPTY("请输入密码"),
-	INTERNET_ERROR("网络连接错误");
+	INTERNET_ERROR("网络连接错误"),
+	ITEM_EMPTY("项目不能为空");
 	
 	private String content;
 

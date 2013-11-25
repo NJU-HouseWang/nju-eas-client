@@ -7,8 +7,8 @@
  */
 package NJU.HouseWang.nju_eas_client.launcher;
 
-import NJU.HouseWang.nju_eas_client.uiController.AdminUIController;
-import NJU.HouseWang.nju_eas_client.uiController.LoginUIController;
+import NJU.HouseWang.nju_eas_client.ui.MainUI.AdminFrame;
+import NJU.HouseWang.nju_eas_client.ui.MainUI.LoginFrame;
 
 /*
  * 类：ClientLauncher
@@ -23,20 +23,20 @@ public class ClientLauncher {
 	public static void createUI(String type, String userName) {
 		switch (type) {
 		case "Login":
-			new LoginUIController();
+			new LoginFrame();
 			break;
 		case "Admin":
-			new AdminUIController(userName);
+			new AdminFrame(userName);
 			break;
-//		case "School":
-//			new SchoolDeanUI().create();
-//			break;
-//		case "Dept":
-//			new DeptADUI().create();
-//			break;
-//		case "Teacher":
-//			new TeacherUI().create();
-//			break;
+		// case "School":
+		// new SchoolDeanUI().create();
+		// break;
+		// case "Dept":
+		// new DeptADUI().create();
+		// break;
+		// case "Teacher":
+		// new TeacherUI().create();
+		// break;
 		}
 	}
 }

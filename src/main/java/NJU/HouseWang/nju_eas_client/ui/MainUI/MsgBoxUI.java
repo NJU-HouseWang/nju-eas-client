@@ -5,7 +5,7 @@
  * 最后修改：王鑫
  * 修改时间：
  */
-package NJU.HouseWang.nju_eas_client.ui.MsgBoxUI;
+package NJU.HouseWang.nju_eas_client.ui.MainUI;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -40,8 +40,7 @@ public class MsgBoxUI implements UIService {
 	private int index = 0;
 	private JPanel[] switchPane = new JPanel[FUNC_NUM];
 
-	@Override
-	public void create() {
+	public MsgBoxUI() {
 		frame = new SmallCommonFrame("MsgBoxFrame");
 		menuBar = new JPanel();
 		cardL = new CardLayout();
@@ -95,10 +94,6 @@ public class MsgBoxUI implements UIService {
 	@Override
 	public void showFeedback(Feedback feedback) {
 
-	}
-
-	public static void main(String[] args) {
-		new MsgBoxUI().create();
 	}
 
 	class MsgPanel extends JPanel {

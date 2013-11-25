@@ -5,7 +5,7 @@
  * 最后修改：王鑫
  * 修改时间：
  */
-package NJU.HouseWang.nju_eas_client.ui.UserCenterUI;
+package NJU.HouseWang.nju_eas_client.ui.MainUI;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -39,8 +39,7 @@ public class UserCenterUI implements UIService {
 	private int index = 0;
 	private JPanel[] switchPane = new JPanel[FUNC_NUM];
 
-	@Override
-	public void create() {
+	public UserCenterUI() {
 		frame = new SmallCommonFrame("UserCenterFrame");
 		menuBar = new JPanel();
 		cardL = new CardLayout();
@@ -93,9 +92,5 @@ public class UserCenterUI implements UIService {
 	@Override
 	public void showFeedback(Feedback feedback) {
 
-	}
-
-	public static void main(String[] args) {
-		new UserCenterUI().create();
 	}
 }
