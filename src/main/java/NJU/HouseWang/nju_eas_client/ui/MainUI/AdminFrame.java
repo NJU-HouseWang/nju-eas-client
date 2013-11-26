@@ -7,17 +7,20 @@
  */
 package NJU.HouseWang.nju_eas_client.ui.MainUI;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import NJU.HouseWang.nju_eas_client.launcher.ClientLauncher;
@@ -86,6 +89,11 @@ public class AdminFrame extends CommonFrame implements UIService {
 		scrollp = new JScrollPane();
 		dtm = new DefaultTableModel(30, 5);
 		table = new JTable(dtm);
+		table.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+		table.getTableHeader().setFont(new Font("微软雅黑", Font.BOLD, 12));
+		DefaultTableCellRenderer r = new DefaultTableCellRenderer();
+		r.setHorizontalAlignment(JLabel.CENTER);
+		table.setDefaultRenderer(Object.class, r);
 		scrollp.setViewportView(table);
 		scrollp.setSize(tablep.getSize());
 		tablep.add(scrollp);

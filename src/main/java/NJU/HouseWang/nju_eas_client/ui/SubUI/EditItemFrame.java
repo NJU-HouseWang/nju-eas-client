@@ -1,6 +1,7 @@
 package NJU.HouseWang.nju_eas_client.ui.SubUI;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -51,6 +52,8 @@ public class EditItemFrame extends JFrame {
 			iteml[i].setHorizontalAlignment(JLabel.CENTER);
 			itemtf[i] = new JTextField(15);
 			itemtf[i].setText(origin[i]);
+			iteml[i].setFont(new Font("微软雅黑", Font.PLAIN, 12));
+			itemtf[i].setFont(new Font("微软雅黑", Font.PLAIN, 12));
 			panel.add(iteml[i]);
 			panel.add(itemtf[i]);
 		}
