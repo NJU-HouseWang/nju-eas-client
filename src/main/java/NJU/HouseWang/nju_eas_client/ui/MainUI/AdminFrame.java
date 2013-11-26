@@ -61,8 +61,8 @@ public class AdminFrame extends CommonFrame implements UIService {
 		fbar = new FunctionBar();
 		fbar.setLocation(30, 100);
 		fBtn[0] = new FunctionBtn("AddBtn");
-		fBtn[1] = new FunctionBtn("DelBtn");
-		fBtn[2] = new FunctionBtn("ModifyBtn");
+		fBtn[1] = new FunctionBtn("ModifyBtn");
+		fBtn[2] = new FunctionBtn("DelBtn");
 		fBtn[3] = new FunctionBtn("ImportBtn");
 		fBtn[4] = new FunctionBtn("ExportBtn");
 		listChooser = new JComboBox<String>();
@@ -70,8 +70,10 @@ public class AdminFrame extends CommonFrame implements UIService {
 		searchBtn = new JButton();
 		listChooser.setBounds(166, 167, 134, 22);
 		listChooser.addItem("login_list");
+		listChooser.addItem("teacher_list");
+		listChooser.addItem("student_list");
 		listChooser.addItem("log_list");
-		listChooser.addItem("states_list");
+		// listChooser.addItem("states_list");
 
 		searchtf.setBounds(627, 168, 130, 20);
 		searchtf.setBorder(null);
@@ -98,55 +100,109 @@ public class AdminFrame extends CommonFrame implements UIService {
 		add(searchBtn);
 		add(tablep);
 		setListener();
-		setVisible(true);
 		try {
 			cPool = ClientPool.getInstance();
 		} catch (Exception e) {
 			e.printStackTrace();
-			dispose();
 			ClientLauncher.createUI("Login", null);
 			JOptionPane.showMessageDialog(null, "由于网络问题，请重新登陆");
 		}
+		setVisible(true);
+		showList((String) listChooser.getSelectedItem(), searchtf.getText());
+		showForm();
+		fBtn[0].setEnabled(false);
+		fBtn[1].setEnabled(true);
+		fBtn[2].setEnabled(false);
+		fBtn[3].setEnabled(false);
+		fBtn[4].setEnabled(false);
 	}
 
 	private void setListener() {
 		listChooser.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				showList((String) listChooser.getSelectedItem(),
-						searchtf.getText());
-				table.updateUI();
+				String listName = (String) listChooser.getSelectedItem();
+				showList(listName, searchtf.getText());
+				showForm();
+
+				// 设置按钮状态
+				switch (listName) {
+				case "login_list":
+				case "status_list":
+					fBtn[0].setEnabled(false);
+					fBtn[1].setEnabled(true);
+					fBtn[2].setEnabled(false);
+					fBtn[3].setEnabled(false);
+					fBtn[4].setEnabled(false);
+					break;
+				case "student_list":
+				case "teacher_list":
+					fBtn[0].setEnabled(true);
+					fBtn[1].setEnabled(true);
+					fBtn[2].setEnabled(true);
+					fBtn[3].setEnabled(false);
+					fBtn[4].setEnabled(false);
+					break;
+				default:
+					fBtn[0].setEnabled(false);
+					fBtn[1].setEnabled(false);
+					fBtn[2].setEnabled(false);
+					fBtn[3].setEnabled(false);
+					fBtn[4].setEnabled(false);
+				}
 			}
 		});
 		searchBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				showList((String) listChooser.getSelectedItem(),
-						searchtf.getText());
-				table.updateUI();
+				String listName = (String) listChooser.getSelectedItem();
+				showList(listName, searchtf.getText());
+				showForm();
 			}
 		});
 		fBtn[0].addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String listName = (String) listChooser.getSelectedItem();
-				new AddItemFrame(listName, head);
+				new AddItemFrame(listName.split("_")[0], head);
 			}
 		});
 		fBtn[1].addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String listName = (String) listChooser.getSelectedItem();
-				new EditItemFrame(listName, head);
+				int selectRowNum = table.getSelectedRow();
+				if (selectRowNum != -1) {
+					String[] origin = new String[table.getColumnCount()];
+					for (int i = 0; i < origin.length; i++) {
+						origin[i] = (String) table.getValueAt(selectRowNum, i);
+					}
+					new EditItemFrame(listName.split("_")[0], head, origin);
+				} else {
+					showFeedback(Feedback.SELECTION_ERROR);
+				}
 			}
 		});
-		fBtn[3].addActionListener(new ActionListener() {
+		fBtn[2].addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String listName = (String) listChooser.getSelectedItem();
-				new EditItemFrame(listName, head);
+				int selectRowNum = table.getSelectedRow();
+				if (selectRowNum != -1) {
+					System.out.println(table.getValueAt(selectRowNum, 0));
+					delItem(listName.split("_")[0],
+							(String) table.getValueAt(selectRowNum, 0));
+				} else {
+					showFeedback(Feedback.SELECTION_ERROR);
+				}
 			}
 		});
+	}
+
+	public void showForm() {
+		dtm.setColumnIdentifiers(head);
+		dtm.setDataVector(content, head);
+		table.updateUI();
 	}
 
 	public void showList(String listName, String conditions) {
@@ -181,8 +237,8 @@ public class AdminFrame extends CommonFrame implements UIService {
 		}
 	}
 
-	public void delUser(String listName, String id) {
-		String command = "del；user；" + content;
+	public void delItem(String item, String id) {
+		String command = "del；" + item + "；" + id;
 		try {
 			NetService ns = cPool.getClient();
 			ns.sendCommand(command);

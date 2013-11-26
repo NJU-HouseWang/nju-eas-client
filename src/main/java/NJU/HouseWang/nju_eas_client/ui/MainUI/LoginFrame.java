@@ -79,7 +79,6 @@ public class LoginFrame extends CommonFrame implements UIService {
 		Feedback feedback = null;
 		try {
 			ClientPool cPool = ClientPool.getInstance();
-			cPool.run();
 			NetService ns = cPool.getClient();
 			ns.sendCommand(command);
 			feedback = Feedback.valueOf(ns.receiveFeedback());

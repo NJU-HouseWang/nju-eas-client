@@ -14,6 +14,7 @@ public enum Feedback {
 	USERNAME_EMPTY("请输入用户名"),
 	PASSWORD_EMPTY("请输入密码"),
 	INTERNET_ERROR("网络连接错误"),
+	SELECTION_ERROR("您未选择列表中的项"),
 	ITEM_EMPTY("项目不能为空");
 	
 	private String content;

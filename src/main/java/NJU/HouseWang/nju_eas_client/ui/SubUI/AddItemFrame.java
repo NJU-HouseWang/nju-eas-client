@@ -21,8 +21,8 @@ public class AddItemFrame extends JFrame {
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private int width = 0;
 	private int height = 0;
-	private String itemName = null;
-	private String itemInfo = null;
+	private String itemName = "";
+	private String itemInfo = "";
 	private JPanel panel = null;
 	private JLabel[] iteml = null;
 	private JTextField[] itemtf = null;
@@ -32,7 +32,7 @@ public class AddItemFrame extends JFrame {
 
 	public AddItemFrame(String itemName, String[] item) {
 		this.itemName = itemName;
-		setTitle("新增项目");
+		setTitle("新增项目：" + itemName);
 		panel = new JPanel();
 		iteml = new JLabel[item.length];
 		itemtf = new JTextField[item.length];

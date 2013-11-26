@@ -4,7 +4,7 @@ import java.util.Stack;
 
 public class ClientPool {
 	private static ClientPool cPool = null;
-	private final int poolSize = 20;
+	private final int poolSize = 100;
 	private int linkNum = 0;
 	private String ip = "localhost";
 	private int port = 9001;
@@ -68,6 +68,7 @@ public class ClientPool {
 			return cPool;
 		} else {
 			cPool = new ClientPool();
+			cPool.run();
 			return cPool;
 		}
 	}
