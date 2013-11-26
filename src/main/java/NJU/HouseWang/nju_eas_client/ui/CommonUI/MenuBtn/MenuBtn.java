@@ -12,6 +12,7 @@ public class MenuBtn extends JToggleButton {
 
 	public MenuBtn(String btnName) {
 		this.name = btnName;
+		setName(btnName);
 		setIcon(new ImageIcon(path + name + "_0" + suffix));
 		setRolloverIcon(new ImageIcon(path + name + "_1" + suffix));
 		setSelectedIcon(new ImageIcon(path + name + "_1" + suffix));

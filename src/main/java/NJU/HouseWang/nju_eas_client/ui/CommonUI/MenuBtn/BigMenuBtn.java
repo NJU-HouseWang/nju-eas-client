@@ -12,6 +12,7 @@ public class BigMenuBtn extends JButton {
 
 	public BigMenuBtn(String btnName) {
 		this.name = btnName;
+		setName(btnName);
 		setIcon(new ImageIcon(path + name + "_0" + suffix));
 		setRolloverIcon(new ImageIcon(path + name + "_1" + suffix));
 		setPressedIcon(new ImageIcon(path + name + "_2" + suffix));
