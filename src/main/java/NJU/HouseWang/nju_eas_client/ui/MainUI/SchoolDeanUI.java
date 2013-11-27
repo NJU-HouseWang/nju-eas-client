@@ -19,8 +19,10 @@ import javax.swing.JPanel;
 import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.BigMenuBar;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.CommonFrame;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.FunctionBar;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.MenuBar;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.TitleBar;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.FunctionBtn.FunctionBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.MenuBtn.BigMenuBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.MenuBtn.MenuBtn;
 import NJU.HouseWang.nju_eas_client.uiService.UIService;
@@ -137,8 +139,18 @@ public class SchoolDeanUI extends CommonFrame implements UIService {
 	}
 
 	class EduFrameworkPanel extends JPanel {
+		private FunctionBar fbar = null;
+		private FunctionBtn[] fBtn = new FunctionBtn[1];
 		public EduFrameworkPanel() {
-			setBackground(Color.black);
+			setLayout(null);
+			fbar = new FunctionBar();
+			fbar.setLocation(0, 0);
+			fBtn[0] = new FunctionBtn("ModifyBtn");
+			
+			for (int i = 0; i < fBtn.length; i++) {
+				fbar.add(fBtn[i]);
+			}
+			add(fbar);
 		}
 	}
 
