@@ -1,4 +1,5 @@
 package NJU.HouseWang.nju_eas_client.ui.CommonUI.CTable;
+import java.awt.Font;
 import java.awt.Point;
 import java.awt.Rectangle;
 
@@ -12,6 +13,7 @@ public class CTable extends JTable {
 		super(tbl);
 		map = cmp;
 		setUI(new CTUI());
+		getTableHeader().setFont(new Font("微软雅黑",Font.PLAIN,12));
 	}
 
 	public Rectangle getCellRect(int row, int column, boolean includeSpacing) {

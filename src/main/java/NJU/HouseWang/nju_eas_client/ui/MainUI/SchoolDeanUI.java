@@ -7,20 +7,29 @@
  */
 package NJU.HouseWang.nju_eas_client.ui.MainUI;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.CTable.CTable;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.BigMenuBar;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.CommonFrame;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.FunctionBar;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.MenuBar;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.TitleBar;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.FunctionBtn.FunctionBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.MenuBtn.BigMenuBtn;
@@ -41,6 +50,18 @@ public class SchoolDeanUI extends CommonFrame implements UIService {
 	private JPanel[] childp = new JPanel[6];
 	private JPanel cardp = new JPanel();
 	private CardLayout card = new CardLayout();
+
+	private String[][] edufwContent = new String[][] {
+			{ "A", "V", "V", "V", "1", "1", "V" },
+			{ "A", "C", "C", "C", "2", "2", "C" },
+			{ "A", "C", "C", "C", "3", "3", "C" },
+			{ "B", "V", "V", "V", "4", "4", "V" },
+			{ "B", "F", "F", "F", "5", "5", "F" }
+
+	};
+
+	private String[] edufwHeader = new String[] { "as", "sdf", "sf", "sdf",
+			"asdf", "adsf", "a" };
 
 	public SchoolDeanUI(String userName) {
 		super("SchoolFrame");
@@ -124,11 +145,10 @@ public class SchoolDeanUI extends CommonFrame implements UIService {
 				bmbtn[i].addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						String bname = ((BigMenuBtn) e.getSource())
-								.getName();
+						String bname = ((BigMenuBtn) e.getSource()).getName();
 						card.show(cardp, bname);
-						for(int i = 1; i < mbtn.length;i++) {
-							if(mbtnName[i].equals(bname)) {
+						for (int i = 1; i < mbtn.length; i++) {
+							if (mbtnName[i].equals(bname)) {
 								mbtn[i].setSelected(true);
 							}
 						}
@@ -140,23 +160,111 @@ public class SchoolDeanUI extends CommonFrame implements UIService {
 
 	class EduFrameworkPanel extends JPanel {
 		private FunctionBar fbar = null;
-		private FunctionBtn[] fBtn = new FunctionBtn[1];
+		private FunctionBtn[] fBtn = new FunctionBtn[2];
+		private SubPanel edufwp = null;
+
+		@SuppressWarnings("serial")
 		public EduFrameworkPanel() {
 			setLayout(null);
+			setBackground(Color.white);
 			fbar = new FunctionBar();
 			fbar.setLocation(0, 0);
-			fBtn[0] = new FunctionBtn("ModifyBtn");
-			
+			fBtn[0] = new FunctionBtn("AddBtn");
+			fBtn[1] = new FunctionBtn("DelBtn");
 			for (int i = 0; i < fBtn.length; i++) {
 				fbar.add(fBtn[i]);
 			}
 			add(fbar);
+
+			edufwp = new SubPanel("当前框架策略", 740, 380);
+			edufwp.setLocation(30, 70);
+
+			EduFrameworkMap m = new EduFrameworkMap(edufwContent);
+			DefaultTableModel tm = new DefaultTableModel(edufwContent.length,
+					edufwContent[0].length) {
+				public boolean isCellEditable(int indexRow, int indexColumn) {
+					return false;
+				}
+			};
+			for (int i = 0; i < edufwContent.length; i++) {
+				for (int j = 0; j < edufwContent[i].length; j++) {
+					tm.setValueAt(edufwContent[i][j], i, j);
+				}
+			}
+			tm.setColumnIdentifiers(edufwHeader);
+
+			CTable ct = new CTable(m, tm);
+			ct.setEnabled(false);
+			DefaultTableCellRenderer r = new DefaultTableCellRenderer();
+			r.setHorizontalAlignment(JLabel.CENTER);
+			ct.setDefaultRenderer(Object.class, r);
+			edufwp.getCenterPanel().setLayout(new BorderLayout());
+			edufwp.getCenterPanel().add(new JScrollPane(ct),
+					BorderLayout.CENTER);
+			add(edufwp);
+
 		}
 	}
 
 	class TeachingPlanPanel extends JPanel {
+		private FunctionBar fbar = null;
+		private FunctionBtn[] fBtn = new FunctionBtn[2];
+		private SubPanel tpp = null;
+		private SubPanel accessoryp = null;
+		private SubPanel localStatuesp = null;
+		private JComboBox<String> deptChooser = null;
+
+		@SuppressWarnings("serial")
 		public TeachingPlanPanel() {
-			setBackground(Color.blue);
+			setLayout(null);
+			setBackground(Color.white);
+			fbar = new FunctionBar();
+			fbar.setLocation(0, 0);
+			fBtn[0] = new FunctionBtn("TrueBtn");
+			fBtn[1] = new FunctionBtn("FalseBtn");
+			for (int i = 0; i < fBtn.length; i++) {
+				fbar.add(fBtn[i]);
+			}
+			add(fbar);
+
+			deptChooser = new JComboBox<String>();
+			deptChooser.setPreferredSize(new Dimension(120, 20));
+
+			tpp = new SubPanel("教学计划  ", 500, 380);
+			tpp.setLocation(30, 70);
+			tpp.getTopPanel().add(deptChooser);
+
+			accessoryp = new SubPanel("附件", 230, 150);
+			accessoryp.setLocation(540, 70);
+
+			localStatuesp = new SubPanel("当前状态", 230, 150);
+			localStatuesp.setLocation(540, 230);
+
+			EduFrameworkMap m = new EduFrameworkMap(edufwContent);
+			DefaultTableModel tm = new DefaultTableModel(edufwContent.length,
+					edufwContent[0].length) {
+				public boolean isCellEditable(int indexRow, int indexColumn) {
+					return false;
+				}
+			};
+			for (int i = 0; i < edufwContent.length; i++) {
+				for (int j = 0; j < edufwContent[i].length; j++) {
+					tm.setValueAt(edufwContent[i][j], i, j);
+				}
+			}
+			tm.setColumnIdentifiers(edufwHeader);
+
+			CTable ct = new CTable(m, tm);
+			ct.setEnabled(false);
+			DefaultTableCellRenderer r = new DefaultTableCellRenderer();
+			r.setHorizontalAlignment(JLabel.CENTER);
+			ct.setDefaultRenderer(Object.class, r);
+			tpp.getCenterPanel().setLayout(new BorderLayout());
+			tpp.getCenterPanel().add(new JScrollPane(ct), BorderLayout.CENTER);
+
+			add(tpp);
+			add(accessoryp);
+			add(localStatuesp);
 		}
 	}
 
