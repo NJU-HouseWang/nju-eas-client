@@ -7,6 +7,9 @@
  */
 package NJU.HouseWang.nju_eas_client.launcher;
 
+import javax.swing.JOptionPane;
+
+import NJU.HouseWang.nju_eas_client.net.ClientPool;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.AdminFrame;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.LoginFrame;
 
@@ -21,22 +24,31 @@ public class ClientLauncher {
 	}
 
 	public static void createUI(String type, String userName) {
-		switch (type) {
-		case "Login":
+		if (type.equals("Login")) {
 			new LoginFrame();
-			break;
-		case "Admin":
-			new AdminFrame(userName);
-			break;
-		// case "School":
-		// new SchoolDeanUI().create();
-		// break;
-		// case "Dept":
-		// new DeptADUI().create();
-		// break;
-		// case "Teacher":
-		// new TeacherUI().create();
-		// break;
+		} else {
+			try {
+				ClientPool.getInstance().run();
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "由于网络问题，请重新登陆");
+				type = "Login";
+				new LoginFrame();
+				e.printStackTrace();
+			}
+			switch (type) {
+			case "Admin":
+				new AdminFrame(userName);
+				break;
+			// case "School":
+			// new SchoolDeanUI().create();
+			// break;
+			// case "Dept":
+			// new DeptADUI().create();
+			// break;
+			// case "Teacher":
+			// new TeacherUI().create();
+			// break;
+			}
 		}
 	}
 }

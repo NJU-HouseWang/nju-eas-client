@@ -53,13 +53,12 @@ public class AdminFrame extends CommonFrame implements UIService {
 	private DefaultTableModel dtm = null;
 	private JTable table = null;
 
-	private String userName = null;
 	private String[] head = null;
 	private String[][] content = null;
 
 	public AdminFrame(String userName) {
 		super("AdminFrame");
-		this.userName = userName;
+		cPool = ClientPool.getInstance();
 		tbar = new TitleBar(userName);
 		fbar = new FunctionBar();
 		fbar.setLocation(30, 100);
@@ -108,13 +107,6 @@ public class AdminFrame extends CommonFrame implements UIService {
 		add(searchBtn);
 		add(tablep);
 		setListener();
-		try {
-			cPool = ClientPool.getInstance();
-		} catch (Exception e) {
-			e.printStackTrace();
-			ClientLauncher.createUI("Login", null);
-			JOptionPane.showMessageDialog(null, "由于网络问题，请重新登陆");
-		}
 		setVisible(true);
 		showList((String) listChooser.getSelectedItem(), searchtf.getText());
 		showForm();
@@ -207,7 +199,7 @@ public class AdminFrame extends CommonFrame implements UIService {
 		});
 	}
 
-	public void showForm() {
+	private void showForm() {
 		dtm.setColumnIdentifiers(head);
 		dtm.setDataVector(content, head);
 		table.updateUI();

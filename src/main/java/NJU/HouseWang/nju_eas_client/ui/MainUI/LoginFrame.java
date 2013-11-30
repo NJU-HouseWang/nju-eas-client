@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import NJU.HouseWang.nju_eas_client.launcher.ClientLauncher;
-import NJU.HouseWang.nju_eas_client.net.ClientPool;
+import NJU.HouseWang.nju_eas_client.net.Client;
 import NJU.HouseWang.nju_eas_client.netService.NetService;
 import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.CommonFrame;
@@ -29,7 +29,7 @@ import NJU.HouseWang.nju_eas_client.vo.UserTypeVO;
  * 
  */
 public class LoginFrame extends CommonFrame implements UIService {
-
+	private NetService client;
 	private LoginBtn loginBtn = null;
 	private UserTypeBox utBox = null;
 	private UserNameField unField = null;
@@ -37,6 +37,7 @@ public class LoginFrame extends CommonFrame implements UIService {
 
 	public LoginFrame() {
 		super("LoginFrame");
+		client = new Client();
 		utBox = new UserTypeBox();
 		unField = new UserNameField();
 		pwField = new PasswordField();
@@ -69,19 +70,22 @@ public class LoginFrame extends CommonFrame implements UIService {
 		});
 	}
 
+	public void setClient(NetService client) {
+		this.client = client;
+	}
+
 	public void showFeedback(Feedback feedback) {
 		JOptionPane.showMessageDialog(this, feedback.getContent());
 	}
 
-	public void login(String userType, String userName, char[] password) {
+	public Feedback login(String userType, String userName, char[] password) {
 		String command = "login；" + userType + "；" + userName + "；"
 				+ new String(password);
 		Feedback feedback = null;
 		try {
-			ClientPool cPool = ClientPool.getInstance();
-			NetService ns = cPool.getClient();
-			ns.sendCommand(command);
-			feedback = Feedback.valueOf(ns.receiveFeedback());
+			client.createConnection();
+			client.sendCommand(command);
+			feedback = Feedback.valueOf(client.receiveFeedback());
 		} catch (Exception e) {
 			showFeedback(Feedback.INTERNET_ERROR);
 			e.printStackTrace();
@@ -92,9 +96,6 @@ public class LoginFrame extends CommonFrame implements UIService {
 		} else {
 			showFeedback(feedback);
 		}
-	}
-
-	public static void main(String[] args) {
-		new LoginFrame();
+		return feedback;
 	}
 }

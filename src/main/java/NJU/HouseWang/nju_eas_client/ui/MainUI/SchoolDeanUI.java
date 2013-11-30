@@ -12,6 +12,7 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -20,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -44,10 +46,10 @@ public class SchoolDeanUI extends CommonFrame implements UIService {
 	private String userName = null;
 	private TitleBar tbar = null;
 	private MenuBar mbar = null;
-	private MenuBtn[] mbtn = new MenuBtn[6];
+	private MenuBtn[] mbtn = new MenuBtn[5];
 	private String[] mbtnName = { "HomeBtn", "EduFrameworkBtn",
-			"TeachingPlanBtn", "ShowInfoBtn", "CommonCourseBtn", "PECourseBtn" };
-	private JPanel[] childp = new JPanel[6];
+			"TeachingPlanBtn", "ShowInfoBtn", "CommonCourseBtn" };
+	private JPanel[] childp = new JPanel[5];
 	private JPanel cardp = new JPanel();
 	private CardLayout card = new CardLayout();
 
@@ -74,7 +76,7 @@ public class SchoolDeanUI extends CommonFrame implements UIService {
 		childp[2] = new TeachingPlanPanel();
 		childp[3] = new InfoListPanel();
 		childp[4] = new CommonCoursePanel();
-		childp[5] = new PECoursePanel();
+		// childp[5] = new PECoursePanel();
 
 		cardp.setSize(800, 480);
 		cardp.setLocation(30, 150);
@@ -122,7 +124,7 @@ public class SchoolDeanUI extends CommonFrame implements UIService {
 	}
 
 	class HomePanel extends JPanel {
-		private BigMenuBtn[] bmbtn = new BigMenuBtn[5];
+		private BigMenuBtn[] bmbtn = new BigMenuBtn[4];
 		private BigMenuBar bmbar = new BigMenuBar();
 
 		public HomePanel() {
@@ -269,14 +271,123 @@ public class SchoolDeanUI extends CommonFrame implements UIService {
 	}
 
 	class InfoListPanel extends JPanel {
+		private SubPanel edufwp = null;
+		private JComboBox<String> listChooser = null;
+		private JComboBox<String> deptChooser = null;
+		private JComboBox<String> yearChooser = null;
+		private JComboBox<String> gradeChooser = null;
+		private JLabel deptlb = null;
+		private JLabel yearlb = null;
+		private JLabel gradelb = null;
+
+		@SuppressWarnings("serial")
 		public InfoListPanel() {
-			setBackground(Color.cyan);
+			setLayout(null);
+			setBackground(Color.white);
+
+			edufwp = new SubPanel("列表：", 740, 420);
+			edufwp.setLocation(30, 30);
+			listChooser = new JComboBox<String>();
+			listChooser.setPreferredSize(new Dimension(120, 20));
+			deptlb = new JLabel("院系：");
+			deptlb.setFont(new Font("微软雅黑", Font.BOLD, 14));
+			deptlb.setForeground(Color.white);
+			deptChooser = new JComboBox<String>();
+			deptChooser.setPreferredSize(new Dimension(120, 20));
+			yearlb = new JLabel("学年：");
+			yearlb.setFont(new Font("微软雅黑", Font.BOLD, 14));
+			yearlb.setForeground(Color.white);
+			yearChooser = new JComboBox<String>();
+			yearChooser.setPreferredSize(new Dimension(120, 20));
+			gradelb = new JLabel("年级：");
+			gradelb.setFont(new Font("微软雅黑", Font.BOLD, 14));
+			gradelb.setForeground(Color.white);
+			gradeChooser = new JComboBox<String>();
+			gradeChooser.setPreferredSize(new Dimension(120, 20));
+
+			listChooser.addItem("student_list");
+			listChooser.addItem("teacher_list");
+			listChooser.addItem("course_list");
+			listChooser.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					JComboBox<String> cb = (JComboBox<String>) e.getSource();
+					if (cb.getSelectedItem().equals("course_list")) {
+						yearlb.setVisible(true);
+						gradelb.setVisible(true);
+						yearChooser.setVisible(true);
+						gradeChooser.setVisible(true);
+					} else {
+						yearlb.setVisible(false);
+						gradelb.setVisible(false);
+						yearChooser.setVisible(false);
+						gradeChooser.setVisible(false);
+					}
+				}
+			});
+
+			edufwp.getTopPanel().add(listChooser);
+			edufwp.getTopPanel().add(deptlb);
+			edufwp.getTopPanel().add(deptChooser);
+			edufwp.getTopPanel().add(yearlb);
+			edufwp.getTopPanel().add(yearChooser);
+			edufwp.getTopPanel().add(gradelb);
+			edufwp.getTopPanel().add(gradeChooser);
+			yearlb.setVisible(false);
+			gradelb.setVisible(false);
+			yearChooser.setVisible(false);
+			gradeChooser.setVisible(false);
+
+			edufwp.getCenterPanel().setLayout(new BorderLayout());
+			DefaultTableModel dtm = new DefaultTableModel(40, 5);
+			JTable infoTable = new JTable(dtm);
+			DefaultTableCellRenderer r = new DefaultTableCellRenderer();
+			r.setHorizontalAlignment(JLabel.CENTER);
+			infoTable.setDefaultRenderer(Object.class, r);
+
+			edufwp.getCenterPanel().add(new JScrollPane(infoTable),
+					BorderLayout.CENTER);
+			add(edufwp);
+
 		}
 	}
 
 	class CommonCoursePanel extends JPanel {
+		private FunctionBar fbar = null;
+		private FunctionBtn[] fBtn = new FunctionBtn[5];
+		private SubPanel edufwp = null;
+
+		@SuppressWarnings("serial")
 		public CommonCoursePanel() {
-			setBackground(Color.green);
+			setLayout(null);
+			setBackground(Color.white);
+			fbar = new FunctionBar();
+			fbar.setLocation(0, 0);
+			fBtn[0] = new FunctionBtn("AddBtn");
+			fBtn[1] = new FunctionBtn("ModifyBtn");
+			fBtn[2] = new FunctionBtn("DelBtn");
+			fBtn[3] = new FunctionBtn("ImportBtn");
+			fBtn[4] = new FunctionBtn("ExportBtn");
+
+			for (int i = 0; i < fBtn.length; i++) {
+				fbar.add(fBtn[i]);
+			}
+			add(fbar);
+
+			edufwp = new SubPanel("通识课列表", 740, 380);
+			edufwp.setLocation(30, 70);
+
+			DefaultTableModel dtm = new DefaultTableModel(40, 5);
+			JTable infoTable = new JTable(dtm);
+			DefaultTableCellRenderer r = new DefaultTableCellRenderer();
+			r.setHorizontalAlignment(JLabel.CENTER);
+			infoTable.setDefaultRenderer(Object.class, r);
+
+			edufwp.getCenterPanel().setLayout(new BorderLayout());
+			edufwp.getCenterPanel().add(new JScrollPane(infoTable),
+					BorderLayout.CENTER);
+			add(edufwp);
+
 		}
 	}
 

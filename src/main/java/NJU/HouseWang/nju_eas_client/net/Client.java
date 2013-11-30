@@ -25,6 +25,8 @@ import NJU.HouseWang.nju_eas_client.netService.NetService;
  * 功能：客户端与服务器的连接，网络命令的发送，网络文件传输
  */
 public class Client implements NetService {
+	private static final String DEFAULT_IP = "localhost";
+	private static final int DEFAULT_PORT = 9001;
 	private String ip;
 	private int port;
 
@@ -34,6 +36,11 @@ public class Client implements NetService {
 	private DataOutputStream out = null;
 	private DataInputStream fis = null;
 	private DataOutputStream fos = null;
+
+	public Client() {
+		ip = DEFAULT_IP;
+		port = DEFAULT_PORT;
+	}
 
 	public Client(String ip, int port) {
 		this.ip = ip;
