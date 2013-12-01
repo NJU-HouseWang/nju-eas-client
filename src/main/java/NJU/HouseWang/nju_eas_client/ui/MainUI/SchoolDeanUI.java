@@ -43,7 +43,6 @@ import NJU.HouseWang.nju_eas_client.uiService.UIService;
  * 
  */
 public class SchoolDeanUI extends CommonFrame implements UIService {
-	private String userName = null;
 	private TitleBar tbar = null;
 	private MenuBar mbar = null;
 	private MenuBtn[] mbtn = new MenuBtn[5];
@@ -67,7 +66,6 @@ public class SchoolDeanUI extends CommonFrame implements UIService {
 
 	public SchoolDeanUI(String userName) {
 		super("SchoolFrame");
-		this.userName = userName;
 		tbar = new TitleBar(userName);
 		mbar = new MenuBar();
 
@@ -111,8 +109,8 @@ public class SchoolDeanUI extends CommonFrame implements UIService {
 		}
 	}
 
-	public void showFeedback(String fbStr) {
-		showFeedback(Feedback.valueOf(fbStr));
+	public void showFeedback(String feedback) {
+		JOptionPane.showMessageDialog(this, feedback);
 	}
 
 	public void showFeedback(Feedback feedback) {

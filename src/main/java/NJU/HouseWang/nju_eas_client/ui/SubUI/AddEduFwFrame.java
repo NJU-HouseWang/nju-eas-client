@@ -8,7 +8,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Label;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -80,7 +79,7 @@ public class AddEduFwFrame extends JFrame {
 		setResizable(false);
 
 		// 窗口标题
-		setTitle("教学计划模板 - 设置向导");
+		setTitle("教学框架策略 - 设置向导");
 
 		// 设置Layout
 		setLayout(new BorderLayout());
