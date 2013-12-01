@@ -22,7 +22,7 @@ public class EduFrameworkMap implements CMap {
 	}
 
 	public void scanColumn(int columnPoint) {
-		HashMap<Integer, SpanInfo> rowMap = new HashMap<>();
+		HashMap<Integer, SpanInfo> rowMap = new HashMap<Integer, SpanInfo>();
 		SpanInfo si = new SpanInfo();
 		si.name = originTable[0][columnPoint];
 		si.row = 0;
