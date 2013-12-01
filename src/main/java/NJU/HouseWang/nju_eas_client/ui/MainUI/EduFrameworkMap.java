@@ -13,7 +13,7 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.CTable.CTable;
 
 public class EduFrameworkMap implements CMap {
 	private String[][] originTable = null;
-	private HashMap<Integer, HashMap<Integer, SpanInfo>> columnMap = new HashMap<>();
+	private HashMap<Integer, HashMap<Integer, SpanInfo>> columnMap = new HashMap<Integer, HashMap<Integer, SpanInfo>>();
 
 	public EduFrameworkMap(String[][] originTable) {
 		this.originTable = originTable;
@@ -86,43 +86,43 @@ public class EduFrameworkMap implements CMap {
 			return row;
 		}
 	}
-
-	public static void main(String args[]) {
-		JFrame jf = new JFrame("Table with cell spanning");
-		String[][] list = new String[][] {
-				{ "A", "V", "V", "V", "1", "1", "V" },
-				{ "A", "C", "C", "C", "2", "2", "C" },
-				{ "A", "C", "C", "C", "3", "3", "C" },
-				{ "B", "V", "V", "V", "4", "4", "V" },
-				{ "B", "F", "F", "F", "5", "5", "F" },
-
-		};
-		EduFrameworkMap m = new EduFrameworkMap(list);
-		DefaultTableModel tm = new DefaultTableModel(5, 7) {
-			public boolean isCellEditable(int indexRow, int indexColumn) {
-				return false;
-			}
-		};
-		for (int i = 0; i < list.length; i++) {
-			for (int j = 0; j < list[i].length; j++) {
-				tm.setValueAt(list[i][j], i, j);
-			}
-		}
-		tm.setColumnIdentifiers(new String[] { "as", "sdf", "sf", "sdf",
-				"asdf", "adsf", "a" });
-		// tm.setValueAt("port1", 0, 0);
-		// tm.setValueAt("port1", 1, 0);
-
-		CTable ct = new CTable(m, tm);
-		ct.setEnabled(false);
-		DefaultTableCellRenderer r = new DefaultTableCellRenderer();
-		r.setHorizontalAlignment(JLabel.CENTER);
-		ct.setDefaultRenderer(Object.class, r);
-		jf.getContentPane().add(new JScrollPane(ct));
-		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		jf.setSize(500, 500);
-		jf.setVisible(true);
-	}
+//
+//	public static void main(String args[]) {
+//		JFrame jf = new JFrame("Table with cell spanning");
+//		String[][] list = new String[][] {
+//				{ "A", "V", "V", "V", "1", "1", "V" },
+//				{ "A", "C", "C", "C", "2", "2", "C" },
+//				{ "A", "C", "C", "C", "3", "3", "C" },
+//				{ "B", "V", "V", "V", "4", "4", "V" },
+//				{ "B", "F", "F", "F", "5", "5", "F" },
+//
+//		};
+//		EduFrameworkMap m = new EduFrameworkMap(list);
+//		DefaultTableModel tm = new DefaultTableModel(5, 7) {
+//			public boolean isCellEditable(int indexRow, int indexColumn) {
+//				return false;
+//			}
+//		};
+//		for (int i = 0; i < list.length; i++) {
+//			for (int j = 0; j < list[i].length; j++) {
+//				tm.setValueAt(list[i][j], i, j);
+//			}
+//		}
+//		tm.setColumnIdentifiers(new String[] { "as", "sdf", "sf", "sdf",
+//				"asdf", "adsf", "a" });
+//		// tm.setValueAt("port1", 0, 0);
+//		// tm.setValueAt("port1", 1, 0);
+//
+//		CTable ct = new CTable(m, tm);
+//		ct.setEnabled(false);
+//		DefaultTableCellRenderer r = new DefaultTableCellRenderer();
+//		r.setHorizontalAlignment(JLabel.CENTER);
+//		ct.setDefaultRenderer(Object.class, r);
+//		jf.getContentPane().add(new JScrollPane(ct));
+//		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		jf.setSize(500, 500);
+//		jf.setVisible(true);
+//	}
 }
 
 class SpanInfo {
