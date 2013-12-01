@@ -23,7 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-import NJU.HouseWang.nju_eas_client.launcher.ClientLauncher;
+import NJU.HouseWang.nju_eas_client.Launcher;
 import NJU.HouseWang.nju_eas_client.net.ClientPool;
 import NJU.HouseWang.nju_eas_client.netService.NetService;
 import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
@@ -258,7 +258,7 @@ public class AdminFrame extends CommonFrame implements UIService {
 		JOptionPane.showMessageDialog(this, feedback.getContent());
 	}
 
-	public static void main(String[] args) {
-		new AdminFrame("Admin");
-	}
+//	public static void main(String[] args) {
+//		new AdminFrame("Admin");
+//	}
 }

@@ -3,12 +3,10 @@ package NJU.HouseWang.nju_eas_client.ui.MainUI;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -18,7 +16,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.CTable.CTable;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.BigMenuBar;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.CommonFrame;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.FunctionBar;
@@ -35,8 +32,8 @@ public class TeacherFrame extends CommonFrame implements UIService {
 	private TitleBar tbar = null;
 	private MenuBar mbar = null;
 	private MenuBtn[] mbtn = new MenuBtn[4];
-	private String[] mbtnName = { "HomeBtn", "MyCourseBtn",
-			"MyStudentBtn", "TeaScoreBtn" };
+	private String[] mbtnName = { "HomeBtn", "MyCourseBtn", "MyStudentBtn",
+			"TeaScoreBtn" };
 	private JPanel[] childp = new JPanel[4];
 	private JPanel cardp = new JPanel();
 	private CardLayout card = new CardLayout();
@@ -247,7 +244,7 @@ public class TeacherFrame extends CommonFrame implements UIService {
 		}
 	}
 
-	public static void main(String[] args) {
-		new TeacherFrame("刘钦");
-	}
+//	public static void main(String[] args) {
+//		new TeacherFrame("刘钦");
+//	}
 }

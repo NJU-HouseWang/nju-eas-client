@@ -264,7 +264,7 @@ public class DeptADFrame extends CommonFrame implements UIService {
 		}
 	}
 
-	public static void main(String[] args) {
-		new DeptADFrame("王东霞");
-	}
+//	public static void main(String[] args) {
+//		new DeptADFrame("王东霞");
+//	}
 }

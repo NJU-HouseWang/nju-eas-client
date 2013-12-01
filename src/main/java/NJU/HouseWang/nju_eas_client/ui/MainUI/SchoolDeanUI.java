@@ -389,9 +389,9 @@ public class SchoolDeanUI extends CommonFrame implements UIService {
 		}
 	}
 
-	class PECoursePanel extends JPanel {
-		public PECoursePanel() {
-			setBackground(Color.pink);
-		}
-	}
+//	class PECoursePanel extends JPanel {
+//		public PECoursePanel() {
+//			setBackground(Color.pink);
+//		}
+//	}
 }

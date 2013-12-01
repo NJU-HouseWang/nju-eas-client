@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import NJU.HouseWang.nju_eas_client.launcher.ClientLauncher;
+import NJU.HouseWang.nju_eas_client.Launcher;
 import NJU.HouseWang.nju_eas_client.net.Client;
 import NJU.HouseWang.nju_eas_client.netService.NetService;
 import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
@@ -92,7 +92,7 @@ public class LoginFrame extends CommonFrame implements UIService {
 		}
 		if (feedback == Feedback.OPERATION_SUCCEED) {
 			dispose();
-			ClientLauncher.createUI(userType, userName);
+			Launcher.createUI(userType, userName);
 		} else {
 			showFeedback(feedback);
 		}

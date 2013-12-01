@@ -506,7 +506,7 @@ public class AddEduFwFrame extends JFrame {
 		JOptionPane.showMessageDialog(this, feedback.getContent());
 	}
 	
-	public static void main(String[] args) {
-		new AddEduFwFrame();
-	}
+//	public static void main(String[] args) {
+//		new AddEduFwFrame();
+//	}
 }

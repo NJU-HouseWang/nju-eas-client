@@ -233,7 +233,7 @@ public class AddTpFrame extends JFrame {
 		}
 	}
 
-	public static void main(String[] args) {
-		new AddTpFrame();
-	}
+//	public static void main(String[] args) {
+//		new AddTpFrame();
+//	}
 }

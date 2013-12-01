@@ -5,7 +5,7 @@
  * 最后修改：王鑫
  * 修改时间：2013-10-18
  */
-package NJU.HouseWang.nju_eas_client.launcher;
+package NJU.HouseWang.nju_eas_client;
 
 import javax.swing.JOptionPane;
 
@@ -17,7 +17,7 @@ import NJU.HouseWang.nju_eas_client.ui.MainUI.LoginFrame;
  * 类：ClientLauncher
  * 
  */
-public class ClientLauncher {
+public class Launcher {
 
 	public static void main(String[] args) {
 		createUI("Login", null);
