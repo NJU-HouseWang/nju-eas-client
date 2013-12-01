@@ -13,9 +13,9 @@ public class MenuBtn extends JToggleButton {
 	public MenuBtn(String btnName) {
 		this.name = btnName;
 		setName(btnName);
-		setIcon(new ImageIcon(path + name + "_0" + suffix));
-		setRolloverIcon(new ImageIcon(path + name + "_1" + suffix));
-		setSelectedIcon(new ImageIcon(path + name + "_1" + suffix));
+		setIcon(new ImageIcon(ClassLoader.getSystemResource(path + name + "_0" + suffix)));
+		setRolloverIcon(new ImageIcon(ClassLoader.getSystemResource(path + name + "_1" + suffix)));
+		setSelectedIcon(new ImageIcon(ClassLoader.getSystemResource(path + name + "_1" + suffix)));
 		setSize(120, 50);
 		setPreferredSize(new Dimension(120, 50));
 		if (btnName.equals("HomeBtn")) {

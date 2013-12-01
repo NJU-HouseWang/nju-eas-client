@@ -18,9 +18,9 @@ public class SmallMenuBtn extends JToggleButton {
 	public SmallMenuBtn(String t) {
 		super();
 		text.setText(t);
-		setIcon(new ImageIcon(path + name + "_0" + suffix));
-		setRolloverIcon(new ImageIcon(path + name + "_1" + suffix));
-		setSelectedIcon(new ImageIcon(path + name + "_1" + suffix));
+		setIcon(new ImageIcon(ClassLoader.getSystemResource(path + name + "_0" + suffix)));
+		setRolloverIcon(new ImageIcon(ClassLoader.getSystemResource(path + name + "_1" + suffix)));
+		setSelectedIcon(new ImageIcon(ClassLoader.getSystemResource(path + name + "_1" + suffix)));
 		setSize(90, 45);
 		setPreferredSize(new Dimension(90, 45));
 		FlowLayout fl = new FlowLayout();

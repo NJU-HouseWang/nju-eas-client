@@ -18,9 +18,9 @@ public class MsgMenuBtn extends JToggleButton {
 	public MsgMenuBtn(String t) {
 		super();
 		text.setText(t);
-		setIcon(new ImageIcon(path + name + "_0" + suffix));
-		setRolloverIcon(new ImageIcon(path + name + "_1" + suffix));
-		setSelectedIcon(new ImageIcon(path + name + "_1" + suffix));
+		setIcon(new ImageIcon(ClassLoader.getSystemResource(path + name + "_0" + suffix)));
+		setRolloverIcon(new ImageIcon(ClassLoader.getSystemResource(path + name + "_1" + suffix)));
+		setSelectedIcon(new ImageIcon(ClassLoader.getSystemResource(path + name + "_1" + suffix)));
 		setSize(200, 50);
 		setPreferredSize(new Dimension(200, 45));
 		FlowLayout fl = new FlowLayout();

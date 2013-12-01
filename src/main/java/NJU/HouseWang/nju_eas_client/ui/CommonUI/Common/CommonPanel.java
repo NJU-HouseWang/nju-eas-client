@@ -17,7 +17,7 @@ public class CommonPanel extends JPanel {
 	public CommonPanel(String name) {
 		super();
 		this.name = name;
-		imageIcon = new ImageIcon(path + name + suffix);
+		imageIcon = new ImageIcon(ClassLoader.getSystemResource(path + name + suffix));
 		setLayout(null);
 	}
 

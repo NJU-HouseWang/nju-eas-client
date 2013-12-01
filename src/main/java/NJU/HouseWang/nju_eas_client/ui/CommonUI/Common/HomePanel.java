@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class HomePanel extends JPanel {
 
-	private ImageIcon imageIcon = new ImageIcon("img/Main/Home.png");
+	private ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("img/Main/Home.png"));
 
 	public HomePanel() {
 		super();

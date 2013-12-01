@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
 public class MenuBar extends JPanel {
-	private ImageIcon imageIcon = new ImageIcon("img/MenuBar.png");
+	private ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("img/MenuBar.png"));
 	private ButtonGroup group = new ButtonGroup();
 
 	public MenuBar() {

@@ -23,9 +23,9 @@ public class FunctionBtn extends JButton {
 
 	public FunctionBtn(String btnName) {
 		name = btnName;
-		setIcon(new ImageIcon(path + name + "_0" + suffix));
-		setRolloverIcon(new ImageIcon(path + name + "_1" + suffix));
-		setPressedIcon(new ImageIcon(path + name + "_2" + suffix));
+		setIcon(new ImageIcon(ClassLoader.getSystemResource(path + name + "_0" + suffix)));
+		setRolloverIcon(new ImageIcon(ClassLoader.getSystemResource(path + name + "_1" + suffix)));
+		setPressedIcon(new ImageIcon(ClassLoader.getSystemResource(path + name + "_2" + suffix)));
 		setSize(90, 45);
 		setPreferredSize(new Dimension(90, 45));
 		setBorderPainted(false);
