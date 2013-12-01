@@ -27,7 +27,7 @@ import NJU.HouseWang.nju_eas_client.uiService.UIService;
  * 类：UserCenterUI
  * 
  */
-public class UserCenterUI implements UIService {
+public class UserCenterFrame implements UIService {
 	private static int FUNC_NUM = 3;
 	private SmallCommonFrame frame = null;
 	private JPanel menuBar = null;
@@ -39,7 +39,7 @@ public class UserCenterUI implements UIService {
 	private int index = 0;
 	private JPanel[] switchPane = new JPanel[FUNC_NUM];
 
-	public UserCenterUI() {
+	public UserCenterFrame() {
 		frame = new SmallCommonFrame("UserCenterFrame");
 		menuBar = new JPanel();
 		cardL = new CardLayout();

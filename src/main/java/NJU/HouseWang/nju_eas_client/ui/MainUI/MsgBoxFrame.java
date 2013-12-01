@@ -28,7 +28,7 @@ import NJU.HouseWang.nju_eas_client.uiService.UIService;
  * 类：MsgBoxUI
  * 
  */
-public class MsgBoxUI implements UIService {
+public class MsgBoxFrame implements UIService {
 	private static int FUNC_NUM = 2;
 	private SmallCommonFrame frame = null;
 	private JPanel menuBar = null;
@@ -40,7 +40,7 @@ public class MsgBoxUI implements UIService {
 	private int index = 0;
 	private JPanel[] switchPane = new JPanel[FUNC_NUM];
 
-	public MsgBoxUI() {
+	public MsgBoxFrame() {
 		frame = new SmallCommonFrame("MsgBoxFrame");
 		menuBar = new JPanel();
 		cardL = new CardLayout();

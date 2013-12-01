@@ -42,7 +42,7 @@ import NJU.HouseWang.nju_eas_client.uiService.UIService;
  * 类：SchoolDeanUI
  * 
  */
-public class SchoolDeanUI extends CommonFrame implements UIService {
+public class SchoolDeanFrame extends CommonFrame implements UIService {
 	private TitleBar tbar = null;
 	private MenuBar mbar = null;
 	private MenuBtn[] mbtn = new MenuBtn[5];
@@ -64,7 +64,7 @@ public class SchoolDeanUI extends CommonFrame implements UIService {
 	private String[] edufwHeader = new String[] { "as", "sdf", "sf", "sdf",
 			"asdf", "adsf", "a" };
 
-	public SchoolDeanUI(String userName) {
+	public SchoolDeanFrame(String userName) {
 		super("SchoolFrame");
 		tbar = new TitleBar(userName);
 		mbar = new MenuBar();
@@ -118,7 +118,7 @@ public class SchoolDeanUI extends CommonFrame implements UIService {
 	}
 
 	public static void main(String[] args) {
-		new SchoolDeanUI("陈建群");
+		new SchoolDeanFrame("陈建群");
 	}
 
 	class HomePanel extends JPanel {

@@ -1,9 +1,9 @@
 /*
- * 文件名：ClientLauncher.java
+ * 文件名：Launcher.java
  * 创建者：王鑫
  * 创建时间：2013-10-16
  * 最后修改：王鑫
- * 修改时间：2013-10-18
+ * 修改时间：2013-12-1
  */
 package NJU.HouseWang.nju_eas_client;
 
@@ -11,15 +11,20 @@ import javax.swing.JOptionPane;
 
 import NJU.HouseWang.nju_eas_client.net.ClientPool;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.AdminFrame;
+import NJU.HouseWang.nju_eas_client.ui.MainUI.DeptADFrame;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.LoginFrame;
+import NJU.HouseWang.nju_eas_client.ui.MainUI.SchoolDeanFrame;
+import NJU.HouseWang.nju_eas_client.ui.MainUI.StudentFrame;
+import NJU.HouseWang.nju_eas_client.ui.MainUI.TeacherFrame;
 
 /*
- * 类：ClientLauncher
+ * 类：Launcher
  * 
  */
 public class Launcher {
 
 	public static void main(String[] args) {
+		System.out.println(new Launcher().getClass().getName());
 		createUI("Login", null);
 	}
 
@@ -39,15 +44,18 @@ public class Launcher {
 			case "Admin":
 				new AdminFrame(userName);
 				break;
-			// case "School":
-			// new SchoolDeanUI().create();
-			// break;
-			// case "Dept":
-			// new DeptADUI().create();
-			// break;
-			// case "Teacher":
-			// new TeacherUI().create();
-			// break;
+			case "School":
+				new SchoolDeanFrame(userName);
+				break;
+			case "Dept":
+				new DeptADFrame(userName);
+				break;
+			case "Teacher":
+				new TeacherFrame(userName);
+				break;
+			case "Student":
+				new StudentFrame(userName);
+				break;
 			}
 		}
 	}
