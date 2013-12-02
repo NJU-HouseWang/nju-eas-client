@@ -244,7 +244,7 @@ public class TeacherFrame extends CommonFrame implements UIService {
 		}
 	}
 
-//	public static void main(String[] args) {
-//		new TeacherFrame("刘钦");
-//	}
+	// public static void main(String[] args) {
+	// new TeacherFrame("刘钦");
+	// }
 }

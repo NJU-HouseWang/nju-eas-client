@@ -3,12 +3,10 @@ package NJU.HouseWang.nju_eas_client.ui.MainUI;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -18,7 +16,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.CTable.CTable;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.BigMenuBar;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.CommonFrame;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.FunctionBar;
@@ -158,27 +155,28 @@ public class DeptADFrame extends CommonFrame implements UIService {
 			localStatuesp = new SubPanel("当前状态", 230, 150);
 			localStatuesp.setLocation(540, 230);
 
-//			EduFrameworkMap m = new EduFrameworkMap(edufwContent);
-//			DefaultTableModel tm = new DefaultTableModel(edufwContent.length,
-//					edufwContent[0].length) {
-//				public boolean isCellEditable(int indexRow, int indexColumn) {
-//					return false;
-//				}
-//			};
-//			for (int i = 0; i < edufwContent.length; i++) {
-//				for (int j = 0; j < edufwContent[i].length; j++) {
-//					tm.setValueAt(edufwContent[i][j], i, j);
-//				}
-//			}
-//			tm.setColumnIdentifiers(edufwHeader);
+			// EduFrameworkMap m = new EduFrameworkMap(edufwContent);
+			// DefaultTableModel tm = new DefaultTableModel(edufwContent.length,
+			// edufwContent[0].length) {
+			// public boolean isCellEditable(int indexRow, int indexColumn) {
+			// return false;
+			// }
+			// };
+			// for (int i = 0; i < edufwContent.length; i++) {
+			// for (int j = 0; j < edufwContent[i].length; j++) {
+			// tm.setValueAt(edufwContent[i][j], i, j);
+			// }
+			// }
+			// tm.setColumnIdentifiers(edufwHeader);
 
-//			CTable ct = new CTable(m, tm);
-//			ct.setEnabled(false);
-//			DefaultTableCellRenderer r = new DefaultTableCellRenderer();
-//			r.setHorizontalAlignment(JLabel.CENTER);
-//			ct.setDefaultRenderer(Object.class, r);
+			// CTable ct = new CTable(m, tm);
+			// ct.setEnabled(false);
+			// DefaultTableCellRenderer r = new DefaultTableCellRenderer();
+			// r.setHorizontalAlignment(JLabel.CENTER);
+			// ct.setDefaultRenderer(Object.class, r);
 			tpp.getCenterPanel().setLayout(new BorderLayout());
-//			tpp.getCenterPanel().add(new JScrollPane(ct), BorderLayout.CENTER);
+			// tpp.getCenterPanel().add(new JScrollPane(ct),
+			// BorderLayout.CENTER);
 
 			add(tpp);
 			add(accessoryp);
@@ -264,7 +262,7 @@ public class DeptADFrame extends CommonFrame implements UIService {
 		}
 	}
 
-//	public static void main(String[] args) {
-//		new DeptADFrame("王东霞");
-//	}
+	// public static void main(String[] args) {
+	// new DeptADFrame("王东霞");
+	// }
 }

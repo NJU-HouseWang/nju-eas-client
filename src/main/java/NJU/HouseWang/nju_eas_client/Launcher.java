@@ -24,7 +24,6 @@ import NJU.HouseWang.nju_eas_client.ui.MainUI.TeacherFrame;
 public class Launcher {
 
 	public static void main(String[] args) {
-		System.out.println(new Launcher().getClass().getName());
 		createUI("Login", null);
 	}
 
@@ -56,6 +55,8 @@ public class Launcher {
 			case "Student":
 				new StudentFrame(userName);
 				break;
+			default:
+				System.err.println("Error:不存在的界面");
 			}
 		}
 	}

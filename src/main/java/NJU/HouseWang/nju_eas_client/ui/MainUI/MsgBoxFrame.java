@@ -86,12 +86,6 @@ public class MsgBoxFrame implements UIService {
 		frame.setVisible(true);
 	}
 
-	@Override
-	public void dispose() {
-
-	}
-
-	@Override
 	public void showFeedback(Feedback feedback) {
 
 	}

@@ -284,7 +284,7 @@ public class StudentFrame extends CommonFrame implements UIService {
 		}
 	}
 
-//	public static void main(String[] args) {
-//		new StudentFrame("王学洋");
-//	}
+	// public static void main(String[] args) {
+	// new StudentFrame("王学洋");
+	// }
 }
