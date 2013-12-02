@@ -59,8 +59,8 @@ public class CommonFrame extends JFrame {
 
 	private void setMovable(final JFrame frame) {
 		String titlePath = "img/Title/";
-		JButton title = new JButton(new ImageIcon(titlePath + frameName
-				+ ".png"));
+		JButton title = new JButton(new ImageIcon(ClassLoader.getSystemResource(titlePath + frameName
+				+ ".png")));
 		title.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				CommonFrame.origin.x = e.getX();
