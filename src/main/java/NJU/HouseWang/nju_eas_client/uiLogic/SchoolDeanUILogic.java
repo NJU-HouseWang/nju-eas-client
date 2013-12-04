@@ -414,7 +414,7 @@ public class SchoolDeanUILogic {
 
 	public Object showCourseEditHead() {
 		String line = null;
-		String cmd = "show；common_course_list_head_edit";
+		String cmd = "show；edit_common_course_list_head";
 		try {
 			NetService client = initNetService();
 			client.sendCommand(cmd);
