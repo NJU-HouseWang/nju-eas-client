@@ -23,8 +23,8 @@ public class EditUserUI {
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private int width = 0;
 	private int height = 0;
-	private String itemName = new String();
-	private String itemInfo = new String();
+	private String itemName = "";
+	private String itemInfo = "";
 	private JPanel panel = null;
 	private JLabel[] iteml = null;
 	private JTextField[] itemtf = null;

@@ -27,7 +27,7 @@ public class EditCommonCourseUI {
 	private int height = 0;
 	private String[] item = null;
 	private String[] origin = null;
-	private String itemInfo = null;
+	private String itemInfo  = "";
 	private JPanel panel = null;
 	private JLabel[] iteml = null;
 	private JTextField[] itemtf = null;
@@ -100,9 +100,13 @@ public class EditCommonCourseUI {
 		confirmBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if (itemtf[5].getText().equals("null")) {
+					JOptionPane.showMessageDialog(null, "课程教师不存在");
+					return;
+				}
 				for (int i = 0; i < itemtf.length; i++) {
 					String itemtmp = itemtf[i].getText();
-					if (itemtmp == "") {
+					if (itemtmp.equals("")) {
 						JOptionPane.showMessageDialog(frame,
 								Feedback.ITEM_EMPTY);
 						itemInfo = null;

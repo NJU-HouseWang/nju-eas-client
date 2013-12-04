@@ -111,6 +111,9 @@ public class MsgBoxUILogic {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		if (line.equals("null")) {
+			line = "";
+		}
 		return line;
 	}
 }

@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -62,6 +64,7 @@ public class SendMsgUI {
 		content.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 		receiveIdtf.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 		receiveNametf.setFont(new Font("微软雅黑", Font.PLAIN, 14));
+		receiveNametf.setEditable(false);
 		topictf.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 		contenttf.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 
@@ -101,13 +104,28 @@ public class SendMsgUI {
 	}
 
 	private void setListener() {
+		receiveIdtf.addFocusListener(new FocusAdapter() {
+			public void focusLost(FocusEvent e) {
+				receiveNametf.setText(logic.showUserName(receiveIdtf.getText()));
+			}
+		});
+
 		save_draftBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MessageVO newMsg = new MessageVO();
 				newMsg.senderId = "me";
 				newMsg.recipientId = receiveIdtf.getText().replaceAll("；", ";");
+				if (newMsg.recipientId.equals("")) {
+					newMsg.recipientId = "null";
+				}
 				newMsg.title = topictf.getText().replaceAll("；", ";");
+				if (newMsg.title.equals("")) {
+					newMsg.title = "null";
+				}
 				newMsg.content = contenttf.getText().replaceAll("；", ";");
+				if (newMsg.content.equals("")) {
+					newMsg.content = "null";
+				}
 				Feedback fb = logic.saveDraft(newMsg);
 				JOptionPane.showMessageDialog(null, fb.getContent());
 			}
@@ -119,6 +137,18 @@ public class SendMsgUI {
 				newMsg.recipientId = receiveIdtf.getText().replaceAll("；", ";");
 				newMsg.title = topictf.getText().replaceAll("；", ";");
 				newMsg.content = contenttf.getText().replaceAll("；", ";");
+				if (newMsg.recipientId.equals("")
+						|| newMsg.recipientId.equals("")
+						|| newMsg.title.equals("") || newMsg.content.equals("")) {
+					JOptionPane.showMessageDialog(null, "消息信息不完整");
+					return;
+				}
+
+				if (receiveNametf.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "接收方不存在");
+					return;
+				}
+
 				Feedback fb = logic.sendMsg(newMsg);
 				JOptionPane.showMessageDialog(null, fb.getContent());
 			}
