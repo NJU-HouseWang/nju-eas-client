@@ -45,6 +45,7 @@ public class ChangePasswordPanel extends JPanel {
 				if (pw1[0] == '请' || pw2[0] == '请'
 						|| oldpf.getPassword()[0] == '请') {
 					JOptionPane.showMessageDialog(null, "请输入完整的密码信息");
+					return;
 				}
 				boolean judge = true;
 				judge = (pw1.length == pw2.length);
