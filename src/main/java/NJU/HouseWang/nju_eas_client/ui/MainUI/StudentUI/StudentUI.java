@@ -20,10 +20,11 @@ import NJU.HouseWang.nju_eas_client.vo.Feedback;
 
 public class StudentUI {
 	private StudentUILogic logic = new StudentUILogic();
-	private final int FUNC_NUM = 4;
+	private final int FUNC_NUM = 5;
 	private final String[] FUNC_BTN_NAME = { "homeBtn", "myCouBtn",
-			"myScoreBtn", "chooseCommonBtn" };
-	private final String[] FUNC_BTN_TEXT = { "主页", "管理我的课程", "查看成绩单", "通识课选课" };
+			"myScoreBtn", "chooseCommonBtn", "byelectBtn" };
+	private final String[] FUNC_BTN_TEXT = { "主页", "管理我的课程", "查看成绩单", "通识课选课",
+			"通识课补选" };
 	private CommonFrame frame = new CommonFrame("StudentFrame");
 	private TitleBar tbar = null;
 	private MenuBar mbar = new MenuBar();
@@ -40,6 +41,7 @@ public class StudentUI {
 		childp[1] = new MyCoursePanel();
 		childp[2] = new MyScorePanel();
 		childp[3] = new ChooseCommonPanel();
+		childp[4] = new ByelectPanel();
 
 		switchPane.setSize(1000, 590);
 		switchPane.setLocation(30, 140);
