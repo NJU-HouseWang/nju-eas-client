@@ -14,13 +14,20 @@ public class MessageVO {
 	// 0表示未读,1表示已读
 	public String status;
 
+	public MessageVO() {
+	}
+
 	public MessageVO(String s) {
 		id = s.split("；")[0];
-		id = s.split("；")[1];
-		id = s.split("；")[2];
-		id = s.split("；")[3];
-		id = s.split("；")[4];
-		id = s.split("；")[5];
-		id = s.split("；")[6];
+		senderId = s.split("；")[1];
+		recipientId = s.split("；")[2];
+		title = s.split("；")[3];
+		content = s.split("；")[4];
+		status = s.split("；")[5];
+	}
+
+	public String toCommand() {
+		return senderId + "；" + recipientId + "；" + title + "；" + content + "；"
+				+ status;
 	}
 }

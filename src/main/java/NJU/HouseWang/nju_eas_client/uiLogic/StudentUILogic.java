@@ -314,9 +314,9 @@ public class StudentUILogic {
 		return course;
 	}
 
-	public boolean showChooseCommonStatus() {
+	public boolean showSystemStatus(String name) {
 		String line = null;
-		String cmd = "show；status；selectCommon";
+		String cmd = "show；status；" + name;
 		try {
 			NetService client = initNetService();
 			client.sendCommand(cmd);

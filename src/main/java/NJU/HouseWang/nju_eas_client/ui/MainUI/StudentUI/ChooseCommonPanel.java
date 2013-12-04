@@ -26,7 +26,7 @@ import NJU.HouseWang.nju_eas_client.vo.Feedback;
 public class ChooseCommonPanel extends JPanel {
 	private StudentUILogic logic = new StudentUILogic();
 	private SubPanel choosep = new SubPanel("已选课程列表", 700, 145);
-	private SubPanel coup = new SubPanel("通识课列表（双击课程即可选中）", 700, 380);
+	private SubPanel coup = new SubPanel("通识课列表", 700, 380);
 	private SubPanel infop = new SubPanel("课程详细信息", 230, 525);
 	private CommonBtn selectBtn = new CommonBtn("选课");
 	private CommonBtn cancelBtn = new CommonBtn("取消选课");
