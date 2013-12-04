@@ -25,29 +25,32 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.TitleBar;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.FunctionBtn.FunctionBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.MenuBtn.BigMenuBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.MenuBtn.MenuBtn;
-import NJU.HouseWang.nju_eas_client.uiService.UIService;
+import NJU.HouseWang.nju_eas_client.uiLogic.StudentUILogic;
 
-public class DeptADFrame extends CommonFrame implements UIService {
-
+public class StudentUI {
+	private StudentUILogic logic = null;
+	private CommonFrame frame = null;
 	private TitleBar tbar = null;
 	private MenuBar mbar = null;
-	private MenuBtn[] mbtn = new MenuBtn[4];
-	private String[] mbtnName = { "HomeBtn", "TeachingPlanBtn",
-			"DeptCourseBtn", "DeptStudentBtn" };
-	private JPanel[] childp = new JPanel[4];
+	private MenuBtn[] mbtn = new MenuBtn[5];
+	private String[] mbtnName = { "HomeBtn", "MyCourseBtn", "StuScoreBtn",
+			"ChooseCommonBtn", "MajorBtn" };
+	private JPanel[] childp = new JPanel[5];
 	private JPanel cardp = new JPanel();
 	private CardLayout card = new CardLayout();
 
-	public DeptADFrame(String userName) {
-		super("DeptFrame");
+	public StudentUI(String userName) {
+		logic = new StudentUILogic();
+		frame = new CommonFrame("StudentFrame");
 
 		tbar = new TitleBar(userName);
 		mbar = new MenuBar();
 
 		childp[0] = new HomePanel();
-		childp[1] = new TeachingPlanPanel();
-		childp[2] = new DeptCoursePanel();
-		childp[3] = new DeptStudentPanel();
+		childp[1] = new MyCoursePanel();
+		childp[2] = new MyScorePanel();
+		childp[3] = new ChooseCommonPanel();
+		childp[4] = new MajorPanel();
 
 		cardp.setSize(800, 480);
 		cardp.setLocation(30, 150);
@@ -63,11 +66,11 @@ public class DeptADFrame extends CommonFrame implements UIService {
 		mbar.setLocation(30, 100);
 		card.show(cardp, mbtnName[0]);
 		mbtn[0].setSelected(true);
-		add(cardp);
-		add(mbar);
-		add(tbar);
+		frame.add(cardp);
+		frame.add(mbar);
+		frame.add(tbar);
 		setListener();
-		setVisible(true);
+		frame.setVisible(true);
 	}
 
 	private void setListener() {
@@ -91,7 +94,7 @@ public class DeptADFrame extends CommonFrame implements UIService {
 	}
 
 	class HomePanel extends JPanel {
-		private BigMenuBtn[] bmbtn = new BigMenuBtn[3];
+		private BigMenuBtn[] bmbtn = new BigMenuBtn[4];
 		private BigMenuBar bmbar = new BigMenuBar();
 
 		public HomePanel() {
@@ -127,70 +130,13 @@ public class DeptADFrame extends CommonFrame implements UIService {
 		}
 	}
 
-	class TeachingPlanPanel extends JPanel {
-		private FunctionBar fbar = null;
-		private FunctionBtn[] fBtn = new FunctionBtn[2];
-		private SubPanel tpp = null;
-		private SubPanel accessoryp = null;
-		private SubPanel localStatuesp = null;
-
-		public TeachingPlanPanel() {
-			setLayout(null);
-			setBackground(Color.white);
-			fbar = new FunctionBar();
-			fbar.setLocation(0, 0);
-			fBtn[0] = new FunctionBtn("AddBtn");
-			fBtn[1] = new FunctionBtn("DelBtn");
-			for (int i = 0; i < fBtn.length; i++) {
-				fbar.add(fBtn[i]);
-			}
-			add(fbar);
-
-			tpp = new SubPanel("教学计划  ", 500, 380);
-			tpp.setLocation(30, 70);
-
-			accessoryp = new SubPanel("附件", 230, 150);
-			accessoryp.setLocation(540, 70);
-
-			localStatuesp = new SubPanel("当前状态", 230, 150);
-			localStatuesp.setLocation(540, 230);
-
-			// EduFrameworkMap m = new EduFrameworkMap(edufwContent);
-			// DefaultTableModel tm = new DefaultTableModel(edufwContent.length,
-			// edufwContent[0].length) {
-			// public boolean isCellEditable(int indexRow, int indexColumn) {
-			// return false;
-			// }
-			// };
-			// for (int i = 0; i < edufwContent.length; i++) {
-			// for (int j = 0; j < edufwContent[i].length; j++) {
-			// tm.setValueAt(edufwContent[i][j], i, j);
-			// }
-			// }
-			// tm.setColumnIdentifiers(edufwHeader);
-
-			// CTable ct = new CTable(m, tm);
-			// ct.setEnabled(false);
-			// DefaultTableCellRenderer r = new DefaultTableCellRenderer();
-			// r.setHorizontalAlignment(JLabel.CENTER);
-			// ct.setDefaultRenderer(Object.class, r);
-			tpp.getCenterPanel().setLayout(new BorderLayout());
-			// tpp.getCenterPanel().add(new JScrollPane(ct),
-			// BorderLayout.CENTER);
-
-			add(tpp);
-			add(accessoryp);
-			add(localStatuesp);
-		}
-	}
-
-	class DeptCoursePanel extends JPanel {
+	class MyCoursePanel extends JPanel {
 		private FunctionBar fbar = null;
 		private FunctionBtn[] fBtn = new FunctionBtn[5];
 		private SubPanel edufwp = null;
 
 		@SuppressWarnings("serial")
-		public DeptCoursePanel() {
+		public MyCoursePanel() {
 			setLayout(null);
 			setBackground(Color.white);
 			fbar = new FunctionBar();
@@ -206,7 +152,7 @@ public class DeptADFrame extends CommonFrame implements UIService {
 			}
 			add(fbar);
 
-			edufwp = new SubPanel("本院课程列表", 740, 380);
+			edufwp = new SubPanel("我的课程列表", 740, 380);
 			edufwp.setLocation(30, 70);
 
 			DefaultTableModel dtm = new DefaultTableModel(40, 5);
@@ -223,13 +169,52 @@ public class DeptADFrame extends CommonFrame implements UIService {
 		}
 	}
 
-	class DeptStudentPanel extends JPanel {
+	class MyScorePanel extends JPanel {
 		private FunctionBar fbar = null;
 		private FunctionBtn[] fBtn = new FunctionBtn[5];
 		private SubPanel edufwp = null;
 
 		@SuppressWarnings("serial")
-		public DeptStudentPanel() {
+		public MyScorePanel() {
+			setLayout(null);
+			setBackground(Color.white);
+			fbar = new FunctionBar();
+			fbar.setLocation(0, 0);
+			fBtn[0] = new FunctionBtn("AddBtn");
+			fBtn[1] = new FunctionBtn("ModifyBtn");
+			fBtn[2] = new FunctionBtn("DelBtn");
+			fBtn[3] = new FunctionBtn("ImportBtn");
+			fBtn[4] = new FunctionBtn("ExportBtn");
+
+			for (int i = 0; i < fBtn.length; i++) {
+				fbar.add(fBtn[i]);
+			}
+			add(fbar);
+
+			edufwp = new SubPanel("我的学生列表", 740, 380);
+			edufwp.setLocation(30, 70);
+
+			DefaultTableModel dtm = new DefaultTableModel(40, 5);
+			JTable infoTable = new JTable(dtm);
+			DefaultTableCellRenderer r = new DefaultTableCellRenderer();
+			r.setHorizontalAlignment(JLabel.CENTER);
+			infoTable.setDefaultRenderer(Object.class, r);
+
+			edufwp.getCenterPanel().setLayout(new BorderLayout());
+			edufwp.getCenterPanel().add(new JScrollPane(infoTable),
+					BorderLayout.CENTER);
+			add(edufwp);
+
+		}
+	}
+
+	class ChooseCommonPanel extends JPanel {
+		private FunctionBar fbar = null;
+		private FunctionBtn[] fBtn = new FunctionBtn[5];
+		private SubPanel edufwp = null;
+
+		@SuppressWarnings("serial")
+		public ChooseCommonPanel() {
 			setLayout(null);
 			setBackground(Color.white);
 			fbar = new FunctionBar();
@@ -262,7 +247,46 @@ public class DeptADFrame extends CommonFrame implements UIService {
 		}
 	}
 
-	// public static void main(String[] args) {
-	// new DeptADFrame("王东霞");
-	// }
+	class MajorPanel extends JPanel {
+		private FunctionBar fbar = null;
+		private FunctionBtn[] fBtn = new FunctionBtn[5];
+		private SubPanel edufwp = null;
+
+		@SuppressWarnings("serial")
+		public MajorPanel() {
+			setLayout(null);
+			setBackground(Color.white);
+			fbar = new FunctionBar();
+			fbar.setLocation(0, 0);
+			fBtn[0] = new FunctionBtn("AddBtn");
+			fBtn[1] = new FunctionBtn("ModifyBtn");
+			fBtn[2] = new FunctionBtn("DelBtn");
+			fBtn[3] = new FunctionBtn("ImportBtn");
+			fBtn[4] = new FunctionBtn("ExportBtn");
+
+			for (int i = 0; i < fBtn.length; i++) {
+				fbar.add(fBtn[i]);
+			}
+			add(fbar);
+
+			edufwp = new SubPanel("本院学生列表", 740, 380);
+			edufwp.setLocation(30, 70);
+
+			DefaultTableModel dtm = new DefaultTableModel(40, 5);
+			JTable infoTable = new JTable(dtm);
+			DefaultTableCellRenderer r = new DefaultTableCellRenderer();
+			r.setHorizontalAlignment(JLabel.CENTER);
+			infoTable.setDefaultRenderer(Object.class, r);
+
+			edufwp.getCenterPanel().setLayout(new BorderLayout());
+			edufwp.getCenterPanel().add(new JScrollPane(infoTable),
+					BorderLayout.CENTER);
+			add(edufwp);
+
+		}
+	}
+
+	public static void main(String[] args) {
+		new StudentUI("王学洋");
+	}
 }

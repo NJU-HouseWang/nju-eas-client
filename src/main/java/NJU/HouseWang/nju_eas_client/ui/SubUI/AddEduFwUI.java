@@ -30,7 +30,8 @@ import NJU.HouseWang.nju_eas_client.net.ClientPool;
 import NJU.HouseWang.nju_eas_client.netService.NetService;
 import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
 
-public class AddEduFwFrame extends JFrame {
+public class AddEduFwUI {
+	private JFrame frame = null;
 	// 窗口位置、大小信息
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private int width = 630;
@@ -72,22 +73,23 @@ public class AddEduFwFrame extends JFrame {
 	private ArrayList<String> typeInfo = new ArrayList<String>();
 	private ArrayList<String> courseInfo = new ArrayList<String>();
 
-	public AddEduFwFrame() {
+	public AddEduFwUI() {
+		frame = new JFrame();
 		// 窗口位置和大小
-		setBounds(((int) screenSize.getWidth() - width) / 2,
+		frame.setBounds(((int) screenSize.getWidth() - width) / 2,
 				((int) screenSize.getHeight() - hight) / 2 - 30, width, hight);
-		setResizable(false);
+		frame.setResizable(false);
 
 		// 窗口标题
-		setTitle("教学框架策略 - 设置向导");
+		frame.setTitle("教学框架策略 - 设置向导");
 
 		// 设置Layout
-		setLayout(new BorderLayout());
+		frame.setLayout(new BorderLayout());
 
 		// topPanel配置
 		topPanel = new JPanel();
 		topPanel.setBackground(Color.darkGray);
-		topPanel.setPreferredSize(new Dimension(getWidth(), 60));
+		topPanel.setPreferredSize(new Dimension(frame.getWidth(), 60));
 		((FlowLayout) topPanel.getLayout()).setAlignment(FlowLayout.LEFT);
 		((FlowLayout) topPanel.getLayout()).setAlignOnBaseline(true);
 
@@ -104,9 +106,9 @@ public class AddEduFwFrame extends JFrame {
 
 		// bottomPanel配置
 		bottomPanel = new JPanel(null);
-		bottomPanel.setPreferredSize(new Dimension(getWidth(), 60));
+		bottomPanel.setPreferredSize(new Dimension(frame.getWidth(), 60));
 		JSeparator sprt = new JSeparator();
-		sprt.setBounds(0, 0, getWidth(), 1);
+		sprt.setBounds(0, 0, frame.getWidth(), 1);
 		sprt.setForeground(Color.DARK_GRAY);
 		bottomPanel.add(sprt);
 
@@ -152,7 +154,7 @@ public class AddEduFwFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (JOptionPane.showConfirmDialog(null, "放弃创建？", "放弃创建？",
 						JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-					dispose();
+					frame.dispose();
 				}
 			}
 		});
@@ -174,15 +176,15 @@ public class AddEduFwFrame extends JFrame {
 
 		cl.show(mainPanel, "1");
 		// 加入Panel
-		add(topPanel, BorderLayout.NORTH);
-		add(mainPanel, BorderLayout.CENTER);
-		add(bottomPanel, BorderLayout.SOUTH);
+		frame.add(topPanel, BorderLayout.NORTH);
+		frame.add(mainPanel, BorderLayout.CENTER);
+		frame.add(bottomPanel, BorderLayout.SOUTH);
 
 		// 设置默认关闭操作
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// 窗口可见性
-		setVisible(true);
+		frame.setVisible(true);
 	}
 
 	public void createModuleTable() {
@@ -203,7 +205,7 @@ public class AddEduFwFrame extends JFrame {
 					}
 				}
 			}
-			repaint();
+			frame.repaint();
 		} catch (NumberFormatException excep) {
 			JOptionPane.showMessageDialog(null, "您输入的数字格式不正确！");
 			numtf.setText("");
@@ -310,8 +312,10 @@ public class AddEduFwFrame extends JFrame {
 				if (line != null) {
 					courseInfo.add(new String(typeInfo.get(i)) + line);
 				} else {
-					if(i == 0 || (!courseInfo.get(courseInfo.size()).contains(typeInfo.get(i))))
-					courseInfo.add(new String(typeInfo.get(i)));
+					if (i == 0
+							|| (!courseInfo.get(courseInfo.size()).contains(
+									typeInfo.get(i))))
+						courseInfo.add(new String(typeInfo.get(i)));
 					break;
 				}
 				rowPoint++;
@@ -398,7 +402,7 @@ public class AddEduFwFrame extends JFrame {
 			for (int i = 0; i < moduleNum; i++) {
 				typeDtm[i] = new DefaultTableModel(26, 7);
 				typeDtm[i].setColumnIdentifiers(new String[] { "课程性质", "序列",
-						"课程类型", "最低学分", "最高学分","起始学期", "终止学期" });
+						"课程类型", "最低学分", "最高学分", "起始学期", "终止学期" });
 				char c = 'A';
 				for (int j = 0; j < 26; j++) {
 					typeDtm[i].setValueAt((char) (c + j) + "", j, 1);
@@ -472,14 +476,14 @@ public class AddEduFwFrame extends JFrame {
 			stepNum.setText("   FINAL STEP  ");
 			stepInfo.setText("上传/确认信息");
 			nextbtn.setText("完成");
-			// 
-			for(String s:courseInfo) {
+			//
+			for (String s : courseInfo) {
 				System.out.println(s);
 			}
-			setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 			add(new JLabel("正在提交..."));
 			try {
-//				sendAddEduFwCommand();
+				// sendAddEduFwCommand();
 			} catch (Exception e) {
 				e.printStackTrace();
 				add(new JLabel("提交出现问题..."));
@@ -490,23 +494,23 @@ public class AddEduFwFrame extends JFrame {
 
 	public void sendAddEduFwCommand() throws Exception {
 		String command = "add；eduframework";
-			ClientPool cPool = ClientPool.getInstance();
-			NetService net = cPool.getClient();
-			net.sendCommand(command);
-			net.sendList(courseInfo);
-			showFeedBack(net.receiveFeedback());
+		ClientPool cPool = ClientPool.getInstance();
+		NetService net = cPool.getClient();
+		net.sendCommand(command);
+		net.sendList(courseInfo);
+		showFeedBack(net.receiveFeedback());
 	}
-	
+
 	public void showFeedBack(String fbStr) {
 		Feedback feedback = Feedback.valueOf(fbStr);
-		JOptionPane.showMessageDialog(this, feedback.getContent());
+		JOptionPane.showMessageDialog(frame, feedback.getContent());
 	}
 
 	public void showFeedBack(Feedback feedback) {
-		JOptionPane.showMessageDialog(this, feedback.getContent());
+		JOptionPane.showMessageDialog(frame, feedback.getContent());
 	}
-	
-//	public static void main(String[] args) {
-//		new AddEduFwFrame();
-//	}
+
+	// public static void main(String[] args) {
+	// new AddEduFwFrame();
+	// }
 }

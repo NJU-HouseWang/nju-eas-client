@@ -21,13 +21,12 @@ import javax.swing.JPanel;
 import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.SmallCommonFrame;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.MenuBtn.SmallMenuBtn;
-import NJU.HouseWang.nju_eas_client.uiService.UIService;
 
 /*
  * 类：UserCenterUI
  * 
  */
-public class UserCenterFrame implements UIService {
+public class UserCenterUI {
 	private static int FUNC_NUM = 3;
 	private SmallCommonFrame frame = null;
 	private JPanel menuBar = null;
@@ -39,7 +38,7 @@ public class UserCenterFrame implements UIService {
 	private int index = 0;
 	private JPanel[] switchPane = new JPanel[FUNC_NUM];
 
-	public UserCenterFrame() {
+	public UserCenterUI() {
 		frame = new SmallCommonFrame("UserCenterFrame");
 		menuBar = new JPanel();
 		cardL = new CardLayout();

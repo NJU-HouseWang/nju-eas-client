@@ -36,13 +36,15 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.TitleBar;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.FunctionBtn.FunctionBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.MenuBtn.BigMenuBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.MenuBtn.MenuBtn;
-import NJU.HouseWang.nju_eas_client.uiService.UIService;
+import NJU.HouseWang.nju_eas_client.uiLogic.SchoolDeanUILogic;
 
 /*
  * 类：SchoolDeanUI
  * 
  */
-public class SchoolDeanFrame extends CommonFrame implements UIService {
+public class SchoolDeanUI {
+	private SchoolDeanUILogic logic = null;
+	private CommonFrame frame = null;
 	private TitleBar tbar = null;
 	private MenuBar mbar = null;
 	private MenuBtn[] mbtn = new MenuBtn[5];
@@ -64,8 +66,9 @@ public class SchoolDeanFrame extends CommonFrame implements UIService {
 	private String[] edufwHeader = new String[] { "as", "sdf", "sf", "sdf",
 			"asdf", "adsf", "a" };
 
-	public SchoolDeanFrame(String userName) {
-		super("SchoolFrame");
+	public SchoolDeanUI(String userName) {
+		logic = new SchoolDeanUILogic();
+		frame = new CommonFrame("SchoolFrame");
 		tbar = new TitleBar(userName);
 		mbar = new MenuBar();
 
@@ -74,7 +77,6 @@ public class SchoolDeanFrame extends CommonFrame implements UIService {
 		childp[2] = new TeachingPlanPanel();
 		childp[3] = new InfoListPanel();
 		childp[4] = new CommonCoursePanel();
-		// childp[5] = new PECoursePanel();
 
 		cardp.setSize(800, 480);
 		cardp.setLocation(30, 150);
@@ -90,11 +92,11 @@ public class SchoolDeanFrame extends CommonFrame implements UIService {
 		mbar.setLocation(30, 100);
 		card.show(cardp, mbtnName[0]);
 		mbtn[0].setSelected(true);
-		add(cardp);
-		add(mbar);
-		add(tbar);
+		frame.add(cardp);
+		frame.add(mbar);
+		frame.add(tbar);
 		setListener();
-		setVisible(true);
+		frame.setVisible(true);
 	}
 
 	public void setListener() {
@@ -110,15 +112,15 @@ public class SchoolDeanFrame extends CommonFrame implements UIService {
 	}
 
 	public void showFeedback(String feedback) {
-		JOptionPane.showMessageDialog(this, feedback);
+		JOptionPane.showMessageDialog(frame, feedback);
 	}
 
 	public void showFeedback(Feedback feedback) {
-		JOptionPane.showMessageDialog(this, feedback.getContent());
+		JOptionPane.showMessageDialog(frame, feedback.getContent());
 	}
 
 	public static void main(String[] args) {
-		new SchoolDeanFrame("陈建群");
+		new SchoolDeanUI("陈建群");
 	}
 
 	class HomePanel extends JPanel {
@@ -278,7 +280,6 @@ public class SchoolDeanFrame extends CommonFrame implements UIService {
 		private JLabel yearlb = null;
 		private JLabel gradelb = null;
 
-		@SuppressWarnings("serial")
 		public InfoListPanel() {
 			setLayout(null);
 			setBackground(Color.white);
@@ -388,10 +389,4 @@ public class SchoolDeanFrame extends CommonFrame implements UIService {
 
 		}
 	}
-
-	// class PECoursePanel extends JPanel {
-	// public PECoursePanel() {
-	// setBackground(Color.pink);
-	// }
-	// }
 }

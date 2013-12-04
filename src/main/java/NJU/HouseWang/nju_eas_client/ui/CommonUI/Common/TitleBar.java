@@ -7,8 +7,8 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
-import NJU.HouseWang.nju_eas_client.ui.MainUI.MsgBoxFrame;
-import NJU.HouseWang.nju_eas_client.ui.MainUI.UserCenterFrame;
+import NJU.HouseWang.nju_eas_client.ui.MainUI.MsgBoxUI;
+import NJU.HouseWang.nju_eas_client.ui.MainUI.UserCenterUI;
 
 public class TitleBar extends JPanel {
 	private CommonLabel welcomel = null;
@@ -24,13 +24,13 @@ public class TitleBar extends JPanel {
 		namel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new UserCenterFrame();
+				new UserCenterUI();
 			}
 		});
 		msgBoxl.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new MsgBoxFrame();
+				new MsgBoxUI();
 			}
 		});
 

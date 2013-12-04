@@ -23,11 +23,12 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-public class AddTpFrame extends JFrame {
+public class AddTpUI {
 	private final int PAGE_NUM = 2;
 	private int index = 1;
 
 	// 窗口位置、大小信息
+	private JFrame frame = null;
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private int width = 630;
 	private int hight = 500;
@@ -50,22 +51,23 @@ public class AddTpFrame extends JFrame {
 	private JButton nextbtn = null;
 	private JButton cancelbtn = null;
 
-	public AddTpFrame() {
+	public AddTpUI() {
+		frame = new JFrame();
 		// 窗口位置和大小
-		setBounds(((int) screenSize.getWidth() - width) / 2,
+		frame.setBounds(((int) screenSize.getWidth() - width) / 2,
 				((int) screenSize.getHeight() - hight) / 2 - 30, width, hight);
-		setResizable(false);
+		frame.setResizable(false);
 
 		// 窗口标题
-		setTitle("教学计划 - 设置向导向导");
+		frame.setTitle("教学计划 - 设置向导向导");
 
 		// 设置Layout
-		setLayout(new BorderLayout());
+		frame.setLayout(new BorderLayout());
 
 		// topPanel配置
 		topPanel = new JPanel();
 		topPanel.setBackground(Color.darkGray);
-		topPanel.setPreferredSize(new Dimension(getWidth(), 60));
+		topPanel.setPreferredSize(new Dimension(frame.getWidth(), 60));
 		((FlowLayout) topPanel.getLayout()).setAlignment(FlowLayout.LEFT);
 		((FlowLayout) topPanel.getLayout()).setAlignOnBaseline(true);
 
@@ -82,9 +84,9 @@ public class AddTpFrame extends JFrame {
 
 		// bottomPanel配置
 		bottomPanel = new JPanel(null);
-		bottomPanel.setPreferredSize(new Dimension(getWidth(), 60));
+		bottomPanel.setPreferredSize(new Dimension(frame.getWidth(), 60));
 		JSeparator sprt = new JSeparator();
-		sprt.setBounds(0, 0, getWidth(), 1);
+		sprt.setBounds(0, 0, frame.getWidth(), 1);
 		sprt.setForeground(Color.DARK_GRAY);
 		bottomPanel.add(sprt);
 
@@ -130,7 +132,7 @@ public class AddTpFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (JOptionPane.showConfirmDialog(null, "放弃创建？", "放弃创建？",
 						JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-					dispose();
+					frame.dispose();
 				}
 			}
 		});
@@ -151,15 +153,15 @@ public class AddTpFrame extends JFrame {
 			mainPanel.add(pagePanel[i], (i + 1) + "");
 		}
 		cl.show(mainPanel, index + "");
-		add(topPanel, BorderLayout.NORTH);
-		add(mainPanel, BorderLayout.CENTER);
-		add(bottomPanel, BorderLayout.SOUTH);
+		frame.add(topPanel, BorderLayout.NORTH);
+		frame.add(mainPanel, BorderLayout.CENTER);
+		frame.add(bottomPanel, BorderLayout.SOUTH);
 
 		// 设置默认关闭操作
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// 窗口可见性
-		setVisible(true);
+		frame.setVisible(true);
 	}
 
 	public ArrayList<String> getEduFwInformation() {
@@ -233,7 +235,7 @@ public class AddTpFrame extends JFrame {
 		}
 	}
 
-//	public static void main(String[] args) {
-//		new AddTpFrame();
-//	}
+	// public static void main(String[] args) {
+	// new AddTpFrame();
+	// }
 }

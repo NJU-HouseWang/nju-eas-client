@@ -35,7 +35,7 @@ public class ClientPool {
 		}
 	}
 
-	public ClientPool(String ip, int port, int maxSize, int minSize) {
+	private ClientPool(String ip, int port, int maxSize, int minSize) {
 		this.maxSize = maxSize;
 		this.minSize = minSize;
 		this.ip = ip;

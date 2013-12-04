@@ -22,13 +22,12 @@ import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.SmallCommonFrame;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.MenuBtn.MsgMenuBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.MenuBtn.SmallMenuBtn;
-import NJU.HouseWang.nju_eas_client.uiService.UIService;
 
 /*
  * 类：MsgBoxUI
  * 
  */
-public class MsgBoxFrame implements UIService {
+public class MsgBoxUI {
 	private static int FUNC_NUM = 2;
 	private SmallCommonFrame frame = null;
 	private JPanel menuBar = null;
@@ -40,7 +39,7 @@ public class MsgBoxFrame implements UIService {
 	private int index = 0;
 	private JPanel[] switchPane = new JPanel[FUNC_NUM];
 
-	public MsgBoxFrame() {
+	public MsgBoxUI() {
 		frame = new SmallCommonFrame("MsgBoxFrame");
 		menuBar = new JPanel();
 		cardL = new CardLayout();

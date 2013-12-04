@@ -18,26 +18,24 @@ import NJU.HouseWang.nju_eas_client.net.ClientPool;
 import NJU.HouseWang.nju_eas_client.netService.NetService;
 import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
 
-public class EditItemFrame extends JFrame {
+public class AddItemUI {
+	private JFrame frame = null;
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private int width = 0;
 	private int height = 0;
-	private String itemName = null;
-	private String itemInfo = null;
+	private String itemName = "";
+	private String itemInfo = "";
 	private JPanel panel = null;
-	private String[] item = null;
-	private String[] origin = null;
 	private JLabel[] iteml = null;
 	private JTextField[] itemtf = null;
 	private JButton confirmBtn = null;
 	private JButton cancelBtn = null;
 	private GridLayout gl = null;
 
-	public EditItemFrame(String itemName, String[] item, String[] origin) {
+	public AddItemUI(String itemName, String[] item) {
 		this.itemName = itemName;
-		this.item = item;
-		this.origin = origin;
-		setTitle("修改项目：" + itemName);
+		frame = new JFrame();
+		frame.setTitle("新增项目：" + itemName);
 		panel = new JPanel();
 		iteml = new JLabel[item.length];
 		itemtf = new JTextField[item.length];
@@ -51,25 +49,23 @@ public class EditItemFrame extends JFrame {
 			iteml[i] = new JLabel(item[i] + ":");
 			iteml[i].setHorizontalAlignment(JLabel.CENTER);
 			itemtf[i] = new JTextField(15);
-			itemtf[i].setText(origin[i]);
 			iteml[i].setFont(new Font("微软雅黑", Font.PLAIN, 12));
 			itemtf[i].setFont(new Font("微软雅黑", Font.PLAIN, 12));
 			panel.add(iteml[i]);
 			panel.add(itemtf[i]);
 		}
-		itemtf[0].setEditable(false);
 		panel.add(confirmBtn);
 		panel.add(cancelBtn);
-		add(panel);
-		setAlwaysOnTop(true);
+		frame.add(panel);
+		frame.setAlwaysOnTop(true);
 		addListener();
-		pack();
-		width = this.getWidth();
-		height = this.getHeight();
-		setBounds(((int) screenSize.getWidth() - width) / 2,
+		frame.pack();
+		width = frame.getWidth();
+		height = frame.getHeight();
+		frame.setBounds(((int) screenSize.getWidth() - width) / 2,
 				((int) screenSize.getHeight() - height) / 2 - 30, width, height);
-		setVisible(true);
-		setResizable(false);
+		frame.setVisible(true);
+		frame.setResizable(false);
 	}
 
 	public void addListener() {
@@ -77,8 +73,8 @@ public class EditItemFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				for (int i = 0; i < itemtf.length; i++) {
-					String itemtmp = itemtf[i].getText();
-					if (itemtmp == "") {
+					String item = itemtf[i].getText();
+					if (item == "") {
 						showFeedBack(Feedback.ITEM_EMPTY);
 						itemInfo = null;
 						break;
@@ -86,22 +82,21 @@ public class EditItemFrame extends JFrame {
 					itemInfo += item + "；";
 				}
 				if (itemInfo != null) {
-					sendEditCommand();
+					sendAddCommand();
 				}
 			}
 		});
-
 		cancelBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				dispose();
+				frame.setVisible(false);
+				frame.dispose();
 			}
 		});
 	}
 
-	public void sendEditCommand() {
-		String command = "edit；" + itemName + "；" + itemInfo;
+	public void sendAddCommand() {
+		String command = "add；" + itemName + "；" + itemInfo;
 		try {
 			ClientPool cPool = ClientPool.getInstance();
 			NetService net = cPool.getClient();
@@ -115,10 +110,10 @@ public class EditItemFrame extends JFrame {
 
 	public void showFeedBack(String fbStr) {
 		Feedback feedback = Feedback.valueOf(fbStr);
-		JOptionPane.showMessageDialog(this, feedback.getContent());
+		JOptionPane.showMessageDialog(frame, feedback.getContent());
 	}
 
 	public void showFeedBack(Feedback feedback) {
-		JOptionPane.showMessageDialog(this, feedback.getContent());
+		JOptionPane.showMessageDialog(frame, feedback.getContent());
 	}
 }

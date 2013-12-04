@@ -25,10 +25,11 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.TitleBar;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.FunctionBtn.FunctionBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.MenuBtn.BigMenuBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.MenuBtn.MenuBtn;
-import NJU.HouseWang.nju_eas_client.uiService.UIService;
+import NJU.HouseWang.nju_eas_client.uiLogic.TeacherUILogic;
 
-public class TeacherFrame extends CommonFrame implements UIService {
-
+public class TeacherUI {
+	private TeacherUILogic logic = null;
+	private CommonFrame frame = null;
 	private TitleBar tbar = null;
 	private MenuBar mbar = null;
 	private MenuBtn[] mbtn = new MenuBtn[4];
@@ -38,8 +39,9 @@ public class TeacherFrame extends CommonFrame implements UIService {
 	private JPanel cardp = new JPanel();
 	private CardLayout card = new CardLayout();
 
-	public TeacherFrame(String userName) {
-		super("TeacherFrame");
+	public TeacherUI(String userName) {
+		logic = new TeacherUILogic();
+		frame = new CommonFrame("TeacherFrame");
 
 		tbar = new TitleBar(userName);
 		mbar = new MenuBar();
@@ -63,11 +65,11 @@ public class TeacherFrame extends CommonFrame implements UIService {
 		mbar.setLocation(30, 100);
 		card.show(cardp, mbtnName[0]);
 		mbtn[0].setSelected(true);
-		add(cardp);
-		add(mbar);
-		add(tbar);
+		frame.add(cardp);
+		frame.add(mbar);
+		frame.add(tbar);
 		setListener();
-		setVisible(true);
+		frame.setVisible(true);
 	}
 
 	private void setListener() {
