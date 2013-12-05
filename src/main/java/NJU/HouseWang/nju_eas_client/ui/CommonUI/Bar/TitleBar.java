@@ -43,9 +43,9 @@ public class TitleBar extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					logic.logout();
 					frame.setVisible(false);
 					frame.dispose();
+					logic.logout();
 					Launcher.createUI("Login", null);
 				} catch (Exception e1) {
 					frame.setVisible(false);

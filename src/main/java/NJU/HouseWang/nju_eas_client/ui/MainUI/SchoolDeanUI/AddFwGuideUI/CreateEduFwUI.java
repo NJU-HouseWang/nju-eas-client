@@ -19,6 +19,7 @@ import javax.swing.JSeparator;
 
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Label.WaitingLabel;
 import NJU.HouseWang.nju_eas_client.uiLogic.SchoolDeanUILogic;
+import NJU.HouseWang.nju_eas_client.vo.Feedback;
 
 public class CreateEduFwUI {
 	private SchoolDeanUILogic slogic = new SchoolDeanUILogic();
@@ -210,7 +211,12 @@ public class CreateEduFwUI {
 		lb.setVisible(true);
 		new Thread(new Runnable() {
 			public void run() {
-				((CommitPanel) page[3]).uploadEduFw(nextbtn,cancelbtn, lb);
+				Feedback fb = ((CommitPanel) page[3]).uploadEduFw(nextbtn,
+						cancelbtn, lb);
+				if (fb == Feedback.OPERATION_SUCCEED) {
+					frame.setVisible(false);
+					frame.dispose();
+				}
 			}
 		}).start();
 	}

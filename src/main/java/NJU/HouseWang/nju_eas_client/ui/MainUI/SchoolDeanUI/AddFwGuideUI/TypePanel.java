@@ -42,7 +42,7 @@ public class TypePanel extends JPanel {
 		for (int i = 0; i < moduleNum; i++) {
 			typeDtm[i] = new DefaultTableModel(15, 7);
 			typeDtm[i].setColumnIdentifiers(new String[] { "课程性质", "序列",
-					"课程类型", "最低学分", "最高学分", "起始学期", "终止学期" });
+					"课程类型", "最低学分", "最高学分" });
 			typeDtm[i]
 					.insertRow(0, new String[] { "", "", "", "", "", "", "" });
 			moduleLb[i] = new JLabel("模块" + moduleInfo.get(i), JLabel.LEFT);
@@ -65,7 +65,7 @@ public class TypePanel extends JPanel {
 			int rowPoint = 0;
 			while (true) {
 				String line = "";
-				for (int j = 0; j < 7; j++) {
+				for (int j = 0; j < 5; j++) {
 					String cell = null;
 					if (typeTable[i].getValueAt(rowPoint, j) != null) {
 						cell = (String) typeTable[i].getValueAt(rowPoint, j);

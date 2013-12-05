@@ -103,7 +103,13 @@ public class ReadMsgUI {
 		deleteBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Feedback fb = logic.delMessage(type, msg.id);
-				JOptionPane.showMessageDialog(null, fb);
+				if (fb == Feedback.OPERATION_SUCCEED) {
+					JOptionPane.showMessageDialog(null, "删除成功！");
+					frame.setVisible(false);
+					frame.dispose();
+				} else {
+					JOptionPane.showMessageDialog(null, fb.getContent());
+				}
 			}
 		});
 		cancelBtn.addActionListener(new ActionListener() {

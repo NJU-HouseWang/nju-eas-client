@@ -48,6 +48,20 @@ public class MsgPanel extends JPanel {
 				public void actionPerformed(ActionEvent e) {
 					cardL.show(cardP,
 							((MsgMenuBtn) e.getSource()).getFuncName());
+					switch (((MsgMenuBtn) e.getSource()).getFuncName()) {
+					case "收件箱":
+						((MsgInPanel)switchPane[0]).showTable();
+						break;
+					case "发件箱":
+						((MsgOutPanel)switchPane[1]).showTable();
+						break;
+					case "草稿箱":
+						((MsgDraftPanel)switchPane[2]).showTable();
+						break;
+					case "回收站":
+						((MsgTrashPanel)switchPane[3]).showTable();
+						break;
+					}
 				}
 			});
 			functionPanel.add(msgBtn[i]);
