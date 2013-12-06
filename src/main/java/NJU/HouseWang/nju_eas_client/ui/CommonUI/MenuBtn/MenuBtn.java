@@ -18,7 +18,7 @@ public class MenuBtn extends JToggleButton {
 		setSelectedIcon(new ImageIcon(path + name + "_1" + suffix));
 		setSize(120, 50);
 		setPreferredSize(new Dimension(120, 50));
-		if (btnName.equals("HomeBtn")) {
+		if (btnName.equals("homeBtn")) {
 			setSize(58, 50);
 			setPreferredSize(new Dimension(58, 50));
 		}
