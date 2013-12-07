@@ -29,7 +29,7 @@ public class UserPanel extends JPanel {
 	private static int FUNC_NUM = 5;// 功能按钮的数量
 	private static String[] FUNC_BTN_NAME = { "AddBtn", "ModifyBtn", "DelBtn",
 			"ImportBtn", "ExportBtn" };// 功能按钮的名称
-	private UserTypeVO[] ut = new UserTypeVO[5];// 用户类型列表
+	private UserTypeVO[] ut = new UserTypeVO[7];// 用户类型列表
 	private AdminUILogic logic = new AdminUILogic();// 管理员界面的逻辑
 	private JPanel fbar = new FunctionBar();// 功能按钮栏
 	private FunctionBtn[] fBtn = new FunctionBtn[FUNC_NUM];// 功能按钮
@@ -56,11 +56,13 @@ public class UserPanel extends JPanel {
 	 * 管理员界面下的管理系统用户的Panel构造方法
 	 */
 	public UserPanel() {
-		ut[0] = new UserTypeVO("Admin", "管理员");
-		ut[1] = new UserTypeVO("SchoolDean", "学校教务老师");
-		ut[2] = new UserTypeVO("DeptAD", "院系教务老师");
-		ut[3] = new UserTypeVO("Teacher", "任课老师");
-		ut[4] = new UserTypeVO("Student", "学生");
+		ut[0] = new UserTypeVO("null", "请选择用户类型...");
+		ut[1] = new UserTypeVO("login", "全体用户");
+		ut[2] = new UserTypeVO("admin", "管理员");
+		ut[3] = new UserTypeVO("schooldean", "学校教务老师");
+		ut[4] = new UserTypeVO("deptad", "院系教务老师");
+		ut[5] = new UserTypeVO("teacher", "任课老师");
+		ut[6] = new UserTypeVO("student", "学生");
 		setLayout(null);
 		setBackground(Color.white);
 		for (int i = 0; i < FUNC_NUM; i++) {
@@ -108,12 +110,12 @@ public class UserPanel extends JPanel {
 				+ "_list";
 		Object fb = logic.showTableHead(listName);
 		if (fb instanceof Feedback) {
-			JOptionPane.showMessageDialog(null, fb);
+			JOptionPane.showMessageDialog(null, ((Feedback) fb).getContent());
 		} else if (fb instanceof String[]) {
 			head = (String[]) fb;
 			fb = logic.showTableContent(listName);
 			if (fb instanceof Feedback) {
-				JOptionPane.showMessageDialog(null, fb);
+				JOptionPane.showMessageDialog(null, ((Feedback) fb).getContent());
 			} else if (fb instanceof String[][]) {
 				content = (String[][]) fb;
 			}
@@ -187,12 +189,14 @@ public class UserPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				showTable();
 				String listName = ((UserTypeVO) userTypecb.getSelectedItem()).name_en;
-				if (listName.equals("Admin")) {
+				if (listName.equals("admin")) {
 					fBtn[0].setEnabled(false);
 					fBtn[1].setEnabled(false);
 					fBtn[2].setEnabled(false);
 					fBtn[3].setEnabled(false);
 					fBtn[4].setEnabled(false);
+				} else if (listName.equals("null")) {
+					JOptionPane.showMessageDialog(null, "请选择用户类型。。。");
 				} else {
 					fBtn[0].setEnabled(true);
 					fBtn[1].setEnabled(true);

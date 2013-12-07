@@ -13,11 +13,12 @@ public class BigMenuBtn extends JButton {
 	public BigMenuBtn(String btnName) {
 		this.name = btnName;
 		setName(btnName);
+		setText(btnName);
 		setIcon(new ImageIcon(path + name + "_0" + suffix));
 		setRolloverIcon(new ImageIcon(path + name + "_1" + suffix));
 		setPressedIcon(new ImageIcon(path + name + "_2" + suffix));
-		setSize(100, 100);
-		setPreferredSize(new Dimension(100, 100));
+		setSize(254, 94);
+		setPreferredSize(new Dimension(254, 94));
 		setBorderPainted(false);
 		updateUI();
 	}

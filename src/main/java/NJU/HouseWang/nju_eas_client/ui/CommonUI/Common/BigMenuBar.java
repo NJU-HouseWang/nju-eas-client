@@ -13,7 +13,7 @@ public class BigMenuBar extends JPanel {
 		FlowLayout fl = new FlowLayout();
 		setLayout(fl);
 		fl.setAlignment(FlowLayout.LEFT);
-		fl.setHgap(40);
+		fl.setHgap(50);
 		fl.setVgap(40);
 		updateUI();
 	}
