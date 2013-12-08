@@ -6,14 +6,14 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class CommonTable extends JTable {
 	public CommonTable() {
 		super();
 	}
 
-	public CommonTable(DefaultTableModel dtm) {
+	public CommonTable(TableModel dtm) {
 		super(dtm);
 		setFont(new Font("微软雅黑", Font.PLAIN, 12));
 		getTableHeader().setFont(new Font("微软雅黑", Font.BOLD, 12));

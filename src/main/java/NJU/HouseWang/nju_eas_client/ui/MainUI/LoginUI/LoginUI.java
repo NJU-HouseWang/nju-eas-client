@@ -5,7 +5,7 @@
  * 最后修改：王鑫
  * 修改时间：2013-12-3
  */
-package NJU.HouseWang.nju_eas_client.ui.MainUI;
+package NJU.HouseWang.nju_eas_client.ui.MainUI.LoginUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +17,6 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.CommonFrame;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.PasswordField;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.UserNameField;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.UserTypeBox;
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.CommonBtn.LoginBtn;
 import NJU.HouseWang.nju_eas_client.uiLogic.LoginUILogic;
 import NJU.HouseWang.nju_eas_client.vo.UserTypeVO;
 

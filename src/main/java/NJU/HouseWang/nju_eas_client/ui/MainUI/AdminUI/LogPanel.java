@@ -54,7 +54,7 @@ public class LogPanel extends JPanel {
 		}
 
 		sp.setLocation(30, 70);
-		refreshBtn.setBounds(3, 3, 24, 24);
+		refreshBtn.setBounds(3, 3, 22, 22);
 		refreshBtn.setPreferredSize(new Dimension(22, 22));
 		conditiontf.setBounds(562, 4, 150, 22);
 		conditiontf.setFont(new Font("微软雅黑", Font.PLAIN, 12));

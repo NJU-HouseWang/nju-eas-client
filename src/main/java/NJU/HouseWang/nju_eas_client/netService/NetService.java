@@ -26,7 +26,7 @@ public interface NetService {
 	public String receiveFeedback() throws IOException;
 
 	// 接收文件
-	public void receiveFile() throws Exception;
+	public File receiveFile() throws Exception;
 
 	// 发送列表
 	public void sendList(ArrayList<String> list) throws IOException;;

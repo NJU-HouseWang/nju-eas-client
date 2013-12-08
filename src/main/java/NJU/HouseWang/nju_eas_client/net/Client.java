@@ -170,12 +170,12 @@ public class Client implements NetService {
 		}
 	}
 
-	public void receiveFile() throws Exception {
+	public File receiveFile() throws Exception {
 		try {
 			in = new DataInputStream(new BufferedInputStream(
 					socket.getInputStream()));
 			// 本地保存路径，文件名会自动从服务器端继承而来。
-			String savePath = "D:\\";
+			String savePath = "/download";
 			int bufferSize = 8192;
 			byte[] buf = new byte[bufferSize];
 			int passedlen = 0;
@@ -205,6 +205,7 @@ public class Client implements NetService {
 			System.out.println("接收完成，文件存为" + savePath + "\n");
 
 			fos.close();
+			return new File(savePath);
 		} catch (Exception e) {
 			System.out.println("接收消息错误" + "\n");
 			throw new Exception();

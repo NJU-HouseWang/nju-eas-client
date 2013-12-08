@@ -5,7 +5,7 @@
  * 最后修改：王鑫
  * 修改时间：2013-10-27
  */
-package NJU.HouseWang.nju_eas_client.ui.CommonUI.CommonBtn;
+package NJU.HouseWang.nju_eas_client.ui.MainUI.LoginUI;
 
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.CommonBtn;
 

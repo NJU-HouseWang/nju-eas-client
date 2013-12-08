@@ -15,7 +15,8 @@ public enum Feedback {
 	PASSWORD_EMPTY("请输入密码"),
 	INTERNET_ERROR("网络连接错误"),
 	SELECTION_ERROR("您未选择列表中的项"),
-	ITEM_EMPTY("项目不能为空");
+	ITEM_EMPTY("项目不能为空"),
+	TEACHINGPLAN_NOT_COMMIT("该院系的教学计划未提交");
 	
 	private String content;
 

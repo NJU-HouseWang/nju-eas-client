@@ -1,4 +1,4 @@
-package NJU.HouseWang.nju_eas_client.ui.MainUI;
+package NJU.HouseWang.nju_eas_client.ui.MainUI.SchoolDeanUI;
 
 import java.util.HashMap;
 

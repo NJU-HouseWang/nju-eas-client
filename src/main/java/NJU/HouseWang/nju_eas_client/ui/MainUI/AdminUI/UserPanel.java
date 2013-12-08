@@ -176,11 +176,13 @@ public class UserPanel extends JPanel {
 
 				if (table.getSelectedRowCount() == 1 && selectRowNum != -1) {
 					System.out.println(table.getValueAt(selectRowNum, 0));
-					logic.delItem(itemName,
+					Feedback fb = logic.delItem(itemName,
 							(String) table.getValueAt(selectRowNum, 0));
+					JOptionPane.showMessageDialog(null,
+							fb.getContent());
 				} else {
 					JOptionPane.showMessageDialog(null,
-							Feedback.SELECTION_ERROR);
+							Feedback.SELECTION_ERROR.getContent());
 				}
 			}
 		});

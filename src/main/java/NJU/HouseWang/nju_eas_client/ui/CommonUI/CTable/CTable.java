@@ -3,10 +3,11 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import javax.swing.JTable;
 import javax.swing.table.TableModel;
 
-public class CTable extends JTable {
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CommonTable;
+
+public class CTable extends CommonTable {
 	public CMap map;
 
 	public CTable(CMap cmp, TableModel tbl) {
