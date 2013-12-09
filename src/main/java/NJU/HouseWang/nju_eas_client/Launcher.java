@@ -10,12 +10,12 @@ package NJU.HouseWang.nju_eas_client;
 import javax.swing.JOptionPane;
 
 import NJU.HouseWang.nju_eas_client.net.ClientPool;
-import NJU.HouseWang.nju_eas_client.ui.MainUI.StudentUI;
-import NJU.HouseWang.nju_eas_client.ui.MainUI.TeacherUI;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.AdminUI.AdminUI;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.DeptADUI.DeptADUI;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.LoginUI.LoginUI;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.SchoolDeanUI.SchoolDeanUI;
+import NJU.HouseWang.nju_eas_client.ui.MainUI.StudentUI.StudentUI;
+import NJU.HouseWang.nju_eas_client.ui.MainUI.TeacherUI.TeacherUI;
 
 /*
  * 类：Launcher

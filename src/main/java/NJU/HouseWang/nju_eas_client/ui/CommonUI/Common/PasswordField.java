@@ -8,9 +8,18 @@ import java.awt.event.FocusListener;
 import javax.swing.JPasswordField;
 
 public class PasswordField extends JPasswordField {
-	static String info = "请输入密码...";
+	private String info = "请输入密码...";
+
+	public PasswordField(String origin) {
+		this.info = origin;
+		create();
+	}
 
 	public PasswordField() {
+		create();
+	}
+
+	public void create() {
 		setBounds(152, 327, 238, 30);
 		setBorder(null);
 		setFont(new Font("微软雅黑", Font.BOLD, 15));

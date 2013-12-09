@@ -5,17 +5,15 @@
  * 最后修改：王鑫
  * 修改时间：
  */
-package NJU.HouseWang.nju_eas_client.ui.MainUI;
+package NJU.HouseWang.nju_eas_client.ui.MainUI.UserCenterUI;
 
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
@@ -27,15 +25,14 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.MenuBtn.SmallMenuBtn;
  * 
  */
 public class UserCenterUI {
-	private static int FUNC_NUM = 3;
+	private static int FUNC_NUM = 2;
 	private SmallCommonFrame frame = null;
 	private JPanel menuBar = null;
 	private ButtonGroup btnG = null;
 	private CardLayout cardL = null;
 	private JPanel cardP = null;
-	private String[] funcName = { "查看信息", "修改信息", "修改密码" };
+	private String[] funcName = { "查看信息", "修改密码" };
 	private SmallMenuBtn[] menuBtn = new SmallMenuBtn[FUNC_NUM];
-	private int index = 0;
 	private JPanel[] switchPane = new JPanel[FUNC_NUM];
 
 	public UserCenterUI() {
@@ -54,6 +51,9 @@ public class UserCenterUI {
 		lf.setVgap(0);
 		lf.setAlignment(FlowLayout.LEFT);
 
+		switchPane[0] = new ShowSelfInfoPanel();
+		switchPane[1] = new ChangePasswordPanel();
+
 		for (int i = 0; i < FUNC_NUM; i++) {
 			menuBtn[i] = new SmallMenuBtn(funcName[i]);
 			menuBtn[i].addActionListener(new ActionListener() {
@@ -65,16 +65,8 @@ public class UserCenterUI {
 			});
 			btnG.add(menuBtn[i]);
 			menuBar.add(menuBtn[i]);
-			switchPane[i] = new JPanel();
-			JLabel bl = new JLabel(funcName[i] + "面板");
-			bl.setFont(new Font("微软雅黑", Font.BOLD, 30));
-			switchPane[i].add(bl);
 			cardP.add(switchPane[i], funcName[i]);
 		}
-
-		// 设置第一个Panel的内容
-		// 设置第二个Panel的内容
-		// 设置第三个Panel的内容
 
 		menuBtn[0].setSelected(true);
 		cardL.show(cardP, funcName[0]);
@@ -82,8 +74,8 @@ public class UserCenterUI {
 		frame.add(menuBar);
 		frame.setVisible(true);
 	}
-
-	public void showFeedback(Feedback feedback) {
-
+	
+	public static void main(String[] args) {
+		new UserCenterUI();
 	}
 }

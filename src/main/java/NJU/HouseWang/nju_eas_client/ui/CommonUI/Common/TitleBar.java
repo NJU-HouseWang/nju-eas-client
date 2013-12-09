@@ -8,7 +8,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 
 import NJU.HouseWang.nju_eas_client.ui.MainUI.MsgBoxUI;
-import NJU.HouseWang.nju_eas_client.ui.MainUI.UserCenterUI;
+import NJU.HouseWang.nju_eas_client.ui.MainUI.UserCenterUI.UserCenterUI;
 
 public class TitleBar extends JPanel {
 	private CommonLabel welcomel = null;

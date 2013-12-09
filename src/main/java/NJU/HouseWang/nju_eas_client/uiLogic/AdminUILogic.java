@@ -86,11 +86,13 @@ public class AdminUILogic implements ShowTableService, DelItemService {
 	 */
 	public Feedback delItem(String itemName, String id) {
 		String command = "del；" + itemName + "；" + id;
+		String line = null;
 		try {
 			NetService ns = initNetService();
 			ns.sendCommand(command);
+			line = ns.receiveFeedback();
 			ns.shutDownConnection();
-			return Feedback.valueOf(ns.receiveFeedback());
+			return Feedback.valueOf(line);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Feedback.INTERNET_ERROR;
