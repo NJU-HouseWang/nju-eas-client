@@ -21,13 +21,13 @@ public class MsgMenuBtn extends JToggleButton {
 		setIcon(new ImageIcon(path + name + "_0" + suffix));
 		setRolloverIcon(new ImageIcon(path + name + "_1" + suffix));
 		setSelectedIcon(new ImageIcon(path + name + "_1" + suffix));
-		setSize(200, 50);
-		setPreferredSize(new Dimension(200, 45));
+		setSize(150, 30);
+		setPreferredSize(new Dimension(150, 45));
 		FlowLayout fl = new FlowLayout();
 		fl.setVgap(8);
 		fl.setAlignment(FlowLayout.CENTER);
 		setLayout(fl);
-		text.setFont(new Font("΢���ź�", Font.BOLD, 15));
+		text.setFont(new Font("微软雅黑", Font.PLAIN, 15));
 		text.setForeground(Color.white);
 		add(text);
 		setBorderPainted(false);

@@ -7,7 +7,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
-import NJU.HouseWang.nju_eas_client.ui.MainUI.MsgBoxUI;
+import NJU.HouseWang.nju_eas_client.ui.MainUI.MsgBoxUI.MsgBoxUI;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.UserCenterUI.UserCenterUI;
 
 public class TitleBar extends JPanel {
@@ -16,6 +16,8 @@ public class TitleBar extends JPanel {
 	private ClickedLabel msgBoxl = null;
 	private ClickedLabel logoutl = null;
 
+	// 0: 管理员和学校教务老师
+	// 1: 其他成员
 	public TitleBar(String userName) {
 		welcomel = new CommonLabel("Welcome!");
 		namel = new ClickedLabel(userName);
