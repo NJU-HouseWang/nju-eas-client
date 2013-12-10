@@ -29,7 +29,7 @@ public class UserPanel extends JPanel {
 	private static int FUNC_NUM = 5;// 功能按钮的数量
 	private static String[] FUNC_BTN_NAME = { "AddBtn", "ModifyBtn", "DelBtn",
 			"ImportBtn", "ExportBtn" };// 功能按钮的名称
-	private UserTypeVO[] ut = new UserTypeVO[7];// 用户类型列表
+	private UserTypeVO[] ut = new UserTypeVO[6];// 用户类型列表
 	private AdminUILogic logic = new AdminUILogic();// 管理员界面的逻辑
 	private JPanel fbar = new FunctionBar();// 功能按钮栏
 	private FunctionBtn[] fBtn = new FunctionBtn[FUNC_NUM];// 功能按钮
@@ -57,12 +57,11 @@ public class UserPanel extends JPanel {
 	 */
 	public UserPanel() {
 		ut[0] = new UserTypeVO("null", "请选择用户类型...");
-		ut[1] = new UserTypeVO("login", "全体用户");
-		ut[2] = new UserTypeVO("admin", "管理员");
-		ut[3] = new UserTypeVO("schooldean", "学校教务老师");
-		ut[4] = new UserTypeVO("deptad", "院系教务老师");
-		ut[5] = new UserTypeVO("teacher", "任课老师");
-		ut[6] = new UserTypeVO("student", "学生");
+		ut[1] = new UserTypeVO("Login", "全体用户");
+		ut[2] = new UserTypeVO("SchoolDean", "学校教务老师");
+		ut[3] = new UserTypeVO("DeptAD", "院系教务老师");
+		ut[4] = new UserTypeVO("Teacher", "任课老师");
+		ut[5] = new UserTypeVO("Student", "学生");
 		setLayout(null);
 		setBackground(Color.white);
 		for (int i = 0; i < FUNC_NUM; i++) {
@@ -106,8 +105,12 @@ public class UserPanel extends JPanel {
 	private void showTable() {
 		head = null;
 		content = null;
+		table.clearSelection();
+		dtm = new DefaultTableModel(0, 5);
+		table.setModel(dtm);
+		table.updateUI();
 		String listName = ((UserTypeVO) userTypecb.getSelectedItem()).name_en
-				+ "_list";
+				.toLowerCase() + "_list";
 		Object fb = logic.showTableHead(listName);
 		if (fb instanceof Feedback) {
 			JOptionPane.showMessageDialog(null, ((Feedback) fb).getContent());
@@ -115,7 +118,8 @@ public class UserPanel extends JPanel {
 			head = (String[]) fb;
 			fb = logic.showTableContent(listName);
 			if (fb instanceof Feedback) {
-				JOptionPane.showMessageDialog(null, ((Feedback) fb).getContent());
+				JOptionPane.showMessageDialog(null,
+						((Feedback) fb).getContent());
 			} else if (fb instanceof String[][]) {
 				content = (String[][]) fb;
 			}
@@ -143,8 +147,12 @@ public class UserPanel extends JPanel {
 		fBtn[1].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String itemName = null;
-				if (userTypecb.getSelectedIndex() == 4) {
+				if (((UserTypeVO) userTypecb.getSelectedItem()).name_en
+						.equals("Student")) {
 					itemName = "student";
+				} else if (((UserTypeVO) userTypecb.getSelectedItem()).name_en
+						.equals("Login")) {
+					itemName = "user";
 				} else {
 					itemName = "teacher";
 				}
@@ -158,7 +166,7 @@ public class UserPanel extends JPanel {
 					new EditItemUI(itemName, head, origin);
 				} else {
 					JOptionPane.showMessageDialog(null,
-							Feedback.SELECTION_ERROR);
+							Feedback.SELECTION_ERROR.getContent());
 				}
 			}
 		});
@@ -178,8 +186,7 @@ public class UserPanel extends JPanel {
 					System.out.println(table.getValueAt(selectRowNum, 0));
 					Feedback fb = logic.delItem(itemName,
 							(String) table.getValueAt(selectRowNum, 0));
-					JOptionPane.showMessageDialog(null,
-							fb.getContent());
+					JOptionPane.showMessageDialog(null, fb.getContent());
 				} else {
 					JOptionPane.showMessageDialog(null,
 							Feedback.SELECTION_ERROR.getContent());
@@ -197,7 +204,7 @@ public class UserPanel extends JPanel {
 					fBtn[2].setEnabled(false);
 					fBtn[3].setEnabled(false);
 					fBtn[4].setEnabled(false);
-				} else if (listName.equals("null")) {
+				} else if (listName.startsWith("null")) {
 					JOptionPane.showMessageDialog(null, "请选择用户类型。。。");
 				} else {
 					fBtn[0].setEnabled(true);

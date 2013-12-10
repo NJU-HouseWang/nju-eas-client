@@ -36,6 +36,10 @@ public class AdminUILogic implements ShowTableService, DelItemService {
 	public Object showTableHead(String listName) {
 		String line = null;
 		String[] head = null;
+		if (!(listName.equals("student_list") || listName.equals("login_list") || listName
+				.equals("log_list"))) {
+			listName = "teacher_list";
+		}
 		String cmd = "show；" + listName + "_head";
 		try {
 			NetService client = initNetService();
@@ -57,6 +61,10 @@ public class AdminUILogic implements ShowTableService, DelItemService {
 	 * @return 如果失败则返回Feedback类型，如果成功返回String[][]类型
 	 */
 	public Object showTableContent(String listName) {
+		if (!(listName.equals("student_list") || listName.equals("login_list") || listName
+				.equals("log_list"))) {
+			listName = "teacher_list；" + listName.split("_")[0];
+		}
 		String command2 = "show；" + listName;
 		ArrayList<String> list = null;
 		String[][] content = null;

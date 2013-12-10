@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import NJU.HouseWang.nju_eas_client.net.Client;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.FrameBtn.ExitBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.FrameBtn.MinBtn;
 
@@ -41,6 +42,14 @@ public class CommonFrame extends JFrame {
 		});
 		exitBtn.addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent e) {
+				try {
+					Client client = new Client();
+					client.createConnection();
+					client.sendCommand("logout");
+					client.receiveFeedback();
+					client.shutDownConnection();
+				} catch (Exception e1) {
+				}
 				System.exit(0);
 			}
 		});
@@ -54,7 +63,7 @@ public class CommonFrame extends JFrame {
 		JPanel imagePanel = (JPanel) this.getContentPane();
 		imagePanel.setOpaque(false);
 		setUndecorated(true);
-//		com.sun.awt.AWTUtilities.setWindowOpaque(this, false);
+		// com.sun.awt.AWTUtilities.setWindowOpaque(this, false);
 	}
 
 	private void setMovable(final JFrame frame) {

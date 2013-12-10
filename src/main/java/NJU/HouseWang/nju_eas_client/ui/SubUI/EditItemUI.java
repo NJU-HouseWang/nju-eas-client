@@ -14,17 +14,17 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import NJU.HouseWang.nju_eas_client.net.ClientPool;
-import NJU.HouseWang.nju_eas_client.netService.NetService;
 import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
+import NJU.HouseWang.nju_eas_client.uiLogic.EditItemUILogic;
 
 public class EditItemUI {
+	private EditItemUILogic logic = new EditItemUILogic();
 	private JFrame frame = null;
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private int width = 0;
 	private int height = 0;
-	private String itemName = null;
-	private String itemInfo = null;
+	private String itemName = new String();
+	private String itemInfo = new String();
 	private JPanel panel = null;
 	private String[] item = null;
 	private String[] origin = null;
@@ -38,8 +38,9 @@ public class EditItemUI {
 		this.itemName = itemName;
 		this.item = item;
 		this.origin = origin;
+		
 		frame = new JFrame();
-		frame.setTitle("修改项目：" + itemName);
+		frame.setTitle("修改项目： " + itemName);
 		panel = new JPanel();
 		iteml = new JLabel[item.length];
 		itemtf = new JTextField[item.length];
@@ -81,14 +82,18 @@ public class EditItemUI {
 				for (int i = 0; i < itemtf.length; i++) {
 					String itemtmp = itemtf[i].getText();
 					if (itemtmp == "") {
-						showFeedBack(Feedback.ITEM_EMPTY);
+						JOptionPane.showMessageDialog(frame,
+								Feedback.ITEM_EMPTY);
 						itemInfo = null;
 						break;
 					}
-					itemInfo += item + "；";
+					itemInfo += itemtmp + "；";
 				}
 				if (itemInfo != null) {
-					sendEditCommand();
+					Feedback fb = logic.editUser(itemName, itemInfo);
+					JOptionPane.showMessageDialog(frame, fb.getContent());
+					frame.setVisible(false);
+					frame.dispose();
 				}
 			}
 		});
@@ -100,27 +105,5 @@ public class EditItemUI {
 				frame.dispose();
 			}
 		});
-	}
-
-	public void sendEditCommand() {
-		String command = "edit；" + itemName + "；" + itemInfo;
-		try {
-			ClientPool cPool = ClientPool.getInstance();
-			NetService net = cPool.getClient();
-			net.sendCommand(command);
-			showFeedBack(net.receiveFeedback());
-		} catch (Exception e) {
-			showFeedBack(Feedback.INTERNET_ERROR);
-			e.printStackTrace();
-		}
-	}
-
-	public void showFeedBack(String fbStr) {
-		Feedback feedback = Feedback.valueOf(fbStr);
-		JOptionPane.showMessageDialog(frame, feedback.getContent());
-	}
-
-	public void showFeedBack(Feedback feedback) {
-		JOptionPane.showMessageDialog(frame, feedback.getContent());
 	}
 }

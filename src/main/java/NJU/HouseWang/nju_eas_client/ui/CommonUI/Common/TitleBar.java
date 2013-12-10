@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
+import NJU.HouseWang.nju_eas_client.net.Client;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.MsgBoxUI.MsgBoxUI;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.UserCenterUI.UserCenterUI;
 
@@ -33,6 +34,19 @@ public class TitleBar extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				new MsgBoxUI();
+			}
+		});
+		logoutl.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					Client client = new Client();
+					client.createConnection();
+					client.sendCommand("logout");
+					client.receiveFeedback();
+					client.shutDownConnection();
+				} catch (Exception e1) {
+				}
 			}
 		});
 

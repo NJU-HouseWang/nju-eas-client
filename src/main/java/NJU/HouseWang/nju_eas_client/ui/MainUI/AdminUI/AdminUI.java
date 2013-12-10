@@ -33,7 +33,7 @@ public class AdminUI {
 		switchPane.setBounds(30, 150, 800, 480);
 		mPanel[0] = new HomePanel();
 		mPanel[1] = new UserPanel();
-		mPanel[2] = new JPanel();
+		mPanel[2] = new StatesPanel();
 		mPanel[3] = new LogPanel();
 		for (int i = 0; i < FUNC_NUM; i++) {
 			mBtn[i] = new MenuBtn(FUNC_BTN_NAME[i]);

@@ -74,6 +74,7 @@ public class LogPanel extends JPanel {
 		setListener();
 		add(fbar);
 		add(sp);
+		showTable();
 	}
 
 	/* *

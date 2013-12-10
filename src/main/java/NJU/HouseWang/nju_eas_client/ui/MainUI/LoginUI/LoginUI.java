@@ -61,6 +61,8 @@ public class LoginUI {
 							pwField.getPassword());
 					if (fb == Feedback.OPERATION_SUCCEED) {
 						frame.dispose();
+					} else {
+						showFeedback(fb);
 					}
 				}
 			}
