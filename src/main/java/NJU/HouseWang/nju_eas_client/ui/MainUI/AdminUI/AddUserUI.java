@@ -1,4 +1,4 @@
-package NJU.HouseWang.nju_eas_client.ui.SubUI;
+package NJU.HouseWang.nju_eas_client.ui.MainUI.AdminUI;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -14,11 +14,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import NJU.HouseWang.nju_eas_client.net.ClientPool;
-import NJU.HouseWang.nju_eas_client.netService.NetService;
 import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
+import NJU.HouseWang.nju_eas_client.uiLogic.AdminUILogic;
 
-public class AddItemUI {
+public class AddUserUI {
+	private AdminUILogic logic = new AdminUILogic();
 	private JFrame frame = null;
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private int width = 0;
@@ -32,7 +32,7 @@ public class AddItemUI {
 	private JButton cancelBtn = null;
 	private GridLayout gl = null;
 
-	public AddItemUI(String itemName, String[] item) {
+	public AddUserUI(String itemName, String[] item) {
 		this.itemName = itemName;
 		frame = new JFrame();
 		frame.setTitle("新增项目：" + itemName);
@@ -82,7 +82,10 @@ public class AddItemUI {
 					itemInfo += item + "；";
 				}
 				if (itemInfo != null) {
-					sendAddCommand();
+					Feedback fb = logic.addUser(itemName, itemInfo);
+					JOptionPane.showMessageDialog(frame, fb.getContent());
+					frame.setVisible(false);
+					frame.dispose();
 				}
 			}
 		});
@@ -93,19 +96,6 @@ public class AddItemUI {
 				frame.dispose();
 			}
 		});
-	}
-
-	public void sendAddCommand() {
-		String command = "add；" + itemName + "；" + itemInfo;
-		try {
-			ClientPool cPool = ClientPool.getInstance();
-			NetService net = cPool.getClient();
-			net.sendCommand(command);
-			showFeedBack(net.receiveFeedback());
-		} catch (Exception e) {
-			showFeedBack(Feedback.INTERNET_ERROR);
-			e.printStackTrace();
-		}
 	}
 
 	public void showFeedBack(String fbStr) {

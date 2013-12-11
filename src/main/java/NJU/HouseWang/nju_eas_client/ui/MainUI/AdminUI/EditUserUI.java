@@ -1,4 +1,4 @@
-package NJU.HouseWang.nju_eas_client.ui.SubUI;
+package NJU.HouseWang.nju_eas_client.ui.MainUI.AdminUI;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -15,10 +15,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
-import NJU.HouseWang.nju_eas_client.uiLogic.EditItemUILogic;
+import NJU.HouseWang.nju_eas_client.uiLogic.AdminUILogic;
 
-public class EditItemUI {
-	private EditItemUILogic logic = new EditItemUILogic();
+public class EditUserUI {
+	private AdminUILogic logic = new AdminUILogic();
 	private JFrame frame = null;
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private int width = 0;
@@ -26,19 +26,17 @@ public class EditItemUI {
 	private String itemName = new String();
 	private String itemInfo = new String();
 	private JPanel panel = null;
-	private String[] item = null;
-	private String[] origin = null;
+	// private String[] item = null;
+	// private String[] origin = null;
 	private JLabel[] iteml = null;
 	private JTextField[] itemtf = null;
 	private JButton confirmBtn = null;
 	private JButton cancelBtn = null;
 	private GridLayout gl = null;
 
-	public EditItemUI(String itemName, String[] item, String[] origin) {
+	public EditUserUI(String itemName, String[] item, String[] origin) {
 		this.itemName = itemName;
-		this.item = item;
-		this.origin = origin;
-		
+
 		frame = new JFrame();
 		frame.setTitle("修改项目： " + itemName);
 		panel = new JPanel();

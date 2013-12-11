@@ -6,11 +6,16 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 
+import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
+import NJU.HouseWang.nju_eas_client.uiLogic.AdminUILogic;
+
 public class StatesPanel extends JPanel {
+	private AdminUILogic logic = new AdminUILogic();
 	private JTextField textField;
 	private JTextField textField_1;
 	private JPanel p1 = new JPanel();
@@ -55,7 +60,16 @@ public class StatesPanel extends JPanel {
 
 		chooseBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// 抽签操作
+				Feedback fb = logic.swicthStates("selectCommon", new Boolean(
+						!chooseBtn.isSelected()).toString());
+				if (fb.equals(Feedback.OPERATION_SUCCEED)) {
+					fb = logic.processSelection();
+				}
+				if (!fb.equals(Feedback.OPERATION_SUCCEED)) {
+					JOptionPane.showMessageDialog(null, fb.getContent());
+				} else {
+					chooseBtn.setSelected(!chooseBtn.isSelected());
+				}
 			}
 		});
 		p2.add(chooseBtn);
@@ -68,7 +82,13 @@ public class StatesPanel extends JPanel {
 
 		byElectBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// 更改选课开关状态
+				Feedback fb = logic.swicthStates("byelectCommon", new Boolean(
+						!byElectBtn.isSelected()).toString());
+				if (!fb.equals(Feedback.OPERATION_SUCCEED)) {
+					JOptionPane.showMessageDialog(null, fb.getContent());
+				} else {
+					byElectBtn.setSelected(!byElectBtn.isSelected());
+				}
 			}
 		});
 		p3.add(byElectBtn);
@@ -81,7 +101,13 @@ public class StatesPanel extends JPanel {
 
 		quitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// 更改补选开关状态
+				Feedback fb = logic.swicthStates("byelectCommon", new Boolean(
+						!quitBtn.isSelected()).toString());
+				if (!fb.equals(Feedback.OPERATION_SUCCEED)) {
+					JOptionPane.showMessageDialog(null, fb.getContent());
+				} else {
+					byElectBtn.setSelected(!quitBtn.isSelected());
+				}
 			}
 		});
 		p4.add(quitBtn);

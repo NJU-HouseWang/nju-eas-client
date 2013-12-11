@@ -19,8 +19,6 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.FunctionBar;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.FunctionBtn.FunctionBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CommonTable;
-import NJU.HouseWang.nju_eas_client.ui.SubUI.AddItemUI;
-import NJU.HouseWang.nju_eas_client.ui.SubUI.EditItemUI;
 import NJU.HouseWang.nju_eas_client.uiLogic.AdminUILogic;
 import NJU.HouseWang.nju_eas_client.vo.UserTypeVO;
 
@@ -46,7 +44,6 @@ public class UserPanel extends JPanel {
 		public boolean isCellEditable(int row, int column) {
 			return false;
 		}
-
 	};
 
 	private String[] head = null;// 表头
@@ -97,6 +94,12 @@ public class UserPanel extends JPanel {
 		setListener();
 		add(fbar);
 		add(sp);
+
+		fBtn[0].setEnabled(false);
+		fBtn[1].setEnabled(false);
+		fBtn[2].setEnabled(false);
+		fBtn[3].setEnabled(false);
+		fBtn[4].setEnabled(false);
 	}
 
 	/* *
@@ -135,11 +138,18 @@ public class UserPanel extends JPanel {
 		// 增加按钮监听
 		fBtn[0].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (userTypecb.getSelectedIndex() == 4) {
-					new AddItemUI("studnet", head);
+				String itemName = null;
+				if (((UserTypeVO) userTypecb.getSelectedItem()).name_en
+						.equals("Student")) {
+					itemName = "student";
+				} else if (((UserTypeVO) userTypecb.getSelectedItem()).name_en
+						.equals("Login")) {
+					itemName = "user";
 				} else {
-					new AddItemUI("teacher", head);
+					itemName = "teacher";
 				}
+
+				new AddUserUI(itemName, head);
 			}
 		});
 
@@ -163,7 +173,7 @@ public class UserPanel extends JPanel {
 					for (int i = 0; i < origin.length; i++) {
 						origin[i] = (String) table.getValueAt(selectRowNum, i);
 					}
-					new EditItemUI(itemName, head, origin);
+					new EditUserUI(itemName, head, origin);
 				} else {
 					JOptionPane.showMessageDialog(null,
 							Feedback.SELECTION_ERROR.getContent());
@@ -184,7 +194,7 @@ public class UserPanel extends JPanel {
 
 				if (table.getSelectedRowCount() == 1 && selectRowNum != -1) {
 					System.out.println(table.getValueAt(selectRowNum, 0));
-					Feedback fb = logic.delItem(itemName,
+					Feedback fb = logic.delUser(itemName,
 							(String) table.getValueAt(selectRowNum, 0));
 					JOptionPane.showMessageDialog(null, fb.getContent());
 				} else {
@@ -196,9 +206,8 @@ public class UserPanel extends JPanel {
 
 		userTypecb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				showTable();
 				String listName = ((UserTypeVO) userTypecb.getSelectedItem()).name_en;
-				if (listName.equals("admin")) {
+				if ((userTypecb.getSelectedIndex() == 0)) {
 					fBtn[0].setEnabled(false);
 					fBtn[1].setEnabled(false);
 					fBtn[2].setEnabled(false);
@@ -206,19 +215,32 @@ public class UserPanel extends JPanel {
 					fBtn[4].setEnabled(false);
 				} else if (listName.startsWith("null")) {
 					JOptionPane.showMessageDialog(null, "请选择用户类型。。。");
-				} else {
+				} else if(listName.startsWith("Login")) {
+					fBtn[0].setEnabled(false);
+					fBtn[1].setEnabled(false);
+					fBtn[2].setEnabled(false);
+					fBtn[3].setEnabled(false);
+					fBtn[4].setEnabled(false);
+					showTable();
+				}
+				else {
 					fBtn[0].setEnabled(true);
 					fBtn[1].setEnabled(true);
 					fBtn[2].setEnabled(true);
 					fBtn[3].setEnabled(true);
 					fBtn[4].setEnabled(true);
+					showTable();
 				}
 			}
 		});
 
 		refreshBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				showTable();
+				if (userTypecb.getSelectedIndex() == 0) {
+					JOptionPane.showMessageDialog(null, "请选择用户类型。。。");
+				} else {
+					showTable();
+				}
 			}
 		});
 
