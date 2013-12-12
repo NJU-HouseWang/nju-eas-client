@@ -32,20 +32,17 @@ public class EduFrameworkPanel extends JPanel {
 	private CTable table = null;
 	private JButton refreshBtn = new JButton();
 
-	private String[][] content = new String[][] {
-			{ "A", "V", "V", "V", "1", "1", "V" },
-			{ "A", "C", "C", "C", "2", "2", "C" },
-			{ "A", "C", "C", "C", "3", "3", "C" },
-			{ "B", "V", "V", "V", "4", "4", "V" },
-			{ "B", "F", "F", "F", "5", "5", "F" }
+	private String[][] content = new String[1][7];
 
-	};
+	private String[] head = new String[7];
 
-	private String[] head = new String[] { "课程模块", "课程性质", "序列", "课程类型", "课程名",
-			"建议学分", "建议学期" };
+	// private String[] head = new String[] { "课程模块", "课程性质", "序列", "课程类型",
+	// "课程名",
+	// "建议学分", "建议学期" };
 
 	@SuppressWarnings("serial")
 	public EduFrameworkPanel() {
+		showEduFw();
 		setLayout(null);
 		setBackground(Color.white);
 		fbar = new FunctionBar();
@@ -70,12 +67,6 @@ public class EduFrameworkPanel extends JPanel {
 				return false;
 			}
 		};
-		for (int i = 0; i < content.length; i++) {
-			for (int j = 0; j < content[i].length; j++) {
-				dtm.setValueAt(content[i][j], i, j);
-			}
-		}
-		dtm.setColumnIdentifiers(head);
 
 		table = new CTable(map, dtm);
 		table.setEnabled(false);
@@ -87,12 +78,24 @@ public class EduFrameworkPanel extends JPanel {
 				.add(new JScrollPane(table), BorderLayout.CENTER);
 		add(edufwp);
 		setListener();
+		for (int i = 0; i < content.length; i++) {
+			for (int j = 0; j < content[i].length; j++) {
+				dtm.setValueAt(content[i][j], i, j);
+			}
+		}
+		dtm.setColumnIdentifiers(head);
 	}
 
 	private void setListener() {
 		refreshBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				showEduFw();
+				for (int i = 0; i < content.length; i++) {
+					for (int j = 0; j < content[i].length; j++) {
+						dtm.setValueAt(content[i][j], i, j);
+					}
+				}
+				dtm.setColumnIdentifiers(head);
 			}
 		});
 
@@ -126,7 +129,5 @@ public class EduFrameworkPanel extends JPanel {
 				content = (String[][]) fb;
 			}
 		}
-		dtm.setDataVector(content, head);
-		table.updateUI();
 	}
 }

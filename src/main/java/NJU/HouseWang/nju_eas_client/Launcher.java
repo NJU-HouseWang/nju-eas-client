@@ -43,10 +43,10 @@ public class Launcher {
 			case "Admin":
 				new AdminUI(userName);
 				break;
-			case "School":
+			case "SchoolDean":
 				new SchoolDeanUI(userName);
 				break;
-			case "Dept":
+			case "DeptAD":
 				new DeptADUI(userName);
 				break;
 			case "Teacher":

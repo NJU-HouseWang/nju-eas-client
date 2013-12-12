@@ -1,10 +1,3 @@
-/*
- * 文件名：Client.java
- * 创建者：王鑫
- * 创建时间：2013-10-09
- * 最后修改：王鑫
- * 最后修改时间：2013-11-2
- */
 package NJU.HouseWang.nju_eas_client.net;
 
 import java.io.BufferedInputStream;
@@ -20,33 +13,77 @@ import java.util.ArrayList;
 
 import NJU.HouseWang.nju_eas_client.netService.NetService;
 
-/*
- * 类：Client
- * 功能：客户端与服务器的连接，网络命令的发送，网络文件传输
+/**
+ * 客户端类
+ * 
+ * @author Xin
+ * @version 2013-12-12
  */
 public class Client implements NetService {
+	/**
+	 * 默认IP地址
+	 */
 	private static final String DEFAULT_IP = "localhost";
+	/**
+	 * 默认端口
+	 */
 	private static final int DEFAULT_PORT = 9001;
+	/**
+	 * IP地址
+	 */
 	private String ip;
+	/**
+	 * 端口
+	 */
 	private int port;
-
+	/**
+	 * 客户端套接字
+	 */
 	private Socket socket = null;
-
+	/**
+	 * 网络数据输入流
+	 */
 	private DataInputStream in = null;
+	/**
+	 * 网络数据输出流
+	 */
 	private DataOutputStream out = null;
+	/**
+	 * 文件数据输入流
+	 */
 	private DataInputStream fis = null;
+	/**
+	 * 文件数据输出流
+	 */
 	private DataOutputStream fos = null;
 
+	/**
+	 * 客户端构造方法
+	 */
 	public Client() {
 		ip = DEFAULT_IP;
 		port = DEFAULT_PORT;
 	}
 
+	/**
+	 * 客户端构造方法
+	 * 
+	 * @param ip
+	 *            IP地址
+	 * @param port
+	 *            端口
+	 */
 	public Client(String ip, int port) {
 		this.ip = ip;
 		this.port = port;
 	}
 
+	/**
+	 * 创建连接
+	 * 
+	 * @throws Exception
+	 *             创建连接时遇到的错误
+	 */
 	public void createConnection() throws Exception {
 		try {
 			socket = new Socket(ip, port);
@@ -60,6 +97,9 @@ public class Client implements NetService {
 		}
 	}
 
+	/**
+	 * 关闭连接
+	 */
 	public void shutDownConnection() {
 		System.out.println("Shutdown Connection");
 		try {
@@ -77,6 +117,14 @@ public class Client implements NetService {
 		}
 	}
 
+	/**
+	 * 发送命令
+	 * 
+	 * @param command
+	 *            命令
+	 * @throws Exception
+	 *             发送命令时遇到的错误
+	 */
 	public void sendCommand(String command) throws Exception {
 		System.out.println("Send Command:" + command);
 		try {
@@ -92,6 +140,13 @@ public class Client implements NetService {
 		}
 	}
 
+	/**
+	 * 接收反馈
+	 * 
+	 * @return 服务器反馈
+	 * @throws IOException
+	 *             接收反馈时遇到的错误
+	 */
 	public String receiveFeedback() throws IOException {
 		in = new DataInputStream(new BufferedInputStream(
 				socket.getInputStream()));
@@ -101,6 +156,14 @@ public class Client implements NetService {
 		return feedback;
 	}
 
+	/**
+	 * 发送列表
+	 * 
+	 * @param list
+	 *            要发送的列表
+	 * @throws IOException
+	 *             发送列表遇到的错误
+	 */
 	public void sendList(ArrayList<String> list) throws IOException {
 		try {
 			out = new DataOutputStream(socket.getOutputStream());
@@ -120,6 +183,13 @@ public class Client implements NetService {
 		}
 	}
 
+	/**
+	 * 接收列表
+	 * 
+	 * @return 接收到的列表
+	 * @throws IOException
+	 *             接收列表时遇到的错误
+	 */
 	public ArrayList<String> receiveList() throws IOException {
 		in = new DataInputStream(new BufferedInputStream(
 				socket.getInputStream()));
@@ -135,6 +205,14 @@ public class Client implements NetService {
 		return list;
 	}
 
+	/**
+	 * 发送文件
+	 * 
+	 * @param file
+	 *            要发送的文件
+	 * @throws Exception
+	 *             发送文件时遇到的错误
+	 */
 	public void sendFile(File file) throws Exception {
 		try {
 			fis = new DataInputStream(new BufferedInputStream(
@@ -170,6 +248,13 @@ public class Client implements NetService {
 		}
 	}
 
+	/**
+	 * 接收文件
+	 * 
+	 * @return 接收到的文件
+	 * @throws Exception
+	 *             接收文件时遇到的错误
+	 */
 	public File receiveFile() throws Exception {
 		try {
 			in = new DataInputStream(new BufferedInputStream(

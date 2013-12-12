@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import NJU.HouseWang.nju_eas_client.net.ClientPool;
 import NJU.HouseWang.nju_eas_client.netService.NetService;
 import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
+import NJU.HouseWang.nju_eas_client.vo.TermVO;
 
 /**
  * 管理员界面所对应的逻辑类，负责与网络层交互
@@ -154,6 +155,32 @@ public class AdminUILogic {
 	}
 
 	/**
+	 * 显示当前学期
+	 * 
+	 * @return 学期信息或反馈
+	 */
+	public Object showCurrentTerm() {
+		String command = "show；term";
+		String line = null;
+		try {
+			NetService ns = initNetService();
+			ns.sendCommand(command);
+			line = ns.receiveFeedback();
+			ns.shutDownConnection();
+			if (line.contains("_")) {
+				return Feedback.valueOf(line);
+			} else if (line.contains("-")) {
+				return new TermVO(line);
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Feedback.INTERNET_ERROR;
+		}
+	}
+
+	/**
 	 * 创建新学期
 	 * 
 	 * @param itemInfo
@@ -218,7 +245,14 @@ public class AdminUILogic {
 			return Feedback.INTERNET_ERROR;
 		}
 	}
-	
+
+	/**
+	 * 显示系统状态
+	 * 
+	 * @param statesName
+	 *            状态名称
+	 * @return 状态或者操作反馈
+	 */
 	public Object showStates(String statesName) {
 		String command = "show；status；" + statesName;
 		String line = null;
@@ -227,10 +261,10 @@ public class AdminUILogic {
 			ns.sendCommand(command);
 			line = ns.receiveFeedback();
 			ns.shutDownConnection();
-			if(line.contains("_")) {
+			if (line.contains("_")) {
 				return Feedback.valueOf(line);
-			} else if(line.equals("false") || line.equals("true")) {
-				return Boolean.valueOf(line);
+			} else if (line.contains("false") || line.contains("true")) {
+				return Boolean.valueOf(line.split("；")[1]);
 			} else {
 				return null;
 			}

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import NJU.HouseWang.nju_eas_client.net.ClientPool;
 import NJU.HouseWang.nju_eas_client.netService.NetService;
 import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
+import NJU.HouseWang.nju_eas_client.vo.DeptVO;
+import NJU.HouseWang.nju_eas_client.vo.TermVO;
 
 /**
  * 管理员界面所对应的逻辑类，负责与网络层交互
@@ -34,51 +36,66 @@ public class SchoolDeanUILogic {
 	 */
 	public Object showEduFwHead() {
 		String line = null;
-		String[] head = null;
-		String cmd = "show；edufw_head";
+		String cmd = "show；eduframework_head";
 		try {
 			NetService client = initNetService();
 			client.sendCommand(cmd);
 			line = client.receiveFeedback();
-			head = line.split("；");
+			client.shutDownConnection();
+			if (!line.contains("；")) {
+				return Feedback.valueOf(line);
+			} else {
+				String[] head = line.split("；");
+				return head;
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Feedback.INTERNET_ERROR;
 		}
-		return head;
 	}
 
 	/**
 	 * 获取教学框架的内容
 	 * 
-	 * @return 如果失败则返回Feedback类型，如果成功返回String[][]类型
+	 * @return 如果失败则返回Feedback类型，如果成功返回String[][]类型，列表为空则直接返回空列表
 	 */
 	public Object showEduFwContent() {
-		String command2 = "show；edufw";
+		String cmd = "show；eduframework";
 		ArrayList<String> list = null;
 		String[][] content = null;
 		try {
 			NetService client = initNetService();
-			client.sendCommand(command2);
+			client.sendCommand(cmd);
 			list = client.receiveList();
+			client.shutDownConnection();
 			content = new String[list.size()][];
 			for (int i = 0; i < list.size(); i++) {
 				content[i] = list.get(i).split("；");
 			}
+			for (int i = 0; i < content.length; i++) {
+				for (int j = 0; j < content[j].length; j++) {
+					if (content[i][j].equals("null")) {
+						content[i][j] = "";
+					} else if (content[i][j].contains("0-0")) {
+						content[i][j] = content[i][j].replaceAll("0-0", "");
+					}
+				}
+			}
+			return content;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Feedback.INTERNET_ERROR;
 		}
-		return content;
 	}
-	
+
 	/**
 	 * 删除当前的教学框架策略
 	 * 
 	 * @return 处理结果
 	 */
 	public Feedback delEdufw() {
-		String command = "del；edufw";
+		String command = "del；eduframework";
 		String line = null;
 		try {
 			NetService client = initNetService();
@@ -91,7 +108,7 @@ public class SchoolDeanUILogic {
 			return Feedback.INTERNET_ERROR;
 		}
 	}
-	
+
 	/**
 	 * 从服务器上获取教学计划的表头
 	 * 
@@ -99,21 +116,24 @@ public class SchoolDeanUILogic {
 	 */
 	public Object showTPHead() {
 		String line = null;
-		String[] head = null;
 		String cmd = "show；teachingplan_head";
 		try {
 			NetService client = initNetService();
 			client.sendCommand(cmd);
 			line = client.receiveFeedback();
-			head = line.split("；");
 			client.shutDownConnection();
+			if (!line.contains("；")) {
+				return Feedback.valueOf(line);
+			} else {
+				String[] head = line.split("；");
+				return head;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Feedback.INTERNET_ERROR;
 		}
-		return head;
 	}
-	
+
 	/**
 	 * 从服务器上获取院系教学计划的内容
 	 * 
@@ -129,7 +149,7 @@ public class SchoolDeanUILogic {
 			NetService client = initNetService();
 			client.sendCommand(command);
 			list = client.receiveList();
-			if(list.isEmpty()) {
+			if (list.isEmpty()) {
 				return Feedback.TEACHINGPLAN_NOT_COMMIT;
 			}
 			content = new String[list.size()][];
@@ -143,7 +163,7 @@ public class SchoolDeanUILogic {
 		}
 		return content;
 	}
-	
+
 	/**
 	 * 审核教学计划
 	 * 
@@ -167,7 +187,7 @@ public class SchoolDeanUILogic {
 			return Feedback.INTERNET_ERROR;
 		}
 	}
-	
+
 	/**
 	 * 得到文件名
 	 * 
@@ -205,13 +225,15 @@ public class SchoolDeanUILogic {
 	 *            删除的列表
 	 * @return 处理结果
 	 */
-	public Feedback delList(String listName, String[][] table) {
+	public Feedback delList(String listName) {
 		String command = "del；" + listName;
+		String line = null;
 		try {
 			NetService ns = initNetService();
 			ns.sendCommand(command);
+			line = ns.receiveFeedback();
 			ns.shutDownConnection();
-			return Feedback.valueOf(ns.receiveFeedback());
+			return Feedback.valueOf(line);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Feedback.INTERNET_ERROR;
@@ -219,7 +241,7 @@ public class SchoolDeanUILogic {
 	}
 
 	/**
-	 * 编辑项目，此处特指审核教学计划
+	 * 编辑通识课
 	 * 
 	 * @param listName
 	 *            列表名
@@ -227,7 +249,7 @@ public class SchoolDeanUILogic {
 	 *            新的项目信息
 	 * @return 处理结果
 	 */
-	public Feedback editItem(String itemName, String itemInfo) {
+	public Feedback editCommonCourse(String itemName, String itemInfo) {
 		String command = "edit；" + itemName + "；" + itemInfo;
 		try {
 			NetService ns = initNetService();
@@ -240,4 +262,142 @@ public class SchoolDeanUILogic {
 		}
 	}
 
+	/**
+	 * 显示教学计划列表
+	 * 
+	 * @return 教学计划列表或者错误反馈
+	 */
+	public Object showTPList() {
+		String command = "show;teachingplan_list";
+		ArrayList<String> list = null;
+		ArrayList<DeptVO> l = new ArrayList<DeptVO>();
+		try {
+			NetService ns = initNetService();
+			ns.sendCommand(command);
+			list = ns.receiveList();
+			ns.shutDownConnection();
+			for (String s : list) {
+				DeptVO dept = new DeptVO(s);
+				l.add(dept);
+			}
+			return l;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Feedback.INTERNET_ERROR;
+		}
+	}
+
+	/**
+	 * 显示信息列表头
+	 * 
+	 * @param listName
+	 *            列表名
+	 * @return 列表头的数组或是错误反馈
+	 */
+	public Object showInfoListHead(String listName) {
+		String line = null;
+		String cmd = "show；" + listName + "_head";
+		try {
+			NetService client = initNetService();
+			client.sendCommand(cmd);
+			line = client.receiveFeedback();
+			client.shutDownConnection();
+			if (!line.contains("；")) {
+				return Feedback.valueOf(line);
+			} else {
+				String[] head = line.split("；");
+				return head;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Feedback.INTERNET_ERROR;
+		}
+	}
+
+	/**
+	 * 显示信息列表
+	 * 
+	 * @param listName
+	 * @param conditions
+	 * @return
+	 */
+	public Object showInfoList(String listName, String conditions) {
+		String cmd = "show；" + listName + "；" + conditions;
+		ArrayList<String> list = null;
+		String[][] content = null;
+		try {
+			NetService client = initNetService();
+			client.sendCommand(cmd);
+			list = client.receiveList();
+			client.shutDownConnection();
+			content = new String[list.size()][];
+			for (int i = 0; i < list.size(); i++) {
+				content[i] = list.get(i).split("；");
+			}
+			for (int i = 0; i < content.length; i++) {
+				for (int j = 0; j < content[j].length; j++) {
+					if (content[i][j].equals("null")) {
+						content[i][j] = "";
+					}
+				}
+			}
+			return content;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Feedback.INTERNET_ERROR;
+		}
+	}
+
+	/**
+	 * 显示院系列表
+	 * 
+	 * @return 院系列表或错误反馈
+	 */
+	public Object showDeptList() {
+		String command = "show；dept_list";
+		ArrayList<String> l = new ArrayList<String>();
+		ArrayList<DeptVO> list = new ArrayList<DeptVO>();
+		try {
+			NetService ns = initNetService();
+			ns.sendCommand(command);
+			l = ns.receiveList();
+			ns.shutDownConnection();
+			for (String s : l) {
+				DeptVO t = new DeptVO();
+				t.deptId = s.split("；")[0];
+				t.deptName = s.split("；")[0];
+				list.add(t);
+			}
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Feedback.INTERNET_ERROR;
+		}
+	}
+
+	/**
+	 * 显示学期列表
+	 * 
+	 * @return 学期列表或错误反馈
+	 */
+	public Object showTermList() {
+		String command = "show；term_list";
+		ArrayList<String> l = new ArrayList<String>();
+		ArrayList<TermVO> list = new ArrayList<TermVO>();
+		try {
+			NetService ns = initNetService();
+			ns.sendCommand(command);
+			l = ns.receiveList();
+			ns.shutDownConnection();
+			for (String s : l) {
+				TermVO t = new TermVO(s);
+				list.add(t);
+			}
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Feedback.INTERNET_ERROR;
+		}
+	}
 }

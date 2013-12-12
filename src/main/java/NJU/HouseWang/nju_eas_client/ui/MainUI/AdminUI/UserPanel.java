@@ -185,8 +185,12 @@ public class UserPanel extends JPanel {
 		fBtn[2].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String itemName = null;
-				if (userTypecb.getSelectedIndex() == 4) {
+				if (((UserTypeVO) userTypecb.getSelectedItem()).name_en
+						.equals("Student")) {
 					itemName = "student";
+				} else if (((UserTypeVO) userTypecb.getSelectedItem()).name_en
+						.equals("Login")) {
+					itemName = "user";
 				} else {
 					itemName = "teacher";
 				}
@@ -215,15 +219,14 @@ public class UserPanel extends JPanel {
 					fBtn[4].setEnabled(false);
 				} else if (listName.startsWith("null")) {
 					JOptionPane.showMessageDialog(null, "请选择用户类型。。。");
-				} else if(listName.startsWith("Login")) {
+				} else if (listName.startsWith("Login")) {
 					fBtn[0].setEnabled(false);
 					fBtn[1].setEnabled(false);
 					fBtn[2].setEnabled(false);
 					fBtn[3].setEnabled(false);
 					fBtn[4].setEnabled(false);
 					showTable();
-				}
-				else {
+				} else {
 					fBtn[0].setEnabled(true);
 					fBtn[1].setEnabled(true);
 					fBtn[2].setEnabled(true);
