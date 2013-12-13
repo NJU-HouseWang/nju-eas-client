@@ -59,12 +59,12 @@ public class AdminUILogic {
 	 *            列表名
 	 * @return 如果失败则返回Feedback类型，如果成功返回String[][]类型
 	 */
-	public Object showTableContent(String listName) {
+	public Object showTableContent(String listName, String conditions) {
 		if (!(listName.equals("student_list") || listName.equals("login_list") || listName
 				.equals("log_list"))) {
 			listName = "teacher_list；" + listName.split("_")[0];
 		}
-		String command2 = "show；" + listName;
+		String command2 = "show；" + listName + "；" + conditions;
 		ArrayList<String> list = null;
 		String[][] content = null;
 		try {

@@ -119,7 +119,7 @@ public class UserPanel extends JPanel {
 			JOptionPane.showMessageDialog(null, ((Feedback) fb).getContent());
 		} else if (fb instanceof String[]) {
 			head = (String[]) fb;
-			fb = logic.showTableContent(listName);
+			fb = logic.showTableContent(listName,"all");
 			if (fb instanceof Feedback) {
 				JOptionPane.showMessageDialog(null,
 						((Feedback) fb).getContent());
