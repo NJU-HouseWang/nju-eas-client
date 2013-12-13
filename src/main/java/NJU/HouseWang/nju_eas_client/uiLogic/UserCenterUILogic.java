@@ -23,7 +23,7 @@ public class UserCenterUILogic {
 	 * @return 网络反馈的信息
 	 */
 	public Object showSelfInformation() {
-		String command = "show；selfInformation";
+		String command = "show；self_information";
 		String line = null;
 		try {
 			NetService ns = initNetService();
@@ -47,7 +47,7 @@ public class UserCenterUILogic {
 	}
 
 	public Feedback changePassword(char[] oldpw, char[] newpw) {
-		String command = "changePassword；" + new String(oldpw) + "；"
+		String command = "edit；password；" + new String(oldpw) + "；"
 				+ new String(newpw);
 		String line = null;
 		try {

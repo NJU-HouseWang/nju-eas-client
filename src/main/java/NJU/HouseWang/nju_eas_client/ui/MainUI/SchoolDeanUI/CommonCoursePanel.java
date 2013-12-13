@@ -2,7 +2,9 @@ package NJU.HouseWang.nju_eas_client.ui.MainUI.SchoolDeanUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -17,10 +19,11 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CommonTable;
 public class CommonCoursePanel extends JPanel {
 	private FunctionBar fbar = new FunctionBar();
 	private FunctionBtn[] fBtn = new FunctionBtn[5];
-	private SubPanel edufwp = new SubPanel("通识课列表", 740, 380);
+	private SubPanel cp = new SubPanel("通识课列表", 740, 380);
 	private DefaultTableModel dtm = new DefaultTableModel(0, 5);
 	private CommonTable infoTable = new CommonTable(dtm);
-
+	private JButton refreshBtn = new JButton();
+	
 	public CommonCoursePanel() {
 		setLayout(null);
 		setBackground(Color.white);
@@ -36,16 +39,22 @@ public class CommonCoursePanel extends JPanel {
 		}
 		add(fbar);
 
-		edufwp.setLocation(30, 70);
+		cp.setLocation(30, 70);
 
 		DefaultTableCellRenderer r = new DefaultTableCellRenderer();
 		r.setHorizontalAlignment(JLabel.CENTER);
 		infoTable.setDefaultRenderer(Object.class, r);
 
-		edufwp.getCenterPanel().setLayout(new BorderLayout());
-		edufwp.getCenterPanel().add(new JScrollPane(infoTable),
+		cp.getCenterPanel().setLayout(new BorderLayout());
+		cp.getCenterPanel().add(new JScrollPane(infoTable),
 				BorderLayout.CENTER);
-		add(edufwp);
-
+		refreshBtn.setPreferredSize(new Dimension(25,25));
+		cp.getTopPanel().add(refreshBtn);
+		add(cp);
+		setListener();
+	}
+	
+	private void setListener() {
+		
 	}
 }

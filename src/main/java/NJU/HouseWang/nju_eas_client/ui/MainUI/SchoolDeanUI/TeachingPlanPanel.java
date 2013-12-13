@@ -90,7 +90,6 @@ public class TeachingPlanPanel extends JPanel {
 				JComboBox<DeptVO> c = (JComboBox<DeptVO>) e.getSource();
 				final DeptVO dept = (DeptVO) c.getSelectedItem();
 				if (dept.deptId.equals("null")) {
-					initDeptList();
 					fBtn[0].setEnabled(false);
 					fBtn[1].setEnabled(false);
 				} else {

@@ -35,7 +35,7 @@ public class InfoListPanel extends JPanel {
 	private JLabel deptlb = new JLabel("院系：");
 	private JLabel termlb = new JLabel("学年：");
 	private JLabel gradelb = new JLabel("年级：");
-	private JButton showBtn = new JButton("查询");
+	private JButton showBtn = new JButton();
 
 	private DefaultTableModel dtm = new DefaultTableModel(40, 5);
 	private CommonTable table = new CommonTable(dtm);
@@ -57,7 +57,7 @@ public class InfoListPanel extends JPanel {
 		termChooser.setFont(new Font("微软雅黑", Font.BOLD, 14));
 		gradeChooser.setPreferredSize(new Dimension(120, 20));
 		gradeChooser.setFont(new Font("微软雅黑", Font.BOLD, 14));
-		showBtn.setPreferredSize(new Dimension(50, 20));
+		showBtn.setPreferredSize(new Dimension(20, 20));
 		showBtn.setFont(new Font("微软雅黑", Font.BOLD, 14));
 
 		deptlb.setFont(new Font("微软雅黑", Font.BOLD, 14));
@@ -181,7 +181,7 @@ public class InfoListPanel extends JPanel {
 			}
 		} else if (listName.equals("老师列表")) {
 			listName = "teacher_list";
-			Object o = logic.showInfoList(listName, "");
+			Object o = logic.showInfoList(listName, "all");
 			if (o instanceof Feedback) {
 				JOptionPane
 						.showMessageDialog(null, ((Feedback) o).getContent());

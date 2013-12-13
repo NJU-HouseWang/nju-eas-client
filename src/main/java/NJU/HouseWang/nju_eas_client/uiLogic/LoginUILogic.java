@@ -25,6 +25,7 @@ public class LoginUILogic implements LoginService {
 			client.createConnection();
 			client.sendCommand(command);
 			feedback = Feedback.valueOf(client.receiveFeedback());
+			client.shutDownConnection();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Feedback.INTERNET_ERROR;

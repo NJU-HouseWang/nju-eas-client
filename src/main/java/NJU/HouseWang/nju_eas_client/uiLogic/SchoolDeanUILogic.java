@@ -268,7 +268,7 @@ public class SchoolDeanUILogic {
 	 * @return 教学计划列表或者错误反馈
 	 */
 	public Object showTPList() {
-		String command = "show;teachingplan_list";
+		String command = "show；teachingplan_list";
 		ArrayList<String> list = null;
 		ArrayList<DeptVO> l = new ArrayList<DeptVO>();
 		try {
@@ -336,7 +336,7 @@ public class SchoolDeanUILogic {
 				content[i] = list.get(i).split("；");
 			}
 			for (int i = 0; i < content.length; i++) {
-				for (int j = 0; j < content[j].length; j++) {
+				for (int j = 0; j < content[i].length; j++) {
 					if (content[i][j].equals("null")) {
 						content[i][j] = "";
 					}
@@ -366,7 +366,7 @@ public class SchoolDeanUILogic {
 			for (String s : l) {
 				DeptVO t = new DeptVO();
 				t.deptId = s.split("；")[0];
-				t.deptName = s.split("；")[0];
+				t.deptName = s.split("；")[1];
 				list.add(t);
 			}
 			return list;

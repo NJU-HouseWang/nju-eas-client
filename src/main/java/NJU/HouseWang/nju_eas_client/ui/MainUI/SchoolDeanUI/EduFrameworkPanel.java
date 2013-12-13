@@ -19,7 +19,7 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.CTable.CTable;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.FunctionBar;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.FunctionBtn.FunctionBtn;
-import NJU.HouseWang.nju_eas_client.ui.SubUI.AddEduFwUI;
+import NJU.HouseWang.nju_eas_client.ui.SubUI.AddEduFwUI.AddEduFwUI;
 import NJU.HouseWang.nju_eas_client.uiLogic.SchoolDeanUILogic;
 
 public class EduFrameworkPanel extends JPanel {
@@ -37,8 +37,7 @@ public class EduFrameworkPanel extends JPanel {
 	private String[] head = new String[7];
 
 	// private String[] head = new String[] { "课程模块", "课程性质", "序列", "课程类型",
-	// "课程名",
-	// "建议学分", "建议学期" };
+	// "课程名", "建议学分", "建议学期" };
 
 	@SuppressWarnings("serial")
 	public EduFrameworkPanel() {

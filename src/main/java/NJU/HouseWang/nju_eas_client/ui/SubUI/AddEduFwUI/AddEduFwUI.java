@@ -1,4 +1,4 @@
-package NJU.HouseWang.nju_eas_client.ui.SubUI;
+package NJU.HouseWang.nju_eas_client.ui.SubUI.AddEduFwUI;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -510,7 +510,7 @@ public class AddEduFwUI {
 		JOptionPane.showMessageDialog(frame, feedback.getContent());
 	}
 
-	// public static void main(String[] args) {
-	// new AddEduFwFrame();
-	// }
+	public static void main(String[] args) {
+		new AddEduFwUI();
+	}
 }

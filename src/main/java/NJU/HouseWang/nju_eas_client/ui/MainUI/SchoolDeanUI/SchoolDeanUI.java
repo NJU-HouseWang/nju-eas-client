@@ -30,8 +30,8 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.MenuBtn.MenuBtn;
  */
 public class SchoolDeanUI {
 	private static int FUNC_NUM = 5;
-	private static String[] FUNC_BTN_NAME = { "homeBtn", "edufwBtn",
-			"tpBtn", "infoBtn", "commoncouBtn" };
+	private static String[] FUNC_BTN_NAME = { "homeBtn", "edufwBtn", "tpBtn",
+			"infoBtn", "commoncouBtn" };
 
 	private CommonFrame frame = new CommonFrame("SchoolFrame");
 	private TitleBar tbar = null;
@@ -76,7 +76,6 @@ public class SchoolDeanUI {
 			mBtn[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					System.out.println(((MenuBtn) e.getSource()).getName());
 					mcl.show(switchPane, ((MenuBtn) e.getSource()).getName());
 				}
 			});
