@@ -1,4 +1,4 @@
-package NJU.HouseWang.nju_eas_client.ui.SubUI.AddEduFwUI;
+package NJU.HouseWang.nju_eas_client.ui.MainUI.SchoolDeanUI;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;

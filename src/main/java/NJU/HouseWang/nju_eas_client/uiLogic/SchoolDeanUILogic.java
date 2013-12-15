@@ -28,7 +28,7 @@ public class SchoolDeanUILogic {
 		ClientPool cPool = ClientPool.getInstance();
 		return cPool.getClient();
 	}
-
+	
 	/**
 	 * 从服务器上获取教学框架的表头
 	 * 
@@ -217,52 +217,6 @@ public class SchoolDeanUILogic {
 	}
 
 	/**
-	 * 删除列表
-	 * 
-	 * @param listName
-	 *            列表名
-	 * @param table
-	 *            删除的列表
-	 * @return 处理结果
-	 */
-	public Feedback delList(String listName) {
-		String command = "del；" + listName;
-		String line = null;
-		try {
-			NetService ns = initNetService();
-			ns.sendCommand(command);
-			line = ns.receiveFeedback();
-			ns.shutDownConnection();
-			return Feedback.valueOf(line);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return Feedback.INTERNET_ERROR;
-		}
-	}
-
-	/**
-	 * 编辑通识课
-	 * 
-	 * @param listName
-	 *            列表名
-	 * @param itemInfo
-	 *            新的项目信息
-	 * @return 处理结果
-	 */
-	public Feedback editCommonCourse(String itemName, String itemInfo) {
-		String command = "edit；" + itemName + "；" + itemInfo;
-		try {
-			NetService ns = initNetService();
-			ns.sendCommand(command);
-			ns.shutDownConnection();
-			return Feedback.valueOf(ns.receiveFeedback());
-		} catch (Exception e) {
-			e.printStackTrace();
-			return Feedback.INTERNET_ERROR;
-		}
-	}
-
-	/**
 	 * 显示教学计划列表
 	 * 
 	 * @return 教学计划列表或者错误反馈
@@ -395,6 +349,94 @@ public class SchoolDeanUILogic {
 				list.add(t);
 			}
 			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Feedback.INTERNET_ERROR;
+		}
+	}
+
+	/**
+	 * 显示年级列表
+	 * 
+	 * @return 年级列表或错误反馈
+	 */
+	public Object showGradeList() {
+		String command = "show；grade_list";
+		ArrayList<String> l = new ArrayList<String>();
+		try {
+			NetService ns = initNetService();
+			ns.sendCommand(command);
+			l = ns.receiveList();
+			ns.shutDownConnection();
+			return l;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Feedback.INTERNET_ERROR;
+		}
+	}
+
+	/**
+	 * 新增通识课
+	 * 
+	 * @param itemName
+	 *            项目名
+	 * @param itemInfo
+	 *            新的项目信息
+	 * @return 处理结果
+	 */
+	public Feedback addCommonCourse(String info) {
+		String command = "add；common_course；" + info;
+		String line = null;
+		try {
+			NetService ns = initNetService();
+			ns.sendCommand(command);
+			line = ns.receiveFeedback();
+			ns.shutDownConnection();
+			return Feedback.valueOf(line);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Feedback.INTERNET_ERROR;
+		}
+	}
+
+	/**
+	 * 编辑通识课
+	 * 
+	 * @param itemInfo
+	 *            新的项目信息
+	 * @return 处理结果
+	 */
+	public Feedback editCommonCourse(String itemInfo) {
+		String command = "edit；common_course；" + itemInfo;
+		String line = null;
+		try {
+			NetService ns = initNetService();
+			ns.sendCommand(command);
+			line = ns.receiveFeedback();
+			ns.shutDownConnection();
+			return Feedback.valueOf(line);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Feedback.INTERNET_ERROR;
+		}
+	}
+
+	/**
+	 * 删除通识课
+	 * 
+	 * @param id
+	 *            课程ID
+	 * @return 处理结果
+	 */
+	public Feedback delCommonCourse(String id) {
+		String command = "del；common_course；" + id;
+		String line = null;
+		try {
+			NetService ns = initNetService();
+			ns.sendCommand(command);
+			line = ns.receiveFeedback();
+			ns.shutDownConnection();
+			return Feedback.valueOf(line);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Feedback.INTERNET_ERROR;

@@ -18,16 +18,16 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.MenuBtn.BigMenuBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.MenuBtn.MenuBtn;
 
 public class StudentUI {
-	private static int FUNC_NUM = 5;
+	private static int FUNC_NUM = 4;
 	private static String[] FUNC_BTN_NAME = { "homeBtn", "myCouBtn",
-			"myScoreBtn", "chooseCommonBtn", "majorBtn" };
+			"myScoreBtn", "chooseCommonBtn"};
 
 	private CommonFrame frame = new CommonFrame("StudentFrame");
 	private TitleBar tbar = null;
 	private MenuBar mbar = new MenuBar();
-	private MenuBtn[] mBtn = new MenuBtn[5];
+	private MenuBtn[] mBtn = new MenuBtn[FUNC_NUM];
 
-	private JPanel[] childp = new JPanel[5];
+	private JPanel[] childp = new JPanel[FUNC_NUM];
 	private JPanel switchPane = new JPanel();
 	private CardLayout mcl = new CardLayout();
 
@@ -38,7 +38,7 @@ public class StudentUI {
 		childp[1] = new MyCoursePanel();
 		childp[2] = new MyScorePanel();
 		childp[3] = new ChooseCommonPanel();
-		childp[4] = new MajorPanel();
+//		childp[4] = new MajorPanel();
 
 		switchPane.setSize(800, 480);
 		switchPane.setLocation(30, 150);

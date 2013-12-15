@@ -19,7 +19,6 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.CTable.CTable;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.FunctionBar;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.FunctionBtn.FunctionBtn;
-import NJU.HouseWang.nju_eas_client.ui.SubUI.AddEduFwUI.AddEduFwUI;
 import NJU.HouseWang.nju_eas_client.uiLogic.SchoolDeanUILogic;
 
 public class EduFrameworkPanel extends JPanel {

@@ -1,4 +1,4 @@
-package NJU.HouseWang.nju_eas_client.ui.SubUI;
+package NJU.HouseWang.nju_eas_client.ui.MainUI.DeptADUI;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -235,7 +235,7 @@ public class AddTpUI {
 		}
 	}
 
-	// public static void main(String[] args) {
-	// new AddTpFrame();
-	// }
+	public static void main(String[] args) {
+		new AddTpUI();
+	}
 }

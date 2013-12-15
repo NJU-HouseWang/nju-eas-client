@@ -2,26 +2,31 @@ package NJU.HouseWang.nju_eas_client.ui.MainUI.DeptADUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.CTable.CTable;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.ClickedLabel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.FunctionBar;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.FunctionBtn.FunctionBtn;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.SchoolDeanUI.EduFrameworkMap;
-import NJU.HouseWang.nju_eas_client.uiLogic.SchoolDeanUILogic;
+import NJU.HouseWang.nju_eas_client.uiLogic.DeptADUILogic;
+import NJU.HouseWang.nju_eas_client.vo.DeptVO;
 
+@SuppressWarnings("serial")
 public class TeachingPlanPanel extends JPanel {
-	private SchoolDeanUILogic logic = new SchoolDeanUILogic();
+	private DeptADUILogic logic = new DeptADUILogic();
 	private FunctionBar fbar = null;
 	private FunctionBtn[] fBtn = new FunctionBtn[2];
 	private SubPanel tpp = null;
@@ -31,19 +36,9 @@ public class TeachingPlanPanel extends JPanel {
 	private DefaultTableModel dtm = null;
 	private CTable table = null;
 
-	private String[][] content = new String[][] {
-			{ "A", "V", "V", "V", "1", "1", "V" },
-			{ "A", "C", "C", "C", "2", "2", "C" },
-			{ "A", "C", "C", "C", "3", "3", "C" },
-			{ "B", "V", "V", "V", "4", "4", "V" },
-			{ "B", "F", "F", "F", "5", "5", "F" }
+	private String[][] content = null;
+	private String[] head = null;
 
-	};
-
-	private String[] head = new String[] { "as", "sdf", "sf", "sdf", "asdf",
-			"adsf", "a" };
-
-	@SuppressWarnings("serial")
 	public TeachingPlanPanel() {
 		setLayout(null);
 		setBackground(Color.white);
@@ -65,6 +60,34 @@ public class TeachingPlanPanel extends JPanel {
 		localStatuesp = new SubPanel("当前状态", 230, 150);
 		localStatuesp.setLocation(540, 230);
 
+		initEmptyTPTable();
+		tpp.getCenterPanel().setLayout(new BorderLayout());
+		tpp.getCenterPanel().add(new JScrollPane(table), BorderLayout.CENTER);
+
+		add(tpp);
+		add(accessoryp);
+		add(localStatuesp);
+		setListener();
+		showTPStatus();
+	}
+
+	private void setListener() {
+		fBtn[0].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new AddTpUI();
+			}
+		});
+		fBtn[1].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Feedback fb = logic.delTP();
+				JOptionPane.showMessageDialog(null, fb.getContent());
+			}
+		});
+	}
+
+	private void initEmptyTPTable() {
+		content = new String[][] { { " ", " ", " ", " ", " ", " ", " " } };
+		head = new String[] { " ", " ", " ", " ", " ", " ", " " };
 		map = new EduFrameworkMap(content);
 		dtm = new DefaultTableModel(content.length, content[0].length) {
 			public boolean isCellEditable(int indexRow, int indexColumn) {
@@ -77,37 +100,73 @@ public class TeachingPlanPanel extends JPanel {
 			}
 		}
 		dtm.setColumnIdentifiers(head);
-
 		table = new CTable(map, dtm);
 		table.setEnabled(false);
-		DefaultTableCellRenderer r = new DefaultTableCellRenderer();
-		r.setHorizontalAlignment(JLabel.CENTER);
-		table.setDefaultRenderer(Object.class, r);
-		tpp.getCenterPanel().setLayout(new BorderLayout());
-		tpp.getCenterPanel().add(new JScrollPane(table), BorderLayout.CENTER);
-
-		add(tpp);
-		add(accessoryp);
-		add(localStatuesp);
 	}
 
-	private void showTP() {
+	private void showTPTable() {
 		head = null;
 		content = null;
-		Object fb = logic.showEduFwHead();
+		Object fb = logic.showTPHead();
 		if (fb instanceof Feedback) {
 			JOptionPane.showMessageDialog(null, ((Feedback) fb).getContent());
 		} else if (fb instanceof String[]) {
 			head = (String[]) fb;
-			fb = logic.showEduFwContent();
+			dtm.setColumnIdentifiers(head);
+			fb = logic.showTPContent();
 			if (fb instanceof Feedback) {
 				JOptionPane.showMessageDialog(null,
 						((Feedback) fb).getContent());
 			} else if (fb instanceof String[][]) {
 				content = (String[][]) fb;
+				for (int i = 0; i < content.length; i++) {
+					for (int j = 0; j < content[i].length; j++) {
+						dtm.setValueAt(content[i][j], i, j);
+					}
+				}
 			}
 		}
-		dtm.setDataVector(content, head);
 		table.updateUI();
+	}
+
+	private void showTPStatus() {
+		Object o = logic.showTPStatus();
+		if (o instanceof Feedback) {
+			JOptionPane.showMessageDialog(null, ((Feedback) o).getContent());
+		} else if (o instanceof DeptVO) {
+			if (!((DeptVO) o).fileName.equals("null")) {
+				ClickedLabel lb = new ClickedLabel(((DeptVO) o).fileName);
+				accessoryp.getCenterPanel().add(lb);
+				lb.addMouseListener(new MouseAdapter() {
+					public void mousePressed(MouseEvent e) {
+						Feedback fb = logic.downloadTPFile();
+						if (fb == Feedback.OPERATION_SUCCEED) {
+							JOptionPane.showMessageDialog(null, "文件已打开，请另存。");
+						} else {
+							JOptionPane.showMessageDialog(null, fb.getContent());
+						}
+					}
+				});
+			}
+			String status = null;
+			switch (((DeptVO) o).tpState) {
+			case 0:
+				status = "未提交";
+				break;
+			case 1:
+				status = "审核通过";
+				showTPTable();
+				break;
+			case 2:
+				status = "审核不通过，请重新提交";
+				showTPTable();
+				break;
+			default:
+				status = "错误代码" + ((DeptVO) o).tpState + "";
+			}
+			JLabel lb2 = new JLabel(status);
+			lb2.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+			localStatuesp.getCenterPanel().add(lb2);
+		}
 	}
 }
