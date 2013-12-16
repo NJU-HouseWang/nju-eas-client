@@ -12,8 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.ExitBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.MinBtn;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.ReturnBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.CommonPanel;
 
 public class SmallCommonFrame extends JFrame {
@@ -25,7 +25,7 @@ public class SmallCommonFrame extends JFrame {
 	private int hight = 560;
 	private String frameName = null;
 	private MinBtn minBtn = null;
-	private ExitBtn exitBtn = null;
+	private ReturnBtn exitBtn = null;
 
 	public SmallCommonFrame(String frameName) {
 		this.frameName = frameName;
@@ -39,7 +39,7 @@ public class SmallCommonFrame extends JFrame {
 
 		setMovable(this);
 		minBtn = new MinBtn(this, 651, 30);
-		exitBtn = new ExitBtn(688, 30);
+		exitBtn = new ReturnBtn(688, 30, this);
 		minBtn.addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent e) {
 				setExtendedState(JFrame.ICONIFIED);
@@ -61,7 +61,7 @@ public class SmallCommonFrame extends JFrame {
 		JPanel imagePanel = (JPanel) this.getContentPane();
 		imagePanel.setOpaque(false);
 		setUndecorated(true);
-//		com.sun.awt.AWTUtilities.setWindowOpaque(this, false);
+		// com.sun.awt.AWTUtilities.setWindowOpaque(this, false);
 	}
 
 	private void setMovable(final JFrame frame) {

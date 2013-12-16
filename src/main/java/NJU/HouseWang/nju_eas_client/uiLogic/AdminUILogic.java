@@ -95,10 +95,10 @@ public class AdminUILogic {
 		String command = "del；" + itemName + "；" + id;
 		String line = null;
 		try {
-			NetService ns = initNetService();
-			ns.sendCommand(command);
-			line = ns.receiveFeedback();
-			ns.shutDownConnection();
+			NetService client = initNetService();
+			client.sendCommand(command);
+			line = client.receiveFeedback();
+			client.shutDownConnection();
 			return Feedback.valueOf(line);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -119,10 +119,10 @@ public class AdminUILogic {
 		String command = "add；" + itemName + "；" + itemInfo;
 		String line = null;
 		try {
-			NetService ns = initNetService();
-			ns.sendCommand(command);
-			line = ns.receiveFeedback();
-			ns.shutDownConnection();
+			NetService client = initNetService();
+			client.sendCommand(command);
+			line = client.receiveFeedback();
+			client.shutDownConnection();
 			return Feedback.valueOf(line);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -143,10 +143,10 @@ public class AdminUILogic {
 		String command = "edit；" + itemName + "；" + itemInfo;
 		String line = null;
 		try {
-			NetService ns = initNetService();
-			ns.sendCommand(command);
-			line = ns.receiveFeedback();
-			ns.shutDownConnection();
+			NetService client = initNetService();
+			client.sendCommand(command);
+			line = client.receiveFeedback();
+			client.shutDownConnection();
 			return Feedback.valueOf(line);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -163,10 +163,10 @@ public class AdminUILogic {
 		String command = "show；term";
 		String line = null;
 		try {
-			NetService ns = initNetService();
-			ns.sendCommand(command);
-			line = ns.receiveFeedback();
-			ns.shutDownConnection();
+			NetService client = initNetService();
+			client.sendCommand(command);
+			line = client.receiveFeedback();
+			client.shutDownConnection();
 			if (line.contains("_")) {
 				return Feedback.valueOf(line);
 			} else if (line.contains("-")) {
@@ -191,10 +191,10 @@ public class AdminUILogic {
 		String command = "edit；term；" + itemInfo;
 		String line = null;
 		try {
-			NetService ns = initNetService();
-			ns.sendCommand(command);
-			line = ns.receiveFeedback();
-			ns.shutDownConnection();
+			NetService client = initNetService();
+			client.sendCommand(command);
+			line = client.receiveFeedback();
+			client.shutDownConnection();
 			return Feedback.valueOf(line);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -215,10 +215,10 @@ public class AdminUILogic {
 		String command = "edit；status；" + statesName + "；" + states;
 		String line = null;
 		try {
-			NetService ns = initNetService();
-			ns.sendCommand(command);
-			line = ns.receiveFeedback();
-			ns.shutDownConnection();
+			NetService client = initNetService();
+			client.sendCommand(command);
+			line = client.receiveFeedback();
+			client.shutDownConnection();
 			return Feedback.valueOf(line);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -235,10 +235,10 @@ public class AdminUILogic {
 		String command = "process；common_course_selection";
 		String line = null;
 		try {
-			NetService ns = initNetService();
-			ns.sendCommand(command);
-			line = ns.receiveFeedback();
-			ns.shutDownConnection();
+			NetService client = initNetService();
+			client.sendCommand(command);
+			line = client.receiveFeedback();
+			client.shutDownConnection();
 			return Feedback.valueOf(line);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -257,10 +257,10 @@ public class AdminUILogic {
 		String command = "show；status；" + statesName;
 		String line = null;
 		try {
-			NetService ns = initNetService();
-			ns.sendCommand(command);
-			line = ns.receiveFeedback();
-			ns.shutDownConnection();
+			NetService client = initNetService();
+			client.sendCommand(command);
+			line = client.receiveFeedback();
+			client.shutDownConnection();
 			if (line.contains("_")) {
 				return Feedback.valueOf(line);
 			} else if (line.contains("false") || line.contains("true")) {

@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -17,21 +16,23 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.ComboBox.DeptBox;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.ComboBox.GradeBox;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.ComboBox.TermBox;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CommonTable;
 import NJU.HouseWang.nju_eas_client.uiLogic.SchoolDeanUILogic;
-import NJU.HouseWang.nju_eas_client.vo.DeptVO;
 import NJU.HouseWang.nju_eas_client.vo.Feedback;
-import NJU.HouseWang.nju_eas_client.vo.TermVO;
+import NJU.HouseWang.nju_eas_client.vo.TPDeptVO;
 
 @SuppressWarnings("serial")
 public class InfoListPanel extends JPanel {
 	private SchoolDeanUILogic logic = new SchoolDeanUILogic();
 	private SubPanel infop = new SubPanel("列表：", 740, 420);
 	private JComboBox<String> listChooser = new JComboBox<String>();
-	private JComboBox<DeptVO> deptChooser = new JComboBox<DeptVO>();
-	private JComboBox<TermVO> termChooser = new JComboBox<TermVO>();
-	private JComboBox<String> gradeChooser = new JComboBox<String>();
+	private DeptBox deptChooser = new DeptBox();
+	private TermBox termChooser = new TermBox();
+	private GradeBox gradeChooser = new GradeBox();
 	private JLabel deptlb = new JLabel("院系：");
 	private JLabel termlb = new JLabel("学年：");
 	private JLabel gradelb = new JLabel("年级：");
@@ -95,8 +96,6 @@ public class InfoListPanel extends JPanel {
 		infop.getCenterPanel().add(new JScrollPane(table), BorderLayout.CENTER);
 		add(infop);
 		setListener();
-		initTermList();
-		initDeptList();
 	}
 
 	private void setListener() {
@@ -136,28 +135,6 @@ public class InfoListPanel extends JPanel {
 		});
 	}
 
-	private void initTermList() {
-		Object o = logic.showTermList();
-		if (o instanceof Feedback) {
-			JOptionPane.showMessageDialog(null, ((Feedback) o).getContent());
-		} else if (o instanceof ArrayList<?>) {
-			for (Object term : (ArrayList<?>) o) {
-				termChooser.addItem((TermVO) term);
-			}
-		}
-	}
-
-	private void initDeptList() {
-		Object o = logic.showDeptList();
-		if (o instanceof Feedback) {
-			JOptionPane.showMessageDialog(null, ((Feedback) o).getContent());
-		} else if (o instanceof ArrayList<?>) {
-			for (Object dept : (ArrayList<?>) o) {
-				deptChooser.addItem((DeptVO) dept);
-			}
-		}
-	}
-
 	public void showTable() {
 		head = null;
 		content = null;
@@ -167,7 +144,7 @@ public class InfoListPanel extends JPanel {
 		table.updateUI();
 
 		String listName = (String) listChooser.getSelectedItem();
-		String dept = ((DeptVO) deptChooser.getSelectedItem()).deptId;
+		String dept = ((TPDeptVO) deptChooser.getSelectedItem()).deptId;
 		String year = (String) termChooser.getSelectedItem();
 		String grade = (String) gradeChooser.getSelectedItem();
 		if (listName.equals("学生列表")) {

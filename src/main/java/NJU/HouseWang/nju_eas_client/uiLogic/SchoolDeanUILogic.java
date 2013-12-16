@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import NJU.HouseWang.nju_eas_client.net.ClientPool;
 import NJU.HouseWang.nju_eas_client.netService.NetService;
-import NJU.HouseWang.nju_eas_client.vo.DeptVO;
+import NJU.HouseWang.nju_eas_client.vo.TPDeptVO;
 import NJU.HouseWang.nju_eas_client.vo.Feedback;
 import NJU.HouseWang.nju_eas_client.vo.TermVO;
 
@@ -224,14 +224,14 @@ public class SchoolDeanUILogic {
 	public Object showTPList() {
 		String command = "show；teachingplan_list";
 		ArrayList<String> list = null;
-		ArrayList<DeptVO> l = new ArrayList<DeptVO>();
+		ArrayList<TPDeptVO> l = new ArrayList<TPDeptVO>();
 		try {
 			NetService ns = initNetService();
 			ns.sendCommand(command);
 			list = ns.receiveList();
 			ns.shutDownConnection();
 			for (String s : list) {
-				DeptVO dept = new DeptVO(s);
+				TPDeptVO dept = new TPDeptVO(s);
 				l.add(dept);
 			}
 			return l;
@@ -297,78 +297,6 @@ public class SchoolDeanUILogic {
 				}
 			}
 			return content;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return Feedback.INTERNET_ERROR;
-		}
-	}
-
-	/**
-	 * 显示院系列表
-	 * 
-	 * @return 院系列表或错误反馈
-	 */
-	public Object showDeptList() {
-		String command = "show；dept_list";
-		ArrayList<String> l = new ArrayList<String>();
-		ArrayList<DeptVO> list = new ArrayList<DeptVO>();
-		try {
-			NetService ns = initNetService();
-			ns.sendCommand(command);
-			l = ns.receiveList();
-			ns.shutDownConnection();
-			for (String s : l) {
-				DeptVO t = new DeptVO();
-				t.deptId = s.split("；")[0];
-				t.deptName = s.split("；")[1];
-				list.add(t);
-			}
-			return list;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return Feedback.INTERNET_ERROR;
-		}
-	}
-
-	/**
-	 * 显示学期列表
-	 * 
-	 * @return 学期列表或错误反馈
-	 */
-	public Object showTermList() {
-		String command = "show；term_list";
-		ArrayList<String> l = new ArrayList<String>();
-		ArrayList<TermVO> list = new ArrayList<TermVO>();
-		try {
-			NetService ns = initNetService();
-			ns.sendCommand(command);
-			l = ns.receiveList();
-			ns.shutDownConnection();
-			for (String s : l) {
-				TermVO t = new TermVO(s);
-				list.add(t);
-			}
-			return list;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return Feedback.INTERNET_ERROR;
-		}
-	}
-
-	/**
-	 * 显示年级列表
-	 * 
-	 * @return 年级列表或错误反馈
-	 */
-	public Object showGradeList() {
-		String command = "show；grade_list";
-		ArrayList<String> l = new ArrayList<String>();
-		try {
-			NetService ns = initNetService();
-			ns.sendCommand(command);
-			l = ns.receiveList();
-			ns.shutDownConnection();
-			return l;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Feedback.INTERNET_ERROR;

@@ -20,9 +20,9 @@ public class LoginBtn extends JButton {
 	 */
 	public LoginBtn() {
 		super();
-		setIcon(new ImageIcon("img/CommonIcon/LoginBtnBtn_0.png"));
-		setRolloverIcon(new ImageIcon("img/CommonIcon/LoginBtnBtn_1.png"));
-		setSelectedIcon(new ImageIcon("img/CommonIcon/LoginBtnBtn_2.png"));
+		setIcon(new ImageIcon("img/CommonIcon/LoginBtn_0.png"));
+		setRolloverIcon(new ImageIcon("img/CommonIcon/LoginBtn_1.png"));
+		setSelectedIcon(new ImageIcon("img/CommonIcon/LoginBtn_2.png"));
 		setBounds(269, 384, 124, 42);
 		setBorderPainted(false);
 		updateUI();

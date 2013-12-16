@@ -129,7 +129,7 @@ public class ClientPool {
 			try {
 				c.createConnection();
 			} catch (IOException e) {
-				e.printStackTrace();
+				break;
 			}
 			clientStack.push(c);
 			linkNum++;

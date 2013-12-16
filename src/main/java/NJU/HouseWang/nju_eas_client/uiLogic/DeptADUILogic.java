@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import NJU.HouseWang.nju_eas_client.net.ClientPool;
 import NJU.HouseWang.nju_eas_client.netService.NetService;
-import NJU.HouseWang.nju_eas_client.vo.DeptVO;
+import NJU.HouseWang.nju_eas_client.vo.TPDeptVO;
 import NJU.HouseWang.nju_eas_client.vo.Feedback;
 
 public class DeptADUILogic {
@@ -172,7 +172,7 @@ public class DeptADUILogic {
 			if (line.contains("_")) {
 				return Feedback.OPERATION_SUCCEED;
 			} else {
-				DeptVO info = new DeptVO(line);
+				TPDeptVO info = new TPDeptVO(line);
 				return info;
 			}
 		} catch (Exception e) {

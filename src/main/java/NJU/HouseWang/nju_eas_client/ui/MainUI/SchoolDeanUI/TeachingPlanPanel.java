@@ -23,7 +23,7 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.Label.ClickedLabel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CTable;
 import NJU.HouseWang.nju_eas_client.uiLogic.SchoolDeanUILogic;
-import NJU.HouseWang.nju_eas_client.vo.DeptVO;
+import NJU.HouseWang.nju_eas_client.vo.TPDeptVO;
 import NJU.HouseWang.nju_eas_client.vo.Feedback;
 
 @SuppressWarnings("serial")
@@ -34,7 +34,7 @@ public class TeachingPlanPanel extends JPanel {
 	private SubPanel tpp = null;
 	private SubPanel accessoryp = null;
 	private SubPanel localStatuesp = null;
-	private JComboBox<DeptVO> deptChooser = new JComboBox<DeptVO>();
+	private JComboBox<TPDeptVO> deptChooser = new JComboBox<TPDeptVO>();
 	private EduFrameworkMap map = null;
 	private DefaultTableModel dtm = null;
 	private CTable table = null;
@@ -87,8 +87,8 @@ public class TeachingPlanPanel extends JPanel {
 		deptChooser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				@SuppressWarnings("unchecked")
-				JComboBox<DeptVO> c = (JComboBox<DeptVO>) e.getSource();
-				final DeptVO dept = (DeptVO) c.getSelectedItem();
+				JComboBox<TPDeptVO> c = (JComboBox<TPDeptVO>) e.getSource();
+				final TPDeptVO dept = (TPDeptVO) c.getSelectedItem();
 				if (dept.deptId.equals("null")) {
 					fBtn[0].setEnabled(false);
 					fBtn[1].setEnabled(false);
@@ -136,7 +136,7 @@ public class TeachingPlanPanel extends JPanel {
 		fBtn[0].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Feedback fb = logic.auditTP(
-						((DeptVO) deptChooser.getSelectedItem()).deptId, 1);
+						((TPDeptVO) deptChooser.getSelectedItem()).deptId, 1);
 				JOptionPane.showMessageDialog(null, fb.getContent());
 			}
 		});
@@ -144,7 +144,7 @@ public class TeachingPlanPanel extends JPanel {
 		fBtn[1].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Feedback fb = logic.auditTP(
-						((DeptVO) deptChooser.getSelectedItem()).deptId, 2);
+						((TPDeptVO) deptChooser.getSelectedItem()).deptId, 2);
 				JOptionPane.showMessageDialog(null, fb.getContent());
 			}
 		});
@@ -155,13 +155,13 @@ public class TeachingPlanPanel extends JPanel {
 		if (o instanceof Feedback) {
 			JOptionPane.showMessageDialog(null, ((Feedback) o).getContent());
 		} else if (o instanceof ArrayList<?>) {
-			DeptVO nul = new DeptVO();
+			TPDeptVO nul = new TPDeptVO();
 			nul.deptId = "null";
 			nul.deptName = "请选择院系...";
 			deptChooser.addItem(nul);
 			for (Object d : (ArrayList<?>) o) {
-				if (d instanceof DeptVO) {
-					deptChooser.addItem((DeptVO) d);
+				if (d instanceof TPDeptVO) {
+					deptChooser.addItem((TPDeptVO) d);
 				}
 			}
 		}

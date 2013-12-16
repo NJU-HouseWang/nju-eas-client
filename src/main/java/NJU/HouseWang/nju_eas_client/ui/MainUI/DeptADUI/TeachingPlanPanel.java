@@ -21,7 +21,7 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CTable;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.SchoolDeanUI.EduFrameworkMap;
 import NJU.HouseWang.nju_eas_client.uiLogic.DeptADUILogic;
-import NJU.HouseWang.nju_eas_client.vo.DeptVO;
+import NJU.HouseWang.nju_eas_client.vo.TPDeptVO;
 import NJU.HouseWang.nju_eas_client.vo.Feedback;
 
 @SuppressWarnings("serial")
@@ -133,9 +133,9 @@ public class TeachingPlanPanel extends JPanel {
 		Object o = logic.showTPStatus();
 		if (o instanceof Feedback) {
 			JOptionPane.showMessageDialog(null, ((Feedback) o).getContent());
-		} else if (o instanceof DeptVO) {
-			if (!((DeptVO) o).fileName.equals("null")) {
-				ClickedLabel lb = new ClickedLabel(((DeptVO) o).fileName);
+		} else if (o instanceof TPDeptVO) {
+			if (!((TPDeptVO) o).fileName.equals("null")) {
+				ClickedLabel lb = new ClickedLabel(((TPDeptVO) o).fileName);
 				accessoryp.getCenterPanel().add(lb);
 				lb.addMouseListener(new MouseAdapter() {
 					public void mousePressed(MouseEvent e) {
@@ -149,7 +149,7 @@ public class TeachingPlanPanel extends JPanel {
 				});
 			}
 			String status = null;
-			switch (((DeptVO) o).tpState) {
+			switch (((TPDeptVO) o).tpState) {
 			case 0:
 				status = "未提交";
 				break;
@@ -162,7 +162,7 @@ public class TeachingPlanPanel extends JPanel {
 				showTPTable();
 				break;
 			default:
-				status = "错误代码" + ((DeptVO) o).tpState + "";
+				status = "错误代码" + ((TPDeptVO) o).tpState + "";
 			}
 			JLabel lb2 = new JLabel(status);
 			lb2.setFont(new Font("微软雅黑", Font.PLAIN, 12));
