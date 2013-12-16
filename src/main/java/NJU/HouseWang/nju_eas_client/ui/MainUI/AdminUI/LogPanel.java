@@ -84,12 +84,12 @@ public class LogPanel extends JPanel {
 		head = null;
 		content = null;
 		String listName = "log_list";
-		Object fb = logic.showTableHead(listName);
+		Object fb = logic.showInfoTableHead(listName);
 		if (fb instanceof Feedback) {
 			JOptionPane.showMessageDialog(null, ((Feedback) fb).getContent());
 		} else if (fb instanceof String[]) {
 			head = (String[]) fb;
-			fb = logic.showTableContent(listName, "all");
+			fb = logic.showInfoTableContent(listName, "all");
 			if (fb instanceof Feedback) {
 				JOptionPane.showMessageDialog(null,
 						((Feedback) fb).getContent());

@@ -1,4 +1,4 @@
-package NJU.HouseWang.nju_eas_client.uiLogicService;
+package NJU.HouseWang.nju_eas_client.vo;
 
 public class TeacherVO {
 	public String id;

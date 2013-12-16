@@ -114,12 +114,12 @@ public class UserPanel extends JPanel {
 		table.updateUI();
 		String listName = ((UserTypeVO) userTypecb.getSelectedItem()).name_en
 				.toLowerCase() + "_list";
-		Object fb = logic.showTableHead(listName);
+		Object fb = logic.showInfoTableHead(listName);
 		if (fb instanceof Feedback) {
 			JOptionPane.showMessageDialog(null, ((Feedback) fb).getContent());
 		} else if (fb instanceof String[]) {
 			head = (String[]) fb;
-			fb = logic.showTableContent(listName,"all");
+			fb = logic.showInfoTableContent(listName,"all");
 			if (fb instanceof Feedback) {
 				JOptionPane.showMessageDialog(null,
 						((Feedback) fb).getContent());

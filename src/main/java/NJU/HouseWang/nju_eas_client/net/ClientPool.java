@@ -31,6 +31,11 @@ public class ClientPool {
 			return cPool;
 		} else {
 			cPool = new ClientPool();
+			try {
+				cPool.initialize();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			return cPool;
 		}
 	}

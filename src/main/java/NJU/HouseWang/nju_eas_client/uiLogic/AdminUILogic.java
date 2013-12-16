@@ -32,7 +32,7 @@ public class AdminUILogic {
 	 *            列表名
 	 * @return 如果失败则返回Feedback类型，如果成功返回String[]类型
 	 */
-	public Object showTableHead(String listName) {
+	public Object showInfoTableHead(String listName) {
 		String line = null;
 		String[] head = null;
 		if (!(listName.equals("student_list") || listName.equals("login_list") || listName
@@ -59,7 +59,7 @@ public class AdminUILogic {
 	 *            列表名
 	 * @return 如果失败则返回Feedback类型，如果成功返回String[][]类型
 	 */
-	public Object showTableContent(String listName, String conditions) {
+	public Object showInfoTableContent(String listName, String conditions) {
 		if (!(listName.equals("student_list") || listName.equals("login_list") || listName
 				.equals("log_list"))) {
 			listName = "teacher_list；" + listName.split("_")[0];

@@ -7,9 +7,6 @@
  */
 package NJU.HouseWang.nju_eas_client;
 
-import javax.swing.JOptionPane;
-
-import NJU.HouseWang.nju_eas_client.net.ClientPool;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.AdminUI.AdminUI;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.DeptADUI.DeptADUI;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.LoginUI.LoginUI;
@@ -31,14 +28,6 @@ public class Launcher {
 		if (type.equals("Login")) {
 			new LoginUI();
 		} else {
-			try {
-				ClientPool.getInstance().run();
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog(null, "由于网络问题，请重新登陆");
-				type = "Login";
-				new LoginUI();
-				e.printStackTrace();
-			}
 			switch (type) {
 			case "Admin":
 				new AdminUI(userName);

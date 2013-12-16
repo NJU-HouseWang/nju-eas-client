@@ -9,8 +9,8 @@ import javax.swing.JPanel;
 import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.CommonPanel;
 import NJU.HouseWang.nju_eas_client.uiLogic.UserCenterUILogic;
-import NJU.HouseWang.nju_eas_client.uiLogicService.TeacherVO;
 import NJU.HouseWang.nju_eas_client.vo.StudentVO;
+import NJU.HouseWang.nju_eas_client.vo.TeacherVO;
 
 public class ShowSelfInfoPanel extends JPanel {
 	private UserCenterUILogic logic = new UserCenterUILogic();
