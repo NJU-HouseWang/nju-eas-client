@@ -9,7 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.SubPanel;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CommonTable;
 
 public class ChooseCommonPanel extends JPanel {

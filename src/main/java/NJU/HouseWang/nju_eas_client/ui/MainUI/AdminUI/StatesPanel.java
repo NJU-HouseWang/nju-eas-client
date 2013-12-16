@@ -14,8 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 
-import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
 import NJU.HouseWang.nju_eas_client.uiLogic.AdminUILogic;
+import NJU.HouseWang.nju_eas_client.vo.Feedback;
 import NJU.HouseWang.nju_eas_client.vo.TermVO;
 
 public class StatesPanel extends JPanel {

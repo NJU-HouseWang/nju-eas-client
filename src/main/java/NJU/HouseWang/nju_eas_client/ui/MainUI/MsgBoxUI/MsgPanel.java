@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.MenuBtn.MsgMenuBtn;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.MsgMenuBtn;
 
 public class MsgPanel extends JPanel {
 	private int FUNC_NUM = 4;

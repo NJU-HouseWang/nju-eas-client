@@ -8,12 +8,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.BigMenuBar;
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.CommonFrame;
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.MenuBar;
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.TitleBar;
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.MenuBtn.BigMenuBtn;
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.MenuBtn.MenuBtn;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Bar.BigMenuBar;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Bar.MenuBar;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Bar.TitleBar;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.HomeMenuBtn;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.MenuBtn;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Frame.CommonFrame;
 
 public class AdminUI {
 	private static int FUNC_NUM = 4;
@@ -59,12 +59,12 @@ public class AdminUI {
 
 	@SuppressWarnings("serial")
 	class HomePanel extends JPanel {
-		private BigMenuBtn[] bmbtn = new BigMenuBtn[FUNC_NUM - 1];
+		private HomeMenuBtn[] bmbtn = new HomeMenuBtn[FUNC_NUM - 1];
 		private BigMenuBar bmbar = new BigMenuBar();
 
 		public HomePanel() {
 			for (int i = 0; i < bmbtn.length; i++) {
-				bmbtn[i] = new BigMenuBtn(FUNC_BTN_NAME[i + 1]);
+				bmbtn[i] = new HomeMenuBtn(FUNC_BTN_NAME[i + 1]);
 				bmbar.add(bmbtn[i]);
 			}
 			bmbar.setLocation(70, 50);
@@ -81,7 +81,7 @@ public class AdminUI {
 				bmbtn[i].addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						String bname = ((BigMenuBtn) e.getSource()).getName();
+						String bname = ((HomeMenuBtn) e.getSource()).getName();
 						mcl.show(switchPane, bname);
 						for (int i = 1; i < FUNC_BTN_NAME.length; i++) {
 							if (FUNC_BTN_NAME[i].equals(bname)) {

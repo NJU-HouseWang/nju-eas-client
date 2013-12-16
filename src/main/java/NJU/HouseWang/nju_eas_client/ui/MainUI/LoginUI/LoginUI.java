@@ -12,12 +12,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.CommonFrame;
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.PasswordField;
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.UserNameField;
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.UserTypeBox;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.ComboBox.UserTypeBox;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Field.PasswordField;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Field.UserNameField;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Frame.CommonFrame;
 import NJU.HouseWang.nju_eas_client.uiLogic.LoginUILogic;
+import NJU.HouseWang.nju_eas_client.vo.Feedback;
 import NJU.HouseWang.nju_eas_client.vo.UserTypeVO;
 
 public class LoginUI {

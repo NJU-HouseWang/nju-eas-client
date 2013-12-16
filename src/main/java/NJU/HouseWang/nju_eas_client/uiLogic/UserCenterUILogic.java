@@ -2,7 +2,7 @@ package NJU.HouseWang.nju_eas_client.uiLogic;
 
 import NJU.HouseWang.nju_eas_client.net.ClientPool;
 import NJU.HouseWang.nju_eas_client.netService.NetService;
-import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
+import NJU.HouseWang.nju_eas_client.vo.Feedback;
 import NJU.HouseWang.nju_eas_client.vo.StudentVO;
 import NJU.HouseWang.nju_eas_client.vo.TeacherVO;
 

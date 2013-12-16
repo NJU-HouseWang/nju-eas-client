@@ -18,7 +18,7 @@ public interface NetService {
 	 *            命令
 	 * @throws Exception
 	 */
-	public void sendCommand(String cmd) throws Exception;
+	public void sendCommand(String cmd) throws IOException;
 
 	/**
 	 * 发送文件
@@ -27,7 +27,7 @@ public interface NetService {
 	 *            文件
 	 * @throws Exception
 	 */
-	public void sendFile(File file) throws Exception;
+	public void sendFile(File file) throws IOException;
 
 	/**
 	 * 接收反馈
@@ -60,20 +60,20 @@ public interface NetService {
 	 * @return 接收到的列表
 	 * @throws Exception
 	 */
-	public ArrayList<String> receiveList() throws Exception;
+	public ArrayList<String> receiveList() throws IOException;
 
 	/**
 	 * 创建连接
 	 * 
 	 * @throws Exception
 	 */
-	public void createConnection() throws Exception;
+	public void createConnection() throws IOException;
 
 	/**
 	 * 关闭连接
 	 * 
 	 * @throws Exception
 	 */
-	public void shutDownConnection() throws Exception;
+	public void shutDownConnection() throws IOException;
 
 }

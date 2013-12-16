@@ -2,7 +2,7 @@ package NJU.HouseWang.nju_eas_client.ui.MainUI.SchoolDeanUI;
 
 import java.util.HashMap;
 
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.CTable.CMap;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CMap;
 
 public class EduFrameworkMap implements CMap {
 	private String[][] originTable = null;

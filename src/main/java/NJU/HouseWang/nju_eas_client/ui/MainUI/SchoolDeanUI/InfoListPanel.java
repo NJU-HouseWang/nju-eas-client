@@ -17,11 +17,11 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.SubPanel;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CommonTable;
 import NJU.HouseWang.nju_eas_client.uiLogic.SchoolDeanUILogic;
 import NJU.HouseWang.nju_eas_client.vo.DeptVO;
+import NJU.HouseWang.nju_eas_client.vo.Feedback;
 import NJU.HouseWang.nju_eas_client.vo.TermVO;
 
 @SuppressWarnings("serial")

@@ -81,15 +81,14 @@ public class Client implements NetService {
 	/**
 	 * 创建连接
 	 * 
-	 * @throws Exception
+	 * @throws IOException
 	 *             创建连接时遇到的错误
 	 */
-	public void createConnection() throws Exception {
+	public void createConnection() throws IOException {
 		try {
 			socket = new Socket(ip, port);
 			System.out.println("Create Connection to ip" + ip + ":" + port);
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (IOException e) {
 			if (socket != null) {
 				socket = null;
 			}
@@ -122,17 +121,16 @@ public class Client implements NetService {
 	 * 
 	 * @param command
 	 *            命令
-	 * @throws Exception
+	 * @throws IOException
 	 *             发送命令时遇到的错误
 	 */
-	public void sendCommand(String command) throws Exception {
+	public void sendCommand(String command) throws IOException {
 		System.out.println("Send Command:" + command);
 		try {
 			out = new DataOutputStream(socket.getOutputStream());
 			out.writeUTF(command);
 			out.flush();
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (IOException e) {
 			if (out != null) {
 				out.close();
 			}
@@ -148,10 +146,17 @@ public class Client implements NetService {
 	 *             接收反馈时遇到的错误
 	 */
 	public String receiveFeedback() throws IOException {
-		in = new DataInputStream(new BufferedInputStream(
-				socket.getInputStream()));
 		String feedback = new String();
-		feedback = in.readUTF();
+		try {
+			in = new DataInputStream(new BufferedInputStream(
+					socket.getInputStream()));
+			feedback = in.readUTF();
+		} catch (IOException e) {
+			if (in != null) {
+				in.close();
+			}
+			throw e;
+		}
 		System.out.println("Receive Feedback:" + feedback);
 		return feedback;
 	}
@@ -175,7 +180,6 @@ public class Client implements NetService {
 			out.writeUTF("listEnd");
 			out.flush();
 		} catch (Exception e) {
-			e.printStackTrace();
 			if (out != null) {
 				out.close();
 			}
@@ -210,10 +214,10 @@ public class Client implements NetService {
 	 * 
 	 * @param file
 	 *            要发送的文件
-	 * @throws Exception
+	 * @throws IOException
 	 *             发送文件时遇到的错误
 	 */
-	public void sendFile(File file) throws Exception {
+	public void sendFile(File file) throws IOException {
 		try {
 			fis = new DataInputStream(new BufferedInputStream(
 					new FileInputStream(file)));
@@ -238,8 +242,7 @@ public class Client implements NetService {
 				out.write(buf, 0, readState);
 			}
 			out.flush();
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (IOException e) {
 			if (out != null) {
 				fis.close();
 				out.close();
@@ -252,10 +255,10 @@ public class Client implements NetService {
 	 * 接收文件
 	 * 
 	 * @return 接收到的文件
-	 * @throws Exception
+	 * @throws IOException
 	 *             接收文件时遇到的错误
 	 */
-	public File receiveFile() throws Exception {
+	public File receiveFile() throws IOException {
 		try {
 			in = new DataInputStream(new BufferedInputStream(
 					socket.getInputStream()));
@@ -291,9 +294,9 @@ public class Client implements NetService {
 
 			fos.close();
 			return new File(savePath);
-		} catch (Exception e) {
+		} catch (IOException e) {
 			System.out.println("接收消息错误" + "\n");
-			throw new Exception();
+			throw e;
 		}
 	}
 }

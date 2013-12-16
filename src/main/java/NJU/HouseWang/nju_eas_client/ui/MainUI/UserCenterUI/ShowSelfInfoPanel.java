@@ -6,9 +6,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.CommonPanel;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.CommonPanel;
 import NJU.HouseWang.nju_eas_client.uiLogic.UserCenterUILogic;
+import NJU.HouseWang.nju_eas_client.vo.Feedback;
 import NJU.HouseWang.nju_eas_client.vo.StudentVO;
 import NJU.HouseWang.nju_eas_client.vo.TeacherVO;
 

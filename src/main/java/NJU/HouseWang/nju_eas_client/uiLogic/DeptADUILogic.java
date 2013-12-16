@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 import NJU.HouseWang.nju_eas_client.net.ClientPool;
 import NJU.HouseWang.nju_eas_client.netService.NetService;
-import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
 import NJU.HouseWang.nju_eas_client.vo.DeptVO;
+import NJU.HouseWang.nju_eas_client.vo.Feedback;
 
 public class DeptADUILogic {
 	private String deptName = null;

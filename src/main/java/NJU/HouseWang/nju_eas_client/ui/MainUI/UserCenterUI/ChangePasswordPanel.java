@@ -12,10 +12,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.CommonPanel;
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.PasswordField;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Field.PasswordField;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.CommonPanel;
 import NJU.HouseWang.nju_eas_client.uiLogic.UserCenterUILogic;
+import NJU.HouseWang.nju_eas_client.vo.Feedback;
 
 public class ChangePasswordPanel extends JPanel {
 	private UserCenterUILogic logic = new UserCenterUILogic();

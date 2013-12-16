@@ -16,9 +16,9 @@ import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 
-import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.SmallCommonFrame;
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.MenuBtn.SmallMenuBtn;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.SmallMenuBtn;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Frame.SmallCommonFrame;
+import NJU.HouseWang.nju_eas_client.vo.Feedback;
 
 /*
  * 类：UserCenterUI

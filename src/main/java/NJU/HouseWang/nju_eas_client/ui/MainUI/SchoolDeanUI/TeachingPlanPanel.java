@@ -17,14 +17,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
-import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.CTable.CTable;
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.ClickedLabel;
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.FunctionBar;
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.Common.SubPanel;
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.FunctionBtn.FunctionBtn;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Bar.FunctionBar;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.FunctionBtn;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Label.ClickedLabel;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.SubPanel;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CTable;
 import NJU.HouseWang.nju_eas_client.uiLogic.SchoolDeanUILogic;
 import NJU.HouseWang.nju_eas_client.vo.DeptVO;
+import NJU.HouseWang.nju_eas_client.vo.Feedback;
 
 @SuppressWarnings("serial")
 public class TeachingPlanPanel extends JPanel {

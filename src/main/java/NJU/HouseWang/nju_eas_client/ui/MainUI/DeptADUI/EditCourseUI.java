@@ -14,8 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import NJU.HouseWang.nju_eas_client.systemMessage.Feedback;
 import NJU.HouseWang.nju_eas_client.uiLogic.AdminUILogic;
+import NJU.HouseWang.nju_eas_client.vo.Feedback;
 
 public class EditCourseUI {
 	private AdminUILogic logic = new AdminUILogic();
