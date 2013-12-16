@@ -7,8 +7,9 @@ import java.util.ArrayList;
 import javax.swing.JComboBox;
 
 import NJU.HouseWang.nju_eas_client.uiLogic.CommonUILogic.CommonUILogic;
+import NJU.HouseWang.nju_eas_client.vo.DeptVO;
 
-public class DeptBox extends JComboBox<String> {
+public class DeptBox extends JComboBox<DeptVO> {
 	private CommonUILogic logic = new CommonUILogic();
 
 	public DeptBox() {
@@ -18,9 +19,9 @@ public class DeptBox extends JComboBox<String> {
 	}
 
 	protected void init() {
-		ArrayList<String> list = logic.getDeptList();
-		addItem("请选择院系...");
-		for (String s : list) {
+		ArrayList<DeptVO> list = logic.getDeptList();
+		addItem(new DeptVO(null, "请选择院系..."));
+		for (DeptVO s : list) {
 			addItem(s);
 		}
 	}

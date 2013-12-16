@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import NJU.HouseWang.nju_eas_client.net.Client;
 import NJU.HouseWang.nju_eas_client.net.ClientPool;
 import NJU.HouseWang.nju_eas_client.netService.NetService;
+import NJU.HouseWang.nju_eas_client.vo.DeptVO;
 import NJU.HouseWang.nju_eas_client.vo.Feedback;
 import NJU.HouseWang.nju_eas_client.vo.TPDeptVO;
 
@@ -78,18 +79,23 @@ public class CommonUILogic {
 	 * 
 	 * @return 院系列表或错误反馈
 	 */
-	public ArrayList<String> getDeptList() {
+	public ArrayList<DeptVO> getDeptList() {
 		String command = "show；dept_list";
-		ArrayList<String> l = new ArrayList<String>();
+		ArrayList<String> l = null;
+		ArrayList<DeptVO> list = new ArrayList<DeptVO>();
 		try {
 			NetService ns = initNetService();
 			ns.sendCommand(command);
 			l = ns.receiveList();
 			ns.shutDownConnection();
+			for (String s : l) {
+				DeptVO d = new DeptVO(s);
+				list.add(d);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return l;
+		return list;
 	}
 
 	/**

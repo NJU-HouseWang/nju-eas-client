@@ -22,8 +22,8 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.ComboBox.TermBox;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CommonTable;
 import NJU.HouseWang.nju_eas_client.uiLogic.SchoolDeanUILogic;
+import NJU.HouseWang.nju_eas_client.vo.DeptVO;
 import NJU.HouseWang.nju_eas_client.vo.Feedback;
-import NJU.HouseWang.nju_eas_client.vo.TPDeptVO;
 
 @SuppressWarnings("serial")
 public class InfoListPanel extends JPanel {
@@ -144,7 +144,7 @@ public class InfoListPanel extends JPanel {
 		table.updateUI();
 
 		String listName = (String) listChooser.getSelectedItem();
-		String dept = ((TPDeptVO) deptChooser.getSelectedItem()).deptId;
+		String dept = ((DeptVO) deptChooser.getSelectedItem()).deptName;
 		String year = (String) termChooser.getSelectedItem();
 		String grade = (String) gradeChooser.getSelectedItem();
 		if (listName.equals("学生列表")) {

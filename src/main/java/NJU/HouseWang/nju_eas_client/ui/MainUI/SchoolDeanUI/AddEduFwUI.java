@@ -181,7 +181,7 @@ public class AddEduFwUI {
 		frame.add(bottomPanel, BorderLayout.SOUTH);
 
 		// 设置默认关闭操作
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		// 窗口可见性
 		frame.setVisible(true);
