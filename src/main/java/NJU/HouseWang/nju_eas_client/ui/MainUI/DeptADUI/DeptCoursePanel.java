@@ -6,10 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -19,6 +16,8 @@ import javax.swing.table.DefaultTableModel;
 
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Bar.FunctionBar;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.FunctionBtn;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.RefreshBtn;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.ComboBox.GradeBox;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CommonTable;
 import NJU.HouseWang.nju_eas_client.uiLogic.DeptADUILogic;
@@ -29,14 +28,14 @@ public class DeptCoursePanel extends JPanel {
 	private FunctionBar fbar = new FunctionBar();
 	private FunctionBtn[] fBtn = new FunctionBtn[2];
 	private SubPanel coup = new SubPanel("本院课程列表", 740, 380);
-	private JComboBox<String> gradeChooser = new JComboBox<String>();
-	private JButton refreshBtn = new JButton();
+	private GradeBox gradeChooser = new GradeBox();
+	private RefreshBtn refreshBtn = new RefreshBtn();
 	private DefaultTableModel dtm = new DefaultTableModel(40, 5);
 	private CommonTable table = new CommonTable(dtm);
 
 	private String[] head = null;
 	private String[][] content = null;
-
+	
 	public DeptCoursePanel() {
 		setLayout(null);
 		setBackground(Color.white);
@@ -63,19 +62,7 @@ public class DeptCoursePanel extends JPanel {
 		coup.getCenterPanel().add(new JScrollPane(table), BorderLayout.CENTER);
 		add(coup);
 		setListener();
-		initGradeList();
 		showTable();
-	}
-
-	private void initGradeList() {
-		Object o = logic.showGradeList();
-		if (o instanceof Feedback) {
-			JOptionPane.showMessageDialog(null, ((Feedback) o).getContent());
-		} else if (o instanceof ArrayList<?>) {
-			for (Object obj : (ArrayList<?>) o) {
-				gradeChooser.addItem((String) obj);
-			}
-		}
 	}
 
 	private void setListener() {
@@ -104,7 +91,7 @@ public class DeptCoursePanel extends JPanel {
 
 		fBtn[1].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// 导出
+				
 			}
 		});
 	}

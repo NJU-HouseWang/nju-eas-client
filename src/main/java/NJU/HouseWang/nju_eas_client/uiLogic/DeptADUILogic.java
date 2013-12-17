@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 import NJU.HouseWang.nju_eas_client.net.ClientPool;
 import NJU.HouseWang.nju_eas_client.netService.NetService;
-import NJU.HouseWang.nju_eas_client.vo.TPDeptVO;
 import NJU.HouseWang.nju_eas_client.vo.Feedback;
+import NJU.HouseWang.nju_eas_client.vo.TPDeptVO;
 
 public class DeptADUILogic {
 	private String deptName = null;
@@ -16,6 +16,7 @@ public class DeptADUILogic {
 
 	public DeptADUILogic() {
 		showDept();
+		showCurrentTerm();
 	}
 
 	/**
@@ -26,26 +27,6 @@ public class DeptADUILogic {
 	public NetService initNetService() {
 		ClientPool cPool = ClientPool.getInstance();
 		return cPool.getClient();
-	}
-
-	/**
-	 * 显示年级列表
-	 * 
-	 * @return 年级列表或错误反馈
-	 */
-	public Object showGradeList() {
-		String command = "show；grade_list";
-		ArrayList<String> l = new ArrayList<String>();
-		try {
-			NetService ns = initNetService();
-			ns.sendCommand(command);
-			l = ns.receiveList();
-			ns.shutDownConnection();
-			return l;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return Feedback.INTERNET_ERROR;
-		}
 	}
 
 	public void showDept() {
@@ -115,9 +96,6 @@ public class DeptADUILogic {
 			NetService client = initNetService();
 			client.sendCommand(command);
 			list = client.receiveList();
-			if (list.isEmpty()) {
-				return Feedback.TEACHINGPLAN_NOT_COMMIT;
-			}
 			content = new String[list.size()][];
 			for (int i = 0; i < list.size(); i++) {
 				content[i] = list.get(i).split("；");

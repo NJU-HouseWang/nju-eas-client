@@ -6,10 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -19,6 +16,8 @@ import javax.swing.table.DefaultTableModel;
 
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Bar.FunctionBar;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.FunctionBtn;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.RefreshBtn;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.ComboBox.GradeBox;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CommonTable;
 import NJU.HouseWang.nju_eas_client.uiLogic.DeptADUILogic;
@@ -29,8 +28,8 @@ public class DeptStudentPanel extends JPanel {
 	private FunctionBar fbar = new FunctionBar();
 	private FunctionBtn[] fBtn = new FunctionBtn[1];
 	private SubPanel stup = new SubPanel("本院学生列表", 740, 380);
-	private JComboBox<String> gradeChooser = new JComboBox<String>();
-	private JButton refreshBtn = new JButton();
+	private GradeBox gradeChooser = new GradeBox();
+	private RefreshBtn refreshBtn = new RefreshBtn();
 	private DefaultTableModel dtm = new DefaultTableModel(40, 5);
 	private CommonTable table = new CommonTable(dtm);
 
@@ -63,19 +62,7 @@ public class DeptStudentPanel extends JPanel {
 		stup.getCenterPanel().add(new JScrollPane(table), BorderLayout.CENTER);
 		add(stup);
 		setListener();
-		initGradeList();
 		showTable();
-	}
-
-	private void initGradeList() {
-		Object o = logic.showGradeList();
-		if (o instanceof Feedback) {
-			JOptionPane.showMessageDialog(null, ((Feedback) o).getContent());
-		} else if (o instanceof ArrayList<?>) {
-			for (Object obj : (ArrayList<?>) o) {
-				gradeChooser.addItem((String) obj);
-			}
-		}
 	}
 
 	private void setListener() {
@@ -86,23 +73,6 @@ public class DeptStudentPanel extends JPanel {
 		});
 
 		fBtn[0].addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int selectRowNum = table.getSelectedRow();
-
-				if (table.getSelectedRowCount() == 1 && selectRowNum != -1) {
-					String[] origin = new String[table.getColumnCount()];
-					for (int i = 0; i < origin.length; i++) {
-						origin[i] = (String) table.getValueAt(selectRowNum, i);
-					}
-					new EditCourseUI("课程", head, origin);
-				} else {
-					JOptionPane.showMessageDialog(null,
-							Feedback.SELECTION_ERROR.getContent());
-				}
-			}
-		});
-
-		fBtn[1].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// 导出
 			}

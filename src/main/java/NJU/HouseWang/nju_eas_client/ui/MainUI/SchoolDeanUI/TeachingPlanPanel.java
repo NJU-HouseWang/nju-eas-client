@@ -19,12 +19,13 @@ import javax.swing.table.DefaultTableModel;
 
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Bar.FunctionBar;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.FunctionBtn;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.RefreshBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Label.ClickedLabel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CTable;
 import NJU.HouseWang.nju_eas_client.uiLogic.SchoolDeanUILogic;
-import NJU.HouseWang.nju_eas_client.vo.TPDeptVO;
 import NJU.HouseWang.nju_eas_client.vo.Feedback;
+import NJU.HouseWang.nju_eas_client.vo.TPDeptVO;
 
 @SuppressWarnings("serial")
 public class TeachingPlanPanel extends JPanel {
@@ -38,6 +39,7 @@ public class TeachingPlanPanel extends JPanel {
 	private EduFrameworkMap map = null;
 	private DefaultTableModel dtm = null;
 	private CTable table = null;
+	private RefreshBtn freshBtn = new RefreshBtn();
 
 	private String[][] content = new String[][] { { " ", " ", " ", " ", " ",
 			" ", " " } };
@@ -60,6 +62,8 @@ public class TeachingPlanPanel extends JPanel {
 		tpp = new SubPanel("教学计划  ", 500, 380);
 		tpp.setLocation(30, 70);
 		tpp.getTopPanel().add(deptChooser);
+		tpp.getTopPanel().add(freshBtn);
+		
 		// 附件子窗口
 		accessoryp = new SubPanel("附件", 230, 150);
 		accessoryp.setLocation(540, 70);

@@ -16,13 +16,14 @@ import javax.swing.table.DefaultTableModel;
 
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Bar.FunctionBar;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.FunctionBtn;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.RefreshBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Label.ClickedLabel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CTable;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.SchoolDeanUI.EduFrameworkMap;
 import NJU.HouseWang.nju_eas_client.uiLogic.DeptADUILogic;
-import NJU.HouseWang.nju_eas_client.vo.TPDeptVO;
 import NJU.HouseWang.nju_eas_client.vo.Feedback;
+import NJU.HouseWang.nju_eas_client.vo.TPDeptVO;
 
 @SuppressWarnings("serial")
 public class TeachingPlanPanel extends JPanel {
@@ -35,6 +36,7 @@ public class TeachingPlanPanel extends JPanel {
 	private EduFrameworkMap map = null;
 	private DefaultTableModel dtm = null;
 	private CTable table = null;
+	private RefreshBtn refreshBtn = new RefreshBtn();
 
 	private String[][] content = null;
 	private String[] head = null;
@@ -53,6 +55,7 @@ public class TeachingPlanPanel extends JPanel {
 
 		tpp = new SubPanel("教学计划  ", 500, 380);
 		tpp.setLocation(30, 70);
+		tpp.getTopPanel().add(refreshBtn);
 
 		accessoryp = new SubPanel("附件", 230, 150);
 		accessoryp.setLocation(540, 70);
@@ -81,6 +84,11 @@ public class TeachingPlanPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				Feedback fb = logic.delTP();
 				JOptionPane.showMessageDialog(null, fb.getContent());
+			}
+		});
+		refreshBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				showTPStatus();
 			}
 		});
 	}
@@ -152,14 +160,18 @@ public class TeachingPlanPanel extends JPanel {
 			switch (((TPDeptVO) o).tpState) {
 			case 0:
 				status = "未提交";
+				refreshBtn.setVisible(false);
+				dtm.removeRow(0);
 				break;
 			case 1:
 				status = "审核通过";
 				showTPTable();
+				refreshBtn.setVisible(true);
 				break;
 			case 2:
 				status = "审核不通过，请重新提交";
 				showTPTable();
+				refreshBtn.setVisible(true);
 				break;
 			default:
 				status = "错误代码" + ((TPDeptVO) o).tpState + "";

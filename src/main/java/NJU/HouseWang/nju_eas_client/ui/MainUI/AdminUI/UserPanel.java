@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Bar.FunctionBar;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.FunctionBtn;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.RefreshBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CommonTable;
 import NJU.HouseWang.nju_eas_client.uiLogic.AdminUILogic;
@@ -33,7 +34,7 @@ public class UserPanel extends JPanel {
 	private FunctionBtn[] fBtn = new FunctionBtn[FUNC_NUM];// 功能按钮
 	private SubPanel sp = new SubPanel("", 740, 380);// 子界面
 	private JComboBox<UserTypeVO> userTypecb = new JComboBox<UserTypeVO>();// 用户类型下拉框
-	private JButton refreshBtn = new JButton();// 刷新按钮
+	private RefreshBtn refreshBtn = new RefreshBtn();// 刷新按钮
 	private JTextField conditiontf = new JTextField();// 条件输入框
 	private JButton searchBtn = new JButton();// 搜索按钮
 

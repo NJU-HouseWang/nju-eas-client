@@ -64,7 +64,6 @@ public class DeptADUI {
 			mBtn[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					System.out.println(((MenuBtn) e.getSource()).getName());
 					mcl.show(switchPane, ((MenuBtn) e.getSource()).getName());
 				}
 			});

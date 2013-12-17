@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -16,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Bar.FunctionBar;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.FunctionBtn;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.RefreshBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CommonTable;
 import NJU.HouseWang.nju_eas_client.uiLogic.SchoolDeanUILogic;
@@ -28,7 +28,7 @@ public class CommonCoursePanel extends JPanel {
 	private SubPanel cp = new SubPanel("通识课列表", 740, 380);
 	private DefaultTableModel dtm = new DefaultTableModel(0, 5);
 	private CommonTable table = new CommonTable(dtm);
-	private JButton refreshBtn = new JButton();
+	private RefreshBtn refreshBtn = new RefreshBtn();
 
 	private String[] head;
 	private String[][] content;

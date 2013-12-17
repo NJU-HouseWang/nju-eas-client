@@ -16,7 +16,7 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CommonTable;
 
 public class MyStudentPanel extends JPanel {
 	private FunctionBar fbar = null;
-	private FunctionBtn[] fBtn = new FunctionBtn[5];
+	private FunctionBtn[] fBtn = new FunctionBtn[1];
 	private SubPanel edufwp = null;
 	private DefaultTableModel dtm = new DefaultTableModel(40, 5);
 	private CommonTable infoTable = new CommonTable(dtm);
@@ -26,11 +26,7 @@ public class MyStudentPanel extends JPanel {
 		setBackground(Color.white);
 		fbar = new FunctionBar();
 		fbar.setLocation(0, 0);
-		fBtn[0] = new FunctionBtn("AddBtn");
-		fBtn[1] = new FunctionBtn("ModifyBtn");
-		fBtn[2] = new FunctionBtn("DelBtn");
-		fBtn[3] = new FunctionBtn("ImportBtn");
-		fBtn[4] = new FunctionBtn("ExportBtn");
+		fBtn[0] = new FunctionBtn("ExportBtn");
 
 		for (int i = 0; i < fBtn.length; i++) {
 			fbar.add(fBtn[i]);

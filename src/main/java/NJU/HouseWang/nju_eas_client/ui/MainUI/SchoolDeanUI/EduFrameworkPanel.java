@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -16,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Bar.FunctionBar;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.FunctionBtn;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.RefreshBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CTable;
 import NJU.HouseWang.nju_eas_client.uiLogic.SchoolDeanUILogic;
@@ -29,7 +29,7 @@ public class EduFrameworkPanel extends JPanel {
 	private EduFrameworkMap map = null;
 	private DefaultTableModel dtm = null;
 	private CTable table = null;
-	private JButton refreshBtn = new JButton();
+	private RefreshBtn refreshBtn = new RefreshBtn();
 
 	private String[][] content = new String[1][7];
 

@@ -7,7 +7,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -16,6 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.RefreshBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.ComboBox.DeptBox;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.ComboBox.GradeBox;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.ComboBox.TermBox;
@@ -36,7 +36,7 @@ public class InfoListPanel extends JPanel {
 	private JLabel deptlb = new JLabel("院系：");
 	private JLabel termlb = new JLabel("学年：");
 	private JLabel gradelb = new JLabel("年级：");
-	private JButton showBtn = new JButton();
+	private RefreshBtn showBtn = new RefreshBtn();
 
 	private DefaultTableModel dtm = new DefaultTableModel(40, 5);
 	private CommonTable table = new CommonTable(dtm);
