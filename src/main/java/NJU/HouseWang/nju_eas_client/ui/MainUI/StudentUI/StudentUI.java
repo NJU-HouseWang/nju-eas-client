@@ -20,7 +20,7 @@ import NJU.HouseWang.nju_eas_client.vo.Feedback;
 public class StudentUI {
 	private static int FUNC_NUM = 4;
 	private static String[] FUNC_BTN_NAME = { "homeBtn", "myCouBtn",
-			"myScoreBtn", "chooseCommonBtn"};
+			"myScoreBtn", "chooseCommonBtn" };
 
 	private CommonFrame frame = new CommonFrame("StudentFrame");
 	private TitleBar tbar = null;
@@ -38,7 +38,6 @@ public class StudentUI {
 		childp[1] = new MyCoursePanel();
 		childp[2] = new MyScorePanel();
 		childp[3] = new ChooseCommonPanel();
-//		childp[4] = new MajorPanel();
 
 		switchPane.setSize(800, 480);
 		switchPane.setLocation(30, 150);
@@ -66,7 +65,6 @@ public class StudentUI {
 			mBtn[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					System.out.println(((MenuBtn) e.getSource()).getName());
 					mcl.show(switchPane, ((MenuBtn) e.getSource()).getName());
 				}
 			});

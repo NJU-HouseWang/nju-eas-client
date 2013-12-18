@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import NJU.HouseWang.nju_eas_client.net.ClientPool;
 import NJU.HouseWang.nju_eas_client.netService.NetService;
+import NJU.HouseWang.nju_eas_client.vo.CourseDetailVO;
 import NJU.HouseWang.nju_eas_client.vo.Feedback;
 
 public class StudentUILogic {
@@ -26,7 +27,7 @@ public class StudentUILogic {
 	/**
 	 * 显示当前学期
 	 */
-	public void showCurrentTerm() {
+	public String showCurrentTerm() {
 		String command = "show；term";
 		try {
 			NetService ns = initNetService();
@@ -36,6 +37,7 @@ public class StudentUILogic {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return currentTerm;
 	}
 
 	public Object showCourseListHead() {
@@ -200,6 +202,21 @@ public class StudentUILogic {
 			return Feedback.INTERNET_ERROR;
 		}
 	}
+	
+	public Feedback cancelCommonCourse(String courseId) {
+		String command = "cancel；common_course；" + courseId;
+		String line = null;
+		try {
+			NetService client = initNetService();
+			client.sendCommand(command);
+			line = client.receiveFeedback();
+			client.shutDownConnection();
+			return Feedback.valueOf(line);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Feedback.INTERNET_ERROR;
+		}
+	}
 
 	public Feedback byelectCommonCourse(String courseId) {
 		String command = "byelect；common_course；" + courseId;
@@ -269,5 +286,24 @@ public class StudentUILogic {
 			return Feedback.INTERNET_ERROR;
 		}
 		return content;
+	}
+
+	public Object showCourseDetail(String term, String couId) {
+		String command = "show；course_detail；" + term + "；" + couId;
+		ArrayList<String> list = null;
+		CourseDetailVO course = new CourseDetailVO();
+		try {
+			NetService client = initNetService();
+			client.sendCommand(command);
+			list = client.receiveList();
+			client.shutDownConnection();
+			course.introduction = list.get(0);
+			course.book = list.get(1);
+			course.syllabus = list.get(2);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Feedback.INTERNET_ERROR;
+		}
+		return course;
 	}
 }

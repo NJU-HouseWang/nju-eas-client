@@ -31,4 +31,8 @@ public class FunctionBtn extends JButton {
 		setBorderPainted(false);
 		updateUI();
 	}
+
+	public String getName() {
+		return name;
+	}
 }

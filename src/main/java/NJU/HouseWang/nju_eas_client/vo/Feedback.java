@@ -24,6 +24,7 @@ public enum Feedback {
 	COURSE_STUDENT_NOT_FOUND("该学生不在课程名单中"),
 	SELECTION_ERROR("您未选择列表中的项"),
 	ITEM_EMPTY("项目不能为空"),
+	NUM_FORMAT_ERROR("登记的数字格式不正确"),
 	TEACHINGPLAN_NOT_COMMIT("该院系的教学计划未提交");
 	
 	private String content;

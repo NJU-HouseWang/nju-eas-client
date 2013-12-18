@@ -7,6 +7,9 @@
  */
 package NJU.HouseWang.nju_eas_client;
 
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 import NJU.HouseWang.nju_eas_client.ui.MainUI.AdminUI.AdminUI;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.DeptADUI.DeptADUI;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.LoginUI.LoginUI;
@@ -21,6 +24,11 @@ import NJU.HouseWang.nju_eas_client.ui.MainUI.TeacherUI.TeacherUI;
 public class Launcher {
 
 	public static void main(String[] args) {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException | InstantiationException
+				| IllegalAccessException | UnsupportedLookAndFeelException e) {
+		}
 		createUI("Login", null);
 	}
 

@@ -39,8 +39,6 @@ public class TeacherUILogic {
 		}
 		return currentTerm;
 	}
-	
-	
 
 	public Object showCourseListHead() {
 		String line = null;
@@ -84,7 +82,7 @@ public class TeacherUILogic {
 
 	public Object showStudentListHead() {
 		String line = null;
-		String cmd = "show；student_list_head";
+		String cmd = "show；student_list_from_course_head";
 		try {
 			NetService client = initNetService();
 			client.sendCommand(cmd);
@@ -103,7 +101,7 @@ public class TeacherUILogic {
 	}
 
 	public Object showMyStudentList(String term, String couId) {
-		String command = "show；course_student_list；" + term + "；" + couId;
+		String command = "show；student_list_from_course；" + term + "；" + couId;
 		ArrayList<String> list = null;
 		String[][] content = null;
 		try {
@@ -169,6 +167,19 @@ public class TeacherUILogic {
 		for (int i = 0; i < table.length; i++) {
 			String l = "";
 			for (int j = 0; j < table[i].length; j++) {
+				if (j == table[i].length - 1) {
+					if (table[i][j].equals("")) {
+						table[i][j] = "-1";
+					} else {
+						try {
+							double d = Double.parseDouble(table[i][j]);
+							int a = (int) d;
+							table[i][j] = a + "";
+						} catch (NumberFormatException e) {
+							return Feedback.NUM_FORMAT_ERROR;
+						}
+					}
+				}
 				l += table[i][j] + "；";
 			}
 			list.add(l);
@@ -184,6 +195,53 @@ public class TeacherUILogic {
 			e.printStackTrace();
 			return Feedback.INTERNET_ERROR;
 		}
+	}
+
+	public Object showStudentScoreListHead() {
+		String line = null;
+		String cmd = "show；course_student_list_head";
+		try {
+			NetService client = initNetService();
+			client.sendCommand(cmd);
+			line = client.receiveFeedback();
+			client.shutDownConnection();
+			if (!line.contains("；")) {
+				return Feedback.valueOf(line);
+			} else {
+				String[] head = line.split("；");
+				return head;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Feedback.INTERNET_ERROR;
+		}
+	}
+
+	public Object showStudentScoreList(String term, String couId) {
+		String command = "show；course_student_list；" + term + "；" + couId;
+		ArrayList<String> list = null;
+		String[][] content = null;
+		try {
+			NetService client = initNetService();
+			client.sendCommand(command);
+			list = client.receiveList();
+			content = new String[list.size()][];
+			for (int i = 0; i < list.size(); i++) {
+				content[i] = list.get(i).split("；");
+			}
+			for (int i = 0; i < content.length; i++) {
+				for (int j = 0; j < content[i].length; j++) {
+					if (content[i][j].equals("-1")) {
+						content[i][j] = "";
+					}
+				}
+			}
+			client.shutDownConnection();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Feedback.INTERNET_ERROR;
+		}
+		return content;
 	}
 
 }

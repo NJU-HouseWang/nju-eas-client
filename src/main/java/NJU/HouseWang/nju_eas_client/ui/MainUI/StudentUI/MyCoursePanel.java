@@ -2,52 +2,104 @@ package NJU.HouseWang.nju_eas_client.ui.MainUI.StudentUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.Bar.FunctionBar;
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.FunctionBtn;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.RefreshBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CommonTable;
+import NJU.HouseWang.nju_eas_client.uiLogic.StudentUILogic;
+import NJU.HouseWang.nju_eas_client.vo.CourseDetailVO;
+import NJU.HouseWang.nju_eas_client.vo.Feedback;
 
 public class MyCoursePanel extends JPanel {
-	private FunctionBar fbar = null;
-	private FunctionBtn[] fBtn = new FunctionBtn[5];
-	private SubPanel edufwp = null;
+	private StudentUILogic logic = new StudentUILogic();
+	private SubPanel coup = new SubPanel("我的课程列表", 500, 380);
+	private SubPanel infop = new SubPanel("详细信息", 230, 380);
 	private DefaultTableModel dtm = new DefaultTableModel(40, 5);
-	private CommonTable infoTable = new CommonTable(dtm);
+	private CommonTable table = new CommonTable(dtm);
+	private RefreshBtn reBtn = new RefreshBtn();
+
+	private String[] head = null;
+	private String[][] content = null;
 
 	public MyCoursePanel() {
 		setLayout(null);
 		setBackground(Color.white);
-		fbar = new FunctionBar();
-		fbar.setLocation(0, 0);
-		fBtn[0] = new FunctionBtn("AddBtn");
-		fBtn[1] = new FunctionBtn("ModifyBtn");
-		fBtn[2] = new FunctionBtn("DelBtn");
-		fBtn[3] = new FunctionBtn("ImportBtn");
-		fBtn[4] = new FunctionBtn("ExportBtn");
 
-		for (int i = 0; i < fBtn.length; i++) {
-			fbar.add(fBtn[i]);
+		coup.setLocation(30, 25);
+		coup.getTopPanel().add(reBtn);
+
+		coup.getCenterPanel().setLayout(new BorderLayout());
+		coup.getCenterPanel().add(new JScrollPane(table), BorderLayout.CENTER);
+		add(coup);
+		setListener();
+
+	}
+
+	private void setListener() {
+		reBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				showTable();
+			}
+		});
+
+		table.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent arg0) {
+				int selectRowNum = table.getSelectedRow();
+				if (table.getSelectedRowCount() == 1 && selectRowNum != -1) {
+					Object o = logic.showCourseDetail(logic.showCurrentTerm(),
+							table.getValueAt(selectRowNum, 0).toString());
+					if (o instanceof CourseDetailVO) {
+						infop.setCenterPanel(new JPanel());
+						JTextArea area = new JTextArea();
+						area.setText("课程介绍：\r\n"
+								+ ((CourseDetailVO) o).introduction
+								+ "\r\n\r\n" + "推荐书目：\r\n"
+								+ ((CourseDetailVO) o).book + "\r\n\r\n"
+								+ "课程大纲：\r\n" + ((CourseDetailVO) o).syllabus
+								+ "\r\n\r\n");
+						area.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+						area.setEditable(false);
+						area.setBorder(null);
+						infop.getCenterPanel().setLayout(new BorderLayout());
+						infop.getCenterPanel().add(area, BorderLayout.CENTER);
+					}
+				}
+			}
+		});
+	}
+
+	private void showTable() {
+		head = null;
+		content = null;
+		table.clearSelection();
+		dtm = new DefaultTableModel(0, 5);
+		table.setModel(dtm);
+		table.updateUI();
+		Object fb = logic.showCourseListHead();
+		if (fb instanceof Feedback) {
+			JOptionPane.showMessageDialog(null, ((Feedback) fb).getContent());
+		} else if (fb instanceof String[]) {
+			head = (String[]) fb;
+			fb = logic.showMyCourseList();
+			if (fb instanceof Feedback) {
+				JOptionPane.showMessageDialog(null,
+						((Feedback) fb).getContent());
+			} else if (fb instanceof String[][]) {
+				content = (String[][]) fb;
+			}
 		}
-		add(fbar);
-
-		edufwp = new SubPanel("我的课程列表", 740, 380);
-		edufwp.setLocation(30, 70);
-
-		DefaultTableCellRenderer r = new DefaultTableCellRenderer();
-		r.setHorizontalAlignment(JLabel.CENTER);
-		infoTable.setDefaultRenderer(Object.class, r);
-
-		edufwp.getCenterPanel().setLayout(new BorderLayout());
-		edufwp.getCenterPanel().add(new JScrollPane(infoTable),
-				BorderLayout.CENTER);
-		add(edufwp);
-
+		dtm.setDataVector(content, head);
+		table.updateUI();
 	}
 }

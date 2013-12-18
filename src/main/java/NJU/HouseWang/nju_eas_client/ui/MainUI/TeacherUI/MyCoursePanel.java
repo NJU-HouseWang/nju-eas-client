@@ -75,6 +75,7 @@ public class MyCoursePanel extends JPanel {
 					Object o = logic.showCourseDetail(logic.showCurrentTerm(),
 							table.getValueAt(selectRowNum, 0).toString());
 					if (o instanceof CourseDetailVO) {
+						infop.setCenterPanel(new JPanel());
 						JTextArea area = new JTextArea();
 						area.setText("课程介绍：\r\n"
 								+ ((CourseDetailVO) o).introduction
@@ -128,9 +129,5 @@ public class MyCoursePanel extends JPanel {
 		}
 		dtm.setDataVector(content, head);
 		table.updateUI();
-	}
-
-	private void showDetails() {
-
 	}
 }
