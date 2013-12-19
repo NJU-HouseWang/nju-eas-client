@@ -56,7 +56,6 @@ public class CommonCoursePanel extends JPanel {
 
 		cp.getCenterPanel().setLayout(new BorderLayout());
 		cp.getCenterPanel().add(new JScrollPane(table), BorderLayout.CENTER);
-		refreshBtn.setPreferredSize(new Dimension(25, 25));
 		cp.getTopPanel().add(refreshBtn);
 		add(cp);
 		setListener();

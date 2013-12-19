@@ -62,7 +62,6 @@ public class DeptStudentPanel extends JPanel {
 		stup.getCenterPanel().add(new JScrollPane(table), BorderLayout.CENTER);
 		add(stup);
 		setListener();
-		showTable();
 	}
 
 	private void setListener() {
@@ -86,13 +85,12 @@ public class DeptStudentPanel extends JPanel {
 		dtm = new DefaultTableModel(0, 5);
 		table.setModel(dtm);
 		table.updateUI();
-		Object fb = logic.showCourseListHead();
+		Object fb = logic.showStudentListHead();
 		if (fb instanceof Feedback) {
 			JOptionPane.showMessageDialog(null, ((Feedback) fb).getContent());
 		} else if (fb instanceof String[]) {
 			head = (String[]) fb;
-			fb = logic.showCourseListContent((String) gradeChooser
-					.getSelectedItem());
+			fb = logic.showStudentList((String) gradeChooser.getSelectedItem());
 			if (fb instanceof Feedback) {
 				JOptionPane.showMessageDialog(null,
 						((Feedback) fb).getContent());

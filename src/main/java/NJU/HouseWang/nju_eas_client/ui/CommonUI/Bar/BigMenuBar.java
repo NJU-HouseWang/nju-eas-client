@@ -9,7 +9,8 @@ public class BigMenuBar extends JPanel {
 
 	public BigMenuBar() {
 		setSize(700, 500);
-		setBackground(Color.getHSBColor((float) 0.617, (float) 0.42, (float) 0.92));
+		setBackground(Color.getHSBColor((float) 0.617, (float) 0.42,
+				(float) 0.92));
 		FlowLayout fl = new FlowLayout();
 		setLayout(fl);
 		fl.setAlignment(FlowLayout.LEFT);

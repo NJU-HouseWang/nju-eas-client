@@ -1,26 +1,37 @@
 package NJU.HouseWang.nju_eas_client.ui.CommonUI.Button;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JToggleButton;
 
 public class MenuBtn extends JToggleButton {
-	private String path = "img/MenuIcon/";
-	private String name = null;
-	private String suffix = ".png";
 
-	public MenuBtn(String btnName) {
-		this.name = btnName;
+	public MenuBtn(String btnName,String btnText) {
 		setName(btnName);
-		setIcon(new ImageIcon(path + name + "_0" + suffix));
-		setRolloverIcon(new ImageIcon(path + name + "_1" + suffix));
-		setSelectedIcon(new ImageIcon(path + name + "_1" + suffix));
-		setSize(120, 50);
-		setPreferredSize(new Dimension(120, 50));
+
 		if (btnName.equals("homeBtn")) {
-			setSize(58, 50);
-			setPreferredSize(new Dimension(58, 50));
+			setSize(40, 40);
+			setPreferredSize(new Dimension(40, 40));
+			setIcon(new ImageIcon("img/CommonIcon/HomeBtn_0.png"));
+			setRolloverIcon(new ImageIcon("img/CommonIcon/HomeBtn_1.png"));
+			setSelectedIcon(new ImageIcon("img/CommonIcon/HomeBtn_1.png"));
+		} else {
+			setText(btnText);
+			setSize(120, 40);
+			setPreferredSize(new Dimension(120, 40));
+			setIcon(new ImageIcon("img/CommonIcon/MenuBtn_0.png"));
+			setRolloverIcon(new ImageIcon("img/CommonIcon/MenuBtn_1.png"));
+			setSelectedIcon(new ImageIcon("img/CommonIcon/MenuBtn_1.png"));
+			JLabel lb = new JLabel(btnText, JLabel.CENTER);
+			lb.setFont(new Font("微软雅黑", Font.BOLD, 14));
+			lb.setForeground(Color.white);
+			this.setLayout(new BorderLayout());
+			this.add(lb, BorderLayout.CENTER);
 		}
 		setBorderPainted(false);
 		updateUI();

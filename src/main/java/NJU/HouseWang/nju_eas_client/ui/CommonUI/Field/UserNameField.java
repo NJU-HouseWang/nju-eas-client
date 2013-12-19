@@ -14,8 +14,8 @@ public class UserNameField extends JTextField {
 		super(info);
 		setBounds(152, 283, 238, 30);
 		setBorder(null);
-		setFont(new Font("微软雅黑", Font.BOLD, 15));
-		setForeground(Color.gray);
+		setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		setForeground(Color.DARK_GRAY);
 		addFocusListener(new FocusListener() {
 
 			public void focusLost(FocusEvent arg0) {

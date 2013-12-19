@@ -29,10 +29,10 @@ import NJU.HouseWang.nju_eas_client.vo.Feedback;
  * 
  */
 public class SchoolDeanUI {
-	private static int FUNC_NUM = 5;
-	private static String[] FUNC_BTN_NAME = { "homeBtn", "edufwBtn", "tpBtn",
+	private final int FUNC_NUM = 5;
+	private final String[] FUNC_BTN_NAME = { "homeBtn", "edufwBtn", "tpBtn",
 			"infoBtn", "commoncouBtn" };
-
+	private final String[] FUNC_BTN_TEXT = {"主页","管理教学框架","管理教学计划","查看信息列表","管理通识课程"};
 	private CommonFrame frame = new CommonFrame("SchoolFrame");
 	private TitleBar tbar = null;
 	private MenuBar mbar = new MenuBar();
@@ -42,7 +42,7 @@ public class SchoolDeanUI {
 	private CardLayout mcl = new CardLayout();
 
 	public SchoolDeanUI(String userName) {
-		tbar = new TitleBar(userName);
+		tbar = new TitleBar(userName,frame);
 
 		childp[0] = new HomePanel();
 		childp[1] = new EduFrameworkPanel();
@@ -50,14 +50,14 @@ public class SchoolDeanUI {
 		childp[3] = new InfoListPanel();
 		childp[4] = new CommonCoursePanel();
 
-		switchPane.setSize(800, 480);
-		switchPane.setLocation(30, 150);
+		switchPane.setSize(800, 490);
+		switchPane.setLocation(30, 140);
 		switchPane.setLayout(mcl);
 
 		for (int i = 0; i < mBtn.length; i++) {
-			mBtn[i] = new MenuBtn(FUNC_BTN_NAME[i]);
+			mBtn[i] = new MenuBtn(FUNC_BTN_NAME[i],FUNC_BTN_TEXT[i]);
 			mbar.add(mBtn[i]);
-			childp[i].setSize(800, 480);
+			childp[i].setSize(800, 490);
 			switchPane.add(childp[i], FUNC_BTN_NAME[i]);
 		}
 

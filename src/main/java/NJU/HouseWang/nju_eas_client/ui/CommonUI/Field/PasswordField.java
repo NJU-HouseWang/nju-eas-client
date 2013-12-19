@@ -22,8 +22,8 @@ public class PasswordField extends JPasswordField {
 	public void create() {
 		setBounds(152, 327, 238, 30);
 		setBorder(null);
-		setFont(new Font("微软雅黑", Font.BOLD, 15));
-		setForeground(Color.gray);
+		setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		setForeground(Color.DARK_GRAY);
 		setEchoChar('\0');
 		setText(info);
 

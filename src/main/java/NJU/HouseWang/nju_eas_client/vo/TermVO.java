@@ -16,7 +16,7 @@ public class TermVO {
 
 	@Override
 	public String toString() {
-		return firstYear + "-" + secondYear + " 第" + termth + "学期";
+		return firstYear + "-" + secondYear + "学年 第" + termth + "学期";
 	}
 
 }

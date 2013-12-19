@@ -9,18 +9,35 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 
 public class CommonTable extends JTable {
+	
 	public CommonTable() {
 		super();
-	}
-
-	public CommonTable(TableModel dtm) {
-		super(dtm);
 		setFont(new Font("微软雅黑", Font.PLAIN, 12));
 		getTableHeader().setFont(new Font("微软雅黑", Font.BOLD, 12));
 		setBackground(Color.white);
 		setRowHeight(20);
-		DefaultTableCellRenderer r = new DefaultTableCellRenderer();
-		r.setHorizontalAlignment(JLabel.CENTER);
-		setDefaultRenderer(Object.class, r);
+		DefaultTableCellRenderer cell = new DefaultTableCellRenderer();
+		cell.setHorizontalAlignment(JLabel.CENTER);
+		setDefaultRenderer(Object.class, cell);
+		DefaultTableCellRenderer head = new DefaultTableCellRenderer();
+		head.setBackground(Color.DARK_GRAY);
+		head.setForeground(Color.white);
+		head.setHorizontalAlignment(JLabel.CENTER);
+		getTableHeader().setDefaultRenderer(head);
+		this.updateUI();
+	}
+
+	public CommonTable(TableModel dtm) {
+		setModel(dtm);
+		setFont(new Font("微软雅黑", Font.PLAIN, 12));
+		getTableHeader().setFont(new Font("微软雅黑", Font.BOLD, 12));
+		setBackground(Color.white);
+		setRowHeight(20);
+//		DefaultTableCellRenderer cell = new DefaultTableCellRenderer();
+//		cell.setHorizontalAlignment(JLabel.CENTER);
+//		setDefaultRenderer(Object.class, cell);
+//		DefaultTableCellRenderer head = new DefaultTableCellRenderer();
+//		head.setHorizontalAlignment(JLabel.CENTER);
+//		getTableHeader().setDefaultRenderer(head);
 	}
 }

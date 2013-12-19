@@ -5,15 +5,19 @@ import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import NJU.HouseWang.nju_eas_client.net.Client;
+import NJU.HouseWang.nju_eas_client.Launcher;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Label.ClickedLabel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Label.CommonLabel;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.MsgBoxUI.MsgBoxUI;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.UserCenterUI.UserCenterUI;
+import NJU.HouseWang.nju_eas_client.uiLogic.CommonUILogic.CommonUILogic;
+import NJU.HouseWang.nju_eas_client.vo.Feedback;
 
 public class TitleBar extends JPanel {
+	private CommonUILogic logic = new CommonUILogic();
 	private CommonLabel welcomel = null;
 	private ClickedLabel namel = null;
 	private ClickedLabel msgBoxl = null;
@@ -21,7 +25,7 @@ public class TitleBar extends JPanel {
 
 	// 0: 管理员和学校教务老师
 	// 1: 其他成员
-	public TitleBar(String userName) {
+	public TitleBar(String userName, final JFrame frame) {
 		welcomel = new CommonLabel("Welcome!");
 		namel = new ClickedLabel(userName);
 		msgBoxl = new ClickedLabel("消息盒子");
@@ -42,11 +46,12 @@ public class TitleBar extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					Client client = new Client();
-					client.createConnection();
-					client.sendCommand("logout");
-					client.receiveFeedback();
-					client.shutDownConnection();
+					Feedback fb = logic.logout();
+					if (fb == Feedback.OPERATION_SUCCEED) {
+						frame.setVisible(false);
+						frame.dispose();
+						Launcher.createUI("Login", null);
+					}
 				} catch (Exception e1) {
 				}
 			}

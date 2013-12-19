@@ -11,9 +11,9 @@ import NJU.HouseWang.nju_eas_client.vo.UserTypeVO;
 public class UserTypeBox extends JComboBox<UserTypeVO> {
 	public UserTypeBox() {
 		super();
-		setBounds(149, 239, 243, 30);
-		setFont(new Font("微软雅黑", Font.BOLD, 15));
-		setForeground(Color.gray);
+		setBounds(148, 238, 245, 32);
+		setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		setForeground(Color.DARK_GRAY);
 
 		addItem(new UserTypeVO(null, "请选择用户类型..."));
 		addItem(new UserTypeVO(UserType.Admin.toString(),

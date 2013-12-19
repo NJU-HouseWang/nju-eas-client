@@ -62,7 +62,6 @@ public class DeptCoursePanel extends JPanel {
 		coup.getCenterPanel().add(new JScrollPane(table), BorderLayout.CENTER);
 		add(coup);
 		setListener();
-		showTable();
 	}
 
 	private void setListener() {

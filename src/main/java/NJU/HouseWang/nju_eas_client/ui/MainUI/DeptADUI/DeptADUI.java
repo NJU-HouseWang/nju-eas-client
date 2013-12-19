@@ -21,6 +21,8 @@ public class DeptADUI {
 	private static int FUNC_NUM = 4;
 	private static String[] FUNC_BTN_NAME = { "homeBtn", "tpBtn", "deptCouBtn",
 			"deptStuBtn" };
+	private static String[] FUNC_BTN_TEXT = { "主页", "管理教学计划", "管理学院课程",
+			"管理学院学生" };
 
 	private CommonFrame frame = new CommonFrame("DeptFrame");
 	private TitleBar tbar = null;
@@ -31,21 +33,21 @@ public class DeptADUI {
 	private CardLayout mcl = new CardLayout();
 
 	public DeptADUI(String userName) {
-		tbar = new TitleBar(userName);
+		tbar = new TitleBar(userName, frame);
 
 		childp[0] = new HomePanel();
 		childp[1] = new TeachingPlanPanel();
 		childp[2] = new DeptCoursePanel();
 		childp[3] = new DeptStudentPanel();
 
-		switchPane.setSize(800, 480);
-		switchPane.setLocation(30, 150);
+		switchPane.setSize(800, 490);
+		switchPane.setLocation(30, 140);
 		switchPane.setLayout(mcl);
 
 		for (int i = 0; i < mBtn.length; i++) {
-			mBtn[i] = new MenuBtn(FUNC_BTN_NAME[i]);
+			mBtn[i] = new MenuBtn(FUNC_BTN_NAME[i], FUNC_BTN_TEXT[i]);
 			mbar.add(mBtn[i]);
-			childp[i].setSize(800, 480);
+			childp[i].setSize(800, 490);
 			switchPane.add(childp[i], FUNC_BTN_NAME[i]);
 		}
 

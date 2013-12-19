@@ -19,6 +19,8 @@ public class AdminUI {
 	private static int FUNC_NUM = 4;
 	private static String[] FUNC_BTN_NAME = { "homeBtn", "userBtn",
 			"statesBtn", "logBtn" };
+	private static String[] FUNC_BTN_TEXT = { "主页", "管理系统用户", "管理系统状态",
+			"查看系统日志" };
 	private MenuBar mbar = new MenuBar();
 	private MenuBtn[] mBtn = new MenuBtn[FUNC_NUM];
 	private CardLayout mcl = new CardLayout();
@@ -28,20 +30,24 @@ public class AdminUI {
 	private TitleBar tbar = null;
 
 	public AdminUI(String userName) {
-		tbar = new TitleBar(userName);
+		tbar = new TitleBar(userName, frame);
 		mbar.setLocation(30, 100);
-		switchPane.setBounds(30, 150, 800, 480);
+		switchPane.setBounds(30, 140, 800, 490);
 		mPanel[0] = new HomePanel();
 		mPanel[1] = new UserPanel();
 		mPanel[2] = new StatesPanel();
 		mPanel[3] = new LogPanel();
 		for (int i = 0; i < FUNC_NUM; i++) {
-			mBtn[i] = new MenuBtn(FUNC_BTN_NAME[i]);
+			mBtn[i] = new MenuBtn(FUNC_BTN_NAME[i], FUNC_BTN_TEXT[i]);
 			mbar.add(mBtn[i]);
 			switchPane.add(mPanel[i], FUNC_BTN_NAME[i]);
+			final int index = i;
 			mBtn[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					mcl.show(switchPane, ((MenuBtn) e.getSource()).getName());
+					if (index == 3) {
+						((LogPanel) mPanel[index]).init();
+					}
 				}
 			});
 		}

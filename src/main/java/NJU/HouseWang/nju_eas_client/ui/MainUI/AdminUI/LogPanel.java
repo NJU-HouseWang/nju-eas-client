@@ -8,14 +8,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Bar.FunctionBar;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.FunctionBtn;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.RefreshBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CommonTable;
 import NJU.HouseWang.nju_eas_client.uiLogic.AdminUILogic;
@@ -28,19 +31,11 @@ public class LogPanel extends JPanel {
 	private JPanel fbar = new FunctionBar();// 功能按钮栏
 	private FunctionBtn[] fBtn = new FunctionBtn[FUNC_NUM];// 功能按钮
 	private SubPanel sp = new SubPanel("操作日志列表", 740, 380);// 子界面
-	private JButton refreshBtn = new JButton();// 刷新按钮
-	private JTextField conditiontf = new JTextField();// 条件输入框
-	private JButton searchBtn = new JButton();// 搜索按钮
+	private RefreshBtn refreshBtn = new RefreshBtn();// 刷新按钮
 
 	private JScrollPane scrollp = new JScrollPane();// 表格滚动框
 	private DefaultTableModel dtm = new DefaultTableModel(20, 5);// 表格Model
-	@SuppressWarnings("serial")
-	private CommonTable table = new CommonTable(dtm) {// 表格
-		// 设置表格不可编辑
-		public boolean isCellEditable(int row, int column) {
-			return false;
-		}
-	};
+	private CommonTable table = new CommonTable(dtm);
 
 	private String[] head = null;// 表头
 	private String[][] content = null;// 表格内容
@@ -56,15 +51,7 @@ public class LogPanel extends JPanel {
 		sp.setLocation(30, 70);
 		refreshBtn.setBounds(3, 3, 22, 22);
 		refreshBtn.setPreferredSize(new Dimension(22, 22));
-		conditiontf.setBounds(562, 4, 150, 22);
-		conditiontf.setFont(new Font("微软雅黑", Font.PLAIN, 12));
-		conditiontf.setBorder(null);
-		searchBtn.setBounds(712, 4, 22, 22);
-		searchBtn.setBorder(null);
-		// sp.getTopPanel().setLayout(null);
 		sp.getTopPanel().add(refreshBtn);
-		// sp.getTopPanel().add(conditiontf);
-		// sp.getTopPanel().add(searchBtn);
 
 		scrollp.getViewport().setBackground(Color.white);
 		scrollp.setViewportView(table);
@@ -74,7 +61,6 @@ public class LogPanel extends JPanel {
 		setListener();
 		add(fbar);
 		add(sp);
-		showTable();
 	}
 
 	/* *
@@ -83,6 +69,10 @@ public class LogPanel extends JPanel {
 	private void showTable() {
 		head = null;
 		content = null;
+		table.clearSelection();
+		dtm = new DefaultTableModel(0, 5);
+		table.setModel(dtm);
+		table.updateUI();
 		String listName = "log_list";
 		Object fb = logic.showInfoTableHead(listName);
 		if (fb instanceof Feedback) {
@@ -95,9 +85,9 @@ public class LogPanel extends JPanel {
 						((Feedback) fb).getContent());
 			} else if (fb instanceof String[][]) {
 				content = (String[][]) fb;
+				dtm.setDataVector(content, head);
 			}
 		}
-		dtm.setDataVector(content, head);
 		table.updateUI();
 	}
 
@@ -118,4 +108,7 @@ public class LogPanel extends JPanel {
 		});
 	}
 
+	public void init() {
+		showTable();
+	}
 }

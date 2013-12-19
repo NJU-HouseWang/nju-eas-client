@@ -40,12 +40,13 @@ public class CommonFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
+	@SuppressWarnings("restriction")
 	private void setBackgroung() {
 		this.setContentPane(new CommonPanel(frameName));
 		JPanel imagePanel = (JPanel) this.getContentPane();
 		imagePanel.setOpaque(false);
 		setUndecorated(true);
-		// com.sun.awt.AWTUtilities.setWindowOpaque(this, false);
+		com.sun.awt.AWTUtilities.setWindowOpaque(this, false);
 	}
 
 	private void setMovable(final JFrame frame) {
