@@ -61,7 +61,7 @@ public class TeacherUILogic {
 	}
 
 	public Object showMyCourseList() {
-		String command = "show；tea_course_list；";
+		String command = "show；tea_course_list";
 		ArrayList<String> list = null;
 		String[][] content = null;
 		try {

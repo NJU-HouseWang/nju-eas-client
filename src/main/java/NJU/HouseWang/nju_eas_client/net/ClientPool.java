@@ -34,7 +34,7 @@ public class ClientPool {
 	/**
 	 * 默认端口
 	 */
-	private static final int DEFAULT_PORT = 9001;
+	private static final int DEFAULT_PORT = 9100;
 
 	/**
 	 * 最大连接数

@@ -101,7 +101,7 @@ public class StudentUILogic {
 	}
 
 	public Object showYixuanCommonCourseList() {
-		String command = "show；yixuan_common_course_list；";
+		String command = "show；selected_common_course_list；";
 		ArrayList<String> list = null;
 		String[][] content = null;
 		try {
@@ -122,7 +122,7 @@ public class StudentUILogic {
 
 	public Object showSelectedCommonCourseListHead() {
 		String line = null;
-		String cmd = "show；selected_common_course_list";
+		String cmd = "show；selectable_common_course_list_head";
 		try {
 			NetService client = initNetService();
 			client.sendCommand(cmd);
@@ -141,7 +141,7 @@ public class StudentUILogic {
 	}
 
 	public Object showSelectedCommonCourseList() {
-		String command = "show；selected_common_course_list；";
+		String command = "show；selectable_common_course_list；";
 		ArrayList<String> list = null;
 		String[][] content = null;
 		try {
@@ -202,7 +202,7 @@ public class StudentUILogic {
 			return Feedback.INTERNET_ERROR;
 		}
 	}
-	
+
 	public Feedback cancelCommonCourse(String courseId) {
 		String command = "cancel；common_course；" + courseId;
 		String line = null;
@@ -250,7 +250,7 @@ public class StudentUILogic {
 
 	public Object showScoreListHead() {
 		String line = null;
-		String cmd = "show；student_score_list_head";
+		String cmd = "show；course_student_list_head";
 		try {
 			NetService client = initNetService();
 			client.sendCommand(cmd);

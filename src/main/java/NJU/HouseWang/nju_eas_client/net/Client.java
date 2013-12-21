@@ -27,7 +27,7 @@ public class Client implements NetService {
 	/**
 	 * 默认端口
 	 */
-	private static final int DEFAULT_PORT = 9001;
+	private static final int DEFAULT_PORT = 9100;
 	/**
 	 * IP地址
 	 */
