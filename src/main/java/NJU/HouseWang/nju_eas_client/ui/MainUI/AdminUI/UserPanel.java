@@ -19,6 +19,8 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.FunctionBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.RefreshBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CommonTable;
+import NJU.HouseWang.nju_eas_client.ui.MainUI.ExportUI.ExportUI;
+import NJU.HouseWang.nju_eas_client.ui.MainUI.ImportUI.ImportUI;
 import NJU.HouseWang.nju_eas_client.uiLogic.AdminUILogic;
 import NJU.HouseWang.nju_eas_client.vo.Feedback;
 import NJU.HouseWang.nju_eas_client.vo.UserTypeVO;
@@ -120,7 +122,7 @@ public class UserPanel extends JPanel {
 			JOptionPane.showMessageDialog(null, ((Feedback) fb).getContent());
 		} else if (fb instanceof String[]) {
 			head = (String[]) fb;
-			fb = logic.showInfoTableContent(listName,"all");
+			fb = logic.showInfoTableContent(listName, "all");
 			if (fb instanceof Feedback) {
 				JOptionPane.showMessageDialog(null,
 						((Feedback) fb).getContent());
@@ -209,6 +211,30 @@ public class UserPanel extends JPanel {
 			}
 		});
 
+		// 导入按钮监听
+		fBtn[3].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String itemName = null;
+				if (((UserTypeVO) userTypecb.getSelectedItem()).name_en
+						.equals("Student")) {
+					itemName = "student";
+				} else if (((UserTypeVO) userTypecb.getSelectedItem()).name_en
+						.equals("Login")) {
+					itemName = "user";
+				} else {
+					itemName = "teacher";
+				}
+				new ImportUI(itemName, head);
+			}
+		});
+
+		// 导出按钮监听
+		fBtn[4].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new ExportUI(head, content);
+			}
+		});
+
 		userTypecb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String listName = ((UserTypeVO) userTypecb.getSelectedItem()).name_en;
@@ -216,8 +242,8 @@ public class UserPanel extends JPanel {
 					fBtn[0].setEnabled(false);
 					fBtn[1].setEnabled(false);
 					fBtn[2].setEnabled(false);
-					fBtn[3].setEnabled(false);
-					fBtn[4].setEnabled(false);
+					fBtn[3].setEnabled(true);
+					fBtn[4].setEnabled(true);
 				} else if (listName.startsWith("null")) {
 					JOptionPane.showMessageDialog(null, "请选择用户类型。。。");
 				} else if (listName.startsWith("Login")) {
@@ -225,7 +251,7 @@ public class UserPanel extends JPanel {
 					fBtn[1].setEnabled(false);
 					fBtn[2].setEnabled(false);
 					fBtn[3].setEnabled(false);
-					fBtn[4].setEnabled(false);
+					fBtn[4].setEnabled(true);
 					showTable();
 				} else {
 					fBtn[0].setEnabled(true);

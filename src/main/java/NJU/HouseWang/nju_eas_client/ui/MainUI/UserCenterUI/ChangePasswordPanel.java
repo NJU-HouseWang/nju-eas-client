@@ -1,17 +1,12 @@
 package NJU.HouseWang.nju_eas_client.ui.MainUI.UserCenterUI;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.CommonBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Field.PasswordField;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.CommonPanel;
 import NJU.HouseWang.nju_eas_client.uiLogic.UserCenterUILogic;
@@ -24,8 +19,7 @@ public class ChangePasswordPanel extends JPanel {
 	private PasswordField oldpf = new PasswordField("请输入原密码...");
 	private PasswordField newpf1 = new PasswordField("请输入新密码...");
 	private PasswordField newpf2 = new PasswordField("请再次输入新密码...");
-	private JButton btn = new JButton();
-	private JLabel lb = new JLabel("修改密码", JLabel.CENTER);
+	private CommonBtn btn = new CommonBtn("修改密码");
 
 	public ChangePasswordPanel() {
 		setLayout(null);
@@ -36,18 +30,7 @@ public class ChangePasswordPanel extends JPanel {
 		newpf1.setBounds(228, 168, 240, 30);
 		newpf2.setBounds(228, 212, 240, 30);
 
-		btn.setIcon(new ImageIcon("img/CommonIcon/ChangePasswordBtn_0.png"));
-		btn.setRolloverIcon(new ImageIcon(
-				"img/CommonIcon/ChangePasswordBtn_1.png"));
-		btn.setSelectedIcon(new ImageIcon(
-				"img/CommonIcon/ChangePasswordBtn_2.png"));
-
-		btn.setBorderPainted(false);
-		btn.setLayout(new BorderLayout());
 		btn.setBounds(339, 256, 130, 35);
-		lb.setFont(new Font("微软雅黑", Font.PLAIN, 14));
-		lb.setForeground(Color.white);
-		btn.add(lb, BorderLayout.CENTER);
 
 		add(oldpf);
 		add(newpf1);

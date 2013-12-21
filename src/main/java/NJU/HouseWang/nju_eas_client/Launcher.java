@@ -1,10 +1,3 @@
-/*
- * 文件名：Launcher.java
- * 创建者：王鑫
- * 创建时间：2013-10-16
- * 最后修改：王鑫
- * 修改时间：2013-12-1
- */
 package NJU.HouseWang.nju_eas_client;
 
 import javax.swing.UIManager;
@@ -17,12 +10,20 @@ import NJU.HouseWang.nju_eas_client.ui.MainUI.SchoolDeanUI.SchoolDeanUI;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.StudentUI.StudentUI;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.TeacherUI.TeacherUI;
 
-/*
- * 类：Launcher
+/**
+ * 程序入口
  * 
+ * @author Xin
+ * @version 2013-12-21
  */
 public class Launcher {
 
+	/**
+	 * 主方法
+	 * 
+	 * @param args
+	 *            运行时参数
+	 */
 	public static void main(String[] args) {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -32,6 +33,14 @@ public class Launcher {
 		createUI("Login", null);
 	}
 
+	/**
+	 * 创建界面
+	 * 
+	 * @param type
+	 *            用户类型
+	 * @param userName
+	 *            用户名
+	 */
 	public static void createUI(String type, String userName) {
 		if (type.equals("Login")) {
 			new LoginUI();

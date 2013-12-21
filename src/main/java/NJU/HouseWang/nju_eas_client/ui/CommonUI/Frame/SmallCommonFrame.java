@@ -53,15 +53,16 @@ public class SmallCommonFrame extends JFrame {
 		add(minBtn);
 		add(exitBtn);
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 
+	@SuppressWarnings("restriction")
 	private void setBackgroung() {
 		setContentPane(new CommonPanel(frameName));
 		JPanel imagePanel = (JPanel) this.getContentPane();
 		imagePanel.setOpaque(false);
 		setUndecorated(true);
-		// com.sun.awt.AWTUtilities.setWindowOpaque(this, false);
+		com.sun.awt.AWTUtilities.setWindowOpaque(this, false);
 	}
 
 	private void setMovable(final JFrame frame) {
