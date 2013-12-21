@@ -35,6 +35,13 @@
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>apache.com</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.9-20121203</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/resources/poi-3.9-20121203.jar</systemPath>
+		</dependency>
 	</dependencies>
 	<organization>
 		<name>NJU-HouseWang</name>
