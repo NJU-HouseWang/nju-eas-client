@@ -6,12 +6,10 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Bar.FunctionBar;
@@ -37,8 +35,8 @@ public class UserPanel extends JPanel {
 	private SubPanel sp = new SubPanel("", 740, 380);// 子界面
 	private JComboBox<UserTypeVO> userTypecb = new JComboBox<UserTypeVO>();// 用户类型下拉框
 	private RefreshBtn refreshBtn = new RefreshBtn();// 刷新按钮
-	private JTextField conditiontf = new JTextField();// 条件输入框
-	private JButton searchBtn = new JButton();// 搜索按钮
+	// private JTextField conditiontf = new JTextField();// 条件输入框
+	// private JButton searchBtn = new JButton();// 搜索按钮
 
 	private JScrollPane scrollp = new JScrollPane();// 表格滚动框
 	private DefaultTableModel dtm = new DefaultTableModel(20, 5);// 表格Model
@@ -73,16 +71,16 @@ public class UserPanel extends JPanel {
 		userTypecb.setBounds(3, 3, 150, 24);
 		userTypecb.setFont(new Font("微软雅黑", Font.PLAIN, 12));
 		refreshBtn.setBounds(155, 3, 24, 24);
-		conditiontf.setBounds(562, 4, 150, 22);
-		conditiontf.setFont(new Font("微软雅黑", Font.PLAIN, 12));
-		conditiontf.setBorder(null);
-		searchBtn.setBounds(712, 4, 22, 22);
-		searchBtn.setBorder(null);
+		// conditiontf.setBounds(562, 4, 150, 22);
+		// conditiontf.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+		// conditiontf.setBorder(null);
+		// searchBtn.setBounds(712, 4, 22, 22);
+		// searchBtn.setBorder(null);
 		sp.getTopPanel().setLayout(null);
 		sp.getTopPanel().add(userTypecb);
 		sp.getTopPanel().add(refreshBtn);
-		sp.getTopPanel().add(conditiontf);
-		sp.getTopPanel().add(searchBtn);
+		// sp.getTopPanel().add(conditiontf);
+		// sp.getTopPanel().add(searchBtn);
 
 		userTypecb.setFont(new Font("微软雅黑", Font.PLAIN, 12));
 		for (int i = 0; i < ut.length; i++) {
@@ -248,7 +246,7 @@ public class UserPanel extends JPanel {
 					JOptionPane.showMessageDialog(null, "请选择用户类型。。。");
 				} else if (listName.startsWith("Login")) {
 					fBtn[0].setEnabled(false);
-					fBtn[1].setEnabled(false);
+					fBtn[1].setEnabled(true);
 					fBtn[2].setEnabled(false);
 					fBtn[3].setEnabled(false);
 					fBtn[4].setEnabled(true);

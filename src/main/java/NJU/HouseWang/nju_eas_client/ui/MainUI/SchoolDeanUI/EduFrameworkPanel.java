@@ -31,16 +31,16 @@ public class EduFrameworkPanel extends JPanel {
 	private CTable table = null;
 	private RefreshBtn refreshBtn = new RefreshBtn();
 
-	private String[][] content = new String[1][7];
+	private String[][] content = new String[][] { { " ", " ", " ", " ", " ",
+			" ", " " } };
 
-	private String[] head = new String[7];
+	private String[] head = new String[] { " ", " ", " ", " ", " ", " ", " " };
 
 	// private String[] head = new String[] { "课程模块", "课程性质", "序列", "课程类型",
 	// "课程名", "建议学分", "建议学期" };
 
 	@SuppressWarnings("serial")
 	public EduFrameworkPanel() {
-		showEduFw();
 		setLayout(null);
 		setBackground(Color.white);
 		fbar = new FunctionBar();
@@ -75,31 +75,20 @@ public class EduFrameworkPanel extends JPanel {
 		edufwp.getCenterPanel()
 				.add(new JScrollPane(table), BorderLayout.CENTER);
 		add(edufwp);
+		showEduFw();
 		setListener();
-		for (int i = 0; i < content.length; i++) {
-			for (int j = 0; j < content[i].length; j++) {
-				dtm.setValueAt(content[i][j], i, j);
-			}
-		}
-		dtm.setColumnIdentifiers(head);
 	}
 
 	private void setListener() {
 		refreshBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				showEduFw();
-				for (int i = 0; i < content.length; i++) {
-					for (int j = 0; j < content[i].length; j++) {
-						dtm.setValueAt(content[i][j], i, j);
-					}
-				}
-				dtm.setColumnIdentifiers(head);
 			}
 		});
 
 		fBtn[0].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new AddEduFwUI();
+				new ImportEduFrameWorkUI();
 			}
 		});
 
@@ -112,8 +101,10 @@ public class EduFrameworkPanel extends JPanel {
 	}
 
 	private void showEduFw() {
-		head = null;
-		content = null;
+		content = new String[][] { { " ", " ", " ", " ", " ", " ", " " } };
+
+		head = new String[] { " ", " ", " ", " ", " ", " ", " " };
+
 		Object fb = logic.showEduFwHead();
 		if (fb instanceof Feedback) {
 			JOptionPane.showMessageDialog(null, ((Feedback) fb).getContent());
@@ -125,6 +116,12 @@ public class EduFrameworkPanel extends JPanel {
 						((Feedback) fb).getContent());
 			} else if (fb instanceof String[][]) {
 				content = (String[][]) fb;
+			}
+		}
+		dtm.setColumnIdentifiers(head);
+		for (int i = 0; i < content.length; i++) {
+			for (int j = 0; j < content[i].length; j++) {
+				dtm.setValueAt(content[i][j], i, j);
 			}
 		}
 	}

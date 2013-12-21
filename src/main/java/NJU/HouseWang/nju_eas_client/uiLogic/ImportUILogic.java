@@ -17,12 +17,12 @@ import NJU.HouseWang.nju_eas_client.vo.Feedback;
 public class ImportUILogic {
 
 	private ClientPool cPool = null;
-	
+
 	private NetService initNetService() {
 		cPool = ClientPool.getInstance();
 		return cPool.getClient();
 	}
-	
+
 	public ArrayList<String> readXls(String path) throws IOException {
 		ArrayList<String> xls = new ArrayList<String>();
 		InputStream is = new FileInputStream(path);
@@ -39,11 +39,13 @@ public class ImportUILogic {
 			for (int cellNum = 0; cellNum <= hssfRow.getLastCellNum(); cellNum++) {
 				HSSFCell hssfCell = hssfRow.getCell(cellNum);
 				if (hssfCell == null) {
-					continue;
-				}
+					s += "null" + "；";
+					System.out.print("\t | \tnull");
+				} else {
 
-				s += getValue(hssfCell) + "；";
-				System.out.print("\t | \t" + getValue(hssfCell));
+					s += getValue(hssfCell) + "；";
+					System.out.print("\t | \t" + getValue(hssfCell));
+				}
 			}
 			xls.add(s);
 			System.out.println();

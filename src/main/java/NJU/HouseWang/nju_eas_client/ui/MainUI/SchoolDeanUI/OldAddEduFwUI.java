@@ -30,7 +30,7 @@ import NJU.HouseWang.nju_eas_client.net.ClientPool;
 import NJU.HouseWang.nju_eas_client.netService.NetService;
 import NJU.HouseWang.nju_eas_client.vo.Feedback;
 
-public class AddEduFwUI {
+public class OldAddEduFwUI {
 	private JFrame frame = null;
 	// 窗口位置、大小信息
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -73,7 +73,7 @@ public class AddEduFwUI {
 	private ArrayList<String> typeInfo = new ArrayList<String>();
 	private ArrayList<String> courseInfo = new ArrayList<String>();
 
-	public AddEduFwUI() {
+	public OldAddEduFwUI() {
 		frame = new JFrame();
 		// 窗口位置和大小
 		frame.setBounds(((int) screenSize.getWidth() - width) / 2,
@@ -258,7 +258,8 @@ public class AddEduFwUI {
 			System.out.println("Get Module Info:" + infoLine);
 			moduleInfo.add(infoLine);
 			for (String s : moduleInfo) {
-				if (s.split("；")[3].compareTo(s.split("；")[2]) < 0) {
+				if (Integer.parseInt(s.split("；")[2]) >= Integer.parseInt((s
+						.split("；")[3]))) {
 					return false;
 				}
 			}
@@ -313,7 +314,7 @@ public class AddEduFwUI {
 					courseInfo.add(new String(typeInfo.get(i)) + line);
 				} else {
 					if (i == 0
-							|| (!courseInfo.get(courseInfo.size()).contains(
+							|| (!courseInfo.get(courseInfo.size()-1).contains(
 									typeInfo.get(i))))
 						courseInfo.add(new String(typeInfo.get(i)));
 					break;
@@ -511,6 +512,6 @@ public class AddEduFwUI {
 	}
 
 	public static void main(String[] args) {
-		new AddEduFwUI();
+		new OldAddEduFwUI();
 	}
 }

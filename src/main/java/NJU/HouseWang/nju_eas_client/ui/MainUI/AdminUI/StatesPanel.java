@@ -214,8 +214,11 @@ public class StatesPanel extends JPanel {
 					newTerm.firstYear = year1;
 					newTerm.secondYear = (Integer.parseInt(year1) + 1) + "";
 					newTerm.termth = termth;
-					logic.createNewTerm(newTerm.toString());
+					Feedback fb = logic.createNewTerm(newTerm.toString());
+					JOptionPane.showMessageDialog(null, fb.getContent());
 				}
+				p5.setVisible(false);
+				p1.setVisible(true);
 				showTerm();
 			}
 		});

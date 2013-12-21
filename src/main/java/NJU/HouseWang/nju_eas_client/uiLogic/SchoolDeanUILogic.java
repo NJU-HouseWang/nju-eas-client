@@ -7,9 +7,8 @@ import java.util.ArrayList;
 
 import NJU.HouseWang.nju_eas_client.net.ClientPool;
 import NJU.HouseWang.nju_eas_client.netService.NetService;
-import NJU.HouseWang.nju_eas_client.vo.TPDeptVO;
 import NJU.HouseWang.nju_eas_client.vo.Feedback;
-import NJU.HouseWang.nju_eas_client.vo.TermVO;
+import NJU.HouseWang.nju_eas_client.vo.TPDeptVO;
 
 /**
  * 管理员界面所对应的逻辑类，负责与网络层交互
@@ -28,7 +27,22 @@ public class SchoolDeanUILogic {
 		ClientPool cPool = ClientPool.getInstance();
 		return cPool.getClient();
 	}
-	
+
+	public Feedback addEduFrameWork(ArrayList<String> list) {
+		String cmd = "add；eduframework";
+		String line = null;
+		try {
+			NetService client = initNetService();
+			client.sendCommand(cmd);
+			client.sendList(list);
+			line = client.receiveFeedback();
+			return Feedback.valueOf(line);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Feedback.INTERNET_ERROR;
+		}
+	}
+
 	/**
 	 * 从服务器上获取教学框架的表头
 	 * 
@@ -37,6 +51,27 @@ public class SchoolDeanUILogic {
 	public Object showEduFwHead() {
 		String line = null;
 		String cmd = "show；eduframework_head";
+		try {
+			NetService client = initNetService();
+			client.sendCommand(cmd);
+			line = client.receiveFeedback();
+			client.shutDownConnection();
+			if (!line.contains("；")) {
+				return Feedback.valueOf(line);
+			} else {
+				String[] head = line.split("；");
+				return head;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Feedback.INTERNET_ERROR;
+		}
+	}
+
+	public Object showEduFwHead_Import() {
+		String line = null;
+		String cmd = "show；eduframework_head_import";
 		try {
 			NetService client = initNetService();
 			client.sendCommand(cmd);

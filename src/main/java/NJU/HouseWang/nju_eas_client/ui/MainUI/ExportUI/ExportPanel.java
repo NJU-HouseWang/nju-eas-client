@@ -43,7 +43,7 @@ public class ExportPanel extends JPanel {
 		setLayout(null);
 		pathField.setBounds(35, 15, 525, 30);
 		pathField.setEditable(false);
-		cfBtn.setBounds(435, 15, 100, 30);
+		cfBtn.setBounds(560, 15, 100, 30);
 
 		scrollPanel.setBounds(35, 62, 625, 300);
 

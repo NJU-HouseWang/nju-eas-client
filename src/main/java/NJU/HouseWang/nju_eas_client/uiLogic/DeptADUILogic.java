@@ -40,6 +40,21 @@ public class DeptADUILogic {
 			e.printStackTrace();
 		}
 	}
+	
+	public Feedback addEduFrameWork(ArrayList<String> list) {
+		String cmd = "add；eduframework";
+		String line = null;
+		try {
+			NetService client = initNetService();
+			client.sendCommand(cmd);
+			client.sendList(list);
+			line = client.receiveFeedback();
+			return Feedback.valueOf(line);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Feedback.INTERNET_ERROR;
+		}
+	}
 
 	/**
 	 * 显示当前学期
@@ -53,6 +68,26 @@ public class DeptADUILogic {
 			ns.shutDownConnection();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	public Object showTPHead_import() {
+		String line = null;
+		String cmd = "show；teachingplan_head_import";
+		try {
+			NetService client = initNetService();
+			client.sendCommand(cmd);
+			line = client.receiveFeedback();
+			client.shutDownConnection();
+			if (!line.contains("；")) {
+				return Feedback.valueOf(line);
+			} else {
+				String[] head = line.split("；");
+				return head;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Feedback.INTERNET_ERROR;
 		}
 	}
 
