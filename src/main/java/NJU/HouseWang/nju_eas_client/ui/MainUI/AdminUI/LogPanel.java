@@ -3,17 +3,12 @@ package NJU.HouseWang.nju_eas_client.ui.MainUI.AdminUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Bar.FunctionBar;
@@ -21,9 +16,11 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.FunctionBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.RefreshBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CommonTable;
+import NJU.HouseWang.nju_eas_client.ui.MainUI.ExportUI.ExportUI;
 import NJU.HouseWang.nju_eas_client.uiLogic.AdminUILogic;
 import NJU.HouseWang.nju_eas_client.vo.Feedback;
 
+@SuppressWarnings("serial")
 public class LogPanel extends JPanel {
 	private static int FUNC_NUM = 1;// 功能按钮的数量
 	private static String[] FUNC_BTN_NAME = { "ExportBtn" };// 功能按钮的名称
@@ -103,7 +100,7 @@ public class LogPanel extends JPanel {
 
 		fBtn[0].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(null, "导出列表");
+				new ExportUI(head, content);
 			}
 		});
 	}

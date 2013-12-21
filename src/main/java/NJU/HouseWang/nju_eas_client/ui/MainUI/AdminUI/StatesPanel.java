@@ -18,6 +18,7 @@ import NJU.HouseWang.nju_eas_client.uiLogic.AdminUILogic;
 import NJU.HouseWang.nju_eas_client.vo.Feedback;
 import NJU.HouseWang.nju_eas_client.vo.TermVO;
 
+@SuppressWarnings("serial")
 public class StatesPanel extends JPanel {
 	private AdminUILogic logic = new AdminUILogic();
 	private TermVO curTerm = new TermVO();
@@ -82,7 +83,7 @@ public class StatesPanel extends JPanel {
 				if (!fb.equals(Feedback.OPERATION_SUCCEED)) {
 					JOptionPane.showMessageDialog(null, fb.getContent());
 				} else {
-					if(newStates) {
+					if (newStates) {
 						chooseBtn.setText("开");
 					} else {
 						chooseBtn.setText("关");
@@ -111,7 +112,7 @@ public class StatesPanel extends JPanel {
 				if (!fb.equals(Feedback.OPERATION_SUCCEED)) {
 					JOptionPane.showMessageDialog(null, fb.getContent());
 				} else {
-					if(newStates) {
+					if (newStates) {
 						byElectBtn.setText("开");
 					} else {
 						byElectBtn.setText("关");
@@ -140,7 +141,7 @@ public class StatesPanel extends JPanel {
 				if (!fb.equals(Feedback.OPERATION_SUCCEED)) {
 					JOptionPane.showMessageDialog(null, fb.getContent());
 				} else {
-					if(newStates) {
+					if (newStates) {
 						quitBtn.setText("开");
 					} else {
 						quitBtn.setText("关");
