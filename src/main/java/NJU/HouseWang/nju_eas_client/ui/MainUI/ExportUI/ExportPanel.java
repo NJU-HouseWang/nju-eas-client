@@ -85,7 +85,11 @@ public class ExportPanel extends JPanel {
 				int result = jfc.showSaveDialog(panel);
 				if (result == JFileChooser.APPROVE_OPTION) {
 					File file = jfc.getSelectedFile();
-					pathField.setText(file.getAbsolutePath());
+					String path = file.getAbsolutePath();
+					if (!path.endsWith(".xls")) {
+						path += ".xls";
+					}
+					pathField.setText(path);
 				}
 			}
 		});
