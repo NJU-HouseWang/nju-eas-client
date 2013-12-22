@@ -2,7 +2,6 @@ package NJU.HouseWang.nju_eas_client.vo;
 
 public class StudentVO {
 	public String id;
-	public String userType;
 	public String name;
 	public String department;
 	public String major;
@@ -17,13 +16,12 @@ public class StudentVO {
 
 	public StudentVO(String[] str) {
 		id = str[0];
-		userType = str[1];
-		name = str[2];
-		department = str[3];
-		major = str[4];
-		grade = str[5];
-		classNo = str[6];
-		duration = str[7];
-		enrollmentStatus = str[8];
+		name = str[1];
+		department = str[2];
+		major = str[3];
+		grade = str[4];
+		classNo = str[5];
+		duration = str[6];
+		enrollmentStatus = str[7];
 	}
 }

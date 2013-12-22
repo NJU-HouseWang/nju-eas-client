@@ -5,6 +5,7 @@ public enum Feedback {
 	OPERATION_FAIL("操作失败"), 
 	DATALIST_NOT_FOUND("数据列表不存在"), 
 	LISTNAME_EMPTY("未设置列表名"), 
+	LIST_EMPTY("空列表"), 
 	DATA_NOT_FOUND("数据不存在"), 
 	DATA_ALREADY_EXISTED("数据已存在"),
 	IP_ALREADY_EXISTED("该IP已登录"),

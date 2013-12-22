@@ -15,14 +15,15 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.Bar.TitleBar;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.HomeMenuBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.MenuBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Frame.CommonFrame;
+import NJU.HouseWang.nju_eas_client.uiLogic.StudentUILogic;
 import NJU.HouseWang.nju_eas_client.vo.Feedback;
 
 public class StudentUI {
+	private StudentUILogic logic = new StudentUILogic();
 	private final int FUNC_NUM = 4;
 	private final String[] FUNC_BTN_NAME = { "homeBtn", "myCouBtn",
 			"myScoreBtn", "chooseCommonBtn" };
-	private final String[] FUNC_BTN_TEXT = { "主页", "管理我的课程",
-			"查看成绩单", "通识课选课" };
+	private final String[] FUNC_BTN_TEXT = { "主页", "管理我的课程", "查看成绩单", "通识课选课" };
 	private CommonFrame frame = new CommonFrame("StudentFrame");
 	private TitleBar tbar = null;
 	private MenuBar mbar = new MenuBar();
@@ -33,7 +34,7 @@ public class StudentUI {
 	private CardLayout mcl = new CardLayout();
 
 	public StudentUI(String userName) {
-		tbar = new TitleBar(userName,frame);
+		tbar = new TitleBar(userName, frame);
 
 		childp[0] = new HomePanel();
 		childp[1] = new MyCoursePanel();
@@ -45,7 +46,7 @@ public class StudentUI {
 		switchPane.setLayout(mcl);
 
 		for (int i = 0; i < mBtn.length; i++) {
-			mBtn[i] = new MenuBtn(FUNC_BTN_NAME[i],FUNC_BTN_TEXT[i]);
+			mBtn[i] = new MenuBtn(FUNC_BTN_NAME[i], FUNC_BTN_TEXT[i]);
 			mbar.add(mBtn[i]);
 			childp[i].setSize(800, 490);
 			switchPane.add(childp[i], FUNC_BTN_NAME[i]);
@@ -66,7 +67,16 @@ public class StudentUI {
 			mBtn[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					mcl.show(switchPane, ((MenuBtn) e.getSource()).getName());
+					if (((MenuBtn) e.getSource()).getName().equals(
+							"chooseCommonBtn")
+							&& !logic.showChooseCommonStatus()) {
+						JOptionPane.showMessageDialog(null, "通识课选课尚未开始。");
+						mcl.show(switchPane, "homeBtn");
+						mBtn[0].setSelected(true);
+					} else {
+						mcl.show(switchPane,
+								((MenuBtn) e.getSource()).getName());
+					}
 				}
 			});
 		}
@@ -105,19 +115,22 @@ public class StudentUI {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						String bname = ((HomeMenuBtn) e.getSource()).getName();
-						mcl.show(switchPane, bname);
-						for (int i = 1; i < FUNC_BTN_NAME.length; i++) {
-							if (FUNC_BTN_NAME[i].equals(bname)) {
-								mBtn[i].setSelected(true);
+						if (bname.equals("chooseCommonBtn")
+								&& !logic.showChooseCommonStatus()) {
+							JOptionPane.showMessageDialog(null, "通识课选课尚未开始。");
+							mcl.show(switchPane, "homeBtn");
+							mBtn[0].setSelected(true);
+						} else {
+							mcl.show(switchPane, bname);
+							for (int i = 1; i < FUNC_BTN_NAME.length; i++) {
+								if (FUNC_BTN_NAME[i].equals(bname)) {
+									mBtn[i].setSelected(true);
+								}
 							}
 						}
 					}
 				});
 			}
 		}
-	}
-
-	public static void main(String[] args) {
-		new StudentUI("王学洋");
 	}
 }

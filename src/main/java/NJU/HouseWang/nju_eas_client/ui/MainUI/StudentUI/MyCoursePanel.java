@@ -2,6 +2,7 @@ package NJU.HouseWang.nju_eas_client.ui.MainUI.StudentUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,14 +24,16 @@ import NJU.HouseWang.nju_eas_client.vo.Feedback;
 
 public class MyCoursePanel extends JPanel {
 	private StudentUILogic logic = new StudentUILogic();
-	private SubPanel coup = new SubPanel("我的课程列表", 500, 380);
-	private SubPanel infop = new SubPanel("详细信息", 230, 380);
+	private SubPanel coup = new SubPanel("我的课程列表", 500, 420);
+	private SubPanel infop = new SubPanel("详细信息", 230, 420);
 	private DefaultTableModel dtm = new DefaultTableModel(40, 5);
 	private CommonTable table = new CommonTable(dtm);
 	private RefreshBtn reBtn = new RefreshBtn();
 
 	private String[] head = null;
 	private String[][] content = null;
+
+	private JTextArea area = new JTextArea();
 
 	public MyCoursePanel() {
 		setLayout(null);
@@ -39,9 +42,20 @@ public class MyCoursePanel extends JPanel {
 		coup.setLocation(30, 25);
 		coup.getTopPanel().add(reBtn);
 
+		area.setPreferredSize(new Dimension(220, 380));
+		area.setSize(new Dimension(220, 390));
+		area.setLineWrap(true);
+		area.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+		area.setEditable(false);
+
+		infop.setLocation(540, 25);
+		infop.getCenterPanel().setLayout(new BorderLayout());
+		infop.getCenterPanel().add(area, BorderLayout.CENTER);
+
 		coup.getCenterPanel().setLayout(new BorderLayout());
 		coup.getCenterPanel().add(new JScrollPane(table), BorderLayout.CENTER);
 		add(coup);
+		add(infop);
 		setListener();
 
 	}
@@ -60,19 +74,12 @@ public class MyCoursePanel extends JPanel {
 					Object o = logic.showCourseDetail(logic.showCurrentTerm(),
 							table.getValueAt(selectRowNum, 0).toString());
 					if (o instanceof CourseDetailVO) {
-						infop.setCenterPanel(new JPanel());
-						JTextArea area = new JTextArea();
-						area.setText("课程介绍：\r\n"
+						area.append("课程介绍：\r\n"
 								+ ((CourseDetailVO) o).introduction
 								+ "\r\n\r\n" + "推荐书目：\r\n"
 								+ ((CourseDetailVO) o).book + "\r\n\r\n"
 								+ "课程大纲：\r\n" + ((CourseDetailVO) o).syllabus
 								+ "\r\n\r\n");
-						area.setFont(new Font("微软雅黑", Font.PLAIN, 12));
-						area.setEditable(false);
-						area.setBorder(null);
-						infop.getCenterPanel().setLayout(new BorderLayout());
-						infop.getCenterPanel().add(area, BorderLayout.CENTER);
 					}
 				}
 			}

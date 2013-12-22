@@ -69,21 +69,22 @@ public class StatesPanel extends JPanel {
 		chooseBtn.setFont(new Font("微软雅黑", Font.PLAIN, 12));
 		chooseBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Boolean newStates = false;
+				Boolean newStates = new Boolean(false);
 				if (chooseBtn.getText().equals("关")) {
-					newStates = true;
+					newStates = new Boolean(true);
 				}
 				Feedback fb = logic.swicthStates("selectCommon",
 						newStates.toString());
-				System.out.println(chooseBtn.isSelected());
 				if (fb.equals(Feedback.OPERATION_SUCCEED)
 						&& newStates.equals(false)) {
 					fb = logic.processSelection();
 				}
-				if (!fb.equals(Feedback.OPERATION_SUCCEED)) {
+
+				if (fb != Feedback.OPERATION_SUCCEED
+						&& fb != Feedback.DATA_NOT_FOUND) {
 					JOptionPane.showMessageDialog(null, fb.getContent());
 				} else {
-					if (newStates) {
+					if (newStates.booleanValue()) {
 						chooseBtn.setText("开");
 					} else {
 						chooseBtn.setText("关");
@@ -112,7 +113,7 @@ public class StatesPanel extends JPanel {
 				if (!fb.equals(Feedback.OPERATION_SUCCEED)) {
 					JOptionPane.showMessageDialog(null, fb.getContent());
 				} else {
-					if (newStates) {
+					if (newStates.booleanValue()) {
 						byElectBtn.setText("开");
 					} else {
 						byElectBtn.setText("关");
@@ -141,7 +142,7 @@ public class StatesPanel extends JPanel {
 				if (!fb.equals(Feedback.OPERATION_SUCCEED)) {
 					JOptionPane.showMessageDialog(null, fb.getContent());
 				} else {
-					if (newStates) {
+					if (newStates.booleanValue()) {
 						quitBtn.setText("开");
 					} else {
 						quitBtn.setText("关");
