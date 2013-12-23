@@ -6,11 +6,9 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Bar.FunctionBar;
@@ -68,9 +66,6 @@ public class EduFrameworkPanel extends JPanel {
 
 		table = new CTable(map, dtm);
 		table.setEnabled(false);
-		DefaultTableCellRenderer r = new DefaultTableCellRenderer();
-		r.setHorizontalAlignment(JLabel.CENTER);
-		table.setDefaultRenderer(Object.class, r);
 		edufwp.getCenterPanel().setLayout(new BorderLayout());
 		edufwp.getCenterPanel()
 				.add(new JScrollPane(table), BorderLayout.CENTER);
@@ -116,13 +111,29 @@ public class EduFrameworkPanel extends JPanel {
 						((Feedback) fb).getContent());
 			} else if (fb instanceof String[][]) {
 				content = (String[][]) fb;
+				System.out.println("----");
 			}
 		}
+		map = new EduFrameworkMap(content);
+		dtm = new DefaultTableModel(content.length, content[0].length) {
+			public boolean isCellEditable(int indexRow, int indexColumn) {
+				return false;
+			}
+		};
+
+		table = new CTable(map, dtm);
 		dtm.setColumnIdentifiers(head);
 		for (int i = 0; i < content.length; i++) {
 			for (int j = 0; j < content[i].length; j++) {
+				if (content[i][j].contains("null-null")) {
+					content[i][j] = content[i][j].replaceAll("null-null", "");
+				}
 				dtm.setValueAt(content[i][j], i, j);
 			}
 		}
+		table.setEnabled(false);
+		edufwp.getCenterPanel().setLayout(new BorderLayout());
+		edufwp.getCenterPanel()
+				.add(new JScrollPane(table), BorderLayout.CENTER);
 	}
 }

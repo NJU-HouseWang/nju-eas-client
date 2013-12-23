@@ -15,7 +15,6 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CommonTable;
 import NJU.HouseWang.nju_eas_client.uiLogic.StudentUILogic;
 import NJU.HouseWang.nju_eas_client.vo.Feedback;
-import NJU.HouseWang.nju_eas_client.vo.TermVO;
 
 public class MyScorePanel extends JPanel {
 	private StudentUILogic logic = new StudentUILogic();
@@ -61,7 +60,7 @@ public class MyScorePanel extends JPanel {
 		Object o = logic.showScoreListHead();
 		if (o instanceof String[]) {
 			head = (String[]) o;
-			o = logic.showScoreList(((TermVO) termChooser.getSelectedItem())
+			o = logic.showScoreList(((String) termChooser.getSelectedItem())
 					.toString());
 			if (o instanceof Feedback) {
 				JOptionPane

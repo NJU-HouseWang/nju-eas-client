@@ -77,7 +77,7 @@ public class TeachingPlanPanel extends JPanel {
 	private void setListener() {
 		fBtn[0].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new AddTpUI();
+				new ImportTeachingPlanUI();
 			}
 		});
 		fBtn[1].addActionListener(new ActionListener() {
@@ -140,7 +140,7 @@ public class TeachingPlanPanel extends JPanel {
 	private void showTP() {
 		Object o = logic.showTPStatus();
 		if (o instanceof Feedback) {
-//			JOptionPane.showMessageDialog(null, ((Feedback) o).getContent());
+			// JOptionPane.showMessageDialog(null, ((Feedback) o).getContent());
 		} else if (o instanceof TPDeptVO) {
 			if (!((TPDeptVO) o).fileName.equals("null")) {
 				ClickedLabel lb = new ClickedLabel(((TPDeptVO) o).fileName);
