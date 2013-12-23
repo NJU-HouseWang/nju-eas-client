@@ -20,6 +20,7 @@ public class EduFrameworkMap implements CMap {
 		si.name = originTable[0][columnPoint];
 		si.row = 0;
 		si.num = 0;
+		rowMap.put(0, si);
 		for (int i = 0; i < originTable.length; i++) {
 			if (si.name.equals(originTable[i][columnPoint])) {
 				si.num++;
@@ -50,6 +51,7 @@ public class EduFrameworkMap implements CMap {
 	public int span(int row, int column) {
 		switch (column) {
 		case 0:
+
 			SpanInfo si1 = columnMap.get(0).get(row);
 			return si1.num;
 		case 1:
@@ -67,6 +69,9 @@ public class EduFrameworkMap implements CMap {
 	public int visibleCell(int row, int column) {
 		switch (column) {
 		case 0:
+			if (row == -1) {
+				return -1;
+			}
 			SpanInfo si1 = columnMap.get(0).get(row);
 			return si1.row;
 		case 1:

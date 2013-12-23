@@ -41,8 +41,8 @@ public class DeptADUILogic {
 		}
 	}
 	
-	public Feedback addEduFrameWork(ArrayList<String> list) {
-		String cmd = "add；eduframework";
+	public Feedback addTeachingPlan(ArrayList<String> list) {
+		String cmd = "add；teachingplan";
 		String line = null;
 		try {
 			NetService client = initNetService();
