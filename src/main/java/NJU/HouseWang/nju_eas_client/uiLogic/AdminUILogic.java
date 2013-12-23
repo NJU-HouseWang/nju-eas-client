@@ -276,4 +276,26 @@ public class AdminUILogic {
 			return Feedback.INTERNET_ERROR;
 		}
 	}
+
+	/**
+	 * 清空日志列表
+	 * 
+	 * @param emptyLogList
+	 * 
+	 * @return 操作反馈
+	 */
+	public Feedback emptyLogList() {
+		String command = "empty；log_list";
+		String line = null;
+		try {
+			NetService client = initNetService();
+			client.sendCommand(command);
+			line = client.receiveFeedback();
+			client.shutDownConnection();
+			return Feedback.valueOf(line);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Feedback.INTERNET_ERROR;
+		}
+	}
 }

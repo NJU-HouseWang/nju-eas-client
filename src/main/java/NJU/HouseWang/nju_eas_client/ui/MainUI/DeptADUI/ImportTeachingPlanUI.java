@@ -76,6 +76,10 @@ public class ImportTeachingPlanUI {
 		frame.add(menuBar);
 		frame.setVisible(true);
 	}
+
+	public static void main(String[] args) {
+		new ImportTeachingPlanUI();
+	}
 }
 
 class ImportPanel extends JPanel {
@@ -83,7 +87,9 @@ class ImportPanel extends JPanel {
 	private DeptADUILogic slogic = new DeptADUILogic();
 	private final ImportPanel panel = this;
 	private JTextField pathField = new JTextField();
-	private CommonBtn cfBtn = new CommonBtn("选择文件");
+	private JTextField pathFieldf = new JTextField();
+	private CommonBtn cfBtn = new CommonBtn("选择列表");
+	private CommonBtn cfBtnf = new CommonBtn("选择文件");
 	private DefaultTableModel dtm = new DefaultTableModel();
 	private CommonTable table = new CommonTable(dtm);
 	private JScrollPane scrollPanel = new JScrollPane(table);
@@ -111,6 +117,10 @@ class ImportPanel extends JPanel {
 		pathField.setEditable(false);
 		cfBtn.setBounds(435, 15, 80, 30);
 
+		pathFieldf.setBounds(35, 50, 545, 30);
+		pathFieldf.setEditable(false);
+		cfBtnf.setBounds(580, 50, 80, 30);
+
 		r1.setBackground(Color.white);
 		r2.setBackground(Color.white);
 		r1.setBounds(530, 23, 70, 15);
@@ -119,7 +129,7 @@ class ImportPanel extends JPanel {
 		rg.add(r2);
 		r1.setSelected(true);
 
-		scrollPanel.setBounds(35, 62, 625, 300);
+		scrollPanel.setBounds(35, 102, 620, 250);
 
 		dtm.setColumnIdentifiers(head);
 
@@ -132,6 +142,8 @@ class ImportPanel extends JPanel {
 		add(r2);
 		add(pathField);
 		add(cfBtn);
+		add(pathFieldf);
+		add(cfBtnf);
 		add(waitlb1);
 		add(scrollPanel);
 		add(notionlb);
@@ -183,6 +195,40 @@ class ImportPanel extends JPanel {
 				showTable();
 			}
 		});
+
+		cfBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser jfc = new JFileChooser();
+				jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+				jfc.setFileFilter(new FileFilter() {
+					public String getDescription() {
+						return "文本文件";
+					}
+
+					public boolean accept(File f) {
+						if (f.getName().endsWith(".pdf")
+								|| f.getName().endsWith(".doc")
+								|| f.getName().endsWith(".docx")
+								|| f.isDirectory()) {
+							return true;
+						}
+						return false;
+					}
+				});
+				int result = jfc.showOpenDialog(panel);
+				if (result == JFileChooser.APPROVE_OPTION) {
+					File file = jfc.getSelectedFile();
+					pathField.setText(file.getAbsolutePath());
+				}
+				
+				if (!pathFieldf.getText().equals("") && !l.isEmpty()) {
+					finishBtn.setEnabled(true);
+				} else {
+					finishBtn.setEnabled(false);
+				}
+			}
+		});
+
 		finishBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				finishBtn.setEnabled(false);
@@ -201,7 +247,7 @@ class ImportPanel extends JPanel {
 							}
 							list.add(s);
 						}
-						Feedback fb = slogic.addEduFrameWork(list);
+						Feedback fb = slogic.addTeachingPlan(list);
 						JOptionPane.showMessageDialog(null, fb.getContent());
 						finishBtn.setEnabled(true);
 						waitlb2.setVisible(false);
@@ -238,7 +284,11 @@ class ImportPanel extends JPanel {
 				}
 			}
 			dtm.setDataVector(content, head);
-			finishBtn.setEnabled(true);
+			if (!pathFieldf.getText().equals("")) {
+				finishBtn.setEnabled(true);
+			} else {
+				finishBtn.setEnabled(false);
+			}
 		} else {
 			finishBtn.setEnabled(false);
 		}

@@ -26,6 +26,7 @@ public enum Feedback {
 	SELECTION_ERROR("您未选择列表中的项"),
 	ITEM_EMPTY("项目不能为空"),
 	NUM_FORMAT_ERROR("登记的数字格式不正确"),
+	COMMAND_ERROR("命令不存在"),
 	TEACHINGPLAN_NOT_COMMIT("该院系的教学计划未提交");
 	
 	private String content;
