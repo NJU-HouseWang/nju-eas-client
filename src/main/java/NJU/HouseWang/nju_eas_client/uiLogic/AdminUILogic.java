@@ -35,6 +35,9 @@ public class AdminUILogic {
 	public Object showInfoTableHead(String listName) {
 		String line = null;
 		String[] head = null;
+		if (listName.equals("user_list")) {
+			listName = "login_list";
+		}
 		if (!(listName.equals("student_list") || listName.equals("login_list") || listName
 				.equals("log_list"))) {
 			listName = "teacher_list";

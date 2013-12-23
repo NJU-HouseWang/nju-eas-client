@@ -20,7 +20,7 @@ public class PasswordField extends JPasswordField {
 	}
 
 	public void create() {
-		setBounds(152, 327, 238, 30);
+		setBounds(198, 366, 238, 30);
 		setBorder(null);
 		setFont(new Font("微软雅黑", Font.PLAIN, 15));
 		setForeground(Color.DARK_GRAY);

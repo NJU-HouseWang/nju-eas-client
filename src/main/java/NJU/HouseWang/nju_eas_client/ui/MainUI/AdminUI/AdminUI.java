@@ -1,5 +1,6 @@
 package NJU.HouseWang.nju_eas_client.ui.MainUI.AdminUI;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -32,7 +33,7 @@ public class AdminUI {
 	public AdminUI(String userName) {
 		tbar = new TitleBar(userName, frame);
 		mbar.setLocation(30, 100);
-		switchPane.setBounds(30, 140, 800, 490);
+		switchPane.setBounds(30, 140, 1000, 590);
 		mPanel[0] = new HomePanel();
 		mPanel[1] = new UserPanel();
 		mPanel[2] = new StatesPanel();
@@ -73,12 +74,9 @@ public class AdminUI {
 				bmbtn[i] = new HomeMenuBtn(FUNC_BTN_NAME[i + 1]);
 				bmbar.add(bmbtn[i]);
 			}
-			bmbar.setLocation(70, 50);
-			setBackground(Color.getHSBColor((float) 0.617, (float) 0.42,
-					(float) 0.92));
 			((FlowLayout) getLayout()).setAlignment(FlowLayout.CENTER);
-			setLayout(null);
-			add(bmbar);
+			setLayout(new BorderLayout());
+			add(bmbar,BorderLayout.CENTER);
 			setListener();
 		}
 

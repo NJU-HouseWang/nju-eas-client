@@ -12,7 +12,7 @@ public class UserNameField extends JTextField {
 
 	public UserNameField() {
 		super(info);
-		setBounds(152, 283, 238, 30);
+		setBounds(198, 322, 238, 30);
 		setBorder(null);
 		setFont(new Font("微软雅黑", Font.PLAIN, 15));
 		setForeground(Color.DARK_GRAY);

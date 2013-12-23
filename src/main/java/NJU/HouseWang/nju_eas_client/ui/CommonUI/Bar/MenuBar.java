@@ -12,7 +12,7 @@ public class MenuBar extends JPanel {
 	private ButtonGroup group = new ButtonGroup();
 
 	public MenuBar() {
-		setSize(800, 40);
+		setSize(1000, 40);
 		FlowLayout fl = new FlowLayout();
 		setLayout(fl);
 		fl.setAlignment(FlowLayout.LEFT);

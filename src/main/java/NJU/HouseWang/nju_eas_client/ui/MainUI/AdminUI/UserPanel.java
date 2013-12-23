@@ -17,6 +17,9 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.FunctionBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.RefreshBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CommonTable;
+import NJU.HouseWang.nju_eas_client.ui.MainUI.AddItemUI.AddItemUIFactory;
+import NJU.HouseWang.nju_eas_client.ui.MainUI.EditUserUI.EditItemUIFactory;
+import NJU.HouseWang.nju_eas_client.ui.MainUI.EditUserUI.EditUserUI;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.ExportUI.ExportUI;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.ImportUI.ImportUI;
 import NJU.HouseWang.nju_eas_client.uiLogic.AdminUILogic;
@@ -30,16 +33,14 @@ public class UserPanel extends JPanel {
 			"ImportBtn", "ExportBtn" };// 功能按钮的名称
 	private UserTypeVO[] ut = new UserTypeVO[6];// 用户类型列表
 	private AdminUILogic logic = new AdminUILogic();// 管理员界面的逻辑
-	private JPanel fbar = new FunctionBar();// 功能按钮栏
+	private FunctionBar fbar = new FunctionBar();// 功能按钮栏
 	private FunctionBtn[] fBtn = new FunctionBtn[FUNC_NUM];// 功能按钮
-	private SubPanel sp = new SubPanel("", 740, 380);// 子界面
+	private SubPanel sp = new SubPanel("", 940, 480);// 子界面
 	private JComboBox<UserTypeVO> userTypecb = new JComboBox<UserTypeVO>();// 用户类型下拉框
 	private RefreshBtn refreshBtn = new RefreshBtn();// 刷新按钮
-	// private JTextField conditiontf = new JTextField();// 条件输入框
-	// private JButton searchBtn = new JButton();// 搜索按钮
 
 	private JScrollPane scrollp = new JScrollPane();// 表格滚动框
-	private DefaultTableModel dtm = new DefaultTableModel(20, 5);// 表格Model
+	private DefaultTableModel dtm = new DefaultTableModel();// 表格Model
 	private CommonTable table = new CommonTable(dtm) {// 表格
 		// 设置表格不可编辑
 		public boolean isCellEditable(int row, int column) {
@@ -71,16 +72,9 @@ public class UserPanel extends JPanel {
 		userTypecb.setBounds(3, 3, 150, 24);
 		userTypecb.setFont(new Font("微软雅黑", Font.PLAIN, 12));
 		refreshBtn.setBounds(155, 3, 24, 24);
-		// conditiontf.setBounds(562, 4, 150, 22);
-		// conditiontf.setFont(new Font("微软雅黑", Font.PLAIN, 12));
-		// conditiontf.setBorder(null);
-		// searchBtn.setBounds(712, 4, 22, 22);
-		// searchBtn.setBorder(null);
 		sp.getTopPanel().setLayout(null);
 		sp.getTopPanel().add(userTypecb);
 		sp.getTopPanel().add(refreshBtn);
-		// sp.getTopPanel().add(conditiontf);
-		// sp.getTopPanel().add(searchBtn);
 
 		userTypecb.setFont(new Font("微软雅黑", Font.PLAIN, 12));
 		for (int i = 0; i < ut.length; i++) {
@@ -143,14 +137,11 @@ public class UserPanel extends JPanel {
 				if (((UserTypeVO) userTypecb.getSelectedItem()).name_en
 						.equals("Student")) {
 					itemName = "student";
-				} else if (((UserTypeVO) userTypecb.getSelectedItem()).name_en
-						.equals("Login")) {
-					itemName = "user";
 				} else {
-					itemName = "teacher";
+					itemName = "teacher；"
+							+ ((UserTypeVO) userTypecb.getSelectedItem()).name_en;
 				}
-
-				new AddUserUI(itemName, head);
+				AddItemUIFactory.showAddItemUI(itemName);
 			}
 		});
 
@@ -165,7 +156,8 @@ public class UserPanel extends JPanel {
 						.equals("Login")) {
 					itemName = "user";
 				} else {
-					itemName = "teacher";
+					itemName = "teacher；"
+							+ ((UserTypeVO) userTypecb.getSelectedItem()).name_en;
 				}
 				int selectRowNum = table.getSelectedRow();
 
@@ -174,7 +166,8 @@ public class UserPanel extends JPanel {
 					for (int i = 0; i < origin.length; i++) {
 						origin[i] = (String) table.getValueAt(selectRowNum, i);
 					}
-					new EditUserUI(itemName, head, origin);
+					System.out.println(itemName);
+					EditItemUIFactory.showEditItemUI(itemName, origin);
 				} else {
 					JOptionPane.showMessageDialog(null,
 							Feedback.SELECTION_ERROR.getContent());

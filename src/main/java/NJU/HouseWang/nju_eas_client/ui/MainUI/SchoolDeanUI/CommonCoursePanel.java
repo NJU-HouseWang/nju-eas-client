@@ -50,10 +50,6 @@ public class CommonCoursePanel extends JPanel {
 
 		cp.setLocation(30, 70);
 
-		DefaultTableCellRenderer r = new DefaultTableCellRenderer();
-		r.setHorizontalAlignment(JLabel.CENTER);
-		table.setDefaultRenderer(Object.class, r);
-
 		cp.getCenterPanel().setLayout(new BorderLayout());
 		cp.getCenterPanel().add(new JScrollPane(table), BorderLayout.CENTER);
 		cp.getTopPanel().add(refreshBtn);
