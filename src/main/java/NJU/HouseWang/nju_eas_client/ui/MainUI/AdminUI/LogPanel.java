@@ -103,6 +103,12 @@ public class LogPanel extends JPanel {
 				new ExportUI(head, content);
 			}
 		});
+
+		fBtn[1].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+			}
+		});
 	}
 
 	public void init() {
