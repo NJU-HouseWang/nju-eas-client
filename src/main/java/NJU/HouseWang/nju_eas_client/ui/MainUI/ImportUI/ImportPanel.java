@@ -14,6 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.LookAndFeel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.table.DefaultTableModel;
 
@@ -92,6 +95,15 @@ public class ImportPanel extends JPanel {
 	private void setListener() {
 		cfBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				LookAndFeel look = UIManager.getLookAndFeel();
+				try {
+					UIManager.setLookAndFeel(UIManager
+							.getSystemLookAndFeelClassName());
+				} catch (ClassNotFoundException | InstantiationException
+						| IllegalAccessException
+						| UnsupportedLookAndFeelException e1) {
+					e1.printStackTrace();
+				}
 				JFileChooser jfc = new JFileChooser();
 				jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
 				jfc.setFileFilter(new FileFilter() {
@@ -115,6 +127,11 @@ public class ImportPanel extends JPanel {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
+				}
+				try {
+					UIManager.setLookAndFeel(look);
+				} catch (UnsupportedLookAndFeelException e1) {
+					e1.printStackTrace();
 				}
 				showTable();
 			}

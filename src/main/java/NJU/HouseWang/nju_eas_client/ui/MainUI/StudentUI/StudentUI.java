@@ -61,10 +61,6 @@ public class StudentUI {
 		setListener();
 		frame.setVisible(true);
 	}
-	
-	public static void main(String[] args) {
-		new StudentUI("222");
-	}
 
 	private void setListener() {
 		for (int i = 0; i < mBtn.length; i++) {

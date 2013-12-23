@@ -106,7 +106,8 @@ public class LogPanel extends JPanel {
 
 		fBtn[1].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				logic.emptyLogList();
+				showTable();
 			}
 		});
 	}
