@@ -106,7 +106,7 @@ public class SchoolDeanUILogic {
 			client.shutDownConnection();
 			content = new String[list.size()][];
 			if (list.isEmpty()) {
-				return Feedback.LISTNAME_EMPTY;
+				return Feedback.LIST_EMPTY;
 			}
 			for (int i = 0; i < list.size(); i++) {
 				content[i] = list.get(i).split("；");

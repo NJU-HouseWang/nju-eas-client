@@ -106,7 +106,7 @@ public class EduFrameworkPanel extends JPanel {
 		} else if (fb instanceof String[]) {
 			head = (String[]) fb;
 			fb = logic.showEduFwContent();
-			if (fb instanceof Feedback) {
+			if ((fb instanceof Feedback) && fb != Feedback.LIST_EMPTY) {
 				JOptionPane.showMessageDialog(null,
 						((Feedback) fb).getContent());
 			} else if (fb instanceof String[][]) {
