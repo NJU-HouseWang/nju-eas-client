@@ -34,16 +34,16 @@ public class LoginUI {
 
 	private JPanel wp = new JPanel(new BorderLayout());
 	private WaitingLabel wlb = new WaitingLabel();
-	
+
 	public LoginUI() {
 		frame.add(loginBtn);
 		frame.add(utBox);
 		frame.add(unField);
 		frame.add(pwField);
-		wp.setSize(50,50);
-		wp.setPreferredSize(new Dimension(50,50));
-		wp.add(wlb,BorderLayout.CENTER);
-		wp.setLocation(180, 380);
+		wp.setSize(50, 50);
+		wp.setPreferredSize(new Dimension(50, 50));
+		wp.add(wlb, BorderLayout.CENTER);
+		wp.setLocation(225, 405);
 		frame.add(wp);
 		wp.setVisible(false);
 		frame.setVisible(true);
@@ -65,7 +65,8 @@ public class LoginUI {
 					processWaiting();
 					new Thread(new Runnable() {
 						public void run() {
-							Feedback fb = logic.login(unField.getText(),
+							Feedback fb = logic.login(
+									unField.getText(),
 									((UserTypeVO) utBox.getSelectedItem()).name_en,
 									pwField.getPassword());
 							if (fb == Feedback.OPERATION_SUCCEED) {
@@ -93,7 +94,8 @@ public class LoginUI {
 					processWaiting();
 					new Thread(new Runnable() {
 						public void run() {
-							Feedback fb = logic.login(unField.getText(),
+							Feedback fb = logic.login(
+									unField.getText(),
 									((UserTypeVO) utBox.getSelectedItem()).name_en,
 									pwField.getPassword());
 							if (fb == Feedback.OPERATION_SUCCEED) {
@@ -116,14 +118,14 @@ public class LoginUI {
 	public void showFeedback(String feedback) {
 		JOptionPane.showMessageDialog(frame, feedback);
 	}
-	
+
 	public void processWaiting() {
 		loginBtn.setEnabled(false);
 		wp.setVisible(true);
 		frame.repaint();
 		frame.validate();
 	}
-	
+
 	public void stopWaiting() {
 		loginBtn.setEnabled(true);
 		wp.setVisible(false);

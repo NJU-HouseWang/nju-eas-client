@@ -11,7 +11,7 @@ import NJU.HouseWang.nju_eas_client.vo.UserTypeVO;
 public class UserTypeBox extends JComboBox<UserTypeVO> {
 	public UserTypeBox() {
 		super();
-		setBounds(148, 238, 245, 32);
+		setBounds(195, 277, 245, 32);
 		setFont(new Font("微软雅黑", Font.PLAIN, 15));
 		setForeground(Color.DARK_GRAY);
 

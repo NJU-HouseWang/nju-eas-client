@@ -15,12 +15,13 @@ public class ExitBtn extends JButton {
 	private String suffix = ".png";
 
 	public ExitBtn() {
-		setLocation(788, 30);
+		setLocation(980, 30);
 		setIcon(new ImageIcon(path + name + "_0" + suffix));
 		setRolloverIcon(new ImageIcon(path + name + "_1" + suffix));
 		setPressedIcon(new ImageIcon(path + name + "_2" + suffix));
 		setSize(36, 25);
 		setBorderPainted(false);
+		setFocusable(false);
 		setListener();
 		updateUI();
 	}

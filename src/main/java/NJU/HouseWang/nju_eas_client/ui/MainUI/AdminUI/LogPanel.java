@@ -22,12 +22,12 @@ import NJU.HouseWang.nju_eas_client.vo.Feedback;
 
 @SuppressWarnings("serial")
 public class LogPanel extends JPanel {
-	private static int FUNC_NUM = 1;// 功能按钮的数量
-	private static String[] FUNC_BTN_NAME = { "ExportBtn" };// 功能按钮的名称
+	private static int FUNC_NUM = 2;// 功能按钮的数量
+	private static String[] FUNC_BTN_NAME = { "ExportBtn", "EmptyBtn" };// 功能按钮的名称
 	private AdminUILogic logic = new AdminUILogic();// 管理员界面的逻辑
 	private JPanel fbar = new FunctionBar();// 功能按钮栏
 	private FunctionBtn[] fBtn = new FunctionBtn[FUNC_NUM];// 功能按钮
-	private SubPanel sp = new SubPanel("操作日志列表", 740, 380);// 子界面
+	private SubPanel sp = new SubPanel("操作日志列表", 940, 480);// 子界面
 	private RefreshBtn refreshBtn = new RefreshBtn();// 刷新按钮
 
 	private JScrollPane scrollp = new JScrollPane();// 表格滚动框

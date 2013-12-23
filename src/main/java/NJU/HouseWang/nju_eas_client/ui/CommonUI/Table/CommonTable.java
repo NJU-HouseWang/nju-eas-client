@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 
 public class CommonTable extends JTable {
-	
+
 	public CommonTable() {
 		super();
 		setFont(new Font("微软雅黑", Font.PLAIN, 12));
@@ -33,11 +33,13 @@ public class CommonTable extends JTable {
 		getTableHeader().setFont(new Font("微软雅黑", Font.BOLD, 12));
 		setBackground(Color.white);
 		setRowHeight(20);
-//		DefaultTableCellRenderer cell = new DefaultTableCellRenderer();
-//		cell.setHorizontalAlignment(JLabel.CENTER);
-//		setDefaultRenderer(Object.class, cell);
-//		DefaultTableCellRenderer head = new DefaultTableCellRenderer();
-//		head.setHorizontalAlignment(JLabel.CENTER);
-//		getTableHeader().setDefaultRenderer(head);
+		DefaultTableCellRenderer cell = new DefaultTableCellRenderer();
+		cell.setHorizontalAlignment(JLabel.CENTER);
+		setDefaultRenderer(Object.class, cell);
+		DefaultTableCellRenderer head = new DefaultTableCellRenderer();
+		head.setBackground(Color.DARK_GRAY);
+		head.setForeground(Color.white);
+		head.setHorizontalAlignment(JLabel.CENTER);
+		getTableHeader().setDefaultRenderer(head);
 	}
 }

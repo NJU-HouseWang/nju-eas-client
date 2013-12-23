@@ -16,12 +16,13 @@ public class MinBtn extends JButton {
 	public MinBtn(JFrame f) {
 		super();
 		frame = f;
-		setLocation(751, 30);
+		setLocation(943, 30);
 		setIcon(new ImageIcon(path + name + "_0" + suffix));
 		setRolloverIcon(new ImageIcon(path + name + "_1" + suffix));
 		setPressedIcon(new ImageIcon(path + name + "_2" + suffix));
 		setSize(36, 25);
 		setBorderPainted(false);
+		setFocusable(false);
 		setListener();
 		updateUI();
 	}

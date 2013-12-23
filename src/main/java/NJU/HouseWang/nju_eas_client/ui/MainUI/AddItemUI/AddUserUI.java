@@ -1,4 +1,4 @@
-package NJU.HouseWang.nju_eas_client.ui.MainUI.AdminUI;
+package NJU.HouseWang.nju_eas_client.ui.MainUI.AddItemUI;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -17,28 +17,26 @@ import javax.swing.JTextField;
 import NJU.HouseWang.nju_eas_client.uiLogic.AdminUILogic;
 import NJU.HouseWang.nju_eas_client.vo.Feedback;
 
-public class EditUserUI {
+public class AddUserUI {
 	private AdminUILogic logic = new AdminUILogic();
 	private JFrame frame = null;
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private int width = 0;
 	private int height = 0;
-	private String itemName = new String();
-	private String itemInfo = new String();
+	private String itemName = "";
+	private String itemInfo = "";
 	private JPanel panel = null;
-	// private String[] item = null;
-	// private String[] origin = null;
 	private JLabel[] iteml = null;
 	private JTextField[] itemtf = null;
 	private JButton confirmBtn = null;
 	private JButton cancelBtn = null;
 	private GridLayout gl = null;
 
-	public EditUserUI(String itemName, String[] item, String[] origin) {
-		this.itemName = itemName;
-
+	public AddUserUI(String itemN) {
+		this.itemName = itemN.split("；")[0];
+		String[] item = (String[]) logic.showInfoTableHead(itemName + "_list");
 		frame = new JFrame();
-		frame.setTitle("修改项目： " + itemName);
+		frame.setTitle("新增项目：" + itemName);
 		panel = new JPanel();
 		iteml = new JLabel[item.length];
 		itemtf = new JTextField[item.length];
@@ -52,13 +50,11 @@ public class EditUserUI {
 			iteml[i] = new JLabel(item[i] + ":");
 			iteml[i].setHorizontalAlignment(JLabel.CENTER);
 			itemtf[i] = new JTextField(15);
-			itemtf[i].setText(origin[i]);
 			iteml[i].setFont(new Font("微软雅黑", Font.PLAIN, 12));
 			itemtf[i].setFont(new Font("微软雅黑", Font.PLAIN, 12));
 			panel.add(iteml[i]);
 			panel.add(itemtf[i]);
 		}
-		itemtf[0].setEditable(false);
 		panel.add(confirmBtn);
 		panel.add(cancelBtn);
 		frame.add(panel);
@@ -71,6 +67,11 @@ public class EditUserUI {
 				((int) screenSize.getHeight() - height) / 2 - 30, width, height);
 		frame.setVisible(true);
 		frame.setResizable(false);
+
+		if (itemName.equals("teacher")) {
+			itemtf[1].setText(itemN.split("；")[1]);
+			itemtf[1].setEditable(false);
+		}
 	}
 
 	public void addListener() {
@@ -78,24 +79,22 @@ public class EditUserUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				for (int i = 0; i < itemtf.length; i++) {
-					String itemtmp = itemtf[i].getText();
-					if (itemtmp == "") {
-						JOptionPane.showMessageDialog(frame,
-								Feedback.ITEM_EMPTY);
+					String item = itemtf[i].getText();
+					if (item == "") {
+						showFeedBack(Feedback.ITEM_EMPTY);
 						itemInfo = null;
 						break;
 					}
-					itemInfo += itemtmp + "；";
+					itemInfo += item + "；";
 				}
 				if (itemInfo != null) {
-					Feedback fb = logic.editUser(itemName, itemInfo);
+					Feedback fb = logic.addUser(itemName, itemInfo);
 					JOptionPane.showMessageDialog(frame, fb.getContent());
 					frame.setVisible(false);
 					frame.dispose();
 				}
 			}
 		});
-
 		cancelBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -103,5 +102,14 @@ public class EditUserUI {
 				frame.dispose();
 			}
 		});
+	}
+
+	public void showFeedBack(String fbStr) {
+		Feedback feedback = Feedback.valueOf(fbStr);
+		JOptionPane.showMessageDialog(frame, feedback.getContent());
+	}
+
+	public void showFeedBack(Feedback feedback) {
+		JOptionPane.showMessageDialog(frame, feedback.getContent());
 	}
 }

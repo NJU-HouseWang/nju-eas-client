@@ -41,16 +41,16 @@ public class StatesPanel extends JPanel {
 	public StatesPanel() {
 		setLayout(null);
 
-		p1.setBounds(200, 128, 400, 45);
+		p1.setBounds(300, 200, 400, 45);
 		add(p1);
 		p1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		JLabel label = new JLabel("当前学期：");
-		label.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+		label.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 		p1.add(label);
 
 		p1.add(currentTermlb);
-		createNewBtn.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+		createNewBtn.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 		createNewBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				p1.setVisible(false);
@@ -59,14 +59,14 @@ public class StatesPanel extends JPanel {
 		});
 		p1.add(createNewBtn);
 
-		p2.setBounds(200, 183, 400, 45);
+		p2.setBounds(300, 250, 400, 45);
 		add(p2);
 
 		JLabel label_2 = new JLabel("通识课选课开关：");
-		label_2.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+		label_2.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 		p2.add(label_2);
 
-		chooseBtn.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+		chooseBtn.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 		chooseBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Boolean newStates = new Boolean(false);
@@ -94,14 +94,14 @@ public class StatesPanel extends JPanel {
 		});
 		p2.add(chooseBtn);
 
-		p3.setBounds(200, 238, 400, 45);
+		p3.setBounds(300, 300, 400, 45);
 		add(p3);
 
 		JLabel label_3 = new JLabel("通识课补选开关：");
-		label_3.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+		label_3.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 		p3.add(label_3);
 
-		byElectBtn.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+		byElectBtn.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 		byElectBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Boolean newStates = false;
@@ -123,14 +123,14 @@ public class StatesPanel extends JPanel {
 		});
 		p3.add(byElectBtn);
 
-		p4.setBounds(200, 293, 400, 45);
+		p4.setBounds(300, 350, 400, 45);
 		add(p4);
 
 		JLabel label_4 = new JLabel("通识课退选开关：");
-		label_4.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+		label_4.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 		p4.add(label_4);
 
-		quitBtn.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+		quitBtn.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 		quitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Boolean newStates = false;
@@ -152,12 +152,12 @@ public class StatesPanel extends JPanel {
 		});
 		p4.add(quitBtn);
 
-		p5.setBounds(125, 128, 550, 45);
+		p5.setBounds(300, 200, 550, 45);
 		add(p5);
 		p5.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		JLabel label_5 = new JLabel("创建学期：");
-		label_5.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+		label_5.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 		p5.add(label_5);
 
 		textField = new JTextField();
@@ -165,17 +165,17 @@ public class StatesPanel extends JPanel {
 		textField.setColumns(4);
 
 		JLabel label_6 = new JLabel("-");
-		label_6.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+		label_6.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 		p5.add(label_6);
 
 		p5.add(generateYear);
 
 		JLabel label_8 = new JLabel("学年");
-		label_8.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+		label_8.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 		p5.add(label_8);
 
 		JLabel label_9 = new JLabel("第");
-		label_9.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+		label_9.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 		p5.add(label_9);
 
 		textField_1 = new JTextField();
@@ -183,10 +183,10 @@ public class StatesPanel extends JPanel {
 		textField_1.setColumns(1);
 
 		JLabel label_10 = new JLabel("学期");
-		label_10.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+		label_10.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 		p5.add(label_10);
 
-		currentTermlb.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+		currentTermlb.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 
 		textField.addFocusListener(new FocusListener() {
 			public void focusLost(FocusEvent arg0) {
@@ -203,7 +203,7 @@ public class StatesPanel extends JPanel {
 				textField.selectAll();
 			}
 		});
-		createBtn.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+		createBtn.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 		createBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String year1 = textField.getText();
@@ -224,7 +224,7 @@ public class StatesPanel extends JPanel {
 			}
 		});
 		p5.add(createBtn);
-		cancelBtn.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+		cancelBtn.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 		cancelBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				p1.setVisible(true);

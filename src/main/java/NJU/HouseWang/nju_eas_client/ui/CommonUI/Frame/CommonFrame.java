@@ -19,8 +19,8 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.CommonPanel;
 public class CommonFrame extends JFrame {
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private static Point origin = new Point();
-	private int width = 860;
-	private int hight = 660;
+	private int width = 1060;
+	private int hight = 760;
 	private String frameName = null;
 	private MinBtn minBtn = null;
 	private ExitBtn exitBtn = null;
@@ -32,12 +32,12 @@ public class CommonFrame extends JFrame {
 		setLayout(null);
 
 		setBackgroung();
-		setMovable(this);
 		minBtn = new MinBtn(this);
 		exitBtn = new ExitBtn();
 		add(minBtn);
 		add(exitBtn);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setMovable(this);
 	}
 
 	@SuppressWarnings("restriction")
@@ -66,8 +66,13 @@ public class CommonFrame extends JFrame {
 						- origin.y);
 			}
 		});
-		title.setBounds(30, 30, 550, 70);
+		if(frameName.equals("LoginFrame")) {
+			title.setBounds(30, 30, 900, 82);
+		} else {
+			title.setBounds(30, 30, 800, 70);
+		}
 		title.setBorderPainted(false);
+		title.setFocusable(false);
 		add(title);
 	}
 }

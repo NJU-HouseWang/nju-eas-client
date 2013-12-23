@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 
 import NJU.HouseWang.nju_eas_client.Launcher;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Label.ClickedLabel;
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.Label.CommonLabel;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.MsgBoxUI.MsgBoxUI;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.UserCenterUI.UserCenterUI;
 import NJU.HouseWang.nju_eas_client.uiLogic.CommonUILogic.CommonUILogic;
@@ -18,15 +17,11 @@ import NJU.HouseWang.nju_eas_client.vo.Feedback;
 
 public class TitleBar extends JPanel {
 	private CommonUILogic logic = new CommonUILogic();
-	private CommonLabel welcomel = null;
 	private ClickedLabel namel = null;
 	private ClickedLabel msgBoxl = null;
 	private ClickedLabel logoutl = null;
 
-	// 0: 管理员和学校教务老师
-	// 1: 其他成员
 	public TitleBar(String userName, final JFrame frame) {
-		welcomel = new CommonLabel("Welcome!");
 		namel = new ClickedLabel(userName);
 		msgBoxl = new ClickedLabel("消息盒子");
 		logoutl = new ClickedLabel("注销");
@@ -57,14 +52,13 @@ public class TitleBar extends JPanel {
 			}
 		});
 
-		setBounds(860 - 30 - 250, 78, 250, 20);
+		setBounds(775, 78, 250, 20);
 		setBackground(Color.getHSBColor(0, 0, (float) 0.16));
 		FlowLayout fl = (FlowLayout) getLayout();
 		fl.setAlignment(FlowLayout.RIGHT);
 		fl.setVgap(0);
 		fl.setHgap(10);
 
-		add(welcomel);
 		add(namel);
 		add(msgBoxl);
 		add(logoutl);

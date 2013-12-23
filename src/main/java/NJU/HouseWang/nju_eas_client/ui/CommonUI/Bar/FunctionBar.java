@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 
 public class FunctionBar extends JPanel {
 	public FunctionBar() {
-		setSize(800, 45);
+		setSize(1000, 45);
 		setBackground(Color.getHSBColor(0, 0, (float) 0.88));
 		FlowLayout fl = new FlowLayout();
 		setLayout(fl);
