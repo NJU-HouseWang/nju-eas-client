@@ -17,9 +17,8 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.FunctionBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.RefreshBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CommonTable;
-import NJU.HouseWang.nju_eas_client.ui.MainUI.AddItemUI.AddItemUIFactory;
-import NJU.HouseWang.nju_eas_client.ui.MainUI.EditUserUI.EditItemUIFactory;
-import NJU.HouseWang.nju_eas_client.ui.MainUI.EditUserUI.EditUserUI;
+import NJU.HouseWang.nju_eas_client.ui.MainUI.AddItemUI.AddUserUI;
+import NJU.HouseWang.nju_eas_client.ui.MainUI.EditItemUI.EditUserUI;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.ExportUI.ExportUI;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.ImportUI.ImportUI;
 import NJU.HouseWang.nju_eas_client.uiLogic.AdminUILogic;
@@ -141,7 +140,7 @@ public class UserPanel extends JPanel {
 					itemName = "teacher；"
 							+ ((UserTypeVO) userTypecb.getSelectedItem()).name_en;
 				}
-				AddItemUIFactory.showAddItemUI(itemName);
+				new AddUserUI(itemName);
 			}
 		});
 
@@ -167,7 +166,7 @@ public class UserPanel extends JPanel {
 						origin[i] = (String) table.getValueAt(selectRowNum, i);
 					}
 					System.out.println(itemName);
-					EditItemUIFactory.showEditItemUI(itemName, origin);
+					new EditUserUI(itemName, origin);
 				} else {
 					JOptionPane.showMessageDialog(null,
 							Feedback.SELECTION_ERROR.getContent());

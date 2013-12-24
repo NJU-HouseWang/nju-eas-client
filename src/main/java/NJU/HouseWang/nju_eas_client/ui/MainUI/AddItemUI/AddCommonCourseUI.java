@@ -1,4 +1,4 @@
-package NJU.HouseWang.nju_eas_client.ui.MainUI.SchoolDeanUI;
+package NJU.HouseWang.nju_eas_client.ui.MainUI.AddItemUI;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -24,6 +24,7 @@ public class AddCommonCourseUI {
 	private int width = 0;
 	private int height = 0;
 	private String itemName = "";
+	private String[] item = null;
 	private String itemInfo = "";
 	private JPanel panel = null;
 	private JLabel[] iteml = null;
@@ -32,10 +33,14 @@ public class AddCommonCourseUI {
 	private JButton cancelBtn = null;
 	private GridLayout gl = null;
 
-	public AddCommonCourseUI(String itemName, String[] item) {
+	public AddCommonCourseUI(String itemName) {
 		this.itemName = itemName;
+		Object o = logic.showCourseEditHead();
+		if (o instanceof String[]) {
+			item = (String[]) o;
+		}
 		frame = new JFrame();
-		frame.setTitle("新增项目：" + itemName);
+		frame.setTitle("新增项目：通识课");
 		panel = new JPanel();
 		iteml = new JLabel[item.length];
 		itemtf = new JTextField[item.length];

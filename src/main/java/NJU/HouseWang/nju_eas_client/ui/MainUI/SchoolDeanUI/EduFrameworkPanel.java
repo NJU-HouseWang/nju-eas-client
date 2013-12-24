@@ -60,11 +60,11 @@ public class EduFrameworkPanel extends JPanel {
 		refreshBtn.setBounds(3, 3, 22, 22);
 		refreshBtn.setPreferredSize(new Dimension(22, 22));
 		edufwp.getTopPanel().add(refreshBtn);
-		
+
 		edufwp.getCenterPanel().setLayout(new BorderLayout());
-		edufwp.getCenterPanel().add(cardp,BorderLayout.CENTER);
-		cardp.add(js1,"1");
-		cardp.add(js2,"2");
+		edufwp.getCenterPanel().add(cardp, BorderLayout.CENTER);
+		cardp.add(js1, "1");
+		cardp.add(js2, "2");
 		showEduFw();
 		add(edufwp);
 
@@ -119,9 +119,10 @@ public class EduFrameworkPanel extends JPanel {
 			fBtn[0].setEnabled(true);
 			fBtn[1].setEnabled(true);
 			fBtn[2].setEnabled(false);
-			DefaultTableModel dtm1 = new DefaultTableModel(1,1);
+			DefaultTableModel dtm1 = new DefaultTableModel(1, 1);
 			dtm1.setValueAt("教学框架策略未提交。", 0, 0);
 			table1 = new CommonTable(dtm1);
+			table1.setEnabled(false);
 			js1.setViewportView(table1);
 			cl.show(cardp, "1");
 		} else {
@@ -129,21 +130,22 @@ public class EduFrameworkPanel extends JPanel {
 			fBtn[1].setEnabled(false);
 			fBtn[2].setEnabled(true);
 			map = new EduFrameworkMap(content);
-			dtm = new DefaultTableModel(content.length,head.length);
+			dtm = new DefaultTableModel(content.length, head.length);
 			table2 = new CTable(map, dtm);
 			dtm.setColumnIdentifiers(head);
 			for (int i = 0; i < content.length; i++) {
 				for (int j = 0; j < content[i].length; j++) {
 					if (content[i][j].contains("null-null")) {
-						content[i][j] = content[i][j].replaceAll("null-null", "");
+						content[i][j] = content[i][j].replaceAll("null-null",
+								"");
 					}
 					dtm.setValueAt(content[i][j], i, j);
 				}
 			}
+			table2.setEnabled(false);
 			js2.setViewportView(table2);
 			cl.show(cardp, "2");
 		}
-
 
 		this.repaint();
 		this.validate();

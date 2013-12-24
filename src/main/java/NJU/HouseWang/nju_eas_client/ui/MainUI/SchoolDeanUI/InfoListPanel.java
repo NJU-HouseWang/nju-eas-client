@@ -28,7 +28,7 @@ import NJU.HouseWang.nju_eas_client.vo.Feedback;
 @SuppressWarnings("serial")
 public class InfoListPanel extends JPanel {
 	private SchoolDeanUILogic logic = new SchoolDeanUILogic();
-	private SubPanel infop = new SubPanel("列表：", 740, 420);
+	private SubPanel infop = new SubPanel("列表：", 940, 520);
 	private JComboBox<String> listChooser = new JComboBox<String>();
 	private DeptBox deptChooser = new DeptBox();
 	private TermBox termChooser = new TermBox();

@@ -1,4 +1,4 @@
-package NJU.HouseWang.nju_eas_client.ui.MainUI.EditUserUI;
+package NJU.HouseWang.nju_eas_client.ui.MainUI.EditItemUI;
 
 import java.awt.Dimension;
 import java.awt.Font;

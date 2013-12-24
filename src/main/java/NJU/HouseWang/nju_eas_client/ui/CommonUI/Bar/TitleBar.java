@@ -12,7 +12,7 @@ import NJU.HouseWang.nju_eas_client.Launcher;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Label.ClickedLabel;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.MsgBoxUI.MsgBoxUI;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.UserCenterUI.UserCenterUI;
-import NJU.HouseWang.nju_eas_client.uiLogic.CommonUILogic.CommonUILogic;
+import NJU.HouseWang.nju_eas_client.uiLogic.CommonUILogic;
 import NJU.HouseWang.nju_eas_client.vo.Feedback;
 
 public class TitleBar extends JPanel {

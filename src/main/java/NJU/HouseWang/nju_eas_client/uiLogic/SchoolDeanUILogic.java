@@ -112,7 +112,7 @@ public class SchoolDeanUILogic {
 				content[i] = list.get(i).split("；");
 			}
 			for (int i = 0; i < content.length; i++) {
-				for (int j = 0; j < content[j].length; j++) {
+				for (int j = 0; j < content[i].length; j++) {
 					if (content[i][j].equals("null")) {
 						content[i][j] = "";
 					} else if (content[i][j].contains("0-0")) {
@@ -406,6 +406,61 @@ public class SchoolDeanUILogic {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Feedback.INTERNET_ERROR;
+		}
+	}
+
+	public Object showCourseEditHead() {
+		String line = null;
+		String cmd = "show；common_course_head_edit；";
+		try {
+			NetService client = initNetService();
+			client.sendCommand(cmd);
+			line = client.receiveFeedback();
+			client.shutDownConnection();
+			if (!line.contains("；")) {
+				return Feedback.valueOf(line);
+			} else {
+				String[] head = line.split("；");
+				return head;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Feedback.INTERNET_ERROR;
+		}
+	}
+
+	public Object showCourseEdit(String id) {
+		String line = null;
+		String cmd = "show；common_course_head_edit；" + id;
+		try {
+			NetService client = initNetService();
+			client.sendCommand(cmd);
+			line = client.receiveFeedback();
+			client.shutDownConnection();
+			if (!line.contains("；")) {
+				return Feedback.valueOf(line);
+			} else {
+				String[] head = line.split("；");
+				return head;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Feedback.INTERNET_ERROR;
+		}
+	}
+
+	public String showTeacherName(String id) {
+		String line = null;
+		String cmd = "show；teacher_name；" + id;
+		try {
+			NetService client = initNetService();
+			client.sendCommand(cmd);
+			line = client.receiveFeedback();
+			client.shutDownConnection();
+			return line;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 }

@@ -1,4 +1,4 @@
-package NJU.HouseWang.nju_eas_client.uiLogic.CommonUILogic;
+package NJU.HouseWang.nju_eas_client.uiLogic;
 
 import java.io.IOException;
 import java.util.ArrayList;

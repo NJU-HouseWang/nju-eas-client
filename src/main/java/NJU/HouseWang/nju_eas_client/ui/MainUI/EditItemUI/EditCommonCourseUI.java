@@ -1,4 +1,4 @@
-package NJU.HouseWang.nju_eas_client.ui.MainUI.SchoolDeanUI;
+package NJU.HouseWang.nju_eas_client.ui.MainUI.EditItemUI;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -23,8 +23,9 @@ public class EditCommonCourseUI {
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private int width = 0;
 	private int height = 0;
-	private String itemName = new String();
-	private String itemInfo = new String();
+	private String[] item = null;
+	private String[] origin = null;
+	private String itemInfo = null;
 	private JPanel panel = null;
 	private JLabel[] iteml = null;
 	private JTextField[] itemtf = null;
@@ -32,11 +33,17 @@ public class EditCommonCourseUI {
 	private JButton cancelBtn = null;
 	private GridLayout gl = null;
 
-	public EditCommonCourseUI(String itemName, String[] item, String[] origin) {
-		this.itemName = itemName;
-
+	public EditCommonCourseUI(String id) {
+		Object o = logic.showCourseEditHead();
+		if (o instanceof String[]) {
+			item = (String[]) o;
+		}
+		o = logic.showCourseEdit(id);
+		if (o instanceof String[]) {
+			origin = (String[]) o;
+		}
 		frame = new JFrame();
-		frame.setTitle("修改项目： " + itemName);
+		frame.setTitle("修改项目：通识课 ");
 		panel = new JPanel();
 		iteml = new JLabel[item.length];
 		itemtf = new JTextField[item.length];

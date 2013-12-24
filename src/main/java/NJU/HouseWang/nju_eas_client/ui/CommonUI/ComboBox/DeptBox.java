@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.JComboBox;
 
-import NJU.HouseWang.nju_eas_client.uiLogic.CommonUILogic.CommonUILogic;
+import NJU.HouseWang.nju_eas_client.uiLogic.CommonUILogic;
 import NJU.HouseWang.nju_eas_client.vo.DeptVO;
 
 public class DeptBox extends JComboBox<DeptVO> {

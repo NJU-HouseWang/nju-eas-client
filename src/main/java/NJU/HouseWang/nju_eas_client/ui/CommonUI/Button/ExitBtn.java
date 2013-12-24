@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-import NJU.HouseWang.nju_eas_client.uiLogic.CommonUILogic.CommonUILogic;
+import NJU.HouseWang.nju_eas_client.uiLogic.CommonUILogic;
 
 public class ExitBtn extends JButton {
 	public CommonUILogic logic = new CommonUILogic();

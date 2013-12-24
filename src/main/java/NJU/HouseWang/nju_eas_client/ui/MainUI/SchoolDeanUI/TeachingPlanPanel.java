@@ -58,18 +58,19 @@ public class TeachingPlanPanel extends JPanel {
 		}
 		add(fbar);
 		deptChooser.setPreferredSize(new Dimension(120, 20));
+		deptChooser.setFont(new Font("微软雅黑",Font.PLAIN,12));
 		// 教学计划子窗口
-		tpp = new SubPanel("教学计划  ", 500, 380);
+		tpp = new SubPanel("教学计划  ", 700, 480);
 		tpp.setLocation(30, 70);
 		tpp.getTopPanel().add(deptChooser);
 		tpp.getTopPanel().add(freshBtn);
 		
 		// 附件子窗口
 		accessoryp = new SubPanel("附件", 230, 150);
-		accessoryp.setLocation(540, 70);
+		accessoryp.setLocation(740, 70);
 		// 状态子窗口
 		localStatuesp = new SubPanel("当前状态", 230, 150);
-		localStatuesp.setLocation(540, 230);
+		localStatuesp.setLocation(740, 230);
 		// 教学计划列表（开始时为空）
 		initEmptyTPTable();
 		tpp.getCenterPanel().setLayout(new BorderLayout());

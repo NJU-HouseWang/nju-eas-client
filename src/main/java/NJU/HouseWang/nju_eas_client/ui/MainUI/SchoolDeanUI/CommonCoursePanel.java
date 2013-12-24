@@ -2,15 +2,12 @@ package NJU.HouseWang.nju_eas_client.ui.MainUI.SchoolDeanUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Bar.FunctionBar;
@@ -18,6 +15,10 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.FunctionBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.RefreshBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CommonTable;
+import NJU.HouseWang.nju_eas_client.ui.MainUI.AddItemUI.AddCommonCourseUI;
+import NJU.HouseWang.nju_eas_client.ui.MainUI.EditItemUI.EditCommonCourseUI;
+import NJU.HouseWang.nju_eas_client.ui.MainUI.ExportUI.ExportUI;
+import NJU.HouseWang.nju_eas_client.ui.MainUI.ImportUI.ImportUI;
 import NJU.HouseWang.nju_eas_client.uiLogic.SchoolDeanUILogic;
 import NJU.HouseWang.nju_eas_client.vo.Feedback;
 
@@ -25,7 +26,7 @@ public class CommonCoursePanel extends JPanel {
 	private SchoolDeanUILogic logic = new SchoolDeanUILogic();
 	private FunctionBar fbar = new FunctionBar();
 	private FunctionBtn[] fBtn = new FunctionBtn[5];
-	private SubPanel cp = new SubPanel("通识课列表", 740, 380);
+	private SubPanel cp = new SubPanel("通识课列表", 940, 480);
 	private DefaultTableModel dtm = new DefaultTableModel(0, 5);
 	private CommonTable table = new CommonTable(dtm);
 	private RefreshBtn refreshBtn = new RefreshBtn();
@@ -67,7 +68,7 @@ public class CommonCoursePanel extends JPanel {
 
 		fBtn[0].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new AddCommonCourseUI("通识课", head);
+				new AddCommonCourseUI("common_course");
 			}
 		});
 
@@ -76,11 +77,8 @@ public class CommonCoursePanel extends JPanel {
 				int selectRowNum = table.getSelectedRow();
 
 				if (table.getSelectedRowCount() == 1 && selectRowNum != -1) {
-					String[] origin = new String[table.getColumnCount()];
-					for (int i = 0; i < origin.length; i++) {
-						origin[i] = (String) table.getValueAt(selectRowNum, i);
-					}
-					new EditCommonCourseUI("通识课", head, origin);
+					new EditCommonCourseUI((String) table.getValueAt(
+							selectRowNum, 0));
 				} else {
 					JOptionPane.showMessageDialog(null,
 							Feedback.SELECTION_ERROR.getContent());
@@ -101,6 +99,20 @@ public class CommonCoursePanel extends JPanel {
 					JOptionPane.showMessageDialog(null,
 							Feedback.SELECTION_ERROR.getContent());
 				}
+			}
+		});
+		fBtn[3].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Object o = logic.showCourseEditHead();
+				if (o instanceof String[]) {
+					new ImportUI("common_course", (String[]) o);
+				}
+			}
+		});
+
+		fBtn[4].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ExportUI(head, content);
 			}
 		});
 
