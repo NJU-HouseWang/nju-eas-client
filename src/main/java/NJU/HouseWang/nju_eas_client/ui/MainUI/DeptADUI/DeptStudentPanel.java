@@ -20,6 +20,7 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.RefreshBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.ComboBox.GradeBox;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CommonTable;
+import NJU.HouseWang.nju_eas_client.ui.MainUI.ExportUI.ExportUI;
 import NJU.HouseWang.nju_eas_client.uiLogic.DeptADUILogic;
 import NJU.HouseWang.nju_eas_client.vo.Feedback;
 
@@ -27,7 +28,7 @@ public class DeptStudentPanel extends JPanel {
 	private DeptADUILogic logic = new DeptADUILogic();
 	private FunctionBar fbar = new FunctionBar();
 	private FunctionBtn[] fBtn = new FunctionBtn[1];
-	private SubPanel stup = new SubPanel("本院学生列表", 740, 380);
+	private SubPanel stup = new SubPanel("本院学生列表", 940, 480);
 	private GradeBox gradeChooser = new GradeBox();
 	private RefreshBtn refreshBtn = new RefreshBtn();
 	private DefaultTableModel dtm = new DefaultTableModel(40, 5);
@@ -73,7 +74,7 @@ public class DeptStudentPanel extends JPanel {
 
 		fBtn[0].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// 导出
+				new ExportUI(head, content);
 			}
 		});
 	}

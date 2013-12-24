@@ -55,6 +55,21 @@ public class DeptADUILogic {
 			return Feedback.INTERNET_ERROR;
 		}
 	}
+	
+	public Feedback uploadTeachingPlan(File f) {
+		String cmd = "upload；teachingplan_file";
+		String line = null;
+		try {
+			NetService client = initNetService();
+			client.sendCommand(cmd);
+			client.sendFile(f);
+			line = client.receiveFeedback();
+			return Feedback.valueOf(line);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Feedback.INTERNET_ERROR;
+		}
+	}
 
 	/**
 	 * 显示当前学期
@@ -299,5 +314,26 @@ public class DeptADUILogic {
 			return Feedback.INTERNET_ERROR;
 		}
 		return content;
+	}
+
+	public Feedback downloadTPTemplate() {
+		String command = "download；teachingplan_template";
+		File file = null;
+		try {
+			NetService ns = initNetService();
+			ns.sendCommand(command);
+			file = ns.receiveFile();
+			ns.shutDownConnection();
+			Desktop desktop = Desktop.getDesktop();
+			try {
+				desktop.open(file);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return Feedback.OPERATION_SUCCEED;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Feedback.INTERNET_ERROR;
+		}
 	}
 }

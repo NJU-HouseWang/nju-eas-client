@@ -94,7 +94,7 @@ public class TeachingPlanPanel extends JPanel {
 				@SuppressWarnings("unchecked")
 				JComboBox<TPDeptVO> c = (JComboBox<TPDeptVO>) e.getSource();
 				final TPDeptVO dept = (TPDeptVO) c.getSelectedItem();
-				if (dept.deptId.equals("null")) {
+				if (dept.deptId == null || dept.deptId.equals("null")) {
 					fBtn[0].setEnabled(false);
 					fBtn[1].setEnabled(false);
 				} else {

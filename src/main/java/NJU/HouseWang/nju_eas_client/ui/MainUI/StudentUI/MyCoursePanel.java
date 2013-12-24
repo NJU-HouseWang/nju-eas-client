@@ -24,8 +24,8 @@ import NJU.HouseWang.nju_eas_client.vo.Feedback;
 
 public class MyCoursePanel extends JPanel {
 	private StudentUILogic logic = new StudentUILogic();
-	private SubPanel coup = new SubPanel("我的课程列表", 500, 420);
-	private SubPanel infop = new SubPanel("详细信息", 230, 420);
+	private SubPanel coup = new SubPanel("我的课程列表", 700, 520);
+	private SubPanel infop = new SubPanel("详细信息", 230, 525);
 	private DefaultTableModel dtm = new DefaultTableModel(40, 5);
 	private CommonTable table = new CommonTable(dtm);
 	private RefreshBtn reBtn = new RefreshBtn();
@@ -48,7 +48,7 @@ public class MyCoursePanel extends JPanel {
 		area.setFont(new Font("微软雅黑", Font.PLAIN, 12));
 		area.setEditable(false);
 
-		infop.setLocation(540, 25);
+		infop.setLocation(740, 25);
 		infop.getCenterPanel().setLayout(new BorderLayout());
 		infop.getCenterPanel().add(area, BorderLayout.CENTER);
 

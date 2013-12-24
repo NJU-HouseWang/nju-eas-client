@@ -1,7 +1,7 @@
 package NJU.HouseWang.nju_eas_client.ui.MainUI.StudentUI;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,7 +41,7 @@ public class StudentUI {
 		childp[2] = new MyScorePanel();
 		childp[3] = new ChooseCommonPanel();
 
-		switchPane.setSize(800, 490);
+		switchPane.setSize(1000, 590);
 		switchPane.setLocation(30, 140);
 		switchPane.setLayout(mcl);
 
@@ -100,12 +100,9 @@ public class StudentUI {
 				bmbtn[i] = new HomeMenuBtn(FUNC_BTN_NAME[i + 1]);
 				bmbar.add(bmbtn[i]);
 			}
-			bmbar.setLocation(70, 50);
-			setBackground(Color.getHSBColor((float) 0.617, (float) 0.42,
-					(float) 0.92));
 			((FlowLayout) getLayout()).setAlignment(FlowLayout.CENTER);
-			setLayout(null);
-			add(bmbar);
+			setLayout(new BorderLayout());
+			add(bmbar, BorderLayout.CENTER);
 			setListener();
 		}
 
@@ -115,17 +112,10 @@ public class StudentUI {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						String bname = ((HomeMenuBtn) e.getSource()).getName();
-						if (bname.equals("chooseCommonBtn")
-								&& !logic.showChooseCommonStatus()) {
-							JOptionPane.showMessageDialog(null, "通识课选课尚未开始。");
-							mcl.show(switchPane, "homeBtn");
-							mBtn[0].setSelected(true);
-						} else {
-							mcl.show(switchPane, bname);
-							for (int i = 1; i < FUNC_BTN_NAME.length; i++) {
-								if (FUNC_BTN_NAME[i].equals(bname)) {
-									mBtn[i].setSelected(true);
-								}
+						mcl.show(switchPane, bname);
+						for (int i = 1; i < FUNC_BTN_NAME.length; i++) {
+							if (FUNC_BTN_NAME[i].equals(bname)) {
+								mBtn[i].setSelected(true);
 							}
 						}
 					}

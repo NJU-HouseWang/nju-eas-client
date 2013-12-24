@@ -1,5 +1,6 @@
 package NJU.HouseWang.nju_eas_client.ui.MainUI.DeptADUI;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -40,7 +41,7 @@ public class DeptADUI {
 		childp[2] = new DeptCoursePanel();
 		childp[3] = new DeptStudentPanel();
 
-		switchPane.setSize(800, 490);
+		switchPane.setSize(1000, 590);
 		switchPane.setLocation(30, 140);
 		switchPane.setLayout(mcl);
 
@@ -80,7 +81,6 @@ public class DeptADUI {
 		JOptionPane.showMessageDialog(null, feedback);
 	}
 
-	@SuppressWarnings("serial")
 	class HomePanel extends JPanel {
 		private HomeMenuBtn[] bmbtn = new HomeMenuBtn[FUNC_NUM - 1];
 		private BigMenuBar bmbar = new BigMenuBar();
@@ -90,12 +90,9 @@ public class DeptADUI {
 				bmbtn[i] = new HomeMenuBtn(FUNC_BTN_NAME[i + 1]);
 				bmbar.add(bmbtn[i]);
 			}
-			bmbar.setLocation(70, 50);
-			setBackground(Color.getHSBColor((float) 0.617, (float) 0.42,
-					(float) 0.92));
 			((FlowLayout) getLayout()).setAlignment(FlowLayout.CENTER);
-			setLayout(null);
-			add(bmbar);
+			setLayout(new BorderLayout());
+			add(bmbar,BorderLayout.CENTER);
 			setListener();
 		}
 

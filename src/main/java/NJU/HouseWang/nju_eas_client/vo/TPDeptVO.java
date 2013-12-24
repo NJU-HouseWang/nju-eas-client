@@ -13,10 +13,10 @@ public class TPDeptVO {
 	public TPDeptVO(String str) {
 		String[] sp = str.split("；");
 		deptId = sp[0];
-		deptName = sp[1];
-		isCommitted = Boolean.valueOf(sp[2]).booleanValue();
-		tpState = Integer.parseInt(sp[3]);
-		fileName = sp[4];
+		deptName = sp[0];
+		isCommitted = Boolean.valueOf(sp[1]).booleanValue();
+		tpState = Integer.parseInt(sp[2]);
+		fileName = sp[3];
 	}
 
 	public TPDeptVO(String deptId, String deptName) {

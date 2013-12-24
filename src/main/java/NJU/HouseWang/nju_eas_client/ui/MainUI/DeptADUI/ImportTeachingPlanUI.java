@@ -3,6 +3,7 @@ package NJU.HouseWang.nju_eas_client.ui.MainUI.DeptADUI;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -14,9 +15,11 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.LookAndFeel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.table.DefaultTableModel;
 
@@ -88,6 +91,7 @@ class ImportPanel extends JPanel {
 	private final ImportPanel panel = this;
 	private JTextField pathField = new JTextField();
 	private JTextField pathFieldf = new JTextField();
+	private CommonBtn getBtn = new CommonBtn("获取模板");
 	private CommonBtn cfBtn = new CommonBtn("选择列表");
 	private CommonBtn cfBtnf = new CommonBtn("选择文件");
 	private DefaultTableModel dtm = new DefaultTableModel();
@@ -98,13 +102,7 @@ class ImportPanel extends JPanel {
 	private WaitingLabel waitlb1 = new WaitingLabel();
 	private WaitingLabel waitlb2 = new WaitingLabel();
 
-	private JRadioButton r1 = new JRadioButton("无表头");
-	private JRadioButton r2 = new JRadioButton("有表头");
-	private ButtonGroup rg = new ButtonGroup();
-
 	private ArrayList<String> l = new ArrayList<>();
-	private String itemName = null;
-	private String tmpHead = null;
 	private String[] head = null;
 	private String[][] content = null;
 
@@ -113,33 +111,28 @@ class ImportPanel extends JPanel {
 		setSize(700, 425);
 		setBackground(Color.white);
 		setLayout(null);
-		pathField.setBounds(35, 15, 400, 30);
+
+		getBtn.setBounds(35, 15, 90, 30);
+
+		pathField.setBounds(125, 15, 440, 30);
 		pathField.setEditable(false);
-		cfBtn.setBounds(435, 15, 80, 30);
+		cfBtn.setBounds(565, 15, 90, 30);
 
-		pathFieldf.setBounds(35, 50, 545, 30);
+		pathFieldf.setBounds(35, 50, 530, 30);
 		pathFieldf.setEditable(false);
-		cfBtnf.setBounds(580, 50, 80, 30);
-
-		r1.setBackground(Color.white);
-		r2.setBackground(Color.white);
-		r1.setBounds(530, 23, 70, 15);
-		r2.setBounds(600, 23, 70, 15);
-		rg.add(r1);
-		rg.add(r2);
-		r1.setSelected(true);
+		cfBtnf.setBounds(565, 50, 90, 30);
 
 		scrollPanel.setBounds(35, 102, 620, 250);
 
 		dtm.setColumnIdentifiers(head);
 
 		notionlb.setText("Notion：导入前请确保上表中表头与数据相对应。");
+		notionlb.setFont(new Font("微软雅黑", Font.PLAIN, 12));
 		notionlb.setBounds(90, 375, 380, 20);
 		finishBtn.setBounds(498, 372, 100, 30);
 		waitlb1.setBounds(325, 195, 42, 42);
 		waitlb2.setBounds(600, 365, 42, 42);
-		add(r1);
-		add(r2);
+		add(getBtn);
 		add(pathField);
 		add(cfBtn);
 		add(pathFieldf);
@@ -155,9 +148,33 @@ class ImportPanel extends JPanel {
 		finishBtn.setEnabled(false);
 	}
 
+	public static void main(String[] args) {
+		new ImportTeachingPlanUI();
+	}
+
 	private void setListener() {
+		getBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Feedback fb = slogic.downloadTPTemplate();
+				if (fb == Feedback.OPERATION_SUCCEED) {
+					JOptionPane.showMessageDialog(null,
+							"请将打开的Xls文件另存为。对其编辑后在进行导入操作。");
+				} else {
+					JOptionPane.showMessageDialog(null, "模板获取失败");
+				}
+			}
+		});
 		cfBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				LookAndFeel look = UIManager.getLookAndFeel();
+				try {
+					UIManager.setLookAndFeel(UIManager
+							.getSystemLookAndFeelClassName());
+				} catch (ClassNotFoundException | InstantiationException
+						| IllegalAccessException
+						| UnsupportedLookAndFeelException e1) {
+					e1.printStackTrace();
+				}
 				JFileChooser jfc = new JFileChooser();
 				jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
 				jfc.setFileFilter(new FileFilter() {
@@ -182,22 +199,26 @@ class ImportPanel extends JPanel {
 						e.printStackTrace();
 					}
 				}
-				showTable();
-			}
-		});
-		r1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				showTable();
-			}
-		});
-		r2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+				try {
+					UIManager.setLookAndFeel(look);
+				} catch (UnsupportedLookAndFeelException e1) {
+					e1.printStackTrace();
+				}
 				showTable();
 			}
 		});
 
 		cfBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				LookAndFeel look = UIManager.getLookAndFeel();
+				try {
+					UIManager.setLookAndFeel(UIManager
+							.getSystemLookAndFeelClassName());
+				} catch (ClassNotFoundException | InstantiationException
+						| IllegalAccessException
+						| UnsupportedLookAndFeelException e1) {
+					e1.printStackTrace();
+				}
 				JFileChooser jfc = new JFileChooser();
 				jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
 				jfc.setFileFilter(new FileFilter() {
@@ -220,11 +241,16 @@ class ImportPanel extends JPanel {
 					File file = jfc.getSelectedFile();
 					pathField.setText(file.getAbsolutePath());
 				}
-				
+
 				if (!pathFieldf.getText().equals("") && !l.isEmpty()) {
 					finishBtn.setEnabled(true);
 				} else {
 					finishBtn.setEnabled(false);
+				}
+				try {
+					UIManager.setLookAndFeel(look);
+				} catch (UnsupportedLookAndFeelException e1) {
+					e1.printStackTrace();
 				}
 			}
 		});
@@ -248,6 +274,10 @@ class ImportPanel extends JPanel {
 							list.add(s);
 						}
 						Feedback fb = slogic.addTeachingPlan(list);
+						if (fb == Feedback.OPERATION_SUCCEED) {
+							fb = slogic.uploadTeachingPlan(new File(pathFieldf
+									.getText()));
+						}
 						JOptionPane.showMessageDialog(null, fb.getContent());
 						finishBtn.setEnabled(true);
 						waitlb2.setVisible(false);
@@ -260,18 +290,6 @@ class ImportPanel extends JPanel {
 	public void showTable() {
 		waitlb1.setVisible(true);
 		if (!l.isEmpty()) {
-			if (r2.isSelected()) {
-				if (tmpHead == null) {
-					tmpHead = l.get(0);
-					l.remove(0);
-				} else if (l.get(0).equals(tmpHead)) {
-					l.remove(0);
-				}
-			} else {
-				if (tmpHead != null && !l.get(0).equals(tmpHead)) {
-					l.add(0, tmpHead);
-				}
-			}
 			content = new String[l.size()][l.get(0).split("；").length];
 			for (int i = 0; i < l.size(); i++) {
 				content[i] = l.get(i).split("；");

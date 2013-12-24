@@ -269,7 +269,10 @@ public class SchoolDeanUILogic {
 			list = ns.receiveList();
 			ns.shutDownConnection();
 			for (String s : list) {
-				TPDeptVO dept = new TPDeptVO(s);
+				TPDeptVO dept = new TPDeptVO();
+				dept.deptName = s.split("；")[0];
+				dept.isCommitted = Boolean.valueOf(s.split("；")[1]);
+				dept.tpState = Integer.parseInt(s.split("；")[2]);
 				l.add(dept);
 			}
 			return l;
@@ -411,7 +414,7 @@ public class SchoolDeanUILogic {
 
 	public Object showCourseEditHead() {
 		String line = null;
-		String cmd = "show；common_course_head_edit；";
+		String cmd = "show；common_course_list_head_edit";
 		try {
 			NetService client = initNetService();
 			client.sendCommand(cmd);
@@ -431,7 +434,7 @@ public class SchoolDeanUILogic {
 
 	public Object showCourseEdit(String id) {
 		String line = null;
-		String cmd = "show；common_course_head_edit；" + id;
+		String cmd = "show；common_course_edit；" + id;
 		try {
 			NetService client = initNetService();
 			client.sendCommand(cmd);

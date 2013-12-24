@@ -18,7 +18,7 @@ import NJU.HouseWang.nju_eas_client.vo.Feedback;
 
 public class MyScorePanel extends JPanel {
 	private StudentUILogic logic = new StudentUILogic();
-	private SubPanel scorep = new SubPanel("我的成绩列表", 740, 425);
+	private SubPanel scorep = new SubPanel("我的成绩列表", 940, 525);
 	private DefaultTableModel dtm = new DefaultTableModel(40, 5);
 	private CommonTable table = new CommonTable(dtm);
 	private TermBox termChooser = new TermBox();

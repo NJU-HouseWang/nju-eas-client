@@ -25,9 +25,9 @@ import NJU.HouseWang.nju_eas_client.vo.Feedback;
 
 public class ChooseCommonPanel extends JPanel {
 	private StudentUILogic logic = new StudentUILogic();
-	private SubPanel choosep = new SubPanel("已选课程列表", 500, 142);
-	private SubPanel coup = new SubPanel("通识课列表", 500, 280);
-	private SubPanel infop = new SubPanel("课程详细信息", 230, 425);
+	private SubPanel choosep = new SubPanel("已选课程列表", 700, 145);
+	private SubPanel coup = new SubPanel("通识课列表", 700, 380);
+	private SubPanel infop = new SubPanel("课程详细信息", 230, 525);
 	private CommonBtn selectBtn = new CommonBtn("选课");
 	private CommonBtn cancelBtn = new CommonBtn("取消选课");
 
@@ -51,8 +51,8 @@ public class ChooseCommonPanel extends JPanel {
 		setBackground(Color.white);
 
 		choosep.setLocation(30, 25);
-		coup.setLocation(30, 170);
-		infop.setLocation(540, 25);
+		coup.setLocation(30, 175);
+		infop.setLocation(740, 25);
 		infop.getCenterPanel().setLayout(new BorderLayout());
 		infop.getCenterPanel().add(area, BorderLayout.CENTER);
 		area.setPreferredSize(new Dimension(220, 380));

@@ -6,6 +6,8 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -59,6 +61,7 @@ public class AddCommonCourseUI {
 			panel.add(iteml[i]);
 			panel.add(itemtf[i]);
 		}
+		itemtf[4].setEditable(false);
 		panel.add(confirmBtn);
 		panel.add(cancelBtn);
 		frame.add(panel);
@@ -74,12 +77,26 @@ public class AddCommonCourseUI {
 	}
 
 	public void addListener() {
+		itemtf[3].addFocusListener(new FocusListener() {
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				if (!itemtf[3].getText().equals("")) {
+					String name = logic.showTeacherName(itemtf[3].getText());
+					itemtf[4].setText(name);
+				}
+			}
+
+			@Override
+			public void focusGained(FocusEvent arg0) {
+
+			}
+		});
 		confirmBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				for (int i = 0; i < itemtf.length; i++) {
 					String item = itemtf[i].getText();
-					if (item == "") {
+					if (item.equals("") || item.equals("null")) {
 						showFeedBack(Feedback.ITEM_EMPTY);
 						itemInfo = null;
 						break;
