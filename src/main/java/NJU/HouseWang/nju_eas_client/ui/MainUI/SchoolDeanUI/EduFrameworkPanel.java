@@ -1,6 +1,7 @@
 package NJU.HouseWang.nju_eas_client.ui.MainUI.SchoolDeanUI;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -9,7 +10,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Bar.FunctionBar;
@@ -29,7 +29,12 @@ public class EduFrameworkPanel extends JPanel {
 	private SubPanel edufwp = null;
 	private EduFrameworkMap map = null;
 	private DefaultTableModel dtm = null;
-	private JTable table = null;
+	private CardLayout cl = new CardLayout();
+	private JPanel cardp = new JPanel(cl);
+	private CommonTable table1 = null;
+	private JScrollPane js1 = new JScrollPane();
+	private CommonTable table2 = null;
+	private JScrollPane js2 = new JScrollPane();
 	private RefreshBtn refreshBtn = new RefreshBtn();
 
 	private String[][] content = null;
@@ -55,9 +60,14 @@ public class EduFrameworkPanel extends JPanel {
 		refreshBtn.setBounds(3, 3, 22, 22);
 		refreshBtn.setPreferredSize(new Dimension(22, 22));
 		edufwp.getTopPanel().add(refreshBtn);
-
-		add(edufwp);
+		
+		edufwp.getCenterPanel().setLayout(new BorderLayout());
+		edufwp.getCenterPanel().add(cardp,BorderLayout.CENTER);
+		cardp.add(js1,"1");
+		cardp.add(js2,"2");
 		showEduFw();
+		add(edufwp);
+
 		setListener();
 	}
 
@@ -73,7 +83,7 @@ public class EduFrameworkPanel extends JPanel {
 				new CreateEduFwUI();
 			}
 		});
-		
+
 		fBtn[1].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new ImportEduFrameWorkUI();
@@ -106,30 +116,36 @@ public class EduFrameworkPanel extends JPanel {
 			}
 		}
 		if (content == null) {
-			dtm = new DefaultTableModel();
-			table = new CommonTable(dtm);
-			dtm.setColumnIdentifiers(head);
 			fBtn[0].setEnabled(true);
+			fBtn[1].setEnabled(true);
+			fBtn[2].setEnabled(false);
+			DefaultTableModel dtm1 = new DefaultTableModel(1,1);
+			dtm1.setValueAt("教学框架策略未提交。", 0, 0);
+			table1 = new CommonTable(dtm1);
+			js1.setViewportView(table1);
+			cl.show(cardp, "1");
 		} else {
+			fBtn[0].setEnabled(false);
+			fBtn[1].setEnabled(false);
+			fBtn[2].setEnabled(true);
 			map = new EduFrameworkMap(content);
-			dtm = new DefaultTableModel(content.length, content[0].length);
+			dtm = new DefaultTableModel(content.length,head.length);
+			table2 = new CTable(map, dtm);
 			dtm.setColumnIdentifiers(head);
-			table = new CTable(map, dtm);
 			for (int i = 0; i < content.length; i++) {
 				for (int j = 0; j < content[i].length; j++) {
 					if (content[i][j].contains("null-null")) {
-						content[i][j] = content[i][j].replaceAll("null-null",
-								"");
+						content[i][j] = content[i][j].replaceAll("null-null", "");
 					}
 					dtm.setValueAt(content[i][j], i, j);
 				}
 			}
-			fBtn[0].setEnabled(false);
+			js2.setViewportView(table2);
+			cl.show(cardp, "2");
 		}
 
-		table.setEnabled(false);
-		edufwp.getCenterPanel().setLayout(new BorderLayout());
-		edufwp.getCenterPanel()
-				.add(new JScrollPane(table), BorderLayout.CENTER);
+
+		this.repaint();
+		this.validate();
 	}
 }

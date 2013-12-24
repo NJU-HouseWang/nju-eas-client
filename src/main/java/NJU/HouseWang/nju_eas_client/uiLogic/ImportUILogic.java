@@ -43,7 +43,7 @@ public class ImportUILogic {
 					System.out.print("\t | \tnull");
 				} else {
 
-					s += getValue(hssfCell) + "；";
+					s += getValue(hssfCell).trim() + "；";
 					System.out.print("\t | \t" + getValue(hssfCell));
 				}
 			}
