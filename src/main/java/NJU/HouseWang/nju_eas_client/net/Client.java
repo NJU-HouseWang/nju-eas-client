@@ -12,6 +12,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 import NJU.HouseWang.nju_eas_client.netService.NetService;
+import NJU.HouseWang.nju_eas_client.vo.Feedback;
 
 /**
  * 客户端类
@@ -217,7 +218,7 @@ public class Client implements NetService {
 	 * @throws IOException
 	 *             发送文件时遇到的错误
 	 */
-	public void sendFile(File file) throws IOException {
+	public String sendFile(File file) throws IOException {
 		try {
 			fis = new DataInputStream(new BufferedInputStream(
 					new FileInputStream(file)));
@@ -242,6 +243,7 @@ public class Client implements NetService {
 				out.write(buf, 0, readState);
 			}
 			out.flush();
+			return Feedback.OPERATION_SUCCEED.toString();
 		} catch (IOException e) {
 			if (out != null) {
 				fis.close();

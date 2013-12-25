@@ -62,8 +62,8 @@ public class DeptADUILogic {
 		try {
 			NetService client = initNetService();
 			client.sendCommand(cmd);
-			client.sendFile(f);
-			line = client.receiveFeedback();
+			line = client.sendFile(f);
+			client.shutDownConnection();
 			return Feedback.valueOf(line);
 		} catch (Exception e) {
 			e.printStackTrace();
