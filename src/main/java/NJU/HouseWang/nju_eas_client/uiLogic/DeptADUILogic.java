@@ -40,7 +40,7 @@ public class DeptADUILogic {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public Feedback addTeachingPlan(ArrayList<String> list) {
 		String cmd = "add；teachingplan";
 		String line = null;
@@ -55,7 +55,7 @@ public class DeptADUILogic {
 			return Feedback.INTERNET_ERROR;
 		}
 	}
-	
+
 	public Feedback uploadTeachingPlan(File f) {
 		String cmd = "upload；teachingplan_file";
 		String line = null;
@@ -147,6 +147,9 @@ public class DeptADUILogic {
 			client.sendCommand(command);
 			list = client.receiveList();
 			content = new String[list.size()][];
+			if (list.isEmpty()) {
+				return null;
+			}
 			for (int i = 0; i < list.size(); i++) {
 				content[i] = list.get(i).split("；");
 			}

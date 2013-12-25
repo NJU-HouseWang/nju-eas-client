@@ -18,6 +18,7 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.RefreshBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CTable;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CommonTable;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.EduFrameworkMap;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.SchoolDeanUI.AddFwGuideUI.CreateEduFwUI;
 import NJU.HouseWang.nju_eas_client.uiLogic.SchoolDeanUILogic;
 import NJU.HouseWang.nju_eas_client.vo.Feedback;

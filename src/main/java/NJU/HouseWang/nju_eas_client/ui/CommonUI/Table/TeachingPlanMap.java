@@ -1,14 +1,12 @@
-package NJU.HouseWang.nju_eas_client.ui.MainUI.SchoolDeanUI;
+package NJU.HouseWang.nju_eas_client.ui.CommonUI.Table;
 
 import java.util.HashMap;
 
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CMap;
-
-public class EduFrameworkMap implements CMap {
+public class TeachingPlanMap implements CMap {
 	private String[][] originTable = null;
 	private HashMap<Integer, HashMap<Integer, SpanInfo>> columnMap = new HashMap<Integer, HashMap<Integer, SpanInfo>>();
 
-	public EduFrameworkMap(String[][] originTable) {
+	public TeachingPlanMap(String[][] originTable) {
 		this.originTable = originTable;
 		scanColumn(0);
 		scanColumn(2);
@@ -56,8 +54,6 @@ public class EduFrameworkMap implements CMap {
 			return si1.num;
 		case 1:
 		case 2:
-		case 3:
-		case 6:
 			SpanInfo si2 = columnMap.get(2).get(row);
 			return si2.num;
 		default:
@@ -76,23 +72,10 @@ public class EduFrameworkMap implements CMap {
 			return si1.row;
 		case 1:
 		case 2:
-		case 3:
-		case 6:
 			SpanInfo si2 = columnMap.get(2).get(row);
 			return si2.row;
 		default:
 			return row;
 		}
-	}
-}
-
-class SpanInfo {
-	String name = null;
-	int row = 0;
-	int num = 0;
-
-	@Override
-	public String toString() {
-		return "SpanInfo [name=" + name + ", row=" + row + ", num=" + num + "]";
 	}
 }

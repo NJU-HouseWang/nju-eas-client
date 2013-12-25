@@ -22,8 +22,11 @@ public class TitleBar extends JPanel {
 
 	public TitleBar(String userName, final JFrame frame) {
 		namel = new ClickedLabel(userName);
+		namel.setForeground(Color.WHITE);
 		msgBoxl = new ClickedLabel("消息盒子");
+		msgBoxl.setForeground(Color.WHITE);
 		logoutl = new ClickedLabel("注销");
+		logoutl.setForeground(Color.WHITE);
 		namel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
