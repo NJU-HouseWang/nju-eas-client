@@ -9,6 +9,7 @@ package NJU.HouseWang.nju_eas_client.ui.MainUI.MsgBoxUI;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +17,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.CommonBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.SmallMenuBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Frame.SmallCommonFrame;
 
@@ -45,11 +47,12 @@ public class MsgBoxUI {
 		menuBar.setBackground(Color.getHSBColor((float) 0.617, (float) 1,
 				(float) 0.24));
 
+		
 		FlowLayout lf = (FlowLayout) menuBar.getLayout();
 		lf.setHgap(0);
 		lf.setVgap(0);
 		lf.setAlignment(FlowLayout.LEFT);
-
+		
 		switchPane[0] = new MsgPanel();
 		for (int i = 0; i < FUNC_NUM; i++) {
 			menuBtn[i] = new SmallMenuBtn(funcName[i]);

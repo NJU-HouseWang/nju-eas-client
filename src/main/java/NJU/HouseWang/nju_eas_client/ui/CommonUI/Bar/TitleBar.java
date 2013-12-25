@@ -13,7 +13,6 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.Label.ClickedLabel;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.MsgBoxUI.MsgBoxUI;
 import NJU.HouseWang.nju_eas_client.ui.MainUI.UserCenterUI.UserCenterUI;
 import NJU.HouseWang.nju_eas_client.uiLogic.CommonUILogic;
-import NJU.HouseWang.nju_eas_client.vo.Feedback;
 
 public class TitleBar extends JPanel {
 	private CommonUILogic logic = new CommonUILogic();
@@ -41,13 +40,14 @@ public class TitleBar extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					Feedback fb = logic.logout();
-					if (fb == Feedback.OPERATION_SUCCEED) {
-						frame.setVisible(false);
-						frame.dispose();
-						Launcher.createUI("Login", null);
-					}
+					logic.logout();
+					frame.setVisible(false);
+					frame.dispose();
+					Launcher.createUI("Login", null);
 				} catch (Exception e1) {
+					frame.setVisible(false);
+					frame.dispose();
+					Launcher.createUI("Login", null);
 				}
 			}
 		});

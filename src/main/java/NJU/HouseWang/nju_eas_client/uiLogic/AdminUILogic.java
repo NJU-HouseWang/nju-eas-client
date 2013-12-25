@@ -78,6 +78,7 @@ public class AdminUILogic {
 			for (int i = 0; i < list.size(); i++) {
 				content[i] = list.get(i).split("；");
 			}
+			client.shutDownConnection();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Feedback.INTERNET_ERROR;

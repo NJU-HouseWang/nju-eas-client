@@ -24,7 +24,7 @@ public class MsgOutPanel extends JPanel {
 		setBackground(Color.black);
 		table.setShowVerticalLines(false);
 		table.setSelectionMode(0);
-		tm.setColumnIdentifiers(new String[]{"发件人","主题","发送时间"});
+		tm.setColumnIdentifiers(new String[]{"收件人","主题","发送时间"});
 		js.setPreferredSize(new Dimension(548,423));
 		add(js,BorderLayout.CENTER);
 	}

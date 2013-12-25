@@ -208,7 +208,7 @@ class ImportPanel extends JPanel {
 			}
 		});
 
-		cfBtn.addActionListener(new ActionListener() {
+		cfBtnf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				LookAndFeel look = UIManager.getLookAndFeel();
 				try {
@@ -239,7 +239,7 @@ class ImportPanel extends JPanel {
 				int result = jfc.showOpenDialog(panel);
 				if (result == JFileChooser.APPROVE_OPTION) {
 					File file = jfc.getSelectedFile();
-					pathField.setText(file.getAbsolutePath());
+					pathFieldf.setText(file.getAbsolutePath());
 				}
 
 				if (!pathFieldf.getText().equals("") && !l.isEmpty()) {
@@ -289,6 +289,7 @@ class ImportPanel extends JPanel {
 
 	public void showTable() {
 		waitlb1.setVisible(true);
+		l.remove(0);
 		if (!l.isEmpty()) {
 			content = new String[l.size()][l.get(0).split("；").length];
 			for (int i = 0; i < l.size(); i++) {
