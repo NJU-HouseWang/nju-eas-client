@@ -25,9 +25,13 @@ import NJU.HouseWang.nju_eas_client.vo.Feedback;
 public class StudentScorePanel extends JPanel {
 	private TeacherUILogic logic = new TeacherUILogic();
 	private FunctionBar fbar = null;
-	private FunctionBtn[] fBtn = new FunctionBtn[1];
+	private FunctionBtn[] fBtn = new FunctionBtn[2];
 	private SubPanel scorep = new SubPanel("学生成绩列表", 940, 480);
-	private DefaultTableModel dtm = new DefaultTableModel(40, 5);
+	private DefaultTableModel dtm = new DefaultTableModel(40, 5) {
+		public boolean isCellEditable(int arg0, int arg1) {
+			return false;
+		}
+	};
 	private CommonTable table = new CommonTable(dtm);
 	private RefreshBtn reBtn = new RefreshBtn();
 	private JComboBox<CourseVO> couChooser = new JComboBox<CourseVO>();
@@ -41,6 +45,7 @@ public class StudentScorePanel extends JPanel {
 		fbar = new FunctionBar();
 		fbar.setLocation(0, 0);
 		fBtn[0] = new FunctionBtn("ScoreBtn");
+		fBtn[1] = new FunctionBtn("CompleteBtn");
 
 		for (int i = 0; i < fBtn.length; i++) {
 			fbar.add(fBtn[i]);
@@ -56,6 +61,7 @@ public class StudentScorePanel extends JPanel {
 		add(scorep);
 		initCouChooser();
 		setListener();
+		fBtn[1].setEnabled(false);
 	}
 
 	private void initCouChooser() {
@@ -89,7 +95,7 @@ public class StudentScorePanel extends JPanel {
 
 		fBtn[0].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (fBtn[0].getName().equals("AddBtn")) {
+				if (fBtn[0].getName().equals("ScoreBtn")) {
 					JOptionPane.showMessageDialog(null, "请在表格中输入学生成绩，按完成按钮提交。");
 					dtm = new DefaultTableModel(0, 5) {
 						public boolean isCellEditable(int arg0, int arg1) {
@@ -99,12 +105,28 @@ public class StudentScorePanel extends JPanel {
 					table.setModel(dtm);
 					dtm.setDataVector(content, head);
 					table.updateUI();
-				} else {
-					Feedback fb = logic.recordScore(logic.showCurrentTerm(),
-							((CourseVO) couChooser.getSelectedItem()).couId,
-							content);
-					JOptionPane.showMessageDialog(null, fb.getContent());
+					couChooser.setEnabled(false);
+					reBtn.setEnabled(false);
+					fBtn[0].setEnabled(false);
+					fBtn[1].setEnabled(true);
 				}
+			}
+		});
+		fBtn[1].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				for (int i = 0; i < content.length; i++) {
+					for (int j = 0; j < content[i].length; j++) {
+						content[i][j] = (String) table.getValueAt(i, j);
+					}
+				}
+				Feedback fb = logic.recordScore(logic.showCurrentTerm(),
+						((CourseVO) couChooser.getSelectedItem()).couId,
+						content);
+				JOptionPane.showMessageDialog(null, fb.getContent());
+				couChooser.setEnabled(true);
+				reBtn.setEnabled(true);
+				fBtn[0].setEnabled(true);
+				fBtn[1].setEnabled(false);
 			}
 		});
 
@@ -114,7 +136,11 @@ public class StudentScorePanel extends JPanel {
 		head = null;
 		content = null;
 		table.clearSelection();
-		dtm = new DefaultTableModel(0, 5);
+		dtm = new DefaultTableModel(0, 5) {
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 		table.setModel(dtm);
 		table.updateUI();
 		fBtn[0].setEnabled(false);

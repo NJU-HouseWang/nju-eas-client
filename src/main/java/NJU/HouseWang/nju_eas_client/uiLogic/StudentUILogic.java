@@ -280,6 +280,13 @@ public class StudentUILogic {
 			for (int i = 0; i < list.size(); i++) {
 				content[i] = list.get(i).split("；");
 			}
+			for (int i = 0; i < content.length; i++) {
+				for (int j = 0; j < content[i].length; j++) {
+					if (content[i][j].equals("-1")) {
+						content[i][j] = "";
+					}
+				}
+			}
 			client.shutDownConnection();
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -167,7 +167,7 @@ public class TeacherUILogic {
 		for (int i = 0; i < table.length; i++) {
 			String l = "";
 			for (int j = 0; j < table[i].length; j++) {
-				if (j == table[i].length - 1) {
+				if (j == table[i].length - 1 || j == table[i].length - 2) {
 					if (table[i][j].equals("")) {
 						table[i][j] = "-1";
 					} else {
