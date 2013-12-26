@@ -217,8 +217,8 @@ public class TeacherUILogic {
 		}
 	}
 
-	public Object showStudentScoreList(String term, String couId) {
-		String command = "show；course_student_list；" + term + "；" + couId;
+	public Object showStudentScoreList(String couId) {
+		String command = "show；course_student_list；" + couId;
 		ArrayList<String> list = null;
 		String[][] content = null;
 		try {

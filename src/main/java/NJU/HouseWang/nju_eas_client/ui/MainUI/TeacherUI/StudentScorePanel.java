@@ -124,7 +124,7 @@ public class StudentScorePanel extends JPanel {
 			Object o = logic.showStudentScoreListHead();
 			if (o instanceof String[]) {
 				head = (String[]) o;
-				o = logic.showStudentScoreList(logic.showCurrentTerm(), couId);
+				o = logic.showStudentScoreList(couId);
 				if (o instanceof Feedback) {
 					JOptionPane.showMessageDialog(null,
 							((Feedback) o).getContent());
