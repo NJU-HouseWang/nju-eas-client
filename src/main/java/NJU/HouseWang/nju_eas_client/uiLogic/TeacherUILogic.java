@@ -82,7 +82,7 @@ public class TeacherUILogic {
 
 	public Object showStudentListHead() {
 		String line = null;
-		String cmd = "show；student_list_from_course_head";
+		String cmd = "show；student_list_head";
 		try {
 			NetService client = initNetService();
 			client.sendCommand(cmd);
@@ -141,7 +141,7 @@ public class TeacherUILogic {
 
 	public Feedback editCourseDetail(String term, String couId,
 			CourseDetailVO course) {
-		String command = "edit；course_detail；" + term + "；" + couId;
+		String command = "edit；course；" + term + "；" + couId;
 		String line = null;
 		ArrayList<String> list = new ArrayList<String>();
 		list.add(course.introduction);

@@ -212,7 +212,7 @@ public class SchoolDeanUILogic {
 	 * @return 处理结果
 	 */
 	public Feedback auditTP(String deptName, int states) {
-		String command = "audit；" + deptName + "；" + states;
+		String command = "audit；teachingplan；" + deptName + "；" + states;
 		String line = null;
 		try {
 			NetService ns = initNetService();
@@ -233,8 +233,8 @@ public class SchoolDeanUILogic {
 	 *            院系名
 	 * @return 处理结果
 	 */
-	public Object downloadTPFile(String deptName) {
-		String command = "download；teachingplan；" + deptName;
+	public Feedback downloadTPFile(String deptName) {
+		String command = "download；teachingplan_file；" + deptName;
 		File file = null;
 		try {
 			NetService ns = initNetService();
@@ -464,6 +464,41 @@ public class SchoolDeanUILogic {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+	
+	public Object showTPStatus(String deptName) {
+		String command = "show；teachingplan_status；" + deptName;
+		String line = null;
+		try {
+			NetService ns = initNetService();
+			ns.sendCommand(command);
+			line = ns.receiveFeedback();
+			ns.shutDownConnection();
+			if (line.contains("_")) {
+				return Feedback.OPERATION_SUCCEED;
+			} else {
+				TPDeptVO info = new TPDeptVO(line);
+				return info;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Feedback.INTERNET_ERROR;
+		}
+	}
+	
+	public Feedback addCourseFromTP(String deptName) {
+		String command = "add；course_list_from_tp；" + deptName;
+		String line = null;
+		try {
+			NetService ns = initNetService();
+			ns.sendCommand(command);
+			line = ns.receiveFeedback();
+			ns.shutDownConnection();
+			return Feedback.valueOf(line);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Feedback.INTERNET_ERROR;
 		}
 	}
 }

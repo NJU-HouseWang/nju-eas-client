@@ -1,17 +1,13 @@
 package NJU.HouseWang.nju_eas_client.ui.MainUI.SchoolDeanUI;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -20,11 +16,15 @@ import javax.swing.table.DefaultTableModel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Bar.FunctionBar;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.FunctionBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.RefreshBtn;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.ComboBox.DeptBox;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Label.ClickedLabel;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Label.CommonLabel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CTable;
-import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.EduFrameworkMap;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CommonTable;
+import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.TeachingPlanMap;
 import NJU.HouseWang.nju_eas_client.uiLogic.SchoolDeanUILogic;
+import NJU.HouseWang.nju_eas_client.vo.DeptVO;
 import NJU.HouseWang.nju_eas_client.vo.Feedback;
 import NJU.HouseWang.nju_eas_client.vo.TPDeptVO;
 
@@ -33,21 +33,27 @@ public class TeachingPlanPanel extends JPanel {
 	private SchoolDeanUILogic logic = new SchoolDeanUILogic();
 	private FunctionBar fbar = null;
 	private FunctionBtn[] fBtn = new FunctionBtn[2];
-	private SubPanel tpp = null;
-	private SubPanel accessoryp = null;
-	private SubPanel localStatuesp = null;
-	private JComboBox<TPDeptVO> deptChooser = new JComboBox<TPDeptVO>();
-	private EduFrameworkMap map = null;
+	private SubPanel tpp = new SubPanel("教学计划", 700, 480);
+	private TeachingPlanMap map = null;
 	private DefaultTableModel dtm = null;
-	private CTable table = null;
-	private RefreshBtn freshBtn = new RefreshBtn();
+	private CardLayout cl = new CardLayout();
+	private JPanel cardp = new JPanel(cl);
+	private CommonTable table1 = null;
+	private JScrollPane js1 = new JScrollPane();
+	private CTable table2 = null;
+	private JScrollPane js2 = new JScrollPane();
 
-	private String[][] content = new String[][] { { " ", " ", " ", " ", " ",
-			" ", " " } };
-	private String[] head = new String[] { " ", " ", " ", " ", " ", " ", " " };
+	private SubPanel accessoryp = new SubPanel("附件", 230, 70);
+	private ClickedLabel lb = new ClickedLabel("");
+	private SubPanel localStatuesp = new SubPanel("当前状态", 230, 70);
+	private CommonLabel lb2 = new CommonLabel("");
+	private DeptBox deptChooser = new DeptBox();
+	private RefreshBtn refreshBtn = new RefreshBtn();
+
+	private String[][] content = null;
+	private String[] head = null;
 
 	public TeachingPlanPanel() {
-		// 构造界面
 		setLayout(null);
 		setBackground(Color.white);
 		fbar = new FunctionBar();
@@ -58,162 +64,159 @@ public class TeachingPlanPanel extends JPanel {
 			fbar.add(fBtn[i]);
 		}
 		add(fbar);
-		deptChooser.setPreferredSize(new Dimension(120, 20));
-		deptChooser.setFont(new Font("微软雅黑",Font.PLAIN,12));
-		// 教学计划子窗口
-		tpp = new SubPanel("教学计划  ", 700, 480);
+
 		tpp.setLocation(30, 70);
 		tpp.getTopPanel().add(deptChooser);
-		tpp.getTopPanel().add(freshBtn);
-		
-		// 附件子窗口
-		accessoryp = new SubPanel("附件", 230, 150);
+		tpp.getTopPanel().add(refreshBtn);
+
 		accessoryp.setLocation(740, 70);
-		// 状态子窗口
-		localStatuesp = new SubPanel("当前状态", 230, 150);
-		localStatuesp.setLocation(740, 230);
-		// 教学计划列表（开始时为空）
-		initEmptyTPTable();
+		accessoryp.getCenterPanel().add(lb);
+		localStatuesp.setLocation(740, 150);
+		localStatuesp.getCenterPanel().add(lb2);
+
 		tpp.getCenterPanel().setLayout(new BorderLayout());
-		tpp.getCenterPanel().add(new JScrollPane(table), BorderLayout.CENTER);
-		// 添加子窗口
+		tpp.getCenterPanel().add(cardp, BorderLayout.CENTER);
+		cardp.add(js1, "1");
+		cardp.add(js2, "2");
+
 		add(tpp);
 		add(accessoryp);
 		add(localStatuesp);
-		// 设置监听
+		showTP();
 		setListener();
-		// 初始化院系列表
-		initDeptList();
-		// 设置按钮初始状态
-		fBtn[0].setEnabled(false);
-		fBtn[1].setEnabled(false);
 	}
 
 	private void setListener() {
-		deptChooser.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				@SuppressWarnings("unchecked")
-				JComboBox<TPDeptVO> c = (JComboBox<TPDeptVO>) e.getSource();
-				final TPDeptVO dept = (TPDeptVO) c.getSelectedItem();
-				if (dept.deptId == null || dept.deptId.equals("null")) {
-					fBtn[0].setEnabled(false);
-					fBtn[1].setEnabled(false);
-				} else {
-					fBtn[0].setEnabled(true);
-					fBtn[1].setEnabled(true);
-					showTPTable(dept.deptId);
-
-					ClickedLabel lb = new ClickedLabel(dept.fileName);
-					accessoryp.getCenterPanel().add(lb);
-					lb.addMouseListener(new MouseAdapter() {
-						@Override
-						public void mouseClicked(MouseEvent arg0) {
-							logic.downloadTPFile(dept.deptId);
-						}
-					});
-
-					JLabel stateslb = new JLabel();
-					stateslb.setFont(new Font("微软雅黑", Font.PLAIN, 12));
-					localStatuesp.getCenterPanel().add(stateslb);
-					if (dept.isCommitted) {
-						switch (dept.tpState) {
-						case 0:
-							stateslb.setText("未审核");
-							fBtn[0].setEnabled(true);
-							fBtn[1].setEnabled(true);
-						case 1:
-							stateslb.setText("审核通过");
-							fBtn[0].setEnabled(false);
-							fBtn[1].setEnabled(false);
-						case 2:
-							stateslb.setText("审核不过");
-							fBtn[0].setEnabled(false);
-							fBtn[1].setEnabled(false);
-						}
-					} else {
-						stateslb.setText("未提交");
-						fBtn[0].setEnabled(false);
-						fBtn[1].setEnabled(false);
-					}
-				}
-			}
-		});
-
 		fBtn[0].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Feedback fb = logic.auditTP(
-						((TPDeptVO) deptChooser.getSelectedItem()).deptId, 1);
+						((DeptVO) deptChooser.getSelectedItem()).deptName, 1);
+				if (fb == Feedback.OPERATION_SUCCEED) {
+					showTP();
+					logic.addCourseFromTP(((DeptVO) deptChooser
+							.getSelectedItem()).deptName);
+					fBtn[0].setEnabled(false);
+					fBtn[1].setEnabled(false);
+				}
 				JOptionPane.showMessageDialog(null, fb.getContent());
 			}
 		});
-
 		fBtn[1].addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				Feedback fb = logic.auditTP(
-						((TPDeptVO) deptChooser.getSelectedItem()).deptId, 2);
+						((DeptVO) deptChooser.getSelectedItem()).deptName, 2);
+				if (fb == Feedback.OPERATION_SUCCEED) {
+					showTP();
+				}
 				JOptionPane.showMessageDialog(null, fb.getContent());
+			}
+		});
+		refreshBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				showTP();
 			}
 		});
 	}
 
-	private void initDeptList() {
-		Object o = logic.showTPList();
+	private void showTP() {
+		Object o = logic
+				.showTPStatus(((DeptVO) deptChooser.getSelectedItem()).deptName);
 		if (o instanceof Feedback) {
 			JOptionPane.showMessageDialog(null, ((Feedback) o).getContent());
-		} else if (o instanceof ArrayList<?>) {
-			TPDeptVO nul = new TPDeptVO();
-			nul.deptId = "null";
-			nul.deptName = "请选择院系...";
-			deptChooser.addItem(nul);
-			for (Object d : (ArrayList<?>) o) {
-				if (d instanceof TPDeptVO) {
-					deptChooser.addItem((TPDeptVO) d);
+		} else if (o instanceof TPDeptVO) {
+			if (((TPDeptVO) o).isCommitted) {
+				lb.setLabelText(((TPDeptVO) o).fileName);
+				lb.setForeground(Color.BLUE);
+				lb.addMouseListener(new MouseAdapter() {
+					public void mousePressed(MouseEvent e) {
+						Feedback fb = logic
+								.downloadTPFile(((DeptVO) deptChooser
+										.getSelectedItem()).deptName);
+						if (fb == Feedback.OPERATION_SUCCEED) {
+							JOptionPane.showMessageDialog(null, "文件已打开，请另存。");
+						} else {
+							JOptionPane.showMessageDialog(null, fb.getContent());
+						}
+					}
+				});
+			} else {
+				lb.setLabelText("教学计划未提交");
+				lb.setForeground(Color.BLACK);
+			}
+			String status = null;
+			if (((TPDeptVO) o).isCommitted) {
+				switch (((TPDeptVO) o).tpState) {
+				case 0:
+					status = "未审核";
+					fBtn[0].setEnabled(true);
+					fBtn[1].setEnabled(true);
+					break;
+				case 1:
+					status = "审核通过";
+					fBtn[0].setEnabled(false);
+					fBtn[1].setEnabled(false);
+					break;
+				case 2:
+					status = "审核不通过";
+					fBtn[0].setEnabled(false);
+					fBtn[1].setEnabled(false);
+					break;
+				default:
+					status = "错误代码" + ((TPDeptVO) o).tpState + "";
+					fBtn[0].setEnabled(false);
+					fBtn[1].setEnabled(false);
 				}
+				showTeachingPlan();
+			} else {
+				DefaultTableModel dtm1 = new DefaultTableModel(1, 1);
+				dtm1.setValueAt("教学计划未提交。", 0, 0);
+				table1 = new CommonTable(dtm1);
+				table1.setEnabled(false);
+				js1.setViewportView(table1);
+				cl.show(cardp, "1");
 			}
+			lb2.setText(status);
+			lb2.setForeground(Color.BLACK);
 		}
 	}
 
-	private void initEmptyTPTable() {
-		content = new String[][] { { " ", " ", " ", " ", " ", " ", " " } };
-		head = new String[] { " ", " ", " ", " ", " ", " ", " " };
-		map = new EduFrameworkMap(content);
-		dtm = new DefaultTableModel(content.length, content[0].length) {
-			public boolean isCellEditable(int indexRow, int indexColumn) {
-				return false;
-			}
-		};
-		for (int i = 0; i < content.length; i++) {
-			for (int j = 0; j < content[i].length; j++) {
-				dtm.setValueAt(content[i][j], i, j);
-			}
-		}
-		dtm.setColumnIdentifiers(head);
-		table = new CTable(map, dtm);
-		table.setEnabled(false);
-	}
-
-	private void showTPTable(String dept) {
-		head = null;
+	private void showTeachingPlan() {
 		content = null;
+		head = null;
+
 		Object fb = logic.showTPHead();
 		if (fb instanceof Feedback) {
 			JOptionPane.showMessageDialog(null, ((Feedback) fb).getContent());
 		} else if (fb instanceof String[]) {
 			head = (String[]) fb;
-			dtm.setColumnIdentifiers(head);
-			fb = logic.showTPContent(dept);
-			if (fb instanceof Feedback) {
+			fb = logic
+					.showTPContent(((DeptVO) deptChooser.getSelectedItem()).deptName);
+			if ((fb instanceof Feedback) && fb != Feedback.LIST_EMPTY) {
 				JOptionPane.showMessageDialog(null,
 						((Feedback) fb).getContent());
 			} else if (fb instanceof String[][]) {
 				content = (String[][]) fb;
-				for (int i = 0; i < content.length; i++) {
-					for (int j = 0; j < content[i].length; j++) {
-						dtm.setValueAt(content[i][j], i, j);
-					}
-				}
 			}
 		}
-		table.updateUI();
+		if (content != null) {
+			map = new TeachingPlanMap(content);
+			dtm = new DefaultTableModel(content.length, head.length);
+			table2 = new CTable(map, dtm);
+			dtm.setColumnIdentifiers(head);
+			for (int i = 0; i < content.length; i++) {
+				for (int j = 0; j < content[i].length; j++) {
+					if (content[i][j].contains("null-null")) {
+						content[i][j] = content[i][j].replaceAll("null-null",
+								"");
+					}
+					dtm.setValueAt(content[i][j], i, j);
+				}
+			}
+			table2.setEnabled(false);
+			js2.setViewportView(table2);
+			cl.show(cardp, "2");
+		}
+		this.repaint();
+		this.validate();
 	}
 }

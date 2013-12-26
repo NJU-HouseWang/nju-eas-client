@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -48,7 +47,7 @@ public class MyStudentPanel extends JPanel {
 		}
 		add(fbar);
 
-		stup = new SubPanel("我的学生列表", 740, 380);
+		stup = new SubPanel("我的学生列表", 940, 480);
 		stup.setLocation(30, 70);
 
 		stup.getTopPanel().add(couChooser);
@@ -66,14 +65,13 @@ public class MyStudentPanel extends JPanel {
 		couChooser.setPreferredSize(new Dimension(120, 20));
 		couChooser.addItem(new CourseVO("null", "请选择课程..."));
 		Object o = logic.showMyCourseList();
-		if (o instanceof ArrayList<?>) {
-			for (Object obj : ((ArrayList<?>) o)) {
-				if (obj instanceof String) {
-					CourseVO cou = new CourseVO();
-					cou.couId = ((String) obj).split("；")[0];
-					cou.couName = ((String) obj).split("；")[1];
-					couChooser.addItem(cou);
-				}
+		if (o instanceof String[][]) {
+			String[][] content = (String[][]) o;
+			for (int i = 0; i < content.length; i++) {
+				CourseVO cou = new CourseVO();
+				cou.couId = content[i][0];
+				cou.couName = content[i][1];
+				couChooser.addItem(cou);
 			}
 		}
 	}

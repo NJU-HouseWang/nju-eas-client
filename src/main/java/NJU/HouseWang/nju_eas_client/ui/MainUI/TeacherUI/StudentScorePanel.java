@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -26,8 +25,8 @@ import NJU.HouseWang.nju_eas_client.vo.Feedback;
 public class StudentScorePanel extends JPanel {
 	private TeacherUILogic logic = new TeacherUILogic();
 	private FunctionBar fbar = null;
-	private FunctionBtn[] fBtn = new FunctionBtn[3];
-	private SubPanel scorep = new SubPanel("学生成绩列表", 740, 380);
+	private FunctionBtn[] fBtn = new FunctionBtn[1];
+	private SubPanel scorep = new SubPanel("学生成绩列表", 940, 480);
 	private DefaultTableModel dtm = new DefaultTableModel(40, 5);
 	private CommonTable table = new CommonTable(dtm);
 	private RefreshBtn reBtn = new RefreshBtn();
@@ -41,9 +40,7 @@ public class StudentScorePanel extends JPanel {
 		setBackground(Color.white);
 		fbar = new FunctionBar();
 		fbar.setLocation(0, 0);
-		fBtn[0] = new FunctionBtn("AddBtn");
-		fBtn[1] = new FunctionBtn("ImportBtn");
-		fBtn[2] = new FunctionBtn("ExportBtn");
+		fBtn[0] = new FunctionBtn("ScoreBtn");
 
 		for (int i = 0; i < fBtn.length; i++) {
 			fbar.add(fBtn[i]);
@@ -51,14 +48,14 @@ public class StudentScorePanel extends JPanel {
 		add(fbar);
 
 		scorep.setLocation(30, 70);
-
+		scorep.getTopPanel().add(couChooser);
+		scorep.getTopPanel().add(reBtn);
 		scorep.getCenterPanel().setLayout(new BorderLayout());
 		scorep.getCenterPanel()
 				.add(new JScrollPane(table), BorderLayout.CENTER);
 		add(scorep);
 		initCouChooser();
 		setListener();
-		fBtn[0].setEnabled(false);
 	}
 
 	private void initCouChooser() {
@@ -66,14 +63,13 @@ public class StudentScorePanel extends JPanel {
 		couChooser.setPreferredSize(new Dimension(120, 20));
 		couChooser.addItem(new CourseVO("null", "请选择课程..."));
 		Object o = logic.showMyCourseList();
-		if (o instanceof ArrayList<?>) {
-			for (Object obj : ((ArrayList<?>) o)) {
-				if (obj instanceof String) {
-					CourseVO cou = new CourseVO();
-					cou.couId = ((String) obj).split("；")[0];
-					cou.couName = ((String) obj).split("；")[1];
-					couChooser.addItem(cou);
-				}
+		if (o instanceof String[][]) {
+			String[][] content = (String[][]) o;
+			for (int i = 0; i < content.length; i++) {
+				CourseVO cou = new CourseVO();
+				cou.couId = content[i][0];
+				cou.couName = content[i][1];
+				couChooser.addItem(cou);
 			}
 		}
 	}

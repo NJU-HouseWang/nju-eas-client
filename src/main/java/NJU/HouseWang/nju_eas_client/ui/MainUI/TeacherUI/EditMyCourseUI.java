@@ -19,8 +19,8 @@ public class EditMyCourseUI {
 	private TeacherUILogic logic = new TeacherUILogic();
 	private JFrame frame = null;
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	private int width = 0;
-	private int height = 0;
+	private int width = 600;
+	private int height = 480;
 	private EditMyCoursePanel panel = new EditMyCoursePanel();
 	private JTextArea t1 = panel.textArea;
 	private JTextArea t2 = panel.textArea_1;
@@ -42,12 +42,10 @@ public class EditMyCourseUI {
 		frame.add(panel, BorderLayout.CENTER);
 		frame.setAlwaysOnTop(true);
 		addListener();
-		frame.pack();
-		width = frame.getWidth();
-		height = frame.getHeight();
 		frame.setBounds(((int) screenSize.getWidth() - width) / 2,
 				((int) screenSize.getHeight() - height) / 2 - 30, width, height);
 		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setResizable(false);
 	}
 
@@ -71,9 +69,11 @@ public class EditMyCourseUI {
 				}
 				Feedback fb = logic.editCourseDetail(logic.showCurrentTerm(),
 						couId, dt);
+				if (fb == Feedback.OPERATION_SUCCEED) {
+					frame.setVisible(false);
+					frame.dispose();
+				}
 				JOptionPane.showMessageDialog(null, fb.getContent());
-				frame.setVisible(false);
-				frame.dispose();
 			}
 		});
 

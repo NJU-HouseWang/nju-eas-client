@@ -1,7 +1,7 @@
 package NJU.HouseWang.nju_eas_client.ui.MainUI.TeacherUI;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -39,14 +39,14 @@ public class TeacherUI {
 		childp[2] = new MyStudentPanel();
 		childp[3] = new StudentScorePanel();
 
-		switchPane.setSize(800, 490);
+		switchPane.setSize(1000, 590);
 		switchPane.setLocation(30, 140);
 		switchPane.setLayout(mcl);
 
 		for (int i = 0; i < mBtn.length; i++) {
 			mBtn[i] = new MenuBtn(FUNC_BTN_NAME[i], FUNC_BTN_TEXT[i]);
 			mbar.add(mBtn[i]);
-			childp[i].setSize(800, 490);
+			childp[i].setSize(1000, 590);
 			switchPane.add(childp[i], FUNC_BTN_NAME[i]);
 		}
 
@@ -90,12 +90,9 @@ public class TeacherUI {
 				bmbtn[i] = new HomeMenuBtn(FUNC_BTN_NAME[i + 1]);
 				bmbar.add(bmbtn[i]);
 			}
-			bmbar.setLocation(70, 50);
-			setBackground(Color.getHSBColor((float) 0.617, (float) 0.42,
-					(float) 0.92));
 			((FlowLayout) getLayout()).setAlignment(FlowLayout.CENTER);
-			setLayout(null);
-			add(bmbar);
+			setLayout(new BorderLayout());
+			add(bmbar, BorderLayout.CENTER);
 			setListener();
 		}
 

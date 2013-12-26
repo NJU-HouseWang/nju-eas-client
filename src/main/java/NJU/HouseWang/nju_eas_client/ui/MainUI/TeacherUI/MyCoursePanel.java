@@ -2,6 +2,7 @@ package NJU.HouseWang.nju_eas_client.ui.MainUI.TeacherUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +20,7 @@ import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.FunctionBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Button.RefreshBtn;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Panel.SubPanel;
 import NJU.HouseWang.nju_eas_client.ui.CommonUI.Table.CommonTable;
+import NJU.HouseWang.nju_eas_client.ui.MainUI.ExportUI.ExportUI;
 import NJU.HouseWang.nju_eas_client.uiLogic.TeacherUILogic;
 import NJU.HouseWang.nju_eas_client.vo.CourseDetailVO;
 import NJU.HouseWang.nju_eas_client.vo.Feedback;
@@ -27,14 +29,16 @@ public class MyCoursePanel extends JPanel {
 	private TeacherUILogic logic = new TeacherUILogic();
 	private FunctionBar fbar = new FunctionBar();
 	private FunctionBtn[] fBtn = new FunctionBtn[2];
-	private SubPanel listp = new SubPanel("我的课程列表", 500, 380);
-	private SubPanel infop = new SubPanel("详细信息", 230, 380);
+	private SubPanel listp = new SubPanel("我的课程列表", 700, 480);
+	private SubPanel infop = new SubPanel("详细信息", 230, 480);
 	private DefaultTableModel dtm = new DefaultTableModel(40, 5);
 	private CommonTable table = new CommonTable(dtm);
 	private RefreshBtn reBtn = new RefreshBtn();
 
 	private String[] head = null;
 	private String[][] content = null;
+
+	private JTextArea area = new JTextArea();
 
 	public MyCoursePanel() {
 		setLayout(null);
@@ -49,7 +53,15 @@ public class MyCoursePanel extends JPanel {
 		add(fbar);
 
 		listp.setLocation(30, 70);
-		infop.setLocation(540, 70);
+		area.setPreferredSize(new Dimension(220, 380));
+		area.setSize(new Dimension(220, 390));
+		area.setLineWrap(true);
+		area.setFont(new Font("微软雅黑", Font.PLAIN, 12));
+		area.setEditable(false);
+
+		infop.setLocation(740, 70);
+		infop.getCenterPanel().setLayout(new BorderLayout());
+		infop.getCenterPanel().add(area, BorderLayout.CENTER);
 
 		listp.getTopPanel().add(reBtn);
 
@@ -75,19 +87,13 @@ public class MyCoursePanel extends JPanel {
 					Object o = logic.showCourseDetail(logic.showCurrentTerm(),
 							table.getValueAt(selectRowNum, 0).toString());
 					if (o instanceof CourseDetailVO) {
-						infop.setCenterPanel(new JPanel());
-						JTextArea area = new JTextArea();
-						area.setText("课程介绍：\r\n"
+						area.setText("");
+						area.append("课程介绍：\r\n"
 								+ ((CourseDetailVO) o).introduction
 								+ "\r\n\r\n" + "推荐书目：\r\n"
 								+ ((CourseDetailVO) o).book + "\r\n\r\n"
 								+ "课程大纲：\r\n" + ((CourseDetailVO) o).syllabus
 								+ "\r\n\r\n");
-						area.setFont(new Font("微软雅黑", Font.PLAIN, 12));
-						area.setEditable(false);
-						area.setBorder(null);
-						infop.getCenterPanel().setLayout(new BorderLayout());
-						infop.getCenterPanel().add(area, BorderLayout.CENTER);
 					}
 				}
 			}
@@ -103,6 +109,11 @@ public class MyCoursePanel extends JPanel {
 						new EditMyCourseUI(couId, (CourseDetailVO) o);
 					}
 				}
+			}
+		});
+		fBtn[1].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new ExportUI(head, content);
 			}
 		});
 	}

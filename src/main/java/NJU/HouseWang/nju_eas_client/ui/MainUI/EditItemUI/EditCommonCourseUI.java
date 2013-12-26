@@ -66,7 +66,7 @@ public class EditCommonCourseUI {
 			panel.add(itemtf[i]);
 		}
 		itemtf[0].setEditable(false);
-		itemtf[4].setEditable(false);
+		itemtf[5].setEditable(false);
 		panel.add(confirmBtn);
 		panel.add(cancelBtn);
 		frame.add(panel);
@@ -82,12 +82,12 @@ public class EditCommonCourseUI {
 	}
 
 	public void addListener() {
-		itemtf[3].addFocusListener(new FocusListener() {
+		itemtf[4].addFocusListener(new FocusListener() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
-				if (!itemtf[3].getText().equals("")) {
-					String name = logic.showTeacherName(itemtf[3].getText());
-					itemtf[4].setText(name);
+				if (!itemtf[4].getText().equals("")) {
+					String name = logic.showTeacherName(itemtf[4].getText());
+					itemtf[5].setText(name);
 				}
 			}
 
