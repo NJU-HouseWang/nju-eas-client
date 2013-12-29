@@ -71,8 +71,14 @@ public class StudentUI {
 				public void actionPerformed(ActionEvent e) {
 					if (((MenuBtn) e.getSource()).getName().equals(
 							"chooseCommonBtn")
-							&& !logic.showChooseCommonStatus()) {
+							&& !logic.showSystemStatus("selectCommon")) {
 						JOptionPane.showMessageDialog(null, "通识课选课尚未开始。");
+						mcl.show(switchPane, "homeBtn");
+						mBtn[0].setSelected(true);
+					} else if (((MenuBtn) e.getSource()).getName().equals(
+							"byelectBtn")
+							&& !logic.showSystemStatus("byelectCommon")) {
+						JOptionPane.showMessageDialog(null, "通识课补选尚未开始。");
 						mcl.show(switchPane, "homeBtn");
 						mBtn[0].setSelected(true);
 					} else {

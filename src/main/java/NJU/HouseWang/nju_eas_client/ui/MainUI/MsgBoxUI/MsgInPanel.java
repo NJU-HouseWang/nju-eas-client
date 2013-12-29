@@ -46,7 +46,7 @@ public class MsgInPanel extends JPanel {
 				if (e.getClickCount() == 2) {
 					if (table.getSelectedRowCount() == 1) {
 						MessageVO msg = list.get(table.getSelectedRow());
-						new ReadMsgUI(msg);
+						new ReadMsgUI(0,msg);
 					}
 				}
 			}
@@ -54,9 +54,9 @@ public class MsgInPanel extends JPanel {
 	}
 
 	private void showTable() {
-		list = logic.showMsgTable(0);
+		list = logic.showMsgList(0);
 		for (MessageVO m : list) {
-			dtm.insertRow(0, new String[] { m.senderId, m.title });
+			dtm.insertRow(0, new String[] { m.senderId + " (" + logic.showUserName(m.senderId) + ")", m.title });
 		}
 	}
 }

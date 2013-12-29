@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import NJU.HouseWang.nju_eas_client.net.ClientPool;
 import NJU.HouseWang.nju_eas_client.netService.NetService;
+import NJU.HouseWang.nju_eas_client.vo.Feedback;
 import NJU.HouseWang.nju_eas_client.vo.MessageVO;
 
 public class MsgBoxUILogic {
@@ -24,7 +25,7 @@ public class MsgBoxUILogic {
 	 *            列表名
 	 * @return 如果失败则返回Feedback类型，如果成功返回String[][]类型
 	 */
-	public ArrayList<MessageVO> showMsgTable(int type) {
+	public ArrayList<MessageVO> showMsgList(int type) {
 		String command = "show；message_list；" + type;
 		ArrayList<MessageVO> list = new ArrayList<MessageVO>();
 		ArrayList<String> l = new ArrayList<String>();
@@ -41,5 +42,75 @@ public class MsgBoxUILogic {
 			e.printStackTrace();
 		}
 		return list;
+	}
+
+	public Feedback sendMsg(MessageVO msg) {
+		String command = "send；message；" + msg.toCommand();
+		String line = null;
+		try {
+			NetService client = initNetService();
+			client.sendCommand(command);
+			line = client.receiveFeedback();
+			client.shutDownConnection();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Feedback.valueOf(line);
+	}
+
+	public Feedback saveDraft(MessageVO msg) {
+		String command = "save；draft；" + msg.toCommand();
+		String line = null;
+		try {
+			NetService client = initNetService();
+			client.sendCommand(command);
+			line = client.receiveFeedback();
+			client.shutDownConnection();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Feedback.valueOf(line);
+	}
+
+	public Feedback delMessage(int type, String id) {
+		String command = "del；message；" + type + "；" + id;
+		String line = null;
+		try {
+			NetService client = initNetService();
+			client.sendCommand(command);
+			line = client.receiveFeedback();
+			client.shutDownConnection();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Feedback.valueOf(line);
+	}
+
+	public Feedback eraseMessage(int type, String id) {
+		String command = "erase；message；" + type + "；" + id;
+		String line = null;
+		try {
+			NetService client = initNetService();
+			client.sendCommand(command);
+			line = client.receiveFeedback();
+			client.shutDownConnection();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Feedback.valueOf(line);
+	}
+
+	public String showUserName(String uid) {
+		String command = "show；user_name；" + uid;
+		String line = null;
+		try {
+			NetService client = initNetService();
+			client.sendCommand(command);
+			line = client.receiveFeedback();
+			client.shutDownConnection();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return line;
 	}
 }
