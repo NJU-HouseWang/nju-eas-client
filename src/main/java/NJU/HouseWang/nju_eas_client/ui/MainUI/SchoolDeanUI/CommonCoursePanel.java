@@ -124,7 +124,7 @@ public class CommonCoursePanel extends JPanel {
 	private void showTable() {
 		head = null;
 		content = null;
-		Object fb = logic.showInfoListHead("common_course_list");
+		Object fb = logic.showInfoListHead("edit_common_course_list");
 		if (fb instanceof Feedback) {
 			JOptionPane.showMessageDialog(null, ((Feedback) fb).getContent());
 		} else if (fb instanceof String[]) {
