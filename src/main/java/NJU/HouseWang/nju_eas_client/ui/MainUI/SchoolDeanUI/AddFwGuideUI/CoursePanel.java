@@ -43,7 +43,7 @@ public class CoursePanel extends JPanel {
 		for (int i = 0; i < typeNum; i++) {
 			couDtm[i] = new DefaultTableModel(16, 3);
 			couDtm[i].setColumnIdentifiers(new String[] { "课程名称", "最低学分",
-					"最高学分" });
+					"最高学分" , "起始学期", "终止学期"});
 			couLb[i] = new JLabel(typeInfo.get(i), JLabel.LEFT);
 			couLb[i].setFont(new Font("微软雅黑", Font.PLAIN, 20));
 			couLb[i].setPreferredSize(new Dimension(595, 50));
@@ -68,7 +68,7 @@ public class CoursePanel extends JPanel {
 			int rowPoint = 0;
 			while (true) {
 				String line = "";
-				for (int j = 0; j < 3; j++) {
+				for (int j = 0; j < 5; j++) {
 					String cell = null;
 					if (couTable[i].getValueAt(rowPoint, j) == null
 							|| couTable[i].getValueAt(rowPoint, j).equals("")) {

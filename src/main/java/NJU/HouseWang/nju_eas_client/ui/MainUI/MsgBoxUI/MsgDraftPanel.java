@@ -45,17 +45,22 @@ public class MsgDraftPanel extends JPanel {
 				if (e.getClickCount() == 2) {
 					if (table.getSelectedRowCount() == 1) {
 						MessageVO msg = list.get(table.getSelectedRow());
-						new ReadMsgUI(2, msg);
+						new SendMsgUI(msg);
 					}
 				}
 			}
 		});
 	}
 
-	private void showTable() {
+	public void showTable() {
+		for (int i = 0; i < table.getRowCount(); i++) {
+			dtm.removeRow(0);
+		}
 		list = logic.showMsgList(2);
 		for (MessageVO m : list) {
-			dtm.insertRow(0, new String[] {
+			dtm.insertRow(
+					0,
+					new String[] {
 							m.recipientId + " ("
 									+ logic.showUserName(m.recipientId) + ")",
 							m.title });

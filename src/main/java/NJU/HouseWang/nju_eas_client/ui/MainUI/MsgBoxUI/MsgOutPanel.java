@@ -52,7 +52,10 @@ public class MsgOutPanel extends JPanel {
 		});
 	}
 
-	private void showTable() {
+	public void showTable() {
+		for (int i = 0; i < table.getRowCount(); i++) {
+			dtm.removeRow(0);
+		}
 		list = logic.showMsgList(1);
 		for (MessageVO m : list) {
 			dtm.insertRow(

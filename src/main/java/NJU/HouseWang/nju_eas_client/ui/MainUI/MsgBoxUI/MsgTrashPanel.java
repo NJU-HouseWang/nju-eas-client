@@ -52,7 +52,10 @@ public class MsgTrashPanel extends JPanel {
 		});
 	}
 
-	private void showTable() {
+	public void showTable() {
+		for (int i = 0; i < table.getRowCount(); i++) {
+			dtm.removeRow(0);
+		}
 		list = logic.showMsgList(3);
 		for (MessageVO m : list) {
 			dtm.insertRow(

@@ -3,6 +3,8 @@ package NJU.HouseWang.nju_eas_client.ui.MainUI.MsgBoxUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -46,17 +48,24 @@ public class MsgInPanel extends JPanel {
 				if (e.getClickCount() == 2) {
 					if (table.getSelectedRowCount() == 1) {
 						MessageVO msg = list.get(table.getSelectedRow());
-						new ReadMsgUI(0,msg);
+						new ReadMsgUI(0, msg);
 					}
 				}
 			}
 		});
 	}
 
-	private void showTable() {
+	public void showTable() {
+		for (int i = 0; i < table.getRowCount(); i++) {
+			dtm.removeRow(0);
+		}
 		list = logic.showMsgList(0);
 		for (MessageVO m : list) {
-			dtm.insertRow(0, new String[] { m.senderId + " (" + logic.showUserName(m.senderId) + ")", m.title });
+			dtm.insertRow(
+					0,
+					new String[] {
+							m.senderId + " (" + logic.showUserName(m.senderId)
+									+ ")", m.title });
 		}
 	}
 }
